@@ -1,0 +1,1346 @@
+﻿<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İnfrastruktur vəziyyəti icmalı</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #eef2ea;
+            --panel: rgba(255, 255, 255, .92);
+            --soft: #f6f7f2;
+            --line: rgba(24, 41, 33, .1);
+            --text: #14221a;
+            --muted: #607061;
+            --blue: #1c67d7;
+            --green: #198754;
+            --amber: #d7a61c;
+            --red: #bf3b35;
+            --teal: #177d7f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Poppins", sans-serif;
+            color: var(--text);
+            background: #f3f5f1;
+        }
+
+        .page {
+            width: min(1420px, calc(100% - 32px));
+            margin: 24px auto 48px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #12392b 0%, #184a6d 48%, #1c67d7 100%);
+            color: #fff;
+            border-radius: 24px;
+            padding: 24px;
+        }
+
+        .hero-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            background: rgba(255, 255, 255, .12);
+            border: 1px solid rgba(255, 255, 255, .16);
+            margin-bottom: 12px;
+        }
+
+        .pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #7ff1b0;
+        }
+
+        h1 {
+            font-size: clamp(28px, 5vw, 62px);
+            line-height: 1.05;
+            letter-spacing: -.04em;
+            font-family: "Poppins", sans-serif;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: rgba(255, 255, 255, .82);
+            font-size: 15px;
+            max-width: 760px;
+        }
+
+        .status-board {
+            min-width: 250px;
+            background: rgba(255, 255, 255, .11);
+            border: 1px solid rgba(255, 255, 255, .16);
+            border-radius: 22px;
+            padding: 18px;
+        }
+
+        .status-title {
+            font-size: 12px;
+            letter-spacing: .08em;
+            color: rgba(255, 255, 255, .72);
+            margin-bottom: 14px;
+        }
+
+        .status-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .12);
+            font-size: 13px;
+        }
+
+        .status-row:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .toolbar,
+        .section,
+        .aside-card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+        }
+
+        .toolbar {
+            margin-top: 18px;
+            padding: 14px;
+        }
+
+        .filter-group,
+        .subtabs {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            border: 1px solid var(--line);
+            background: #fff;
+            border-radius: 999px;
+            padding: 11px 15px;
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--muted);
+            font-family: "Poppins", sans-serif;
+            cursor: pointer;
+        }
+
+        .chip.active {
+            background: #e4efff;
+            color: var(--blue);
+            border-color: rgba(28, 103, 215, .25);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 7fr) minmax(280px, 3fr);
+            gap: 22px;
+            margin-top: 18px;
+            align-items: start;
+        }
+
+        .main-column,
+        .section-body,
+        .legend-list,
+        .split-bars {
+            display: grid;
+            gap: 22px;
+        }
+
+        .aside-column {
+            display: grid;
+            gap: 14px;
+            align-content: start;
+            position: sticky;
+            top: 16px;
+            align-self: start;
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 20px 22px;
+            cursor: pointer;
+        }
+
+        .section-intro {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+        }
+
+        .section-icon.blue {
+            color: var(--blue);
+            background: #e4efff;
+        }
+
+        .section-icon.amber {
+            color: #b86a12;
+            background: #fff2d8;
+        }
+
+        .section-icon.teal {
+            color: var(--teal);
+            background: #daf6f5;
+        }
+
+        .section-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        h2 {
+            font-size: 20px;
+            line-height: 1.1;
+            margin-bottom: 6px;
+        }
+
+        .section-intro p,
+        .helper,
+        .chart-note,
+        .mini-item span,
+        .overview-note {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        .section-body {
+            padding: 0 22px 22px;
+        }
+
+        .head-view {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: #fff;
+            padding: 9px 14px;
+            font-size: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .collapse {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: #fff;
+            width: 34px;
+            height: 34px;
+            cursor: pointer;
+        }
+
+        .collapse svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .section-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section.collapsed .section-head {
+            border-bottom: 0;
+        }
+
+        .section.collapsed .section-body {
+            display: none;
+        }
+
+        .subtab {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--muted);
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            cursor: pointer;
+            transition: .18s ease;
+        }
+
+        .subtab.active {
+            color: var(--blue);
+            background: #eef5ff;
+            border-color: rgba(28, 103, 215, .18);
+        }
+
+        .panel-kicker {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #f4f7f4;
+            border: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0px 12px;
+        }
+
+        .info-card,
+        .viz-card,
+        .overview-box,
+        .mini-item {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .eyeline {
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .big-number {
+            font-size: 28px;
+            line-height: 1;
+            letter-spacing: -.04em;
+            margin-bottom: 10px;
+        }
+
+        .good {
+            color: var(--green);
+        }
+
+        .info {
+            color: var(--blue);
+        }
+
+        .alert {
+            color: var(--red);
+        }
+
+        .viz-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .split-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 12px;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .split-track,
+        .hbar-track {
+            height: 10px;
+            border-radius: 999px;
+            background: #e9eee7;
+            overflow: hidden;
+        }
+
+        .split-track span,
+        .hbar-track span {
+            display: block;
+            height: 100%;
+            border-radius: 999px;
+        }
+
+        .line-chart {
+            height: 180px;
+            border-radius: 16px;
+            border: 1px solid var(--line);
+            background: #fafcf9;
+            padding: 12px;
+        }
+
+        .line-chart svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .bar-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            align-items: end;
+        }
+
+        .bar-col {
+            text-align: center;
+        }
+
+        .bar {
+            width: 100%;
+            border-radius: 14px 14px 6px 6px;
+            margin-bottom: 10px;
+        }
+
+        .bar-col strong {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .bar-col span {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .table-wrap {
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 13px;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+
+        th {
+            color: var(--muted);
+            background: #f9fbf8;
+            font-size: 12px;
+        }
+
+        tr:last-child td {
+            border-bottom: 0;
+        }
+
+        td strong {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        td span {
+            color: var(--muted);
+        }
+
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .heat-cell {
+            border-radius: 14px;
+            padding: 16px 12px;
+            text-align: center;
+            color: #fff;
+            font-weight: 700;
+            min-height: 76px;
+            display: grid;
+            place-items: center;
+        }
+
+        .low {
+            background: #d7a61c;
+        }
+
+        .mid {
+            background: #e67f22;
+        }
+
+        .high {
+            background: #bf3b35;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .main-kpis {
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .metric-card {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 34px;
+            gap: 8px;
+            align-items: end;
+            padding: 14px;
+            border-radius: 18px;
+            background: #fbfcfa;
+            border: 1px solid rgba(24, 41, 33, .08);
+        }
+
+        .metric-copy {
+            min-width: 0;
+        }
+
+        .metric-value {
+            display: block;
+            font-size: 23px;
+            line-height: 1;
+            margin-bottom: 8px;
+            letter-spacing: -.03em;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .metric-note {
+            display: block;
+            font-size: 10px;
+            line-height: 1.2;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        .metric-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(24, 41, 33, .08);
+            background: #f1f5ef;
+            color: #36584a;
+            align-self: end;
+            justify-self: end;
+        }
+
+        .metric-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 1.8;
+        }
+
+        .metric-card.alert .metric-value,
+        .metric-card.alert .metric-icon {
+            color: var(--red);
+        }
+
+        .overview-box strong {
+            display: block;
+            font-size: 20px;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .overview-box span {
+            font-size: 11px;
+            line-height: 1.35;
+        }
+
+        .mini-list {
+            gap: 10px;
+        }
+
+        .aside-card {
+            padding: 14px;
+        }
+
+        .aside-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .brand-card {
+            padding: 12px 14px;
+        }
+
+        .brand-mark {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .brand-copy small {
+            display: block;
+            font-size: 10px;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .brand-copy strong {
+            display: block;
+            font-size: 15px;
+            line-height: 1.1;
+        }
+
+        .brand-badge {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: #f1f5ef;
+            border: 1px solid rgba(24, 41, 33, .08);
+            color: #36584a;
+            font-weight: 700;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width:1180px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .aside-column {
+                position: static;
+                top: auto;
+            }
+        }
+
+        @media (max-width:920px) {
+
+            .hero-top,
+            .section-head {
+                flex-direction: column;
+            }
+
+            .section-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .card-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width:640px) {
+            .page {
+                width: min(100% - 20px, 1420px);
+            }
+
+            .card-grid,
+            .bar-grid,
+            .overview-grid,
+            .heatmap-grid,
+            .mini-list,
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-group,
+            .subtabs {
+                gap: 8px;
+            }
+
+            .chip,
+            .subtab {
+                width: 100%;
+                justify-content: flex-start;
+                border-radius: 14px;
+            }
+
+            .hero {
+                padding: 20px;
+            }
+
+            .status-board,
+            .section-actions {
+                width: 100%;
+            }
+
+            .split-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <header class="hero">
+            <div class="hero-top">
+                <div>
+                    <div class="eyebrow"><span class="pulse"></span>Canlı göstəricilər</div>
+                    <h1>Yol reyestri icmalı</h1>
+                    <p>Şəbəkə vəziyyəti, risk və nəzarət, icra və performans göstəriciləri.</p>
+                </div>
+                <div class="status-board">
+                    <div class="status-title">Cari vəziyyət</div>
+                    <div class="status-row"><span>Tarix</span><strong id="datebadge">--.--.----</strong></div>
+                    <div class="status-row"><span>Saat</span><strong id="clock">--:--</strong></div>
+                    <div class="status-row"><span>Şəbəkə uzunluğu</span><strong>19 200 km</strong></div>
+                    <div class="status-row"><span>Seqment sayı</span><strong>12 500</strong></div>
+                </div>
+            </div>
+        </header>
+        <div class="toolbar">
+            <div class="filter-group" aria-label="Əsas menyu">
+                <button class="chip active" data-filter="all">Hamısı</button>
+                <button class="chip" data-filter="network">Şəbəkə vəziyyəti</button>
+                <button class="chip" data-filter="risk">Risk və nəzarət</button>
+                <button class="chip" data-filter="performance">İcra və performans</button>
+            </div>
+        </div>
+        <div class="content-grid">
+            <div class="main-column">
+                <section class="section" data-group="network" id="sebeke">
+                    <div class="section-head">
+                        <div class="section-intro">
+                            <div class="section-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <rect x="3" y="4" width="18" height="12" rx="2"></rect>
+                                    <path d="M8 20h8"></path>
+                                    <path d="M12 16v4"></path>
+                                </svg></div>
+                            <div>
+                                <h2>Şəbəkə vəziyyəti</h2>
+                                <p>Yol şəbəkəsinin ümumi mənzərəsi, seqmentlər, aktivlər və texniki durum göstəriciləri.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="section-actions"><a class="head-view" href="#sebeke">Baxış</a><button
+                                class="collapse" aria-label="Bölməni gizlət"><svg viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2.3">
+                                    <path d="m6 9 6 6 6-6"></path>
+                                </svg></button></div>
+                    </div>
+                    <div class="section-body">
+                        <div class="subtabs" data-subtabs="network-tabs">
+                            <button class="subtab active" data-tab-target="__all__">Hamısı</button>
+                            <button class="subtab" data-tab-target="network-overview">Yol şəbəkəsinin ümumi
+                                vəziyyəti</button>
+                            <button class="subtab" data-tab-target="network-segments">Seqmentlər üzrə texniki
+                                vəziyyət</button>
+                            <button class="subtab" data-tab-target="network-assets">Aktivlər üzrə ümumi
+                                statistika</button>
+                            <button class="subtab" data-tab-target="network-health">Aktivlərin texniki
+                                vəziyyəti</button>
+                        </div>
+                        <div class="tabpanel" id="network-overview">
+                            <div class="panel-kicker">Yol şəbəkəsinin ümumi vəziyyəti</div>
+                            <div class="card-grid">
+                                <article class="info-card">
+                                    <div class="eyeline">Ümumi yol uzunluğu</div>
+                                    <div class="big-number good">19 200 km</div>
+                                    <p class="helper">Respublika üzrə cəmi yol uzunluğu.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Respublika əhəmiyyətli yollar</div>
+                                    <div class="big-number">4 800 km</div>
+                                    <p class="helper">Respublika əhəmiyyətli şəbəkə.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Yerli yollar</div>
+                                    <div class="big-number info">14 400 km</div>
+                                    <p class="helper">Yerli yolların ümumi uzunluğu.</p>
+                                </article>
+                            </div>
+                            <div class="viz-card">
+                                <div class="viz-title">Vəziyyət bölgüsü</div>
+                                <div class="split-bars">
+                                    <div class="split-row"><span>Yaxşı vəziyyətdə yollar</span>
+                                        <div class="split-track"><span style="width:62%; background:#198754"></span>
+                                        </div><strong>62%</strong>
+                                    </div>
+                                    <div class="split-row"><span>Orta vəziyyətdə yollar</span>
+                                        <div class="split-track"><span style="width:25%; background:#d7a61c"></span>
+                                        </div><strong>25%</strong>
+                                    </div>
+                                    <div class="split-row"><span>Qənaətsiz vəziyyətdə yollar</span>
+                                        <div class="split-track"><span style="width:13%; background:#bf3b35"></span>
+                                        </div><strong>13%</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tabpanel" id="network-segments">
+                            <div class="panel-kicker">Seqmentlər üzrə texniki vəziyyət</div>
+                            <div class="card-grid">
+                                <article class="info-card">
+                                    <div class="eyeline">Ümumi seqment sayı</div>
+                                    <div class="big-number">12 500</div>
+                                    <p class="helper">Yol şəbəkəsinin ümumi seqment sayı.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Monitoring olunan seqmentlər</div>
+                                    <div class="big-number info">9 200</div>
+                                    <p class="helper">Ümumi şəbəkənin 74%-i.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Təmir tələb edən seqmentlər</div>
+                                    <div class="big-number">2 100</div>
+                                    <p class="helper">Planlı təmirə ehtiyacı olan hissələr.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Kritik seqmentlər</div>
+                                    <div class="big-number alert">620</div>
+                                    <p class="helper">Dərhal müdaxilə tələb edən hissələr.</p>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="tabpanel" id="network-assets">
+                            <div class="panel-kicker">Aktivlər üzrə ümumi statistika</div>
+                            <div class="card-grid">
+                                <article class="info-card">
+                                    <div class="eyeline">Körpülər</div>
+                                    <div class="big-number">1 240</div>
+                                    <p class="helper">Ümumi körpü sayı.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Tunel və keçidlər</div>
+                                    <div class="big-number">185</div>
+                                    <p class="helper">Tunel və keçid qurğuları.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Suötürücü və drenaj</div>
+                                    <div class="big-number">8 500</div>
+                                    <p class="helper">Suötürücü və drenaj aktivləri.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Geotexniki qurğular</div>
+                                    <div class="big-number">2 300</div>
+                                    <p class="helper">Geotexniki qurğular.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Kommunikasiya keçidləri</div>
+                                    <div class="big-number">3 100</div>
+                                    <p class="helper">Kommunikasiya keçidləri.</p>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="tabpanel" id="network-health">
+                            <div class="panel-kicker">Aktivlərin texniki vəziyyəti</div>
+                            <div class="card-grid">
+                                <article class="info-card">
+                                    <div class="eyeline">Yaxşı</div>
+                                    <div class="big-number good">58%</div>
+                                    <p class="helper">Yaxşı vəziyyətdə olan aktivlər.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Qənaətbəxş</div>
+                                    <div class="big-number">28%</div>
+                                    <p class="helper">Orta vəziyyətdə olan aktivlər.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Qənaətsiz</div>
+                                    <div class="big-number alert">14%</div>
+                                    <p class="helper">Yenilənmə tələb edən aktivlər.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Ümumi defekt balı</div>
+                                    <div class="big-number alert">31 bal</div>
+                                    <p class="helper">Defektlərin yekun balı.</p>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="section collapsed" data-group="risk" id="risk">
+                    <div class="section-head">
+                        <div class="section-intro">
+                            <div class="section-icon amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <path d="M12 9v4"></path>
+                                    <path d="M12 17h.01"></path>
+                                    <path
+                                        d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z">
+                                    </path>
+                                </svg></div>
+                            <div>
+                                <h2>Risk və nəzarət</h2>
+                                <p>Hüquqi vəziyyət, torpaq məsələləri, hadisələr və operativ reaksiya göstəriciləri.</p>
+                            </div>
+                        </div>
+                        <div class="section-actions"><a class="head-view" href="#risk">Baxış</a><button class="collapse"
+                                aria-label="Bölməni gizlət"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.3">
+                                    <path d="m6 9 6 6 6-6"></path>
+                                </svg></button></div>
+                    </div>
+                    <div class="section-body">
+                        <div class="subtabs" data-subtabs="risk-tabs"><button class="subtab active"
+                                data-tab-target="__all__">Hamısı</button><button class="subtab"
+                                data-tab-target="risk-legal">Hüquqi və torpaq məsələləri</button><button class="subtab"
+                                data-tab-target="risk-events">Monitoring və hadisələr</button></div>
+                        <div class="tabpanel" id="risk-legal">
+                            <div class="panel-kicker">Hüquqi və torpaq məsələləri</div>
+                            <div class="card-grid">
+                                <article class="info-card">
+                                    <div class="eyeline">Təhkim zolağı üzrə qeydiyyat</div>
+                                    <div class="big-number">72%</div>
+                                    <p class="helper">Dövlət qeydiyyatında olan təhkim zolağı.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Mühafizə zolağı üzrə qeydiyyat</div>
+                                    <div class="big-number">64%</div>
+                                    <p class="helper">Qeydiyyatda olan qorunma zonaları.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Mübahisəli sahələr</div>
+                                    <div class="big-number alert">310</div>
+                                    <p class="helper">Mübahisəli və riskli sahələr.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">İcazə verilmiş keçidlər</div>
+                                    <div class="big-number">1 150</div>
+                                    <p class="helper">Rəsmi icazə ilə birləşən keçidlər.</p>
+                                </article>
+                            </div>
+                            <div class="viz-card">
+                                <div class="viz-title">Qeydiyyat tərəqqisi</div>
+                                <div class="split-bars">
+                                    <div class="split-row"><span>Təhkim zolağı</span>
+                                        <div class="split-track"><span style="width:72%; background:#1c67d7"></span>
+                                        </div><strong>72%</strong>
+                                    </div>
+                                    <div class="split-row"><span>Mühafizə zolağı</span>
+                                        <div class="split-track"><span style="width:64%; background:#177d7f"></span>
+                                        </div><strong>64%</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tabpanel" id="risk-events">
+                            <div class="panel-kicker">Monitoring və hadisələr</div>
+                            <div class="card-grid">
+                                <article class="info-card">
+                                    <div class="eyeline">Günlük hadisə sayı</div>
+                                    <div class="big-number">45</div>
+                                    <p class="helper">Gündəlik qeydə alınan hadisələr.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Aylıq hadisələr</div>
+                                    <div class="big-number">1 350</div>
+                                    <p class="helper">Ay üzrə ümumi hadisələr.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Kritik hadisələr</div>
+                                    <div class="big-number alert">120</div>
+                                    <p class="helper">Dərhal müdaxilə tələb edən hallar.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Orta reaksiya müddəti</div>
+                                    <div class="big-number">6 saat</div>
+                                    <p class="helper">Məlumatdan müdaxiləyə qədər orta vaxt.</p>
+                                </article>
+                            </div>
+                            <div class="viz-card">
+                                <div class="viz-title">Hadisə göstəricisi</div>
+                                <div class="overview-grid">
+                                    <div class="overview-box"><strong style="color:#bf3b35">120</strong><span>Kritik
+                                            hadisə</span></div>
+                                    <div class="overview-box"><strong>45</strong><span>Günlük hadisə</span></div>
+                                    <div class="overview-box"><strong>1 350</strong><span>Aylıq hadisə</span></div>
+                                    <div class="overview-box"><strong>6 saat</strong><span>Orta reaksiya</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="section collapsed" data-group="performance" id="icra">
+                    <div class="section-head">
+                        <div class="section-intro">
+                            <div class="section-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <path d="M3 3v18h18"></path>
+                                    <path d="m7 13 4-4 3 3 5-6"></path>
+                                </svg></div>
+                            <div>
+                                <h2>İcra və performans</h2>
+                                <p>Pasportlaşdırma, layihə icrası, məlumat keyfiyyəti və sistem istifadəsi
+                                    göstəriciləri.</p>
+                            </div>
+                        </div>
+                        <div class="section-actions"><a class="head-view" href="#icra">Baxış</a><button class="collapse"
+                                aria-label="Bölməni gizlət"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.3">
+                                    <path d="m6 9 6 6 6-6"></path>
+                                </svg></button></div>
+                    </div>
+                    <div class="section-body">
+                        <div class="subtabs" data-subtabs="performance-tabs"><button class="subtab active"
+                                data-tab-target="__all__">Hamısı</button><button class="subtab"
+                                data-tab-target="perf-passport">Pasportlaşdırma səviyyəsi</button><button class="subtab"
+                                data-tab-target="perf-projects">Layihə və təmir işləri</button><button class="subtab"
+                                data-tab-target="perf-quality">Məlumat keyfiyyəti</button><button class="subtab"
+                                data-tab-target="perf-usage">Sistem istifadə statistikası</button></div>
+                        <div class="tabpanel" id="perf-passport">
+                            <div class="panel-kicker">Pasportlaşdırma səviyyəsi</div>
+                            <div class="card-grid">
+                                <article class="info-card">
+                                    <div class="eyeline">Pasport tələb edən aktivlər</div>
+                                    <div class="big-number">6 200</div>
+                                    <p class="helper">Pasportlaşmalı olan aktivlər.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Pasportlaşdırılmış aktivlər</div>
+                                    <div class="big-number good">4 850</div>
+                                    <p class="helper">Ümumi sayın 78%-i.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Tam doldurulmuş pasportlar</div>
+                                    <div class="big-number">3 900</div>
+                                    <p class="helper">Tam mühəndis məlumatlı pasportlar.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Yenilənmə tələb edən pasportlar</div>
+                                    <div class="big-number alert">950</div>
+                                    <p class="helper">Yenidən baxış tələb edən sənədlər.</p>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="tabpanel" id="perf-projects">
+                            <div class="panel-kicker">Layihə və təmir işləri</div>
+                            <div class="card-grid">
+                                <article class="info-card">
+                                    <div class="eyeline">Aktiv layihələr</div>
+                                    <div class="big-number">210</div>
+                                    <p class="helper">İcra mərhələsində olan layihələr.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Gecikən layihələr</div>
+                                    <div class="big-number alert">38</div>
+                                    <p class="helper">Vaxt qrafikindən geri qalanlar.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Büdcə icra faizi</div>
+                                    <div class="big-number">81%</div>
+                                    <p class="helper">Büdcə icra göstəricisi.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Təmir işləri</div>
+                                    <div class="big-number">1 750</div>
+                                    <p class="helper">İllik təmir olunan seqment sayı.</p>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="tabpanel" id="perf-quality">
+                            <div class="panel-kicker">Məlumat keyfiyyəti</div>
+                            <div class="card-grid">
+                                <article class="info-card">
+                                    <div class="eyeline">Tam məlumatlı yollar</div>
+                                    <div class="big-number good">88%</div>
+                                    <p class="helper">Tam məlumatı olan yol qeydləri.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Tam məlumatlı seqmentlər</div>
+                                    <div class="big-number">76%</div>
+                                    <p class="helper">Tam məlumatlı seqmentlər.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Aktivlər üzrə boş data</div>
+                                    <div class="big-number alert">18%</div>
+                                    <p class="helper">Boş qalan mühəndis xanaları.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Uyğunsuzluqlar</div>
+                                    <div class="big-number alert">240</div>
+                                    <p class="helper">Aşkar edilmiş məlumat xətaları.</p>
+                                </article>
+                            </div>
+                            <div class="table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Tapşırıq</th>
+                                            <th>Say</th>
+                                            <th>Vəziyyət</th>
+                                            <th>Qeyd</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Uyğunsuzluq siyahısı</strong><span>məlumat keyfiyyəti</span>
+                                            </td>
+                                            <td><span>240</span></td>
+                                            <td><span>İcrada</span></td>
+                                            <td><span>Mütəxəssis üçün iş siyahısı</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Boş sahələr</strong><span>aktivlər</span></td>
+                                            <td><span>18%</span></td>
+                                            <td><span>Diqqət tələb edir</span></td>
+                                            <td><span>Tamamlanmalı xanalar</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tabpanel" id="perf-usage">
+                            <div class="panel-kicker">Sistem istifadə statistikası</div>
+                            <div class="card-grid">
+                                <article class="info-card">
+                                    <div class="eyeline">Aktiv istifadəçi sayı</div>
+                                    <div class="big-number">320</div>
+                                    <p class="helper">Sistemdən istifadə edən əməkdaşlar.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Günlük əməliyyat sayı</div>
+                                    <div class="big-number">4 500</div>
+                                    <p class="helper">Məlumat girişi, baxış və redaktə.</p>
+                                </article>
+                                <article class="info-card">
+                                    <div class="eyeline">Mobil istifadə payı</div>
+                                    <div class="big-number">42%</div>
+                                    <p class="helper">Mobil tətbiqdən istifadə göstəricisi.</p>
+                                </article>
+                            </div>
+                            <div class="viz-card">
+                                <div class="viz-title">İstifadə göstəriciləri</div>
+                                <div class="split-bars">
+                                    <div class="split-row"><span>Mobil istifadə payı</span>
+                                        <div class="split-track"><span style="width:42%; background:#177d7f"></span>
+                                        </div><strong>42%</strong>
+                                    </div>
+                                    <div class="split-row"><span>Günlük əməliyyatlar</span>
+                                        <div class="split-track"><span style="width:75%; background:#1c67d7"></span>
+                                        </div><strong>4 500</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <aside class="aside-column">
+                <section class="aside-card">
+                    <h3>Əsas göstəricilər</h3>
+                    <div class="metric-grid main-kpis">
+                        <div class="metric-card">
+                            <div class="metric-copy">
+                                <strong class="metric-value">19 200 km</strong>
+                                <span class="metric-note">Ümumi yol uzunluğu</span>
+                            </div>
+                            <div class="metric-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M8 3h8"></path>
+                                    <path d="M10 3v5"></path>
+                                    <path d="M14 3v5"></path>
+                                    <path d="M12 8v13"></path>
+                                    <path d="M12 11h.01"></path>
+                                    <path d="M12 16h.01"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-copy">
+                                <strong class="metric-value">12 500</strong>
+                                <span class="metric-note">Ümumi seqment sayı</span>
+                            </div>
+                            <div class="metric-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <rect x="4" y="5" width="6" height="6" rx="1.4"></rect>
+                                    <rect x="14" y="5" width="6" height="6" rx="1.4"></rect>
+                                    <rect x="4" y="13" width="6" height="6" rx="1.4"></rect>
+                                    <rect x="14" y="13" width="6" height="6" rx="1.4"></rect>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-copy">
+                                <strong class="metric-value">15 325</strong>
+                                <span class="metric-note">Ümumi aktiv sayı</span>
+                            </div>
+                            <div class="metric-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <rect x="5" y="5" width="14" height="14" rx="2"></rect>
+                                    <path d="M9 9h6"></path>
+                                    <path d="M9 12h6"></path>
+                                    <path d="M9 15h4"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="metric-card alert">
+                            <div class="metric-copy">
+                                <strong class="metric-value">120</strong>
+                                <span class="metric-note">Kritik hadisə</span>
+                            </div>
+                            <div class="metric-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12 4 4 18h16L12 4Z"></path>
+                                    <path d="M12 9v4"></path>
+                                    <path d="M12 16h.01"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overview-note">Sənəddə verilən əsas göstəricilərin qısa xülasəsi</div>
+                </section>
+                <section class="aside-card">
+                    <h3>Qısa statistika</h3>
+                    <div class="metric-grid mini-list">
+                        <div class="metric-card">
+                            <div class="metric-copy">
+                                <strong class="metric-value">72%</strong>
+                                <span class="metric-note">Təhkim zolağı</span>
+                            </div>
+                            <div class="metric-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M5 18V8"></path>
+                                    <path d="M12 18V4"></path>
+                                    <path d="M19 18v-6"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-copy">
+                                <strong class="metric-value">64%</strong>
+                                <span class="metric-note">Mühafizə zolağı</span>
+                            </div>
+                            <div class="metric-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M12 4 6 7v5c0 3.5 2.2 6.6 6 8 3.8-1.4 6-4.5 6-8V7l-6-3Z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-copy">
+                                <strong class="metric-value">78%</strong>
+                                <span class="metric-note">Pasportlar</span>
+                            </div>
+                            <div class="metric-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M8 4h7l3 3v13H8z"></path>
+                                    <path d="M15 4v4h4"></path>
+                                    <path d="M10 12h6"></path>
+                                    <path d="M10 15h6"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-copy">
+                                <strong class="metric-value">81%</strong>
+                                <span class="metric-note">Büdcə icrası</span>
+                            </div>
+                            <div class="metric-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M4 8h16"></path>
+                                    <path d="M6 8V6h12v2"></path>
+                                    <rect x="4" y="8" width="16" height="10" rx="2"></rect>
+                                    <path d="M9 13h6"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-copy">
+                                <strong class="metric-value">240</strong>
+                                <span class="metric-note">Uyğunsuzluq</span>
+                            </div>
+                            <div class="metric-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <circle cx="12" cy="12" r="8"></circle>
+                                    <path d="M12 8v5"></path>
+                                    <path d="M12 16h.01"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-copy">
+                                <strong class="metric-value">42%</strong>
+                                <span class="metric-note">Mobil istifadə</span>
+                            </div>
+                            <div class="metric-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <rect x="8" y="3" width="8" height="18" rx="2"></rect>
+                                    <path d="M11 6h2"></path>
+                                    <path d="M12 17h.01"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="aside-card brand-card">
+                    <div class="brand-mark">
+                        <div class="brand-copy">
+                            <small>Copyright</small>
+                            <strong>AIST Group</strong>
+                        </div>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </div>
+    <script>
+        const chips = document.querySelectorAll('.chip');
+        const sections = document.querySelectorAll('.section[data-group]');
+        const collapses = document.querySelectorAll('.collapse');
+        const subtabGroups = document.querySelectorAll('.subtabs');
+        chips.forEach((chip) => { chip.addEventListener('click', () => { chips.forEach((item) => item.classList.remove('active')); chip.classList.add('active'); const filter = chip.dataset.filter; sections.forEach((section) => { section.hidden = !(filter === 'all' || section.dataset.group === filter); }); }); });
+        collapses.forEach((button) => {
+            button.addEventListener('click', (event) => {
+                event.stopPropagation();
+                button.closest('.section').classList.toggle('collapsed');
+            });
+        });
+        document.querySelectorAll('.section-head').forEach((head) => {
+            head.addEventListener('click', (event) => {
+                if (event.target.closest('.head-view')) return;
+                head.closest('.section').classList.toggle('collapsed');
+            });
+        });
+        subtabGroups.forEach((group) => { const buttons = group.querySelectorAll('.subtab'); buttons.forEach((button) => { button.addEventListener('click', () => { const body = group.parentElement; const panels = Array.from(body.children).filter((item) => item.classList && item.classList.contains('tabpanel')); buttons.forEach((item) => item.classList.remove('active')); button.classList.add('active'); if (button.dataset.tabTarget === '__all__') { panels.forEach((panel) => { panel.hidden = false; }); return; } panels.forEach((panel) => { panel.hidden = true; }); const target = document.getElementById(button.dataset.tabTarget); if (target) target.hidden = false; }); }); });
+        function updateDateTime() { const now = new Date(); document.getElementById('clock').textContent = now.toLocaleTimeString('az-AZ', { hour: '2-digit', minute: '2-digit' }); document.getElementById('datebadge').textContent = now.toLocaleDateString('az-AZ', { day: '2-digit', month: '2-digit', year: 'numeric' }); }
+        updateDateTime(); setInterval(updateDateTime, 1000);
+    </script>
+</body>
+
+</html>

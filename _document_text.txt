@@ -1,0 +1,301 @@
+1. Ümumi 
+i
+nfrastruktur 
+s
+tatistikası 
+A. Yolların 
+ü
+mumi 
+u
+zunluğu
+Nə olacaq:
+ Bütün ölkə və ya region üzrə sistemə daxil edilmiş yolların cəmi məsafəsi (km).
+Necə olacaq:
+ Sistem həm "Balans uzunluğunu" (hüquqi), həm də "Faktiki uzunluğu" (GİS üzərindən ölçülən) göstərməlidir.
+Hansı məlumatları göstərəcək:
+Ümumi şəbəkənin uzunluğu.
+İnzibati ərazilər (rayonlar) üzrə km bölgüsü.
+Son 1 ildə şəbəkəyə əlavə olunan yeni yolların artım dinamikası.
+Hansı problemin qarşısını alacaq:
+ Kağız üzərindəki uzunluqla real peyk/GİS koordinatları arasındakı uyğunsuzluğu aradan qaldırır. Yolun harada başlayıb harada bitdiyinə dair mübahisələrə son qoyur.
+B. Yolların 
+t
+əsnifatı
+Nə olacaq:
+ Yolların qanunvericiliklə müəyyən edilmiş statusuna görə qruplaşdırılması.
+Necə olacaq:
+ Sənəddəki soraqçalar əsasında (M, R, Y indeksləri) rəngli dairəvi (pie) diaqram formatında təqdim ediləcək.
+Hansı məlumatları göstərəcək:
+Magistral (M):
+ Beynəlxalq əhəmiyyətli yolların faizi və km-i.
+Respublika (R):
+ Ölkə daxili əsas birləşdirici yollar.
+Yerli (Y):
+ Rayon daxili və kənd yolları.
+Hansı problemin qarşısını alacaq:
+ Büdcə və resurs planlaşdırılması zamanı prioritetlərin səhv qoyulmasının qarşısını alır (məsələn, Magistral yola ayrılmalı olan vəsaitin səhvən yerli yola yönəldilməsi riskini azaldır).
+C. Aktivlərin 
+s
+ayı 
+Nə olacaq:
+ Yol infrastrukturuna daxil olan bütün mühəndis qurğularının kəmiyyət hesabatı.
+Necə olacaq:
+ Aktiv növləri üzrə kartlar (widgets) şəklində: "Körpülər - 450 ədəd", "Tunellər - 12 ədəd", "Suötürücü borular - 3200 ədəd".
+Hansı məlumatları göstərəcək:
+Hər bir aktiv növünün cəmi sayı.
+Yeni quraşdırılmış aktivlər vs köhnə (istismar müddəti keçmiş) aktivlər.
+Aktivlərin yol dərəcələrinə görə paylanması (məsələn: "M-1 yolunda neçə ədəd suötürücü boru var?").
+Hansı problemin qarşısını alacaq:
+ "İtmiş" aktivlərin (uçotda olmayan boruların, nişanların) qarşısını alır. Sahədə olan real vəziyyətlə mərkəzi bazadakı rəqəmləri 100% eyniləşdirir.
+D. İstismar 
+s
+tatusu
+Nə olacaq:
+ Yolun və ya aktivin həyat dövrünün (life-cycle) hansı mərhələsində olduğunun vizuallaşdırılması.
+Necə olacaq:
+ Sənəddəki status soraqçası əsasında: Aktiv, Tikintidə, Təmirdə, Layihədə.
+Hansı məlumatları göstərəcək:
+Aktiv:
+ Hazırda tam istifadədə olan yollar.
+Təmirdə/Yenidənqurmada:
+ Hazırda iş gedən seqmentlər (bu, birbaşa "Yenidənqurma tarixi" sahəsi ilə əlaqəlidir).
+Ləğv edilmiş:
+ Artıq istifadə olunmayan və ya istiqaməti dəyişdirilmiş köhnə yollar.
+Hansı problemin qarşısını alacaq:
+ Eyni vaxtda neçə obyektdə iş getdiyinə dair şəffaflıq yaradır. Layihə mərhələsində olan yolla faktiki istifadədə olan yolun qarışdırılmasının (və buna görə yaranan hesabat xətalarının) qarşısını alır.
+2. Texniki 
+v
+əziyyət və 
+k
+eyfiyyət 
+m
+onitorinqi
+A. Ümumi 
+t
+exniki 
+v
+əziyyət 
+g
+östəricisi 
+Nə olacaq:
+ Yol seqmentlərinin fiziki sağlamlıq səviyyəsinin rəqəmsal və vizual inikası.
+Necə olacaq:
+ "Texniki xüsusiyyətlər" sahələrindən istifadə edilərək, yollar "Yaxşı", "Qənaətbəxş", "Qeyri-qənaətbəxş" və "Qəzalı" rəng kodları (Yaşıl, Sarı, Narıncı, Qırmızı) ilə qruplaşdırılacaq.
+Hansı məlumatları göstərəcək:
+Beynəlxalq 
+h
+amarlıq 
+i
+ndeksi:
+ Yolun hamarlıq dərəcəsi.
+Deformasiya faizi:
+ Çatların, çuxurların və çökmələrin seqment üzrə ümumi həcmi.
+Yükdaşıma qabiliyyəti:
+ Faktiki vəziyyətin layihə göstəricilərinə uyğunluğu.
+Hansı problemin qarşısını alacaq:
+ Subyektiv qiymətləndirmənin qarşısını alır. Hansı yolun daha tez təmirə ehtiyacı olduğunu rəqəmlərlə sübut edir və qəza riskini öncədən proqnozlaşdırır.
+B. Örtük 
+n
+övlərinə görə 
+b
+ölgü və 
+a
+naliz
+Nə olacaq:
+ Yolun üst qatının material tərkibi və strukturuna nəzarət.
+Necə olacaq:
+ "Material və Texnologiya" statistik bölgü.
+Hansı məlumatları göstərəcək:
+Asfalt-beton:
+ (I, II və III tip qarışıqlar üzrə ayrılma).
+Sement-beton:
+ (Dözümlülük sinfi üzrə).
+Qrunt və çınqıl yollar:
+ (Kənd yolları üçün).
+Örtük qalınlığı:
+ Layihədə nəzərdə tutulan qalınlıqla real ölçülmüş qalınlığın müqayisəsi.
+Hansı problemin qarşısını alacaq:
+ Material israfının və keyfiyyətsiz örtük istifadəsinin qarşısını alır. İqlim və yük şəraitinə uyğun olmayan örtüklərin vaxtından əvvəl dağılmasını izləməyə imkan verir.
+C. Amortizasiya və 
+i
+stismar 
+m
+üddəti 
+Nə olacaq:
+ Yolun və süni qurğuların "faydalı ömür" analizi.
+Necə olacaq:
+ Tikinti ili, Son əsaslı təmir tarixi və Yenidənqurma tarixi əsasında avtomatik hesablanma.
+Hansı məlumatları göstərəcək:
+Amortizasiya faizi:
+ Yolun istismar müddətinin neçə faizini başa vurduğu.
+Növbəti 
+b
+axış 
+t
+arixi:
+ Məcburi texniki baxışa qalan günlərin sayı.
+Tarixçə zənciri:
+ Aktivin bütün ömrü boyu keçdiyi təmir mərhələlərinin xronologiyası.
+Hansı problemin qarşısını alacaq:
+ "Gözlənilməz" dağılmalardan sığortalayır. Təmirin gecikməsi nəticəsində yaranan 10 qat daha baha başa gələn yenidənqurma xərclərinin qarşısını almağa kömək edir.
+3. İnventar və 
+p
+asportlaşdırma 
+i
+llüstrasiyası
+A. Pasportlaşdırma 
+s
+əviyyəsi 
+Nə olacaq:
+ Sistemdəki bütün aktivlərin rəqəmsal pasportlarının doluluq dərəcəsi.
+Necə olacaq:
+ Məcburi və əlavə sahələr əsasən, hər bir aktiv üçün "Doldurulma Faizi" (Completion %) hesablanacaq və ümumi proqres-bar şəklində görünəcək.
+Hansı məlumatları göstərəcək:
+Tam 
+p
+asportlar:
+ Bütün mühəndis, hüquqi və GİS məlumatları daxil edilmiş aktivlər.
+Natamam 
+p
+asportlar:
+ Məcburi sahələri boş qalan (məsələn, materialı qeyd olunmayan) aktivlərin siyahısı.
+Sahə üzrə bölgü:
+ Yollar, körpülər və drenaj sistemləri üzrə pasportlaşma sürəti.
+Hansı problemin qarşısını alacaq:
+ Məlumat boşluqlarının qarşısını alır. İdarəetmə strukturuna hansı aktivlərin hələ də rəqəmsallaşdırılmadığını göstərərək, inventarizasiya işlərini sürətləndirir.
+B. Media 
+a
+rxivi və 
+v
+izual 
+d
+oluluq
+Nə olacaq:
+ Aktivlərin vizual sübutlarla (foto/video) təmin olunma vəziyyəti.
+Necə olacaq:
+ 
+H
+ər bir pasporta bağlanmış media fayllarının miqdarı və növü üzrə hesabat.
+Hansı məlumatları göstərəcək:
+Vizual 
+t
+əsdiq:
+ Şəkli olan aktivlərin faizi.
+Son 
+y
+ükləmələr:
+ Sahə mühəndisləri tərəfindən mobil tətbiq və ya sistem vasitəsilə son 24 saatda əlavə edilmiş vizualların "live feed" axını.
+Media növü:
+ Ortofotoplanlar, dron çəkilişləri və ya yerdən çəkilmiş mühəndis fotoları.
+Hansı problemin qarşısını alacaq:
+ Sahəyə getmədən obyektin vəziyyətini görməyə imkan verir. "Kağız üzərində var, amma reallıqda yoxdur" tipli saxta qeydlərin və ya yanlış məlumat girişinin qarşısını vizual nəzarətlə alır.
+C. Versiya 
+i
+zləmə və 
+s
+ənəd 
+t
+arixçəsi
+Nə olacaq:
+ Texniki pasportlarda və qoşma sənədlərdə edilən dəyişikliklərin dinamikası.
+Necə olacaq:
+ Sənədlərin versiyalarının izlənməsi əsasən, pasportun "həyat tarixçəsi".
+Hansı məlumatları göstərəcək:
+Dəyişiklik 
+i
+ndeksi:
+ Ən çox yenilənən pasportlar (bu, adətən həmin aktivdə intensiv təmir və ya problem olduğunu göstərir).
+Sənəd növləri:
+ Pasporta qoşulan PDF aktların, DWG çertyojların və laboratoriya rəylərinin sayı 
+Arxiv statusu:
+ Köhnəlmiş (superseded) layihə sənədləri ilə aktual sənədlərin nisbəti.
+Hansı problemin qarşısını alacaq:
+ Köhnə sənədlərlə işləmək riskini sıfıra endirir. Hər hansı texniki qəza və ya mübahisə zamanı sistemdə sənədin hansı tarixdə və kim tərəfindən yeniləndiyini sübut edir (hüquqi dayanıqlıq).
+4. GİS və 
+m
+əkan 
+a
+nalitikası 
+A
+. Aktivlərin 
+x
+əritə 
+p
+aylanması 
+Nə olacaq:
+ Bütün süni qurğuların (körpü, tunel, boru) və yol elementlərinin xəritə üzərindəki dəqiq mövqeyi.
+Necə olacaq:
+ 
+A
+ktivlərin növünə görə fərqli ikonlarla və ya həndəsi fiqurlarla (Point, Line, Polygon) göstərilməsi.
+Hansı məlumatları göstərəcək:
+Nöqtəvi aktivlər:
+ Nişanlar, işıqforlar, dirəklər.
+Xətti və sahəvi aktivlər:
+ Körpülərin konturları, tunellərin uzunluğu boyunca yerləşməsi, suötürücü boruların axım istiqaməti.
+İnteraktivlik:
+ Aktivin üzərinə kliklədikdə sağ tərəfdə açılan "Mini-Pasport" (ID, növü, son təmir tarixi).
+Hansı problemin qarşısını alacaq:
+ Sahədəki aktivin yerinin itirilməsi və ya səhv koordinatlandırılması riskini aradan qaldırır. Xüsusilə torpaq altında qalan boruların və ya drenaj sistemlərinin tapılmasını asanlaşdırır.
+B
+. İnzibati 
+a
+idiyyət və 
+t
+əhkim 
+z
+olağı 
+a
+nalizi
+Nə olacaq:
+ Yolun hüquqi hüdudlarının (torpaq sahəsinin) kadastr və inzibati sərhədlərlə kəsişmə analizi.
+Necə olacaq:
+ Təhkim zolağı əsasən, yolun kənarlarındakı qorunma zonalarının poliqon kimi göstərilməsi.
+Hansı məlumatları göstərəcək:
+Rayonlar üzrə filtrləmə:
+ Yalnız seçilmiş rayonun (məs: Qusar rayonu) yol şəbəkəsinin izolyasiyası.
+Müdaxilə zonaları:
+ Yolun təhkim zolağına (mühafizə zonasına) düşən kənar tikililərin və ya əkin sahələrinin koordinat bazlı vizuallaşdırılması.
+Hansı problemin qarşısını alacaq:
+ Qanunsuz tikintilərin və yol kənarındakı torpaq zəbtlərinin dərhal aşkar edilməsinə kömək edir. Rayonlararası yol balansının idarə edilməsindəki qarışıqlığı aradan qaldırır.
+5. Nəzarət və 
+b
+ildirişlər 
+s
+istemi
+A. Yenilənmə 
+n
+əzarəti 
+Nə olacaq:
+ Məlumatların aktuallığını qorumaq üçün avtomatik izləmə mexanizmi.
+Necə olacaq:
+ 
+H
+ər bir yol və ya aktivin son redaktə tarixini izləyən taymer sistemi. 30 günü keçən hər bir qeyd Dashboard-da "Təcili" statusu ilə qırmızı rəngdə işarələnir.
+Hansı məlumatları göstərəcək:
+Yenilənməyən obyektlərin siyahısı:
+ Hansı rayon və ya kurator üzrə gecikmələrin olduğu.
+Bildiriş statusu:
+ Müvafiq məsul şəxsə göndərilmiş bildirişlərin (push və ya email) çatdırılma və oxunma tarixi.
+Gecikmə müddəti:
+ Son yenilənmədən neçə gün keçdiyini göstərən sayğac.
+Hansı problemin qarşısını alacaq:
+ Sistemdəki məlumatların "ölü dataya" çevrilməsinin qarşısını alır. Rəhbərlik real vaxt rejimində görür ki, hansı yollar üzrə məlumatlar aktual deyil və qərarları yanlış informasiya üzərində qurmur.
+B. Audit 
+t
+arixçəsi və 
+l
+oqlar 
+Nə olacaq:
+ Sistemdə həyata keçirilən bütün əməliyyatların "rəqəmsal barmaq izi".
+Necə olacaq:
+ Son 24 saat ərzində daxil olan, dəyişdirilən və ya silinən bütün dataların xronoloji siyahısı.
+Hansı məlumatları göstərəcək:
+Dəyişiklik detalı:
+ Məsələn, "İstifadəçi A körpünün yükqaldırma qabiliyyətini 60 tondan 80 tona dəyişdi".
+Giriş-Çıxış analitikası:
+ Sistemin hansı hissələrinə daha çox müraciət olunur və kimlər tərəfindən.
+Cihaz məlumatı:
+ Dəyişikliyin ofisdən (veb) və ya sahədən (mobil) edildiyinin göstəricisi.
+Hansı problemin qarşısını alacaq:
+ Məsuliyyətsiz məlumat girişinin və ya qeyri-qanuni müdaxilələrin qarşısını alır. Hər hansı bir texniki səhv baş verdikdə, məlumatı ilkin vəziyyətinə qaytarmağa (rollback) imkan verir.
