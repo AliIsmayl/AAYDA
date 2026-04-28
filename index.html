@@ -727,6 +727,27 @@ td{padding:11px 10px;font-size:14px;}
 .modal-body{padding:22px;}
 .modal-foot{padding:15px 22px;}
 .modal-foot-r{gap:10px;}
+
+/* Table readability */
+tbody tr:nth-child(odd) td{background:#fff;}
+tbody tr:nth-child(even) td{background:#f7fbff;}
+tbody tr:hover td{background:#eef6ff;}
+#mainTable th:nth-child(3),
+#mainTable td:nth-child(3){
+  min-width:320px;
+  width:28%;
+}
+#segmentsTable th:nth-child(3),
+#segmentsTable td:nth-child(3),
+#assetsTable th:nth-child(3),
+#assetsTable td:nth-child(3){
+  min-width:300px;
+}
+.td-name{
+  max-width:360px;
+  white-space:normal;
+  line-height:1.5;
+}
 </style>
 </head>
 <body>
