@@ -2394,6 +2394,11 @@
       max-height: 92vh;
     }
 
+    #segCreateModal .modal-box {
+      height: 680px;
+      max-height: 92vh;
+    }
+
     .modal-head {
       padding: 14px 18px;
       border-bottom: 1px solid #ecf1f8;
@@ -4483,6 +4488,56 @@
     </div>
   </div>
 
+  <!-- ══ SEG ASSETS MODAL ══ -->
+  <div class="road-segs-ov" id="segAssetsOv">
+    <div class="road-segs-card">
+      <div class="rs-head">
+        <button class="fp-back-btn" id="segAssetsBack">
+          <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>Geri
+        </button>
+        <div class="rs-road-icon" style="background:linear-gradient(135deg,#0891b2,#0e7490);">
+          <svg viewBox="0 0 24 24">
+            <rect x="2" y="7" width="20" height="14" rx="2"/>
+            <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+            <line x1="12" y1="12" x2="12" y2="16"/>
+            <line x1="10" y1="14" x2="14" y2="14"/>
+          </svg>
+        </div>
+        <div class="rs-title-block">
+          <div class="rs-title" id="segAssetsTitle">Aktivlər</div>
+          <div class="rs-subtitle">Aktiv reyestri — filtrlənmiş görünüş</div>
+        </div>
+        <div class="rs-count-pill" style="color:#0891b2;background:#ecfeff;border-color:#a5f3fc;">
+          <span id="segAssetsCount">0</span> aktiv
+        </div>
+        <button class="rs-close-btn" id="segAssetsClose" title="Bağla">
+          <svg viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="table-wrap" style="flex:1;overflow:auto;">
+        <table id="segAssetsTable" style="min-width:820px;">
+          <thead>
+            <tr>
+              <th class="th-nof" style="width:36px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">#</span></div></th>
+              <th><div class="th-top"><span class="th-label">Aktiv kodu</span></div></th>
+              <th><div class="th-top"><span class="th-label">Qrup</span></div></th>
+              <th><div class="th-top"><span class="th-label">Növ</span></div></th>
+              <th><div class="th-top"><span class="th-label">Tip</span></div></th>
+              <th><div class="th-top"><span class="th-label">GİS tipi</span></div></th>
+              <th><div class="th-top"><span class="th-label">km / PK</span></div></th>
+              <th><div class="th-top"><span class="th-label">Status</span></div></th>
+              <th class="th-nof" style="width:140px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">Əməliyyatlar</span></div></th>
+            </tr>
+          </thead>
+          <tbody id="segAssetsBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <!-- ══ SEGMENT MODAL ══ -->
   <div class="modal-ov" id="segModal">
     <div class="modal-box">
@@ -5051,6 +5106,160 @@
     </div>
   </div>
 
+  <!-- ══ SEG CREATE MODAL ══ -->
+  <div class="modal-ov" id="segCreateModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <div class="modal-title-block">
+          <div class="mh-title">Seqment yarat</div>
+          <div class="mh-sub" id="scmSub">Addım 1 / 2 — Ümumi məlumatlar</div>
+        </div>
+        <button class="modal-close-btn" id="scmClose">
+          <svg viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <div class="modal-stepper">
+        <div class="msub ms-active" id="smsub1">
+          <div class="msub-c">1</div>
+          <div class="msub-l">Ümumi məlumatlar</div>
+        </div>
+        <div class="msub-conn" id="smsc1"></div>
+        <div class="msub" id="smsub2">
+          <div class="msub-c">2</div>
+          <div class="msub-l">Texniki parametrlər</div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <!-- Step 1: Ümumi məlumatlar -->
+        <div class="mpane mp-active" id="smp1">
+          <div class="fgrid">
+            <div class="frow full">
+              <label>Seqment kodu <span class="fauto-tag">AUTO</span></label>
+              <input class="finput f-auto" id="sm_kod" readonly>
+            </div>
+            <div class="frow">
+              <label>Başlanğıc (km) <span class="req">*</span></label>
+              <input class="finput" id="sm_bas" type="number" step="0.1" placeholder="0.0">
+            </div>
+            <div class="frow">
+              <label>Son (km) <span class="req">*</span></label>
+              <input class="finput" id="sm_son" type="number" step="0.1" placeholder="12.5">
+            </div>
+            <div class="frow">
+              <label>Uzunluq (km) <span class="fauto-tag">AUTO</span></label>
+              <input class="finput f-auto" id="sm_uzun" readonly placeholder="Avtomatik">
+            </div>
+            <div class="frow">
+              <label>Texniki kateqoriya <span class="req">*</span></label>
+              <select class="fselect" id="sm_kat">
+                <option value="">Seçin...</option>
+                <option>I</option>
+                <option>II</option>
+                <option>III</option>
+                <option>IV</option>
+                <option>V</option>
+              </select>
+            </div>
+            <div class="frow">
+              <label>Örtük növü <span class="req">*</span></label>
+              <select class="fselect" id="sm_ortuk">
+                <option value="">Seçin...</option>
+                <option>Asfalt</option>
+                <option>Beton</option>
+                <option>Torpaq</option>
+                <option>Çınqıl</option>
+                <option>Daş döşəmə</option>
+              </select>
+            </div>
+            <div class="frow">
+              <label>Seqment statusu <span class="req">*</span></label>
+              <select class="fselect" id="sm_status">
+                <option value="">Seçin...</option>
+                <option>Qaralama</option>
+                <option>Aktiv</option>
+                <option>Ləğv olunmuş</option>
+                <option>Arxivləşdirilmiş</option>
+              </select>
+            </div>
+            <div class="frow full" style="margin-top:4px;">
+              <label>GİS centerline <span class="req">*</span></label>
+              <div class="gis-box">
+                <svg viewBox="0 0 24 24">
+                  <path d="M3 12h18M3 6l9-3 9 3M3 18l9 3 9-3" />
+                </svg>
+                Xəritədən seqment xəttini çəkin (Polyline)
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Step 2: Texniki parametrlər -->
+        <div class="mpane" id="smp2">
+          <div class="fgrid">
+            <div class="frow">
+              <label>Zolaq sayı</label>
+              <input class="finput" id="sm_zolaq" type="number" placeholder="Nümunə: 2">
+            </div>
+            <div class="frow">
+              <label>Hərəkət hissəsi eni (m)</label>
+              <input class="finput" id="sm_en" type="number" step="0.1" placeholder="Nümunə: 7.0">
+            </div>
+            <div class="frow">
+              <label>Çiyin eni (m)</label>
+              <input class="finput" id="sm_ciyin" type="number" step="0.1" placeholder="Nümunə: 1.5">
+            </div>
+            <div class="frow">
+              <label>Ayırıcı zolaq</label>
+              <select class="fselect" id="sm_ayir">
+                <option value="">Seçin...</option>
+                <option>Var</option>
+                <option>Yox</option>
+              </select>
+            </div>
+            <div class="frow">
+              <label>Hesabi sürət (km/s)</label>
+              <input class="finput" id="sm_suret" type="number" placeholder="Nümunə: 110">
+            </div>
+            <div class="frow">
+              <label>İstismara verilmə tarixi</label>
+              <input class="finput" id="sm_tarix" type="date">
+            </div>
+            <div class="frow">
+              <label>Hüquqi status</label>
+              <select class="fselect" id="sm_huq">
+                <option value="">Seçin...</option>
+                <option>Aktiv</option>
+                <option>Ləğv</option>
+                <option>Mübahisəli</option>
+                <option>Qeydiyyatsız</option>
+              </select>
+            </div>
+            <div class="frow full">
+              <label>Qeyd</label>
+              <textarea class="ftextarea" id="sm_qeyd" placeholder="Seqment haqqında əlavə texniki qeydlər..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="fbtn fbtn-ghost" id="scmCancel">Ləğv et</button>
+        <div class="modal-foot-r">
+          <button class="fbtn fbtn-outline" id="scmPrev" style="display:none;">
+            <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></svg>Əvvəlki
+          </button>
+          <button class="fbtn fbtn-primary" id="scmNext">
+            İrəli<svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></svg>
+          </button>
+          <button class="fbtn fbtn-success" id="scmSave" style="display:none;">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>Yadda saxla
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     /* ══ STATE ══ */
     let perPage = 5;
@@ -5111,7 +5320,13 @@
     function findSourceActionItem(item) {
       const sourcePanel = activeActionTrigger?.closest('.action-menu-wrap')?.querySelector('.action-menu');
       if (!sourcePanel) return null;
-      const keys = ['roadAction', 'segEdit', 'segDel', 'segAsset', 'assetEdit', 'assetDel'];
+      const keys = [
+        'roadAction',
+        'segEdit', 'segDel', 'segAsset', 'segNewasset', 'segAssetcount',
+        'assetEdit', 'assetDel',
+        'rspEdit', 'rspDel', 'rspNewasset', 'rspAssetcount',
+        'spaEdit', 'spaDel',
+      ];
       return Array.from(sourcePanel.querySelectorAll('.action-menu-item')).find(sourceItem =>
         keys.some(key => item.dataset[key] !== undefined && sourceItem.dataset[key] === item.dataset[key])
       );
@@ -5830,6 +6045,9 @@
 
     function closeAssetModal() {
       document.getElementById('assetModal').classList.remove('open');
+      if (window._segAssetsCode && typeof window._renderSegAssetsTable === 'function') {
+        window._renderSegAssetsTable(window._segAssetsCode);
+      }
     }
 
     document.getElementById('assetNext').addEventListener('click', () => goAssetStep(2));
@@ -6278,14 +6496,15 @@
         <td>${badge(s.kat || '-', 'b-gray')}</td>
         <td>${esc(s.ortuk || '-')}</td>
         <td>${statusBadge(s.status || '-')}</td>
-        <td><button class="link-btn" data-seg-asset="${i}">${(s.assets || []).length} aktiv</button></td>
+        <td><button class="link-btn" data-seg-assetcount="${i}">${(s.assets || []).length} aktiv</button></td>
         <td>
           <div class="row-acts">
             <div class="action-menu-wrap">
               <button class="action-menu-btn" data-action-menu type="button" aria-label="Əməliyyatlar">⋮</button>
               <div class="action-menu">
                 <button class="action-menu-item" data-seg-edit="${i}" type="button">Redaktə et</button>
-                <button class="action-menu-item" data-seg-asset="${i}" type="button">Yeni aktiv</button>
+                <button class="action-menu-item" data-seg-newasset="${i}" type="button">Yeni aktiv əlavə et</button>
+                <button class="action-menu-item" data-seg-assetcount="${i}" type="button">${(s.assets || []).length} aktiv</button>
                 <button class="action-menu-item danger" data-seg-del="${i}" type="button">Sil</button>
               </div>
             </div>
@@ -6953,7 +7172,8 @@
       document.getElementById('segmentsTableBody').addEventListener('click', e => {
         const edit = e.target.closest('[data-seg-edit]');
         const del = e.target.closest('[data-seg-del]');
-        const addAsset = e.target.closest('[data-seg-asset]');
+        const newAsset = e.target.closest('[data-seg-newasset]');
+        const assetCount = e.target.closest('[data-seg-assetcount]');
         if (edit) openSegModal(parseInt(edit.dataset.segEdit, 10), 'global');
         if (del) {
           const idx = parseInt(del.dataset.segDel, 10);
@@ -6964,9 +7184,13 @@
           renderAssetTable();
           refreshRoadActionCells();
         }
-        if (addAsset) {
-          const idx = parseInt(addAsset.dataset.segAsset, 10);
+        if (newAsset) {
+          const idx = parseInt(newAsset.dataset.segNewasset, 10);
           openGlobalAssetModal(-1, segmentsData[idx]?.code || '');
+        }
+        if (assetCount) {
+          const idx = parseInt(assetCount.dataset.segAssetcount, 10);
+          openSegAssetsPanel(segmentsData[idx]?.code || '', idx);
         }
       });
       document.getElementById('assetsTableBody').addEventListener('click', e => {
@@ -6990,40 +7214,7 @@
       document.getElementById('sgCreateRoadToggle').addEventListener('click', () => openRoadCreateModal('sg'));
       document.getElementById('acCreateRoadToggle').addEventListener('click', () => openRoadCreateModal('ac'));
       document.getElementById('ac_road').addEventListener('change', populateAssetSegmentSelect);
-      document.getElementById('acCreateSegToggle').addEventListener('click', () => document.getElementById('acQuickSeg').classList.toggle('open'));
-      document.getElementById('acQuickSegSave').addEventListener('click', () => {
-        const roadCode = document.getElementById('ac_road').value;
-        const bas = document.getElementById('ac_qs_bas').value;
-        const son = document.getElementById('ac_qs_son').value;
-        if (!roadCode) {
-          alert('Seqment yaratmaq üçün əvvəl yol seçin və ya yol yaradın.');
-          return;
-        }
-        if (!bas || !son) {
-          alert('Seqment yaratmaq üçün başlanğıc və son km daxil edilməlidir.');
-          return;
-        }
-        const length = parseFloat(son) > parseFloat(bas) ? (parseFloat(son) - parseFloat(bas)).toFixed(2) : '';
-        const seg = {
-          code: nextCode('SEG', segmentsData, segmentsData.length),
-          roadCode,
-          roadName: selectedRoadName(roadCode),
-          bas,
-          son,
-          uzun: length,
-          kat: 'III',
-          ortuk: document.getElementById('ac_qs_ortuk').value || 'Asfalt',
-          status: 'Aktiv',
-          assets: [],
-        };
-        segmentsData.push(seg);
-        document.getElementById('acQuickSeg').classList.remove('open');
-        ['ac_qs_bas', 'ac_qs_son', 'ac_qs_ortuk'].forEach(id => document.getElementById(id).value = '');
-        populateAssetSegmentSelect();
-        document.getElementById('ac_segment_select').value = seg.code;
-        renderSegmentTable();
-        refreshRoadActionCells();
-      });
+      document.getElementById('acCreateSegToggle').addEventListener('click', () => openSegCreateModal('ac'));
 
       /* ══ ROAD SEGMENTS MODAL ══ */
       let currentRoadSegsCode = '';
@@ -7038,6 +7229,86 @@
         document.getElementById('roadSegsOv').classList.add('open');
       }
       window.openRoadSegsPanel = openRoadSegsPanel;
+
+      /* ══ SEG ASSETS MODAL ══ */
+      let currentSegAssetsCode = '';
+
+      function openSegAssetsPanel(segCode, segIdx) {
+        currentSegAssetsCode = segCode;
+        window._segAssetsCode = segCode;
+        const seg = segmentsData[segIdx] !== undefined ? segmentsData[segIdx] : segmentsData.find(s => s.code === segCode);
+        const roadName = seg ? roadLabel(seg.roadCode) : '';
+        document.getElementById('segAssetsTitle').textContent = seg ? `${seg.code}${roadName ? '  ·  ' + roadName : ''}` : segCode;
+        renderSegAssetsTable(segCode);
+        switchView('assets');
+        document.getElementById('segAssetsOv').classList.add('open');
+      }
+
+      function closeSegAssetsPanel() {
+        document.getElementById('segAssetsOv').classList.remove('open');
+        currentSegAssetsCode = '';
+        window._segAssetsCode = '';
+      }
+
+      window._renderSegAssetsTable = renderSegAssetsTable;
+
+      function renderSegAssetsTable(segCode) {
+        const assets = assetsData.filter(a => a.segmentCode === segCode);
+        const tbody = document.getElementById('segAssetsBody');
+        document.getElementById('segAssetsCount').textContent = assets.length;
+        if (!assets.length) {
+          tbody.innerHTML = `<tr><td colspan="9" class="empty-cell">Bu seqmentə aid aktiv yoxdur.</td></tr>`;
+          return;
+        }
+        tbody.innerHTML = assets.map((a, i) => {
+          const gi = assetsData.indexOf(a);
+          return `<tr>
+            <td class="td-num">${i + 1}</td>
+            <td class="td-code">${esc(a.code)}</td>
+            <td>${esc(a.grup || '-')}</td>
+            <td>${esc(a.nov || '-')}</td>
+            <td>${esc(a.tip || '-')}</td>
+            <td>${badge(a.gis_tip || '-', 'b-blue')}</td>
+            <td>${esc(a.km || '-')}</td>
+            <td>${statusBadge(a.status || '-')}</td>
+            <td><div class="row-acts"><div class="action-menu-wrap"><button class="action-menu-btn" data-action-menu type="button" aria-label="Əməliyyatlar">⋮</button><div class="action-menu">
+              <button class="action-menu-item" data-spa-edit="${gi}" type="button">Redaktə et</button>
+              <button class="action-menu-item danger" data-spa-del="${gi}" type="button">Sil</button>
+            </div></div></div></td>
+          </tr>`;
+        }).join('');
+      }
+
+      document.getElementById('segAssetsClose').addEventListener('click', closeSegAssetsPanel);
+      document.getElementById('segAssetsBack').addEventListener('click', () => {
+        closeSegAssetsPanel();
+        switchView('segments');
+      });
+      document.getElementById('segAssetsOv').addEventListener('click', e => {
+        if (e.target === document.getElementById('segAssetsOv')) closeSegAssetsPanel();
+      });
+
+      document.getElementById('segAssetsBody').addEventListener('click', e => {
+        const editBtn = e.target.closest('[data-spa-edit]');
+        const delBtn = e.target.closest('[data-spa-del]');
+        if (editBtn) {
+          openGlobalAssetModal(parseInt(editBtn.dataset.spaEdit, 10));
+          return;
+        }
+        if (delBtn) {
+          if (!confirm('Bu aktivi silmək istədiyinizə əminsiniz?')) return;
+          const idx = parseInt(delBtn.dataset.spaDel, 10);
+          const code = assetsData[idx]?.code;
+          assetsData.splice(idx, 1);
+          segmentsData.forEach(seg => {
+            if (seg.assets) seg.assets = seg.assets.filter(a => a.code !== code);
+          });
+          renderAssetTable();
+          renderSegmentTable();
+          renderSegAssetsTable(currentSegAssetsCode);
+          return;
+        }
+      });
 
       function closeRoadSegsPanel() {
         document.getElementById('roadSegsOv').classList.remove('open');
@@ -7064,10 +7335,11 @@
             <td>${badge(s.kat || '-', 'b-gray')}</td>
             <td>${esc(s.ortuk || '-')}</td>
             <td>${statusBadge(s.status || '-')}</td>
-            <td><button class="link-btn" data-rsp-asset="${gi}">${(s.assets || []).length} aktiv</button></td>
+            <td><button class="link-btn" data-rsp-assetcount="${gi}">${(s.assets || []).length} aktiv</button></td>
             <td><div class="row-acts"><div class="action-menu-wrap"><button class="action-menu-btn" data-action-menu type="button" aria-label="Əməliyyatlar">⋮</button><div class="action-menu">
               <button class="action-menu-item" data-rsp-edit="${gi}" type="button">Redaktə et</button>
-              <button class="action-menu-item" data-rsp-asset="${gi}" type="button">Yeni aktiv</button>
+              <button class="action-menu-item" data-rsp-newasset="${gi}" type="button">Yeni aktiv əlavə et</button>
+              <button class="action-menu-item" data-rsp-assetcount="${gi}" type="button">${(s.assets || []).length} aktiv</button>
               <button class="action-menu-item danger" data-rsp-del="${gi}" type="button">Sil</button>
             </div></div></div></td>
           </tr>`;
@@ -7088,7 +7360,8 @@
       document.getElementById('roadSegsBody').addEventListener('click', e => {
         const editBtn = e.target.closest('[data-rsp-edit]');
         const delBtn = e.target.closest('[data-rsp-del]');
-        const assetBtn = e.target.closest('[data-rsp-asset]');
+        const newAssetBtn = e.target.closest('[data-rsp-newasset]');
+        const assetCountBtn = e.target.closest('[data-rsp-assetcount]');
         if (editBtn) {
           openSegModal(parseInt(editBtn.dataset.rspEdit, 10), 'global');
           return;
@@ -7105,9 +7378,14 @@
           renderRoadSegsTable(currentRoadSegsCode);
           return;
         }
-        if (assetBtn) {
-          const idx = parseInt(assetBtn.dataset.rspAsset, 10);
+        if (newAssetBtn) {
+          const idx = parseInt(newAssetBtn.dataset.rspNewasset, 10);
           openGlobalAssetModal(-1, segmentsData[idx]?.code || '');
+          return;
+        }
+        if (assetCountBtn) {
+          const idx = parseInt(assetCountBtn.dataset.rspAssetcount, 10);
+          openSegAssetsPanel(segmentsData[idx]?.code || '', idx);
           return;
         }
       });
@@ -7189,6 +7467,88 @@
           if (rcmCallerPrefix === 'ac') populateAssetSegmentSelect();
         }
       });
+
+      /* ══ SEG CREATE MODAL ══ */
+      const SCM_STEPS = 2;
+      let scmCallerPrefix = 'ac';
+      let scmStep = 1;
+      const scmStepLabels = ['Ümumi məlumatlar', 'Texniki parametrlər'];
+
+      function openSegCreateModal(prefix) {
+        scmCallerPrefix = prefix;
+        scmStep = 1;
+        ['sm_bas', 'sm_son', 'sm_uzun', 'sm_zolaq', 'sm_en', 'sm_ciyin', 'sm_suret', 'sm_tarix', 'sm_qeyd'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+        ['sm_kat', 'sm_ortuk', 'sm_status', 'sm_ayir', 'sm_huq'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+        document.getElementById('sm_kod').value = nextCode('SEG', segmentsData, segmentsData.length);
+        goScmStep(1);
+        document.getElementById('segCreateModal').classList.add('open');
+      }
+
+      function closeSegCreateModal() {
+        document.getElementById('segCreateModal').classList.remove('open');
+      }
+
+      function goScmStep(n) {
+        scmStep = n;
+        for (let i = 1; i <= SCM_STEPS; i++) {
+          document.getElementById(`smp${i}`).classList.toggle('mp-active', i === n);
+          document.getElementById(`smsub${i}`).classList.toggle('ms-active', i === n);
+          document.getElementById(`smsub${i}`).classList.toggle('ms-done', i < n);
+        }
+        document.getElementById('smsc1').classList.toggle('mc-done', n > 1);
+        document.getElementById('scmSub').textContent = `Addım ${n} / ${SCM_STEPS} — ${scmStepLabels[n - 1]}`;
+        document.getElementById('scmPrev').style.display = n > 1 ? '' : 'none';
+        document.getElementById('scmNext').style.display = n < SCM_STEPS ? '' : 'none';
+        document.getElementById('scmSave').style.display = n === SCM_STEPS ? '' : 'none';
+      }
+
+      document.getElementById('scmClose').addEventListener('click', closeSegCreateModal);
+      document.getElementById('scmCancel').addEventListener('click', closeSegCreateModal);
+      document.getElementById('segCreateModal').addEventListener('click', e => {
+        if (e.target === document.getElementById('segCreateModal')) closeSegCreateModal();
+      });
+      document.getElementById('scmNext').addEventListener('click', () => { if (scmStep < SCM_STEPS) goScmStep(scmStep + 1); });
+      document.getElementById('scmPrev').addEventListener('click', () => { if (scmStep > 1) goScmStep(scmStep - 1); });
+      document.getElementById('smsub1').addEventListener('click', () => goScmStep(1));
+      document.getElementById('smsub2').addEventListener('click', () => goScmStep(2));
+      ['sm_bas', 'sm_son'].forEach(id => document.getElementById(id).addEventListener('input', () => {
+        const b = parseFloat(document.getElementById('sm_bas').value);
+        const s = parseFloat(document.getElementById('sm_son').value);
+        document.getElementById('sm_uzun').value = (!isNaN(b) && !isNaN(s) && s > b) ? (s - b).toFixed(2) : '';
+      }));
+      document.getElementById('scmSave').addEventListener('click', () => {
+        const roadCode = document.getElementById('ac_road').value;
+        const bas = document.getElementById('sm_bas').value;
+        const son = document.getElementById('sm_son').value;
+        if (!roadCode) { alert('Seqment yaratmaq üçün əvvəl yol seçin.'); return; }
+        if (!bas || !son) { alert('Başlanğıc və son km daxil edilməlidir.'); goScmStep(1); return; }
+        const length = parseFloat(son) > parseFloat(bas) ? (parseFloat(son) - parseFloat(bas)).toFixed(2) : '';
+        const seg = {
+          code: document.getElementById('sm_kod').value || nextCode('SEG', segmentsData, segmentsData.length),
+          roadCode,
+          roadName: selectedRoadName(roadCode),
+          bas, son, uzun: length,
+          kat: document.getElementById('sm_kat').value || 'III',
+          ortuk: document.getElementById('sm_ortuk').value || 'Asfalt',
+          status: document.getElementById('sm_status').value || 'Aktiv',
+          zolaq: document.getElementById('sm_zolaq').value,
+          en: document.getElementById('sm_en').value,
+          ciyin: document.getElementById('sm_ciyin').value,
+          ayir: document.getElementById('sm_ayir').value,
+          suret: document.getElementById('sm_suret').value,
+          tarix: document.getElementById('sm_tarix').value,
+          huq: document.getElementById('sm_huq').value,
+          qeyd: document.getElementById('sm_qeyd').value,
+          assets: [],
+        };
+        segmentsData.push(seg);
+        closeSegCreateModal();
+        populateAssetSegmentSelect();
+        document.getElementById('ac_segment_select').value = seg.code;
+        renderSegmentTable();
+        refreshRoadActionCells();
+      });
+      window.openSegCreateModal = openSegCreateModal;
 
       syncRoadsFromRows();
       initDemoRelations();
