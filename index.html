@@ -641,6 +641,59 @@
       flex-shrink: 0;
     }
 
+    .pm-item.has-submenu {
+      justify-content: space-between;
+    }
+
+    .pm-item .pm-item-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .pm-chevron {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+      flex-shrink: 0;
+    }
+
+    .pm-submenu {
+      display: none;
+      margin: 0 10px 10px 44px;
+      border: 1px solid #d8e4f0;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #f8fbff;
+    }
+
+    .pm-submenu.open {
+      display: block;
+    }
+
+    .pm-submenu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 12px;
+      cursor: pointer;
+      font-size: 12px;
+      color: #1a2b3c;
+      border-bottom: 1px solid #e6eef8;
+    }
+
+    .pm-submenu-item:last-child {
+      border-bottom: none;
+    }
+
+    .pm-submenu-item:hover {
+      background: #eef5ff;
+    }
+
     .pm-divider {
       height: 1px;
       background: #ecf1f8;
@@ -3515,35 +3568,62 @@
             </div>
             <div class="pm-items">
               <div class="pm-item">
-                <svg viewBox="0 0 24 24">
-                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-                Profili gör
+                <span class="pm-item-label">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  Profili gör
+                </span>
               </div>
               <div class="pm-item">
-                <svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="3" />
-                  <path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14" />
-                  <path d="M12 2v2M12 20v2M2 12h2M20 12h2" />
-                </svg>
-                Hesab ayarları
+                <span class="pm-item-label">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3" />
+                    <path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14" />
+                    <path d="M12 2v2M12 20v2M2 12h2M20 12h2" />
+                  </svg>
+                  Hesab ayarları
+                </span>
               </div>
               <div class="pm-item">
-                <svg viewBox="0 0 24 24">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                  <path d="M7 11V7a5 5 0 0110 0v4" />
+                <span class="pm-item-label">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0110 0v4" />
+                  </svg>
+                  Şifrəni dəyiş
+                </span>
+              </div>
+              <div class="pm-item has-submenu" id="profileTemplatesBtn" role="button" tabindex="0">
+                <span class="pm-item-label">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="3" y="4" width="7" height="7" rx="1.2" />
+                    <rect x="14" y="4" width="7" height="7" rx="1.2" />
+                    <rect x="3" y="15" width="7" height="5" rx="1.2" />
+                    <rect x="14" y="15" width="7" height="5" rx="1.2" />
+                  </svg>
+                  Şablonlar
+                </span>
+                <svg class="pm-chevron" viewBox="0 0 24 24">
+                  <path d="m9 6 6 6-6 6" />
                 </svg>
-                Şifrəni dəyiş
+              </div>
+              <div class="pm-submenu" id="profileTemplatesMenu">
+                <div class="pm-submenu-item" data-template="road">Yol şablonu</div>
+                <div class="pm-submenu-item" data-template="segment">Seqment şablonu</div>
+                <div class="pm-submenu-item" data-template="asset">Aktiv şablonu</div>
               </div>
               <div class="pm-divider"></div>
               <div class="pm-item danger">
-                <svg viewBox="0 0 24 24">
-                  <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
-                  <polyline points="16 17 21 12 16 7" />
-                  <line x1="21" y1="12" x2="9" y2="12" />
-                </svg>
-                Çıxış
+                <span class="pm-item-label">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                  </svg>
+                  Çıxış
+                </span>
               </div>
             </div>
           </div>
@@ -5520,6 +5600,81 @@
     });
 
     /* ══ SORT MENUS (⋮) ══ */
+    function closeTopbarPanels() {
+      document.querySelectorAll('.tb-panel.open').forEach(panel => panel.classList.remove('open'));
+      document.getElementById('profileTemplatesMenu')?.classList.remove('open');
+    }
+
+    function toggleTopbarPanel(panelId) {
+      const panel = document.getElementById(panelId);
+      if (!panel) return;
+      const wasOpen = panel.classList.contains('open');
+      closeTopbarPanels();
+      if (!wasOpen) panel.classList.add('open');
+    }
+
+    function updateNotifBadge() {
+      const unread = document.querySelectorAll('#notifList .np-item.unread').length;
+      const badge = document.getElementById('notifBadge');
+      if (!badge) return;
+      badge.style.display = unread ? 'block' : 'none';
+    }
+
+    document.getElementById('notifBtn')?.addEventListener('click', e => {
+      e.stopPropagation();
+      toggleTopbarPanel('notifPanel');
+    });
+
+    document.getElementById('profileBtn')?.addEventListener('click', e => {
+      e.stopPropagation();
+      toggleTopbarPanel('profilePanel');
+    });
+
+    document.getElementById('profileTemplatesBtn')?.addEventListener('click', e => {
+      e.stopPropagation();
+      document.getElementById('profileTemplatesMenu')?.classList.toggle('open');
+    });
+
+    document.getElementById('profileTemplatesBtn')?.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        document.getElementById('profileTemplatesMenu')?.classList.toggle('open');
+      }
+    });
+
+    document.querySelectorAll('#profileTemplatesMenu .pm-submenu-item').forEach(item => {
+      item.addEventListener('click', e => {
+        e.stopPropagation();
+        const labels = {
+          road: 'Yol şablonu',
+          segment: 'Seqment şablonu',
+          asset: 'Aktiv şablonu',
+        };
+        document.querySelector('.topbar-sub').textContent = labels[item.dataset.template] || 'Şablon seçildi';
+        closeTopbarPanels();
+      });
+    });
+
+    document.getElementById('notifMarkAll')?.addEventListener('click', e => {
+      e.stopPropagation();
+      document.querySelectorAll('#notifList .np-item.unread').forEach(item => item.classList.remove('unread'));
+      updateNotifBadge();
+    });
+
+    document.querySelectorAll('#notifList .np-item').forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.remove('unread');
+        updateNotifBadge();
+      });
+    });
+
+    document.addEventListener('click', e => {
+      if (e.target.closest('.tb-dropdown-wrap')) return;
+      closeTopbarPanels();
+    });
+
+    updateNotifBadge();
+
     function closeAllMenus() {
       document.querySelectorAll('.sort-menu.open').forEach(m => m.classList.remove('open'));
       document.querySelectorAll('.sort-btn.on').forEach(b => b.classList.remove('on'));
