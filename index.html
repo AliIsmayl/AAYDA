@@ -713,6 +713,36 @@
       flex-shrink: 0;
     }
 
+    .registry-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      padding: 12px 16px;
+      border-top: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+      background: #f8fafc;
+    }
+
+    .registry-stat {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+
+    .registry-stat .rs-v {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.1;
+    }
+
+    .registry-stat .rs-l {
+      margin-top: 4px;
+      font-size: 11px;
+      color: #64748b;
+    }
+
     .btn-new {
       display: inline-flex;
       align-items: center;
@@ -825,6 +855,10 @@
       vertical-align: top;
       position: relative;
       padding: 0;
+    }
+
+    th.menu-open {
+      z-index: 700;
     }
 
     th:last-child {
@@ -959,7 +993,7 @@
       margin: 0;
       padding: 6px;
       box-shadow: 0 8px 24px rgba(37, 99, 235, .13);
-      z-index: 260;
+      z-index: 780;
     }
 
     .th-input {
@@ -1054,7 +1088,7 @@
       border: 1px solid #d8e4f0;
       border-radius: 10px;
       box-shadow: 0 8px 24px rgba(37, 99, 235, .13);
-      z-index: 300;
+      z-index: 800;
       min-width: 152px;
       overflow: hidden;
       display: none;
@@ -3299,6 +3333,13 @@
       <div class="nav-group-title">Vahid Reyestr</div>
       <a class="nav-item active" href="#">
         <svg viewBox="0 0 24 24">
+          <path d="M3 7h18M3 12h18M3 17h18" />
+          <path d="M6 4v16" />
+        </svg>
+        <span class="ni-label">Vahid reyestr</span>
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 24 24">
           <path d="M3 17l4-8 4 4 4-6 4 4" />
           <path d="M3 21h18" />
         </svg>
@@ -4722,6 +4763,55 @@
   </div>
 
   <!-- ══ ASSET MODAL ══ -->
+  <div class="road-segs-ov" id="roadAssetsOv">
+    <div class="road-segs-card">
+      <div class="rs-head">
+        <button class="fp-back-btn" id="roadAssetsBack">
+          <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>Geri
+        </button>
+        <div class="rs-road-icon" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">
+          <svg viewBox="0 0 24 24">
+            <rect x="2" y="7" width="20" height="14" rx="2"/>
+            <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+            <line x1="12" y1="12" x2="12" y2="16"/>
+            <line x1="10" y1="14" x2="14" y2="14"/>
+          </svg>
+        </div>
+        <div class="rs-title-block">
+          <div class="rs-title" id="roadAssetsTitle">Aktivlər</div>
+          <div class="rs-subtitle">Yol üzrə aktivlərin siyahısı</div>
+        </div>
+        <div class="rs-count-pill" style="color:#6d28d9;background:#f5f3ff;border-color:#ddd6fe;">
+          <span id="roadAssetsCount">0</span> aktiv
+        </div>
+        <button class="rs-close-btn" id="roadAssetsClose" title="Bağla">
+          <svg viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="table-wrap" style="flex:1;overflow:auto;">
+        <table id="roadAssetsTable" style="min-width:820px;">
+          <thead>
+            <tr>
+              <th class="th-nof" style="width:36px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">#</span></div></th>
+              <th><div class="th-top"><span class="th-label">Aktiv kodu</span></div></th>
+              <th><div class="th-top"><span class="th-label">Qrup</span></div></th>
+              <th><div class="th-top"><span class="th-label">Növ</span></div></th>
+              <th><div class="th-top"><span class="th-label">Tip</span></div></th>
+              <th><div class="th-top"><span class="th-label">GIS tipi</span></div></th>
+              <th><div class="th-top"><span class="th-label">km / PK</span></div></th>
+              <th><div class="th-top"><span class="th-label">Status</span></div></th>
+              <th class="th-nof" style="width:140px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">Əməliyyatlar</span></div></th>
+            </tr>
+          </thead>
+          <tbody id="roadAssetsBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <div class="modal-ov" id="assetModal">
     <div class="modal-box">
       <div class="modal-head">
@@ -5322,6 +5412,7 @@
       if (!sourcePanel) return null;
       const keys = [
         'roadAction',
+        'regRoad', 'regSegs', 'regAssets',
         'segEdit', 'segDel', 'segAsset', 'segNewasset', 'segAssetcount',
         'assetEdit', 'assetDel',
         'rspEdit', 'rspDel', 'rspNewasset', 'rspAssetcount',
@@ -5404,17 +5495,24 @@
     function closeAllMenus() {
       document.querySelectorAll('.sort-menu.open').forEach(m => m.classList.remove('open'));
       document.querySelectorAll('.sort-btn.on').forEach(b => b.classList.remove('on'));
+      document.querySelectorAll('table .th-bot').forEach(bot => { bot.style.display = 'none'; });
+      document.querySelectorAll('table .filt-btn.on').forEach(b => b.classList.remove('on'));
+      document.querySelectorAll('table th.menu-open').forEach(th => th.classList.remove('menu-open'));
     }
-    document.querySelectorAll('.sort-btn').forEach(btn => {
+    document.querySelectorAll('#mainTable .sort-btn').forEach(btn => {
       btn.addEventListener('click', e => {
         e.stopPropagation();
+        const th = btn.closest('th');
         const menu = btn.closest('.th-top').querySelector('.sort-menu');
         const wasOpen = menu.classList.contains('open');
         closeAllMenus();
-        if (!wasOpen) { menu.classList.add('open'); btn.classList.add('on'); }
+        if (!wasOpen) { menu.classList.add('open'); btn.classList.add('on'); th?.classList.add('menu-open'); }
       });
     });
-    document.addEventListener('click', closeAllMenus);
+    document.addEventListener('click', e => {
+      if (e.target.closest('.sort-menu') || e.target.closest('.th-bot') || e.target.closest('.action-menu-wrap')) return;
+      closeAllMenus();
+    });
 
     /* ══ FILTER TOGGLE ══ */
     function getMainFilterInputs() {
@@ -5425,6 +5523,9 @@
       document.querySelectorAll('#mainTable thead .th-bot').forEach(bot => {
         const input = bot.querySelector('.th-input');
         if (!input || bot.querySelector('.th-filter-clear')) return;
+        const th = bot.closest('th');
+        const ci = parseInt(th?.dataset?.ci || '', 10);
+        input.dataset.filterKind = input.tagName === 'SELECT' ? 'select' : (ci === 5 ? 'range' : 'text');
 
         const row = document.createElement('div');
         row.className = 'th-filter-row';
@@ -5438,12 +5539,171 @@
         clearBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>';
         row.appendChild(clearBtn);
 
-        clearBtn.addEventListener('click', e => {
-          e.stopPropagation();
-          input.value = '';
-          applyFilters();
-          input.focus();
-        });
+      });
+    }
+
+    function getAllFilterInputs() {
+      return Array.from(document.querySelectorAll('table .th-input'));
+    }
+
+    function getFilterKind(control) {
+      if (!control) return 'text';
+      return control.dataset.filterKind || (control.tagName === 'SELECT' ? 'select' : 'text');
+    }
+
+    function clearFilterControl(control) {
+      if (!control) return;
+      if (control.tagName === 'SELECT') control.selectedIndex = 0;
+      else control.value = '';
+    }
+
+    function normalizeFilterValue(control) {
+      return (control?.value || '').trim().toLowerCase();
+    }
+
+    function parseNumericValue(text) {
+      const raw = String(text ?? '').replace(/\s+/g, '').replace(',', '.');
+      const m = raw.match(/-?\d+(?:\.\d+)?/);
+      return m ? Number(m[0]) : NaN;
+    }
+
+    function matchesFilterValue(filterValue, cellText, kind = 'text') {
+      const query = String(filterValue ?? '').trim().toLowerCase();
+      if (!query) return true;
+      const cell = String(cellText ?? '').trim().toLowerCase();
+      if (kind === 'select') {
+        const cellNum = parseNumericValue(cellText);
+        const plusMatch = query.match(/^(\d+(?:[.,]\d+)?)\+$/);
+        if (Number.isFinite(cellNum) && plusMatch) {
+          return cellNum >= Number(plusMatch[1].replace(',', '.'));
+        }
+        const rangeMatch = query.match(/^(\d+(?:[.,]\d+)?)\s*-\s*(\d+(?:[.,]\d+)?)$/);
+        if (Number.isFinite(cellNum) && rangeMatch) {
+          const min = Number(rangeMatch[1].replace(',', '.'));
+          const max = Number(rangeMatch[2].replace(',', '.'));
+          return cellNum >= min && cellNum <= max;
+        }
+        const compactRangeMatch = query.match(/^(\d+(?:[.,]\d+)?)\s*-\s*(\d+(?:[.,]\d+)?)\+?$/);
+        if (Number.isFinite(cellNum) && compactRangeMatch) {
+          const min = Number(compactRangeMatch[1].replace(',', '.'));
+          const max = Number(compactRangeMatch[2].replace(',', '.'));
+          return cellNum >= min && cellNum <= max;
+        }
+        return cell === query;
+      }
+      if (kind === 'range') {
+        const cellNum = parseNumericValue(cellText);
+        if (!Number.isFinite(cellNum)) return cell.includes(query);
+        const normalized = query.replace(/\.\./g, '-').replace(/\sto\s/gi, '-');
+        const rangeMatch = normalized.match(/^(-?\d+(?:[.,]\d+)?)?\s*-\s*(-?\d+(?:[.,]\d+)?)?$/);
+        if (rangeMatch) {
+          const min = rangeMatch[1] ? Number(rangeMatch[1].replace(',', '.')) : -Infinity;
+          const max = rangeMatch[2] ? Number(rangeMatch[2].replace(',', '.')) : Infinity;
+          if (Number.isFinite(min) && Number.isFinite(max)) return cellNum >= min && cellNum <= max;
+        }
+        const exact = Number(query.replace(',', '.'));
+        if (Number.isFinite(exact)) return cellNum === exact;
+      }
+      return cell.includes(query);
+    }
+
+    function syncFilterClearButtons(tableSelector) {
+      const table = document.querySelector(tableSelector);
+      if (!table) return;
+      table.querySelectorAll('th').forEach(th => {
+        const inp = th.querySelector('.th-input');
+        const clearBtn = th.querySelector('.th-filter-clear');
+        if (!inp || !clearBtn) return;
+        clearBtn.classList.toggle('visible', inp.value.trim() !== '');
+      });
+    }
+
+    function syncResetButtons() {
+      document.querySelectorAll('.btn-filter-reset').forEach(btn => {
+        const card = btn.closest('.table-card');
+        const hasAnyFilter = card
+          ? Array.from(card.querySelectorAll('.th-input')).some(inp => inp.value.trim() !== '')
+          : getAllFilterInputs().some(inp => inp.value.trim() !== '');
+        btn.classList.toggle('visible', hasAnyFilter);
+      });
+    }
+
+    function ensureFilterClearButtons(tableSelector, onClear) {
+      const table = document.querySelector(tableSelector);
+      if (!table) return;
+      table.querySelectorAll('.th-bot').forEach(bot => {
+        const input = bot.querySelector('.th-input');
+        if (!input || bot.querySelector('.th-filter-clear')) return;
+        const row = bot.querySelector('.th-filter-row') || bot;
+        const clearBtn = document.createElement('button');
+        clearBtn.type = 'button';
+        clearBtn.className = 'th-filter-clear';
+        clearBtn.title = 'Bu filteri sıfırla';
+        clearBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>';
+        row.appendChild(clearBtn);
+      });
+      syncFilterClearButtons(tableSelector);
+    }
+
+    function resetAllFilters() {
+      getAllFilterInputs().forEach(clearFilterControl);
+      document.querySelectorAll('table .th-bot').forEach(bot => { bot.style.display = 'none'; });
+      document.querySelectorAll('table .filt-btn.on').forEach(btn => btn.classList.remove('on'));
+      closeAllMenus();
+      currentPage = 1;
+      applyFilters();
+      renderRegistryTable();
+      applyDomTable('segmentsTable', segmentTableState, 'segments');
+      applyDomTable('assetsTable', assetTableState, 'assets');
+      syncFilterClearButtons('#mainTable');
+      syncFilterClearButtons('#registryTable');
+      syncFilterClearButtons('#segmentsTable');
+      syncFilterClearButtons('#assetsTable');
+      syncResetButtons();
+    }
+
+    function resetRegistryFilters() {
+      const table = document.getElementById('registryTable');
+      if (!table) return;
+      table.querySelectorAll('.th-input').forEach(clearFilterControl);
+      table.querySelectorAll('.th-bot').forEach(bot => { bot.style.display = 'none'; });
+      table.querySelectorAll('.filt-btn.on').forEach(btn => btn.classList.remove('on'));
+      closeAllMenus();
+      registryState.sortCi = null;
+      registryState.sortDir = 'asc';
+      renderRegistryTable();
+      syncFilterClearButtons('#registryTable');
+      syncResetButtons();
+    }
+
+    function wireFilterDelegation(tableSelector, applyFn) {
+      const table = document.querySelector(tableSelector);
+      if (!table || table.dataset.filterWired === '1') return;
+      table.dataset.filterWired = '1';
+      table.addEventListener('input', e => {
+        if (!e.target.matches('.th-input')) return;
+        applyFn();
+        syncFilterClearButtons(tableSelector);
+        syncResetButtons();
+      });
+      table.addEventListener('change', e => {
+        if (!e.target.matches('.th-input')) return;
+        applyFn();
+        syncFilterClearButtons(tableSelector);
+        syncResetButtons();
+      });
+      table.addEventListener('click', e => {
+        const clearBtn = e.target.closest('.th-filter-clear');
+        if (!clearBtn) return;
+        const th = clearBtn.closest('th');
+        const inp = th?.querySelector('.th-input');
+        if (!inp) return;
+        e.stopPropagation();
+        clearFilterControl(inp);
+        applyFn();
+        inp.focus();
+        syncFilterClearButtons(tableSelector);
+        syncResetButtons();
       });
     }
 
@@ -5462,44 +5722,46 @@
         btn.title = hasValue ? 'Filter aktivdir' : 'Axtar';
         clearBtn?.classList.toggle('visible', hasValue);
       });
-      document.getElementById('resetFiltersBtn')?.classList.toggle('visible', hasActiveFilter);
+      syncResetButtons();
     }
 
     setupColumnFilterControls();
+    ensureFilterClearButtons('#mainTable', applyFilters);
 
-    document.querySelectorAll('.filt-btn').forEach(btn => {
+    document.querySelectorAll('#mainTable .filt-btn').forEach(btn => {
       btn.addEventListener('click', e => {
         e.stopPropagation();
         const th = btn.closest('th');
         const bot = th.querySelector('.th-bot');
         if (!bot) return;
         const isHidden = bot.style.display === 'none' || bot.style.display === '';
+        closeAllMenus();
         if (isHidden) {
           bot.style.display = 'block';
           const inp = bot.querySelector('.th-input');
           if (inp) inp.focus();
-        } else {
-          bot.style.display = 'none';
+          th.classList.add('menu-open');
         }
         syncFilterUi();
       });
     });
+    wireFilterDelegation('#mainTable', applyFilters);
 
     /* ══ FILTER LOGIC ══ */
     function applyFilters() {
       const ths = Array.from(document.querySelectorAll('#mainTable thead th'));
       const filters = ths.map(th => {
         const inp = th.querySelector('.th-input');
-        if (!inp) return '';
-        return inp.value.trim().toLowerCase();
+        if (!inp) return null;
+        return { value: normalizeFilterValue(inp), kind: getFilterKind(inp) };
       });
 
       allRows.forEach(row => {
         const cells = Array.from(row.cells);
         const match = filters.every((f, i) => {
-          if (!f) return true;
+          if (!f?.value) return true;
           const cell = cells[i];
-          return cell && cell.textContent.trim().toLowerCase().includes(f);
+          return cell && matchesFilterValue(f.value, cell.textContent, f.kind);
         });
         row.dataset.out = match ? '' : '1';
       });
@@ -5510,19 +5772,32 @@
     }
 
     getMainFilterInputs().forEach(inp => {
-      inp.addEventListener('input', applyFilters);
-      inp.addEventListener('change', applyFilters);
+      inp.addEventListener('input', () => {
+        applyFilters();
+        syncFilterClearButtons('#mainTable');
+        syncResetButtons();
+      });
+      inp.addEventListener('change', () => {
+        applyFilters();
+        syncFilterClearButtons('#mainTable');
+        syncResetButtons();
+      });
     });
 
     document.getElementById('resetFiltersBtn').addEventListener('click', () => {
-      getMainFilterInputs().forEach(inp => { inp.value = ''; });
-      document.querySelectorAll('#mainTable thead .th-bot').forEach(bot => { bot.style.display = 'none'; });
-      document.querySelectorAll('#mainTable thead .filt-btn').forEach(btn => btn.classList.remove('on'));
-      applyFilters();
+      resetAllFilters();
+    });
+    document.querySelectorAll('.btn-filter-reset').forEach(btn => {
+      if (btn.id === 'resetFiltersBtn' || btn.id === 'registryResetBtn') return;
+      btn.addEventListener('click', resetAllFilters);
+    });
+    document.getElementById('registryResetBtn')?.addEventListener('click', e => {
+      e.stopPropagation();
+      resetRegistryFilters();
     });
 
     /* ══ SORT ══ */
-    document.querySelectorAll('.sort-opt').forEach(opt => {
+    document.querySelectorAll('#mainTable .sort-opt').forEach(opt => {
       opt.addEventListener('click', e => {
         e.stopPropagation();
         const th = opt.closest('th');
@@ -6097,6 +6372,50 @@
       roadsView.id = 'roadsView';
       roadsView.classList.add('view-card');
 
+      roadsView.insertAdjacentHTML('beforebegin', `
+  <div class="table-card view-card is-hidden" id="registryView">
+    <div class="tc-head">
+      <div class="tc-title">
+        <h2>Vahid reyestr</h2>
+        <span class="tc-badge">Yollar, seqmentlər və aktivlər üzrə ümumi baxış</span>
+      </div>
+      <div class="tc-actions">
+        <button class="btn-filter-reset" id="registryResetBtn" type="button">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 6h18" />
+            <path d="M8 6v12a2 2 0 002 2h4a2 2 0 002-2V6" />
+            <path d="M10 11v6M14 11v6" />
+            <path d="M9 6V4h6v2" />
+          </svg>
+          Filteri sıfırla
+        </button>
+      </div>
+    </div>
+    <div class="registry-stats">
+      <div class="registry-stat"><div class="rs-v" id="regRoadCount">0</div><div class="rs-l">Yol</div></div>
+      <div class="registry-stat"><div class="rs-v" id="regSegCount">0</div><div class="rs-l">Seqment</div></div>
+      <div class="registry-stat"><div class="rs-v" id="regAssetCount">0</div><div class="rs-l">Aktiv</div></div>
+      <div class="registry-stat"><div class="rs-v" id="regKmCount">0</div><div class="rs-l">Ümumi km</div></div>
+    </div>
+    <div class="table-wrap">
+      <table id="registryTable" style="min-width:980px;">
+        <thead>
+          <tr>
+            <th class="th-nof" style="width:36px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">#</span></div></th>
+            <th data-ci="1"><div class="th-top"><span class="th-label">Reyestr kodu</span><div class="th-ctrls"><button class="sort-btn" type="button">⋮</button><button class="filt-btn" type="button"><svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></svg></button></div><div class="sort-menu"><div class="sort-opt" data-dir="asc">Artan sırala</div><div class="sort-opt" data-dir="desc">Azalan sırala</div><div class="sort-opt danger" data-dir="clear">Sıfırla</div></div></div><div class="th-bot" style="display:none;"><div class="th-filter-row"><input class="th-input" type="text" placeholder="Axtar..."></div></div></th>
+            <th data-ci="2"><div class="th-top"><span class="th-label">Yol adı</span><div class="th-ctrls"><button class="sort-btn" type="button">⋮</button><button class="filt-btn" type="button"><svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></svg></button></div><div class="sort-menu"><div class="sort-opt" data-dir="asc">Artan sırala</div><div class="sort-opt" data-dir="desc">Azalan sırala</div><div class="sort-opt danger" data-dir="clear">Sıfırla</div></div></div><div class="th-bot" style="display:none;"><div class="th-filter-row"><input class="th-input" type="text" placeholder="Axtar..."></div></div></th>
+            <th data-ci="3"><div class="th-top"><span class="th-label">Km</span><div class="th-ctrls"><button class="sort-btn" type="button">⋮</button><button class="filt-btn" type="button"><svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></svg></button></div><div class="sort-menu"><div class="sort-opt" data-dir="asc">Artan sırala</div><div class="sort-opt" data-dir="desc">Azalan sırala</div><div class="sort-opt danger" data-dir="clear">Sıfırla</div></div></div><div class="th-bot" style="display:none;"><div class="th-filter-row"><input class="th-input" type="text" placeholder="Axtar..."></div></div></th>
+            <th data-ci="4"><div class="th-top"><span class="th-label">Seqment sayı</span><div class="th-ctrls"><button class="sort-btn" type="button">⋮</button><button class="filt-btn" type="button"><svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></svg></button></div><div class="sort-menu"><div class="sort-opt" data-dir="asc">Artan sırala</div><div class="sort-opt" data-dir="desc">Azalan sırala</div><div class="sort-opt danger" data-dir="clear">Sıfırla</div></div></div><div class="th-bot" style="display:none;"><div class="th-filter-row"><input class="th-input" type="text" placeholder="Axtar..."></div></div></th>
+            <th data-ci="5"><div class="th-top"><span class="th-label">Aktiv sayı</span><div class="th-ctrls"><button class="sort-btn" type="button">⋮</button><button class="filt-btn" type="button"><svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></svg></button></div><div class="sort-menu"><div class="sort-opt" data-dir="asc">Artan sırala</div><div class="sort-opt" data-dir="desc">Azalan sırala</div><div class="sort-opt danger" data-dir="clear">Sıfırla</div></div></div><div class="th-bot" style="display:none;"><div class="th-filter-row"><input class="th-input" type="text" placeholder="Axtar..."></div></div></th>
+            <th data-ci="6"><div class="th-top"><span class="th-label">Vacib hissə</span><div class="th-ctrls"><button class="sort-btn" type="button">⋮</button><button class="filt-btn" type="button"><svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></svg></button></div><div class="sort-menu"><div class="sort-opt" data-dir="asc">Artan sırala</div><div class="sort-opt" data-dir="desc">Azalan sırala</div><div class="sort-opt danger" data-dir="clear">Sıfırla</div></div></div><div class="th-bot" style="display:none;"><div class="th-filter-row"><input class="th-input" type="text" placeholder="Axtar..."></div></div></th>
+            <th class="th-nof" style="width:220px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">Əməliyyatlar</span></div></th>
+          </tr>
+        </thead>
+        <tbody id="registryTableBody"></tbody>
+      </table>
+    </div>
+  </div>`);
+
       roadsView.insertAdjacentHTML('afterend', `
   <div class="table-card view-card is-hidden" id="segmentsView">
     <div class="tc-head">
@@ -6104,10 +6423,21 @@
         <h2>Seqment Reyestri</h2>
         <span class="tc-badge">Ümumi <span id="segmentTotalBadge">0</span> seqment qeydə alınıb</span>
       </div>
-      <button class="btn-new" id="btnNewSegment" type="button">
-        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Yeni Seqment
-      </button>
+      <div class="tc-actions">
+        <button class="btn-filter-reset" type="button">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 6h18" />
+            <path d="M8 6v12a2 2 0 002 2h4a2 2 0 002-2V6" />
+            <path d="M10 11v6M14 11v6" />
+            <path d="M9 6V4h6v2" />
+          </svg>
+          Filteri sıfırla
+        </button>
+        <button class="btn-new" id="btnNewSegment" type="button">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Yeni Seqment
+        </button>
+      </div>
     </div>
     <div class="table-wrap">
       <table id="segmentsTable" style="min-width:980px;">
@@ -6137,10 +6467,21 @@
         <h2>Aktiv Reyestri</h2>
         <span class="tc-badge">Ümumi <span id="assetTotalBadge">0</span> aktiv qeydə alınıb</span>
       </div>
-      <button class="btn-new" id="btnNewAsset" type="button">
-        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Yeni Aktiv
-      </button>
+      <div class="tc-actions">
+        <button class="btn-filter-reset" type="button">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 6h18" />
+            <path d="M8 6v12a2 2 0 002 2h4a2 2 0 002-2V6" />
+            <path d="M10 11v6M14 11v6" />
+            <path d="M9 6V4h6v2" />
+          </svg>
+          Filteri sıfırla
+        </button>
+        <button class="btn-new" id="btnNewAsset" type="button">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Yeni Aktiv
+        </button>
+      </div>
     </div>
     <div class="table-wrap">
       <table id="assetsTable" style="min-width:1040px;">
@@ -6237,8 +6578,8 @@
 
       const originalAcSegRow = document.getElementById('ac_seg').closest('.frow');
       const navItems = Array.from(document.querySelectorAll('.sb-body .nav-item'));
-      const viewNames = ['roads', 'segments', 'assets'];
-      navItems.slice(0, 3).forEach((item, idx) => {
+      const viewNames = ['registry', 'roads', 'segments', 'assets'];
+      navItems.slice(0, 4).forEach((item, idx) => {
         item.dataset.view = viewNames[idx];
         item.addEventListener('click', (e) => {
           e.preventDefault();
@@ -6246,7 +6587,7 @@
         });
       });
 
-      let activeView = 'roads';
+      let activeView = 'registry';
       let globalSegmentEditIdx = -1;
       let globalAssetEditIdx = -1;
       let preselectAssetSegmentCode = '';
@@ -6328,6 +6669,7 @@
           }
         }
         refreshRoadSelects();
+        renderRegistryTable();
         renderSegmentTable();
         renderAssetTable();
         refreshRoadActionCells();
@@ -6377,6 +6719,7 @@
           appendRoadRow(road);
         }
         refreshRoadSelects();
+        renderRegistryTable();
         refreshRoadActionCells();
         renderTable();
         return road;
@@ -6483,6 +6826,8 @@
         document.getElementById('segmentTotalBadge').textContent = segmentsData.length;
         if (!segmentsData.length) {
           tbody.innerHTML = `<tr><td colspan="11" class="empty-cell">Hələ seqment yoxdur. Yeni seqment yaradanda əvvəl yol seçilir.</td></tr>`;
+          syncFilterClearButtons('#segmentsTable');
+          syncResetButtons();
           return;
         }
         tbody.innerHTML = segmentsData.map((s, i) => `
@@ -6510,7 +6855,11 @@
             </div>
           </div>
         </td>
-      </tr>`).join('');
+        </tr>`).join('');
+        setSelectOptions('segmentsTable', 6, segmentsData.map(s => s.kat || '-'));
+        setSelectOptions('segmentsTable', 7, segmentsData.map(s => s.ortuk || '-'));
+        setSelectOptions('segmentsTable', 8, segmentsData.map(s => s.status || '-'));
+        applyDomTable('segmentsTable', segmentTableState, 'segments');
       }
 
       function renderAssetTable() {
@@ -6518,6 +6867,8 @@
         document.getElementById('assetTotalBadge').textContent = assetsData.length;
         if (!assetsData.length) {
           tbody.innerHTML = `<tr><td colspan="11" class="empty-cell">Hələ aktiv yoxdur. Aktiv yaradanda əvvəl yol və seqment seçilir.</td></tr>`;
+          syncFilterClearButtons('#assetsTable');
+          syncResetButtons();
           return;
         }
         tbody.innerHTML = assetsData.map((a, i) => `
@@ -6543,8 +6894,280 @@
             </div>
           </div>
         </td>
-      </tr>`).join('');
+        </tr>`).join('');
+        setSelectOptions('assetsTable', 4, assetsData.map(a => a.grup || '-'));
+        setSelectOptions('assetsTable', 5, assetsData.map(a => a.nov || '-'));
+        setSelectOptions('assetsTable', 6, assetsData.map(a => a.tip || '-'));
+        setSelectOptions('assetsTable', 7, assetsData.map(a => a.gis_tip || '-'));
+        setSelectOptions('assetsTable', 9, assetsData.map(a => a.status || '-'));
+        applyDomTable('assetsTable', assetTableState, 'assets');
       }
+
+      function syncRegistryMenu() {
+        let hasOpen = false;
+        document.querySelectorAll('#registryTable thead th').forEach(th => {
+          const inp = th.querySelector('.th-input');
+          const btn = th.querySelector('.filt-btn');
+          const bot = th.querySelector('.th-bot');
+          if (!inp || !btn) return;
+          const hasValue = inp.value.trim() !== '';
+          const isOpen = bot && bot.style.display !== 'none';
+          hasOpen = hasOpen || hasValue;
+          btn.classList.toggle('on', hasValue || isOpen);
+        });
+        return hasOpen;
+      }
+
+      document.querySelectorAll('#registryTable .sort-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const th = btn.closest('th');
+          const menu = btn.closest('.th-top')?.querySelector('.sort-menu');
+          const wasOpen = menu?.classList.contains('open');
+          closeAllMenus();
+          if (!wasOpen && menu) {
+            menu.classList.add('open');
+            btn.classList.add('on');
+            th?.classList.add('menu-open');
+          }
+        });
+      });
+      document.querySelectorAll('#registryTable .filt-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const th = btn.closest('th');
+          const bot = th?.querySelector('.th-bot');
+          if (!bot) return;
+          const isHidden = bot.style.display === 'none' || bot.style.display === '';
+          closeAllMenus();
+          if (isHidden) {
+            bot.style.display = 'block';
+            th?.classList.add('menu-open');
+          }
+          const inp = bot.querySelector('.th-input');
+          if (isHidden && inp) inp.focus();
+          syncRegistryMenu();
+        });
+      });
+      wireFilterDelegation('#registryTable', renderRegistryTable);
+      document.querySelectorAll('#registryTable .sort-opt').forEach(opt => {
+        opt.addEventListener('click', e => {
+          e.stopPropagation();
+          const th = opt.closest('th');
+          if (!th) return;
+          if (opt.dataset.dir === 'clear') {
+            registryState.sortCi = null;
+            registryState.sortDir = 'asc';
+          } else {
+            registryState.sortCi = parseInt(th.dataset.ci, 10);
+            registryState.sortDir = opt.dataset.dir;
+          }
+          closeAllMenus();
+          renderRegistryTable();
+        });
+      });
+      document.getElementById('registryTableBody')?.addEventListener('click', e => {
+        const segBtn = e.target.closest('[data-reg-segs]');
+        const assetBtn = e.target.closest('[data-reg-assets]');
+        if (segBtn) {
+          const idx = parseInt(segBtn.dataset.regSegs, 10);
+          openRoadSegsPanel(roadsData[idx]?.code || '', 'registry');
+          return;
+        }
+        if (assetBtn) {
+          const idx = parseInt(assetBtn.dataset.regAssets, 10);
+          openRoadAssetsPanel(roadsData[idx]?.code || '', 'registry');
+        }
+      });
+
+      ensureFilterClearButtons('#registryTable', renderRegistryTable);
+
+      const roadSegTableState = { sortCi: null, sortDir: 'asc' };
+      const roadAssetTableState = { sortCi: null, sortDir: 'asc' };
+      const segmentTableState = { sortCi: null, sortDir: 'asc' };
+      const assetTableState = { sortCi: null, sortDir: 'asc' };
+
+      function getDecoratedFilterKind(tableId, ci) {
+        const numericRange = new Set(['3', '4', '5', '8', '9']);
+        if (tableId === 'registryTable') {
+          if (ci === 6) return 'select';
+          if (ci === 3 || ci === 4 || ci === 5) return 'range';
+        }
+        if (tableId === 'roadSegsTable') {
+          if (ci === 1) return 'text';
+          if (ci === 2 || ci === 3 || ci === 4) return 'range';
+          if (ci === 5 || ci === 6 || ci === 7 || ci === 8) return 'select';
+        }
+        if (tableId === 'roadAssetsTable') {
+          if (ci === 1) return 'text';
+          if (ci === 2) return 'select';
+          if (ci === 3) return 'text';
+          if (ci === 4 || ci === 5 || ci === 7) return 'select';
+          if (ci === 6) return 'range';
+        }
+        if (tableId === 'segmentsTable') {
+          if (ci === 6 || ci === 7 || ci === 8) return 'select';
+          if (ci === 3 || ci === 4 || ci === 5 || ci === 9) return 'range';
+        }
+        if (tableId === 'assetsTable') {
+          if (ci === 4 || ci === 5 || ci === 6 || ci === 7 || ci === 9) return 'select';
+          if (ci === 8) return 'range';
+        }
+        return numericRange.has(String(ci)) ? 'range' : 'text';
+      }
+
+      function filterControlMarkup(kind) {
+        if (kind === 'select') {
+          return `<select class="th-input" data-filter-kind="select"><option value="">Hamısı</option></select>`;
+        }
+        const placeholder = kind === 'range' ? '0-2' : 'Axtar...';
+        return `<input class="th-input" data-filter-kind="${kind}" type="text" placeholder="${placeholder}">`;
+      }
+
+      function decorateDomTable(tableId) {
+        const table = document.getElementById(tableId);
+        const headRow = table?.querySelector('thead tr');
+        if (!headRow || headRow.dataset.decorated === '1') return;
+        const ths = Array.from(headRow.children);
+        const lastIdx = ths.length - 1;
+        ths.forEach((th, idx) => {
+          if (idx === 0 || idx === lastIdx) return;
+          const label = th.querySelector('.th-label')?.textContent.trim() || th.textContent.trim();
+          const kind = getDecoratedFilterKind(tableId, idx, label);
+          th.dataset.ci = String(idx);
+          th.innerHTML = `
+            <div class="th-top">
+              <span class="th-label">${label}</span>
+              <div class="th-ctrls">
+                <button class="sort-btn" type="button">⋮</button>
+                <button class="filt-btn" type="button"><svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></svg></button>
+              </div>
+              <div class="sort-menu">
+                <div class="sort-opt" data-dir="asc">Artan sırala</div>
+                <div class="sort-opt" data-dir="desc">Azalan sırala</div>
+                <div class="sort-opt danger" data-dir="clear">Sıfırla</div>
+              </div>
+            </div>
+            <div class="th-bot" style="display:none;">
+              <div class="th-filter-row">
+                ${filterControlMarkup(kind)}
+              </div>
+            </div>`;
+        });
+        headRow.dataset.decorated = '1';
+      }
+
+      function setSelectOptions(tableId, ci, values) {
+        const table = document.getElementById(tableId);
+        const th = table?.querySelector(`thead th[data-ci="${ci}"]`);
+        const select = th?.querySelector('.th-input');
+        if (!select || select.tagName !== 'SELECT') return;
+        const current = select.value;
+        const unique = Array.from(new Set(values.map(v => String(v ?? '').trim()).filter(v => v && v !== '-')))
+          .sort((a, b) => a.localeCompare(b, 'az'));
+        select.innerHTML = `<option value="">Hamısı</option>` + unique.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join('');
+        select.value = current;
+      }
+
+      function applyDomTable(tableId, state, mode) {
+        const table = document.getElementById(tableId);
+        const tbody = table?.querySelector('tbody');
+        if (!table || !tbody) return;
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const filters = Array.from(table.querySelectorAll('thead th')).map((th, idx) => {
+          const inp = th.querySelector('.th-input');
+          if (!inp) return null;
+          return {
+            ci: Number.isInteger(parseInt(th.dataset.ci, 10)) ? parseInt(th.dataset.ci, 10) : idx,
+            value: normalizeFilterValue(inp),
+            kind: getFilterKind(inp),
+          };
+        }).filter(Boolean);
+        const filtered = rows.filter(row => {
+          const cells = Array.from(row.cells).map(cell => cell.textContent.trim());
+          return filters.every(f => {
+            if (!f.value) return true;
+            return matchesFilterValue(f.value, cells[f.ci] || '', f.kind);
+          });
+        });
+        if (Number.isInteger(state.sortCi)) {
+          filtered.sort((a, b) => {
+            const av = a.cells[state.sortCi]?.textContent.trim() || '';
+            const bv = b.cells[state.sortCi]?.textContent.trim() || '';
+            const an = parseFloat(av);
+            const bn = parseFloat(bv);
+            if (Number.isFinite(an) && Number.isFinite(bn)) return state.sortDir === 'asc' ? an - bn : bn - an;
+            return state.sortDir === 'asc' ? av.localeCompare(bv, 'az') : bv.localeCompare(av, 'az');
+          });
+        }
+        filtered.forEach(row => tbody.appendChild(row));
+        rows.forEach(row => { row.style.display = filtered.includes(row) ? '' : 'none'; });
+        if (mode === 'segments') document.getElementById('segmentTotalBadge').textContent = filtered.length;
+        if (mode === 'assets') document.getElementById('assetTotalBadge').textContent = filtered.length;
+        syncFilterClearButtons(`#${tableId}`);
+        syncResetButtons();
+      }
+
+      function bindDomTable(tableId, state, mode, renderFn) {
+        const table = document.getElementById(tableId);
+        if (!table || table.dataset.bound === '1') return;
+        table.dataset.bound = '1';
+        table.querySelectorAll('.sort-btn').forEach(btn => {
+          btn.addEventListener('click', e => {
+            e.stopPropagation();
+            const th = btn.closest('th');
+            const menu = btn.closest('.th-top')?.querySelector('.sort-menu');
+            const open = menu?.classList.contains('open');
+            closeAllMenus();
+            if (!open && menu) {
+              menu.classList.add('open');
+              th?.classList.add('menu-open');
+            }
+          });
+        });
+        table.querySelectorAll('.filt-btn').forEach(btn => {
+          btn.addEventListener('click', e => {
+            e.stopPropagation();
+            const th = btn.closest('th');
+            const bot = th?.querySelector('.th-bot');
+            if (!bot) return;
+            const show = bot.style.display === 'none' || bot.style.display === '';
+            closeAllMenus();
+            if (show) {
+              bot.style.display = 'block';
+              th?.classList.add('menu-open');
+            }
+            bot.querySelector('.th-input')?.focus();
+          });
+        });
+        table.querySelectorAll('.sort-opt').forEach(opt => {
+          opt.addEventListener('click', e => {
+            e.stopPropagation();
+            const th = opt.closest('th');
+            if (!th) return;
+            if (opt.dataset.dir === 'clear') {
+              state.sortCi = null;
+              state.sortDir = 'asc';
+            } else {
+              state.sortCi = parseInt(th.dataset.ci, 10);
+              state.sortDir = opt.dataset.dir;
+            }
+            closeAllMenus();
+            renderFn();
+          });
+        });
+      }
+
+      decorateDomTable('segmentsTable');
+      decorateDomTable('assetsTable');
+      ensureFilterClearButtons('#segmentsTable', () => applyDomTable('segmentsTable', segmentTableState, 'segments'));
+      ensureFilterClearButtons('#assetsTable', () => applyDomTable('assetsTable', assetTableState, 'assets'));
+      bindDomTable('segmentsTable', segmentTableState, 'segments', renderSegmentTable);
+      bindDomTable('assetsTable', assetTableState, 'assets', renderAssetTable);
+      wireFilterDelegation('#segmentsTable', () => applyDomTable('segmentsTable', segmentTableState, 'segments'));
+      wireFilterDelegation('#assetsTable', () => applyDomTable('assetsTable', assetTableState, 'assets'));
+      wireFilterDelegation('#roadSegsTable', () => applyDomTable('roadSegsTable', roadSegTableState, 'segments'));
+      wireFilterDelegation('#roadAssetsTable', () => applyDomTable('roadAssetsTable', roadAssetTableState, 'assets'));
 
       function assetsForSegment(seg, source) {
         if (!seg) return [];
@@ -6554,6 +7177,229 @@
             .filter(item => item.asset.segmentCode === seg.code);
         }
         return (seg.assets || []).map((asset, idx) => ({ asset, idx }));
+      }
+
+      const registryState = { sortCi: null, sortDir: 'asc' };
+
+      function registryRows() {
+        return roadsData.map((road, idx) => {
+          const segs = segmentsData.filter(s => s.roadCode === road.code);
+          const acts = assetsData.filter(a => a.roadCode === road.code);
+          return {
+            road,
+            idx,
+            segCount: segs.length,
+            assetCount: acts.length,
+            focus: segs.length ? `${segs[0].bas || '-'}-${segs[segs.length - 1].son || '-'}` : '-',
+          };
+        });
+      }
+
+      function registryCellText(item, ci) {
+        switch (ci) {
+          case 1: return item.road.code;
+          case 2: return item.road.name;
+          case 3: return item.road.length;
+          case 4: return String(item.segCount);
+          case 5: return String(item.assetCount);
+          case 6: return item.road.importance || '';
+          default: return '';
+        }
+      }
+
+      function setupRegistryFilterControls() {
+        const table = document.getElementById('registryTable');
+        if (!table || table.dataset.filtersReady === '1') return;
+        table.dataset.filtersReady = '1';
+        table.querySelectorAll('thead th').forEach(th => {
+          const ci = parseInt(th.dataset.ci || '', 10);
+          const bot = th.querySelector('.th-bot');
+          const input = bot?.querySelector('.th-input');
+          if (!input) return;
+          if ([3, 4, 5].includes(ci)) {
+            input.dataset.filterKind = 'range';
+            input.setAttribute('placeholder', '1-100');
+        } else if (ci === 6) {
+          bot.innerHTML = `
+              <div class="th-filter-row">
+                <select class="th-input" data-filter-kind="select">
+                  <option value="">Hamısı</option>
+                  <option value="Respublika">Respublika</option>
+                  <option value="Yerli">Yerli</option>
+                </select>
+              </div>`;
+        } else if ([3, 4, 5].includes(ci)) {
+          const options = ci === 3
+            ? ['0-50', '50-100', '100-200', '200+']
+            : ci === 4
+              ? ['0-5', '6-10', '11-20', '20+']
+              : ['0-5', '6-10', '11-25', '25+'];
+          bot.innerHTML = `
+              <div class="th-filter-row">
+                <select class="th-input" data-filter-kind="select">
+                  <option value="">Hamısı</option>
+                  ${options.map(v => `<option value="${v}">${v}</option>`).join('')}
+                </select>
+              </div>`;
+        } else {
+          input.dataset.filterKind = 'text';
+        }
+      });
+    }
+
+      function renderRegistryTable() {
+        const tbody = document.getElementById('registryTableBody');
+        if (!tbody) return;
+        setupRegistryFilterControls();
+        ensureFilterClearButtons('#registryTable', renderRegistryTable);
+        const rows = registryRows();
+        document.getElementById('regRoadCount').textContent = roadsData.length;
+        document.getElementById('regSegCount').textContent = segmentsData.length;
+        document.getElementById('regAssetCount').textContent = assetsData.length;
+        document.getElementById('regKmCount').textContent = roadsData.reduce((sum, r) => sum + (parseFloat(r.length) || 0), 0).toFixed(1);
+        const filters = Array.from(document.querySelectorAll('#registryTable thead .th-input')).map(inp => ({
+          value: normalizeFilterValue(inp),
+          kind: getFilterKind(inp),
+        }));
+        let visible = rows.filter(item => filters.every((f, ci) => {
+          if (ci === 0 || !f.value) return true;
+          return matchesFilterValue(f.value, registryCellText(item, ci), f.kind);
+        }));
+        if (Number.isInteger(registryState.sortCi)) {
+          visible.sort((a, b) => {
+            const av = registryCellText(a, registryState.sortCi);
+            const bv = registryCellText(b, registryState.sortCi);
+            const an = parseFloat(av);
+            const bn = parseFloat(bv);
+            if (Number.isFinite(an) && Number.isFinite(bn)) {
+              return registryState.sortDir === 'asc' ? an - bn : bn - an;
+            }
+            return registryState.sortDir === 'asc'
+              ? String(av).localeCompare(String(bv), 'az')
+              : String(bv).localeCompare(String(av), 'az');
+          });
+        }
+        tbody.innerHTML = visible.map((item, i) => `
+          <tr>
+            <td class="td-num">${i + 1}</td>
+            <td class="td-code">${esc(item.road.code)}</td>
+            <td class="td-name">${esc(item.road.name)}</td>
+            <td>${esc(item.road.length || '-')}</td>
+            <td>${item.segCount}</td>
+            <td>${item.assetCount}</td>
+            <td>${badge(item.road.importance || item.road.category || '-', item.road.importance === 'Yerli' ? 'b-gray' : 'b-blue')}</td>
+            <td>
+              <div class="row-acts">
+                <div class="action-menu-wrap">
+                  <button class="action-menu-btn" data-action-menu type="button" aria-label="Əməliyyatlar">⋮</button>
+                  <div class="action-menu">
+                    <button class="action-menu-item" data-reg-road="${item.idx}" type="button">Yollar</button>
+                    <button class="action-menu-item" data-reg-segs="${item.idx}" type="button">Seqmentlər</button>
+                    <button class="action-menu-item" data-reg-assets="${item.idx}" type="button">Aktivlər</button>
+                    <button class="action-menu-item danger" data-road-action="edit" type="button">Redaktə et</button>
+                    <button class="action-menu-item danger" data-road-action="delete" type="button">Sil</button>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>`).join('');
+        syncRegistryMenu();
+        syncFilterClearButtons('#registryTable');
+        syncResetButtons();
+      }
+
+      function setupRegistryFilterControls() {
+        const table = document.getElementById('registryTable');
+        if (!table) return;
+        const numericOptions = {
+          3: ['1-100', '100-200', '200-500', '500+'],
+          4: ['0-5', '6-10', '11-20', '20+'],
+          5: ['0-5', '6-10', '11-25', '25+'],
+        };
+        table.querySelectorAll('thead th').forEach(th => {
+          const ci = parseInt(th.dataset.ci || '', 10);
+          const bot = th.querySelector('.th-bot');
+          const input = bot?.querySelector('.th-input');
+          if (!bot || !input) return;
+          if (ci === 1 || ci === 2) {
+            input.dataset.filterKind = 'text';
+            input.placeholder = 'Axtar...';
+            return;
+          }
+          if (ci === 6) {
+            bot.innerHTML = `
+              <div class="th-filter-row">
+                <select class="th-input" data-filter-kind="select">
+                  <option value="">Hamısı</option>
+                  <option value="Respublika">Respublika</option>
+                  <option value="Yerli">Yerli</option>
+                </select>
+              </div>`;
+            return;
+          }
+          if (numericOptions[ci]) {
+            bot.innerHTML = `
+              <div class="th-filter-row">
+                <select class="th-input" data-filter-kind="select">
+                  <option value="">Hamısı</option>
+                  ${numericOptions[ci].map(v => `<option value="${v}">${v}</option>`).join('')}
+                </select>
+              </div>`;
+          }
+        });
+        syncFilterClearButtons('#registryTable');
+      }
+
+      function renderRegistryTable() {
+        const tbody = document.getElementById('registryTableBody');
+        if (!tbody) return;
+        setupRegistryFilterControls();
+        ensureFilterClearButtons('#registryTable', renderRegistryTable);
+        const rows = registryRows();
+        document.getElementById('regRoadCount').textContent = roadsData.length;
+        document.getElementById('regSegCount').textContent = segmentsData.length;
+        document.getElementById('regAssetCount').textContent = assetsData.length;
+        document.getElementById('regKmCount').textContent = roadsData.reduce((sum, r) => sum + (parseFloat(r.length) || 0), 0).toFixed(1);
+        const filters = Array.from(document.querySelectorAll('#registryTable thead .th-input')).map(inp => ({
+          value: normalizeFilterValue(inp),
+          kind: getFilterKind(inp),
+        }));
+        let visible = rows.filter(item => filters.every((f, ci) => {
+          if (!f.value) return true;
+          return matchesFilterValue(f.value, registryCellText(item, ci + 1), f.kind);
+        }));
+        if (Number.isInteger(registryState.sortCi)) {
+          visible.sort((a, b) => {
+            const av = registryCellText(a, registryState.sortCi);
+            const bv = registryCellText(b, registryState.sortCi);
+            const an = parseFloat(av);
+            const bn = parseFloat(bv);
+            if (Number.isFinite(an) && Number.isFinite(bn)) {
+              return registryState.sortDir === 'asc' ? an - bn : bn - an;
+            }
+            return registryState.sortDir === 'asc'
+              ? String(av).localeCompare(String(bv), 'az')
+              : String(bv).localeCompare(String(av), 'az');
+          });
+        }
+        tbody.innerHTML = visible.map((item, i) => `
+          <tr>
+            <td class="td-num">${i + 1}</td>
+            <td class="td-code">${esc(item.road.code)}</td>
+            <td class="td-name">${esc(item.road.name)}</td>
+            <td>${esc(item.road.length || '-')}</td>
+            <td>${item.segCount}</td>
+            <td>${item.assetCount}</td>
+            <td>${badge(item.road.importance || item.road.category || '-', item.road.importance === 'Yerli' ? 'b-gray' : 'b-blue')}</td>
+            <td>
+              <div class="row-acts">
+                <button class="seg-act" data-reg-segs="${item.idx}" type="button">${item.segCount} seqment</button>
+                <button class="seg-act" data-reg-assets="${item.idx}" type="button">${item.assetCount} aktiv</button>
+              </div>
+            </td>
+          </tr>`).join('');
+        syncFilterClearButtons('#registryTable');
+        syncResetButtons();
       }
 
       function assetRowsForSegment(seg, source, segIdx) {
@@ -6715,6 +7561,7 @@
           segmentsData.forEach(seg => {
             if (seg.assets) seg.assets = seg.assets.filter(asset => asset.code !== code);
           });
+          renderRegistryTable();
           renderAssetTable();
           renderSegmentTable();
           renderSegList();
@@ -6736,21 +7583,24 @@
         targetView.classList.remove('is-hidden');
         targetView.style.display = 'flex';
         navItems.forEach(item => item.classList.toggle('active', item.dataset.view === view));
-        const titleMap = { roads: 'Yollar', segments: 'Seqmentlər', assets: 'Aktivlər' };
+        const titleMap = { registry: 'Vahid reyestr', roads: 'Yollar', segments: 'Seqmentlər', assets: 'Aktivlər' };
         const subMap = {
+          registry: 'Bütün yollara, seqmentlərə və aktivlərə vahid baxış',
           roads: 'Avtomobil Yolları İdarəsi agentliyi',
           segments: 'Yola bağlı seqmentlərin reyestri',
           assets: 'Yol və seqmentə bağlı aktivlərin reyestri'
         };
         document.querySelector('.topbar-title').textContent = titleMap[view];
         document.querySelector('.topbar-sub').textContent = subMap[view];
+        if (view === 'registry') renderRegistryTable();
+        if (view === 'roads') renderTable();
         if (view === 'segments') renderSegmentTable();
         if (view === 'assets') renderAssetTable();
       }
 
       const originalOpenForm = openForm;
       openForm = function (mode, rowEl) {
-        switchView('roads');
+        switchView('registry');
         originalOpenForm(mode, rowEl);
       };
 
@@ -6957,6 +7807,7 @@
           seg.assets = assetsData.filter(asset => asset.segmentCode === seg.code);
         }
         if (ctx === 'global') {
+          renderRegistryTable();
           renderSegmentTable();
           renderAssetTable();
           refreshRoadActionCells();
@@ -7151,6 +8002,7 @@
             if (idx >= 0) seg.assets[idx] = asset;
             else seg.assets.push(asset);
           }
+          renderRegistryTable();
           renderAssetTable();
           renderSegmentTable();
           renderSegList();
@@ -7218,9 +8070,11 @@
 
       /* ══ ROAD SEGMENTS MODAL ══ */
       let currentRoadSegsCode = '';
+      let currentRoadSegsOrigin = 'roads';
 
-      function openRoadSegsPanel(roadCode) {
+      function openRoadSegsPanel(roadCode, origin = 'roads') {
         currentRoadSegsCode = roadCode;
+        currentRoadSegsOrigin = origin;
         window._roadSegsCode = roadCode;
         const road = roadByCode(roadCode);
         document.getElementById('roadSegsTitle').textContent = road ? `${road.code} — ${road.name}` : roadCode;
@@ -7231,6 +8085,72 @@
       window.openRoadSegsPanel = openRoadSegsPanel;
 
       /* ══ SEG ASSETS MODAL ══ */
+      /* ROAD ASSETS MODAL */
+      let currentRoadAssetsCode = '';
+      let currentRoadAssetsOrigin = 'roads';
+
+      function openRoadAssetsPanel(roadCode, origin = 'roads') {
+        currentRoadAssetsCode = roadCode;
+        currentRoadAssetsOrigin = origin;
+        window._roadAssetsCode = roadCode;
+        const road = roadByCode(roadCode);
+        document.getElementById('roadAssetsTitle').textContent = road ? `${road.code} â€” ${road.name}` : roadCode;
+        renderRoadAssetsTable(roadCode);
+        switchView('assets');
+        document.getElementById('roadAssetsOv').classList.add('open');
+      }
+      window.openRoadAssetsPanel = openRoadAssetsPanel;
+
+      function closeRoadAssetsPanel() {
+        document.getElementById('roadAssetsOv').classList.remove('open');
+        currentRoadAssetsCode = '';
+        window._roadAssetsCode = '';
+      }
+
+      function renderRoadAssetsTable(roadCode) {
+        const assets = assetsData.filter(a => a.roadCode === roadCode);
+        const tbody = document.getElementById('roadAssetsBody');
+        document.getElementById('roadAssetsCount').textContent = assets.length;
+        decorateDomTable('roadAssetsTable');
+        document.querySelectorAll('#roadAssetsTable .th-bot').forEach(bot => { bot.style.display = 'block'; });
+        ensureFilterClearButtons('#roadAssetsTable', () => applyDomTable('roadAssetsTable', roadAssetTableState, 'assets'));
+        if (!assets.length) {
+          tbody.innerHTML = `<tr><td colspan="9" class="empty-cell">Bu yol üzrə aktiv yoxdur.</td></tr>`;
+          return;
+        }
+        tbody.innerHTML = assets.map((a, i) => {
+          const gi = assetsData.indexOf(a);
+          return `<tr>
+            <td class="td-num">${i + 1}</td>
+            <td class="td-code">${esc(a.code)}</td>
+            <td>${esc(a.grup || '-')}</td>
+            <td>${esc(a.nov || '-')}</td>
+            <td>${esc(a.tip || '-')}</td>
+            <td>${badge(a.gis_tip || '-', 'b-blue')}</td>
+            <td>${esc(a.km || '-')}</td>
+            <td>${statusBadge(a.status || '-')}</td>
+            <td><div class="row-acts"><div class="action-menu-wrap"><button class="action-menu-btn" data-action-menu type="button" aria-label="Əməliyyatlar">⋮</button><div class="action-menu">
+              <button class="action-menu-item" data-spa-edit="${gi}" type="button">Redaktə et</button>
+              <button class="action-menu-item danger" data-spa-del="${gi}" type="button">Sil</button>
+            </div></div></div></td>
+          </tr>`;
+        }).join('');
+        setSelectOptions('roadAssetsTable', 2, assets.map(a => a.grup || '-'));
+        setSelectOptions('roadAssetsTable', 4, assets.map(a => a.tip || '-'));
+        setSelectOptions('roadAssetsTable', 5, assets.map(a => a.gis_tip || '-'));
+        setSelectOptions('roadAssetsTable', 7, assets.map(a => a.status || '-'));
+        applyDomTable('roadAssetsTable', roadAssetTableState, 'assets');
+      }
+
+      document.getElementById('roadAssetsClose')?.addEventListener('click', closeRoadAssetsPanel);
+      document.getElementById('roadAssetsBack')?.addEventListener('click', () => {
+        closeRoadAssetsPanel();
+        switchView(currentRoadAssetsOrigin === 'registry' ? 'registry' : 'roads');
+      });
+      document.getElementById('roadAssetsOv')?.addEventListener('click', e => {
+        if (e.target === document.getElementById('roadAssetsOv')) closeRoadAssetsPanel();
+      });
+
       let currentSegAssetsCode = '';
 
       function openSegAssetsPanel(segCode, segIdx) {
@@ -7320,6 +8240,9 @@
         const segs = segmentsData.filter(s => s.roadCode === roadCode);
         const tbody = document.getElementById('roadSegsBody');
         document.getElementById('roadSegsCount').textContent = segs.length;
+        decorateDomTable('roadSegsTable');
+        document.querySelectorAll('#roadSegsTable .th-bot').forEach(bot => { bot.style.display = 'block'; });
+        ensureFilterClearButtons('#roadSegsTable', () => applyDomTable('roadSegsTable', roadSegTableState, 'segments'));
         if (!segs.length) {
           tbody.innerHTML = `<tr><td colspan="10" class="empty-cell">Bu yola aid seqment yoxdur.</td></tr>`;
           return;
@@ -7344,6 +8267,11 @@
             </div></div></div></td>
           </tr>`;
         }).join('');
+        setSelectOptions('roadSegsTable', 5, segs.map(s => s.kat || '-'));
+        setSelectOptions('roadSegsTable', 6, segs.map(s => s.ortuk || '-'));
+        setSelectOptions('roadSegsTable', 7, segs.map(s => s.status || '-'));
+        setSelectOptions('roadSegsTable', 8, segs.map(s => `${(s.assets || []).length} aktiv`));
+        applyDomTable('roadSegsTable', roadSegTableState, 'segments');
       }
 
       window._renderRoadSegsTable = renderRoadSegsTable;
@@ -7351,7 +8279,7 @@
       document.getElementById('roadSegsClose').addEventListener('click', closeRoadSegsPanel);
       document.getElementById('roadSegsBack').addEventListener('click', () => {
         closeRoadSegsPanel();
-        switchView('roads');
+        switchView(currentRoadSegsOrigin === 'registry' ? 'registry' : 'roads');
       });
       document.getElementById('roadSegsOv').addEventListener('click', e => {
         if (e.target === document.getElementById('roadSegsOv')) closeRoadSegsPanel();
@@ -7554,8 +8482,10 @@
       initDemoRelations();
       refreshRoadSelects();
       refreshRoadActionCells();
+      renderRegistryTable();
       renderSegmentTable();
       renderAssetTable();
+      switchView('registry');
     })();
   </script>
 </body>
