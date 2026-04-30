@@ -4728,8 +4728,8 @@
         <div class="pp-group">
           <span>Sətir:</span>
           <select class="pp-select" id="perPageSelect" aria-label="Sətir sayı">
-            <option value="5" selected>5</option>
-            <option value="10">10</option>
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
             <option value="20">20</option>
             <option value="50">50</option>
             <option value="100">100</option>
@@ -6014,7 +6014,7 @@
 
   <script>
     /* ══ STATE ══ */
-    let perPage = 5;
+    let perPage = 10;
     let currentPage = 1;
     const allRows = Array.from(document.querySelectorAll('#tableBody tr'));
 
@@ -6389,9 +6389,7 @@
       closeAllMenus();
       currentPage = 1;
       applyFilters();
-      renderRegistryTable();
-      applyDomTable('segmentsTable', segmentTableState, 'segments');
-      applyDomTable('assetsTable', assetTableState, 'assets');
+      window.resetExtendedTables?.();
       syncFilterClearButtons('#mainTable');
       syncFilterClearButtons('#registryTable');
       syncFilterClearButtons('#segmentsTable');
@@ -6406,9 +6404,7 @@
       table.querySelectorAll('.th-bot').forEach(bot => { bot.style.display = 'none'; });
       table.querySelectorAll('.filt-btn.on').forEach(btn => btn.classList.remove('on'));
       closeAllMenus();
-      registryState.sortCi = null;
-      registryState.sortDir = 'asc';
-      renderRegistryTable();
+      window.resetExtendedTable?.('registryTable');
       syncFilterClearButtons('#registryTable');
       syncResetButtons();
     }
@@ -6419,12 +6415,14 @@
       table.dataset.filterWired = '1';
       table.addEventListener('input', e => {
         if (!e.target.matches('.th-input')) return;
+        window.setExtendedTablePage?.(e.target.closest('table')?.id, 1);
         applyFn();
         syncFilterClearButtons(tableSelector);
         syncResetButtons();
       });
       table.addEventListener('change', e => {
         if (!e.target.matches('.th-input')) return;
+        window.setExtendedTablePage?.(e.target.closest('table')?.id, 1);
         applyFn();
         syncFilterClearButtons(tableSelector);
         syncResetButtons();
@@ -6437,6 +6435,7 @@
         if (!inp) return;
         e.stopPropagation();
         clearFilterControl(inp);
+        window.setExtendedTablePage?.(inp.closest('table')?.id, 1);
         applyFn();
         inp.focus();
         syncFilterClearButtons(tableSelector);
@@ -8030,6 +8029,7 @@
         document.getElementById('segmentTotalBadge').textContent = segmentsData.length;
         if (!segmentsData.length) {
           tbody.innerHTML = `<tr><td colspan="11" class="empty-cell">Hələ seqment yoxdur. Yeni seqment yaradanda əvvəl yol seçilir.</td></tr>`;
+          updateTablePager('segmentsTable', 0, 0, 0, 1);
           syncFilterClearButtons('#segmentsTable');
           syncResetButtons();
           return;
@@ -8071,6 +8071,7 @@
         document.getElementById('assetTotalBadge').textContent = assetsData.length;
         if (!assetsData.length) {
           tbody.innerHTML = `<tr><td colspan="11" class="empty-cell">Hələ aktiv yoxdur. Aktiv yaradanda əvvəl yol və seqment seçilir.</td></tr>`;
+          updateTablePager('assetsTable', 0, 0, 0, 1);
           syncFilterClearButtons('#assetsTable');
           syncResetButtons();
           return;
@@ -8166,6 +8167,7 @@
             registryState.sortCi = parseInt(th.dataset.ci, 10);
             registryState.sortDir = opt.dataset.dir;
           }
+          getTablePagerState('registryTable').page = 1;
           closeAllMenus();
           renderRegistryTable();
         });
@@ -8201,8 +8203,181 @@
 
       const roadSegTableState = { sortCi: null, sortDir: 'asc' };
       const roadAssetTableState = { sortCi: null, sortDir: 'asc' };
+      const segAssetTableState = { sortCi: null, sortDir: 'asc' };
       const segmentTableState = { sortCi: null, sortDir: 'asc' };
       const assetTableState = { sortCi: null, sortDir: 'asc' };
+
+      const DEFAULT_TABLE_PAGE_SIZE = 10;
+      const tablePagerState = {};
+
+      function getTablePagerState(tableId) {
+        if (!tablePagerState[tableId]) {
+          tablePagerState[tableId] = { page: 1, perPage: DEFAULT_TABLE_PAGE_SIZE };
+        }
+        return tablePagerState[tableId];
+      }
+
+      function tablePageRange(cur, total) {
+        if (total <= 3) return Array.from({ length: total }, (_, i) => i + 1);
+        if (cur <= 2) return [1, 2, '…', total];
+        if (cur >= total - 1) return [1, '…', total - 1, total];
+        return [1, '…', cur, '…', total];
+      }
+
+      function rerenderPagedTable(tableId) {
+        if (tableId === 'registryTable') { renderRegistryTable(); return; }
+        if (tableId === 'segmentsTable') { applyDomTable('segmentsTable', segmentTableState, 'segments'); return; }
+        if (tableId === 'assetsTable') { applyDomTable('assetsTable', assetTableState, 'assets'); return; }
+        if (tableId === 'roadSegsTable') { applyDomTable('roadSegsTable', roadSegTableState, 'segments'); return; }
+        if (tableId === 'roadAssetsTable') { applyDomTable('roadAssetsTable', roadAssetTableState, 'assets'); return; }
+        if (tableId === 'segAssetsTable') { applyDomTable('segAssetsTable', segAssetTableState, 'assets'); }
+      }
+
+      function ensureTablePager(tableId) {
+        const table = document.getElementById(tableId);
+        if (!table) return null;
+        const existing = document.querySelector(`[data-table-pager="${tableId}"]`);
+        if (existing) return existing;
+        const wrap = table.closest('.table-wrap');
+        if (!wrap) return null;
+        const state = getTablePagerState(tableId);
+        const footer = document.createElement('div');
+        footer.className = 'tc-foot table-pager';
+        footer.dataset.tablePager = tableId;
+        footer.innerHTML = `
+          <div class="pp-group">
+            <span>Sətir:</span>
+            <select class="pp-select" aria-label="Sətir sayı">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+          <div class="pag-info">–</div>
+          <div class="pag-btns"></div>`;
+        const select = footer.querySelector('.pp-select');
+        select.value = String(state.perPage);
+        select.addEventListener('change', () => {
+          state.perPage = parseInt(select.value, 10) || DEFAULT_TABLE_PAGE_SIZE;
+          state.page = 1;
+          rerenderPagedTable(tableId);
+        });
+        wrap.insertAdjacentElement('afterend', footer);
+        return footer;
+      }
+
+      function updateTablePager(tableId, total, start, end, totalPages) {
+        const footer = ensureTablePager(tableId);
+        if (!footer) return;
+        const state = getTablePagerState(tableId);
+        const info = footer.querySelector('.pag-info');
+        const buttons = footer.querySelector('.pag-btns');
+        const select = footer.querySelector('.pp-select');
+        if (select) select.value = String(state.perPage);
+        if (info) {
+          info.textContent = total === 0 ? 'Nəticə tapılmadı' : `${start + 1}–${Math.min(end, total)} / ${total} nəticə`;
+        }
+        if (!buttons) return;
+        buttons.innerHTML = '';
+
+        const mkBtn = (label, page, isSvg = false) => {
+          const btn = document.createElement('button');
+          btn.className = 'pag-pg' + (page === state.page ? ' active' : '');
+          if (isSvg) btn.innerHTML = label;
+          else btn.textContent = label;
+          if (page < 1 || page > totalPages || total === 0) btn.disabled = true;
+          btn.addEventListener('click', () => {
+            if (btn.disabled) return;
+            state.page = page;
+            rerenderPagedTable(tableId);
+          });
+          return btn;
+        };
+
+        buttons.appendChild(mkBtn(`<svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>`, state.page - 1, true));
+        tablePageRange(state.page, totalPages).forEach(page => {
+          if (page === '…') {
+            const dots = document.createElement('span');
+            dots.textContent = '…';
+            dots.style.cssText = 'padding:0 4px;font-size:11px;color:#94a3b8;align-self:center;';
+            buttons.appendChild(dots);
+          } else {
+            buttons.appendChild(mkBtn(page, page));
+          }
+        });
+        buttons.appendChild(mkBtn(`<svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>`, state.page + 1, true));
+      }
+
+      function paginateItems(tableId, items) {
+        ensureTablePager(tableId);
+        const state = getTablePagerState(tableId);
+        const total = items.length;
+        const totalPages = Math.max(1, Math.ceil(total / state.perPage));
+        state.page = Math.min(Math.max(1, state.page), totalPages);
+        const start = total === 0 ? 0 : (state.page - 1) * state.perPage;
+        const end = start + state.perPage;
+        updateTablePager(tableId, total, start, end, totalPages);
+        return items.slice(start, end);
+      }
+
+      function resetExtendedTable(tableId) {
+        const table = document.getElementById(tableId);
+        if (!table) return;
+        const state = getTablePagerState(tableId);
+        state.page = 1;
+        table.querySelectorAll('.th-input').forEach(clearFilterControl);
+        table.querySelectorAll('.th-bot').forEach(bot => { bot.style.display = 'none'; });
+        table.querySelectorAll('.filt-btn.on').forEach(btn => btn.classList.remove('on'));
+        table.querySelectorAll('th.menu-open').forEach(th => th.classList.remove('menu-open'));
+        if (tableId === 'registryTable') {
+          registryState.sortCi = null;
+          registryState.sortDir = 'asc';
+        } else if (tableId === 'segmentsTable') {
+          segmentTableState.sortCi = null;
+          segmentTableState.sortDir = 'asc';
+        } else if (tableId === 'assetsTable') {
+          assetTableState.sortCi = null;
+          assetTableState.sortDir = 'asc';
+        } else if (tableId === 'roadSegsTable') {
+          roadSegTableState.sortCi = null;
+          roadSegTableState.sortDir = 'asc';
+        } else if (tableId === 'roadAssetsTable') {
+          roadAssetTableState.sortCi = null;
+          roadAssetTableState.sortDir = 'asc';
+        } else if (tableId === 'segAssetsTable') {
+          segAssetTableState.sortCi = null;
+          segAssetTableState.sortDir = 'asc';
+        }
+        rerenderPagedTable(tableId);
+        syncFilterClearButtons(`#${tableId}`);
+        syncResetButtons();
+      }
+
+      function resetExtendedTables() {
+        ['registryTable', 'segmentsTable', 'assetsTable', 'roadSegsTable', 'roadAssetsTable', 'segAssetsTable']
+          .forEach(resetExtendedTable);
+      }
+
+      function setExtendedTablePage(tableId, page) {
+        if (!tableId || !tablePagerState[tableId]) return;
+        tablePagerState[tableId].page = page;
+      }
+
+      window.setExtendedTablePage = setExtendedTablePage;
+      window.resetExtendedTable = resetExtendedTable;
+      window.resetExtendedTables = resetExtendedTables;
+
+      document.addEventListener('click', e => {
+        const btn = e.target.closest('.btn-filter-reset');
+        if (!btn || btn.id === 'resetFiltersBtn') return;
+        const table = btn.closest('.table-card')?.querySelector('table');
+        if (!table) return;
+        e.preventDefault();
+        e.stopPropagation();
+        resetExtendedTable(table.id);
+      });
 
       function getDecoratedFilterKind(tableId, ci) {
         const numericRange = new Set(['3', '4', '5', '8', '9']);
@@ -8227,6 +8402,10 @@
         if (tableId === 'assetsTable') {
           if (ci === 4 || ci === 5 || ci === 6 || ci === 7 || ci === 9) return 'select';
           if (ci === 8) return 'range';
+        }
+        if (tableId === 'segAssetsTable') {
+          if (ci === 2 || ci === 3 || ci === 4 || ci === 5 || ci === 7) return 'select';
+          if (ci === 6) return 'range';
         }
         return numericRange.has(String(ci)) ? 'range' : 'text';
       }
@@ -8288,7 +8467,14 @@
         const table = document.getElementById(tableId);
         const tbody = table?.querySelector('tbody');
         if (!table || !tbody) return;
+        ensureTablePager(tableId);
         const rows = Array.from(tbody.querySelectorAll('tr'));
+        const dataRows = rows.filter(row => !row.querySelector('.empty-cell'));
+        if (!dataRows.length) {
+          rows.forEach(row => { row.style.display = ''; });
+          updateTablePager(tableId, 0, 0, 0, 1);
+          return;
+        }
         const filters = Array.from(table.querySelectorAll('thead th')).map((th, idx) => {
           const inp = th.querySelector('.th-input');
           if (!inp) return null;
@@ -8298,7 +8484,7 @@
             kind: getFilterKind(inp),
           };
         }).filter(Boolean);
-        const filtered = rows.filter(row => {
+        const filtered = dataRows.filter(row => {
           const cells = Array.from(row.cells).map(cell => cell.textContent.trim());
           return filters.every(f => {
             if (!f.value) return true;
@@ -8316,9 +8502,13 @@
           });
         }
         filtered.forEach(row => tbody.appendChild(row));
-        rows.forEach(row => { row.style.display = filtered.includes(row) ? '' : 'none'; });
-        if (mode === 'segments') document.getElementById('segmentTotalBadge').textContent = filtered.length;
-        if (mode === 'assets') document.getElementById('assetTotalBadge').textContent = filtered.length;
+        const pageRows = new Set(paginateItems(tableId, filtered));
+        rows.forEach(row => { row.style.display = pageRows.has(row) ? '' : 'none'; });
+        if (tableId === 'segmentsTable') document.getElementById('segmentTotalBadge').textContent = filtered.length;
+        if (tableId === 'assetsTable') document.getElementById('assetTotalBadge').textContent = filtered.length;
+        if (tableId === 'roadSegsTable') document.getElementById('roadSegsCount').textContent = filtered.length;
+        if (tableId === 'roadAssetsTable') document.getElementById('roadAssetsCount').textContent = filtered.length;
+        if (tableId === 'segAssetsTable') document.getElementById('segAssetsCount').textContent = filtered.length;
         syncFilterClearButtons(`#${tableId}`);
         syncResetButtons();
       }
@@ -8367,20 +8557,33 @@
               state.sortCi = parseInt(th.dataset.ci, 10);
               state.sortDir = opt.dataset.dir;
             }
+            getTablePagerState(tableId).page = 1;
             closeAllMenus();
             renderFn();
           });
         });
       }
 
+      ['registryTable', 'segmentsTable', 'assetsTable', 'roadSegsTable', 'roadAssetsTable', 'segAssetsTable']
+        .forEach(ensureTablePager);
       decorateDomTable('segmentsTable');
       decorateDomTable('assetsTable');
+      decorateDomTable('roadSegsTable');
+      decorateDomTable('roadAssetsTable');
+      decorateDomTable('segAssetsTable');
       ensureFilterClearButtons('#segmentsTable', () => applyDomTable('segmentsTable', segmentTableState, 'segments'));
       ensureFilterClearButtons('#assetsTable', () => applyDomTable('assetsTable', assetTableState, 'assets'));
+      ensureFilterClearButtons('#roadSegsTable', () => applyDomTable('roadSegsTable', roadSegTableState, 'segments'));
+      ensureFilterClearButtons('#roadAssetsTable', () => applyDomTable('roadAssetsTable', roadAssetTableState, 'assets'));
+      ensureFilterClearButtons('#segAssetsTable', () => applyDomTable('segAssetsTable', segAssetTableState, 'assets'));
       bindDomTable('segmentsTable', segmentTableState, 'segments', renderSegmentTable);
       bindDomTable('assetsTable', assetTableState, 'assets', renderAssetTable);
+      bindDomTable('roadSegsTable', roadSegTableState, 'segments', () => applyDomTable('roadSegsTable', roadSegTableState, 'segments'));
+      bindDomTable('roadAssetsTable', roadAssetTableState, 'assets', () => applyDomTable('roadAssetsTable', roadAssetTableState, 'assets'));
+      bindDomTable('segAssetsTable', segAssetTableState, 'assets', () => applyDomTable('segAssetsTable', segAssetTableState, 'assets'));
       wireFilterDelegation('#segmentsTable', () => applyDomTable('segmentsTable', segmentTableState, 'segments'));
       wireFilterDelegation('#assetsTable', () => applyDomTable('assetsTable', assetTableState, 'assets'));
+      wireFilterDelegation('#segAssetsTable', () => applyDomTable('segAssetsTable', segAssetTableState, 'assets'));
       wireFilterDelegation('#roadSegsTable', () => applyDomTable('roadSegsTable', roadSegTableState, 'segments'));
       wireFilterDelegation('#roadAssetsTable', () => applyDomTable('roadAssetsTable', roadAssetTableState, 'assets'));
 
@@ -8495,9 +8698,11 @@
               : String(bv).localeCompare(String(av), 'az');
           });
         }
-        tbody.innerHTML = visible.map((item, i) => `
+        const pageItems = paginateItems('registryTable', visible);
+        const pageStart = visible.length ? (getTablePagerState('registryTable').page - 1) * getTablePagerState('registryTable').perPage : 0;
+        tbody.innerHTML = pageItems.map((item, i) => `
           <tr>
-            <td class="td-num">${i + 1}</td>
+            <td class="td-num">${pageStart + i + 1}</td>
             <td class="td-code code-road">${roadCodeButtonHtml(item.road.code)}</td>
             <td class="td-name">${esc(item.road.name)}</td>
             <td>${esc(item.road.length || '-')}</td>
@@ -8598,9 +8803,11 @@
               : String(bv).localeCompare(String(av), 'az');
           });
         }
-        tbody.innerHTML = visible.map((item, i) => `
+        const pageItems = paginateItems('registryTable', visible);
+        const pageStart = visible.length ? (getTablePagerState('registryTable').page - 1) * getTablePagerState('registryTable').perPage : 0;
+        tbody.innerHTML = pageItems.map((item, i) => `
           <tr>
-            <td class="td-num">${i + 1}</td>
+            <td class="td-num">${pageStart + i + 1}</td>
             <td class="td-code code-road">${roadCodeButtonHtml(item.road.code)}</td>
             <td class="td-name">${esc(item.road.name)}</td>
             <td>${esc(item.road.length || '-')}</td>
@@ -9386,6 +9593,7 @@
         ensureFilterClearButtons('#roadAssetsTable', () => applyDomTable('roadAssetsTable', roadAssetTableState, 'assets'));
         if (!assets.length) {
           tbody.innerHTML = `<tr><td colspan="10" class="empty-cell">Bu yol üzrə aktiv yoxdur.</td></tr>`;
+          updateTablePager('roadAssetsTable', 0, 0, 0, 1);
           return;
         }
         tbody.innerHTML = assets.map((a, i) => {
@@ -9476,6 +9684,7 @@
         document.getElementById('segAssetsCount').textContent = assets.length;
         if (!assets.length) {
           tbody.innerHTML = `<tr><td colspan="9" class="empty-cell">Bu seqmentə aid aktiv yoxdur.</td></tr>`;
+          updateTablePager('segAssetsTable', 0, 0, 0, 1);
           return;
         }
         tbody.innerHTML = assets.map((a, i) => {
@@ -9495,6 +9704,12 @@
             </div></div></div></td>
           </tr>`;
         }).join('');
+        setSelectOptions('segAssetsTable', 2, assets.map(a => a.grup || '-'));
+        setSelectOptions('segAssetsTable', 3, assets.map(a => a.nov || '-'));
+        setSelectOptions('segAssetsTable', 4, assets.map(a => a.tip || '-'));
+        setSelectOptions('segAssetsTable', 5, assets.map(a => a.gis_tip || '-'));
+        setSelectOptions('segAssetsTable', 7, assets.map(a => a.status || '-'));
+        applyDomTable('segAssetsTable', segAssetTableState, 'assets');
       }
 
       document.getElementById('segAssetsClose').addEventListener('click', closeSegAssetsPanel);
@@ -9546,6 +9761,7 @@
         ensureFilterClearButtons('#roadSegsTable', () => applyDomTable('roadSegsTable', roadSegTableState, 'segments'));
         if (!segs.length) {
           tbody.innerHTML = `<tr><td colspan="10" class="empty-cell">Bu yola aid seqment yoxdur.</td></tr>`;
+          updateTablePager('roadSegsTable', 0, 0, 0, 1);
           return;
         }
         tbody.innerHTML = segs.map((s, i) => {
