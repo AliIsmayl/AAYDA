@@ -1221,6 +1221,18 @@
       color: #1d4ed8;
     }
 
+    .td-code.code-road {
+      color: #1d4ed8;
+    }
+
+    .td-code.code-segment {
+      color: #047857;
+    }
+
+    .td-code.code-asset {
+      color: #a16207;
+    }
+
     .td-name {
       white-space: normal;
       max-width: 155px;
@@ -2520,6 +2532,61 @@
       text-decoration: underline;
     }
 
+    .road-code-link {
+      border-radius: 6px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      padding: 3px 7px;
+      text-align: left;
+      text-decoration: none;
+      letter-spacing: 0;
+    }
+
+    .segment-code-link {
+      border-radius: 6px;
+      background: #ecfdf5;
+      color: #047857;
+      padding: 3px 7px;
+      text-align: left;
+      text-decoration: none;
+      letter-spacing: 0;
+    }
+
+    .asset-code-link {
+      border-radius: 6px;
+      background: #fef9c3;
+      color: #a16207;
+      padding: 3px 7px;
+      text-align: left;
+      text-decoration: none;
+      letter-spacing: 0;
+    }
+
+    .road-code-link:hover {
+      background: #dbeafe;
+      color: #1e40af;
+      text-decoration: none;
+    }
+
+    .segment-code-link:hover {
+      background: #d1fae5;
+      color: #065f46;
+      text-decoration: none;
+    }
+
+    .asset-code-link:hover {
+      background: #fef08a;
+      color: #854d0e;
+      text-decoration: none;
+    }
+
+    .asset-code-link:focus-visible,
+    .segment-code-link:focus-visible,
+    .road-code-link:focus-visible {
+      outline: 2px solid #93c5fd;
+      outline-offset: 3px;
+    }
+
     /* MODALS */
     .modal-ov {
       position: fixed;
@@ -2720,6 +2787,321 @@
     .modal-foot-r {
       display: flex;
       gap: 8px;
+    }
+
+    #roadInfoModal .modal-box {
+      max-width: 860px;
+    }
+
+    #segmentInfoModal .modal-box {
+      max-width: 860px;
+    }
+
+    #assetInfoModal .modal-box {
+      max-width: 860px;
+    }
+
+    .road-info-text {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      color: #1a2b3c;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .road-info-hero {
+      border: 1px solid #dbeafe;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #f8fbff 0%, #eef7ff 58%, #f3fbf6 100%);
+      padding: 16px;
+    }
+
+    .road-info-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .road-info-code {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 9px;
+      border-radius: 7px;
+      background: #1d4ed8;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .road-info-code.code-segment {
+      background: #047857;
+    }
+
+    .road-info-code.code-asset {
+      background: #ca8a04;
+    }
+
+    .road-info-hero h3 {
+      margin: 0;
+      color: #0f172a;
+      font-size: 20px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .road-info-summary {
+      margin: 8px 0 0;
+      color: #475569;
+      font-size: 13px;
+      white-space: normal;
+    }
+
+    .road-info-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .road-info-metric {
+      border: 1px solid #e6edf5;
+      border-radius: 10px;
+      background: #fff;
+      padding: 12px;
+      min-width: 0;
+    }
+
+    .road-info-metric span {
+      display: block;
+      color: #64748b;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .road-info-metric strong {
+      display: block;
+      color: #0f172a;
+      font-size: 16px;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    .road-info-section {
+      border: 1px solid #e6edf5;
+      border-radius: 12px;
+      background: #fff;
+      padding: 14px;
+    }
+
+    .road-info-section-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .road-info-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #2563eb;
+      flex: 0 0 auto;
+    }
+
+    .road-info-section h3 {
+      margin: 0;
+      font-size: 14px;
+      color: #0f172a;
+    }
+
+    .road-info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 12px;
+    }
+
+    .road-info-item {
+      border-top: 1px solid #f0f5fb;
+      padding-top: 8px;
+      min-width: 0;
+    }
+
+    .road-info-label {
+      display: block;
+      color: #64748b;
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+
+    .road-info-value {
+      display: block;
+      color: #0f172a;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+      white-space: normal;
+    }
+
+    .road-info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .road-info-row {
+      display: grid;
+      grid-template-columns: 120px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      border-top: 1px solid #f0f5fb;
+      padding-top: 8px;
+    }
+
+    .road-info-row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .road-info-row-code {
+      color: #1d4ed8;
+      font-size: 12px;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .road-info-row-code.code-segment {
+      color: #047857;
+    }
+
+    .road-info-row-code.code-asset {
+      color: #a16207;
+    }
+
+    .road-info-row-text {
+      color: #334155;
+      font-size: 13px;
+      white-space: normal;
+    }
+
+    .road-info-row-title {
+      color: #0f172a;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .road-info-muted {
+      color: #64748b;
+      font-size: 12px;
+      line-height: 1.45;
+      margin-bottom: 8px;
+    }
+
+    .road-info-asset-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .road-info-asset-item {
+      border: 1px solid #f3e8a3;
+      border-radius: 8px;
+      background: #fffbeb;
+      padding: 8px 10px;
+      color: #334155;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .road-info-asset-item strong {
+      color: #a16207;
+      display: inline-block;
+      margin-right: 5px;
+    }
+
+    .road-info-empty.compact {
+      margin-top: 6px;
+    }
+
+    .road-info-empty {
+      margin: 0;
+      color: #64748b;
+      font-size: 13px;
+      white-space: normal;
+    }
+
+    .road-info-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .road-info-actions .fbtn {
+      min-width: 150px;
+      justify-content: center;
+    }
+
+    .road-info-action-btn {
+      border: none;
+      color: #fff;
+    }
+
+    .road-info-action-btn svg {
+      stroke: currentColor;
+    }
+
+    .road-info-action-btn:hover {
+      transform: none;
+    }
+
+    .road-action-edit {
+      background: #f59e0b;
+    }
+
+    .road-action-edit:hover {
+      background: #d97706;
+    }
+
+    .road-action-segment {
+      background: #16a34a;
+    }
+
+    .road-action-segment:hover {
+      background: #15803d;
+    }
+
+    .road-action-asset {
+      background: #2563eb;
+    }
+
+    .road-action-asset:hover {
+      background: #1d4ed8;
+    }
+
+    @media (max-width: 760px) {
+      .road-info-metrics,
+      .road-info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .road-info-row {
+        grid-template-columns: 1fr;
+        gap: 3px;
+      }
+
+      .road-info-actions {
+        justify-content: stretch;
+      }
+
+      .road-info-actions .fbtn {
+        width: 100%;
+      }
     }
 
     /* ─── SIZE BUMP: daha oxunaqlı böyük interfeys ─── */
@@ -4357,6 +4739,120 @@
         <div class="pag-btns" id="pagBtns"></div>
       </div>
     </div><!-- /table-card -->
+
+    <div class="modal-ov" id="roadInfoModal" aria-hidden="true">
+      <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="roadInfoTitle">
+        <div class="modal-head">
+          <div class="modal-title-block">
+            <div class="mh-title" id="roadInfoTitle">Yol məlumatları</div>
+            <div class="mh-sub" id="roadInfoSub">Reyestr üzrə tam mətn məlumatı</div>
+          </div>
+          <button class="modal-close-btn" id="roadInfoClose" type="button" aria-label="Bağla">
+            <svg viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="road-info-text" id="roadInfoContent"></div>
+        </div>
+        <div class="modal-foot">
+          <div class="road-info-actions">
+            <button class="fbtn road-info-action-btn road-action-edit" id="roadInfoEdit" type="button">
+              <svg viewBox="0 0 24 24">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                <path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z" />
+              </svg>
+              Redaktə et
+            </button>
+            <button class="fbtn road-info-action-btn road-action-segment" id="roadInfoAddSegment" type="button">
+              <svg viewBox="0 0 24 24">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              Seqment əlavə et
+            </button>
+            <button class="fbtn road-info-action-btn road-action-asset" id="roadInfoAddAsset" type="button">
+              <svg viewBox="0 0 24 24">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              Aktiv əlavə et
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-ov" id="segmentInfoModal" aria-hidden="true">
+      <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="segmentInfoTitle">
+        <div class="modal-head">
+          <div class="modal-title-block">
+            <div class="mh-title" id="segmentInfoTitle">Seqment məlumatları</div>
+            <div class="mh-sub" id="segmentInfoSub">Seqment üzrə reyestr məlumatları</div>
+          </div>
+          <button class="modal-close-btn" id="segmentInfoClose" type="button" aria-label="Bağla">
+            <svg viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="road-info-text" id="segmentInfoContent"></div>
+        </div>
+        <div class="modal-foot">
+          <div class="road-info-actions">
+            <button class="fbtn road-info-action-btn road-action-edit" id="segmentInfoEdit" type="button">
+              <svg viewBox="0 0 24 24">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                <path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z" />
+              </svg>
+              Redaktə et
+            </button>
+            <button class="fbtn road-info-action-btn road-action-asset" id="segmentInfoAddAsset" type="button">
+              <svg viewBox="0 0 24 24">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              Aktiv əlavə et
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-ov" id="assetInfoModal" aria-hidden="true">
+      <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="assetInfoTitle">
+        <div class="modal-head">
+          <div class="modal-title-block">
+            <div class="mh-title" id="assetInfoTitle">Aktiv məlumatları</div>
+            <div class="mh-sub" id="assetInfoSub">Aktiv üzrə reyestr məlumatları</div>
+          </div>
+          <button class="modal-close-btn" id="assetInfoClose" type="button" aria-label="Bağla">
+            <svg viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="road-info-text" id="assetInfoContent"></div>
+        </div>
+        <div class="modal-foot">
+          <div class="road-info-actions">
+            <button class="fbtn road-info-action-btn road-action-edit" id="assetInfoEdit" type="button">
+              <svg viewBox="0 0 24 24">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                <path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z" />
+              </svg>
+              Redaktə et
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- ══ FORM PANEL ══ -->
     <div class="form-panel" id="formPanel">
@@ -6866,6 +7362,9 @@
       const roadsData = [];
       const segmentsData = [];
       const assetsData = [];
+      let currentRoadInfoCode = '';
+      let currentSegmentInfoCode = '';
+      let currentAssetInfoCode = '';
 
       function esc(value) {
         return String(value ?? '').replace(/[&<>"']/g, ch => ({
@@ -6883,6 +7382,33 @@
         if (v.includes('qaralama') || v.includes('katastr')) return badge(value, 'b-amber');
         if (v.includes('qəza') || v.includes('ləğv')) return badge(value, 'b-pink');
         return badge(value || '-', 'b-gray');
+      }
+
+      function roadCodeButtonHtml(code) {
+        const safeCode = esc(code || '-');
+        return `<button class="link-btn road-code-link" data-road-code="${safeCode}" type="button">${safeCode}</button>`;
+      }
+
+      function segmentCodeButtonHtml(code) {
+        const safeCode = esc(code || '-');
+        return `<button class="link-btn segment-code-link" data-segment-code="${safeCode}" type="button">${safeCode}</button>`;
+      }
+
+      function assetCodeButtonHtml(code) {
+        const safeCode = esc(code || '-');
+        return `<button class="link-btn asset-code-link" data-asset-code="${safeCode}" type="button">${safeCode}</button>`;
+      }
+
+      function setRoadCodeCell(row, code) {
+        const cell = row?.cells?.[1];
+        if (cell) cell.innerHTML = roadCodeButtonHtml(code);
+      }
+
+      function refreshRoadCodeLinks() {
+        allRows.forEach(row => {
+          const code = row.cells[1]?.textContent.trim() || '';
+          if (code) setRoadCodeCell(row, code);
+        });
       }
 
       function nextCode(prefix, list, fallback) {
@@ -6914,6 +7440,413 @@
 
       function roadByCode(code) {
         return roadsData.find(r => r.code === code);
+      }
+
+      function segmentByCode(code) {
+        return segmentsData.find(s => s.code === code);
+      }
+
+      function assetByCode(code) {
+        return assetsData.find(a => a.code === code);
+      }
+
+      function displayValue(value) {
+        const shown = value === undefined || value === null || value === '' ? '-' : value;
+        return esc(shown);
+      }
+
+      function roadInfoItem(label, value) {
+        return `
+          <div class="road-info-item">
+            <span class="road-info-label">${esc(label)}</span>
+            <span class="road-info-value">${displayValue(value)}</span>
+          </div>`;
+      }
+
+      function roadInfoMetric(label, value) {
+        return `
+          <div class="road-info-metric">
+            <span>${esc(label)}</span>
+            <strong>${displayValue(value)}</strong>
+          </div>`;
+      }
+
+      function roadInfoSection(title, body) {
+        return `
+          <div class="road-info-section">
+            <div class="road-info-section-head">
+              <span class="road-info-dot"></span>
+              <h3>${esc(title)}</h3>
+            </div>
+            ${body}
+          </div>`;
+      }
+
+      function buildRoadInfoHtml(road, code) {
+        if (!road) {
+          return `
+            <div class="road-info-section">
+              <div class="road-info-section-head">
+                <span class="road-info-dot"></span>
+                <h3>Qeyd tapılmadı</h3>
+              </div>
+              <p class="road-info-empty"><strong>${esc(code || '-')}</strong> kodlu yol qeydi tapılmadı.</p>
+            </div>`;
+        }
+
+        const roadSegments = segmentsData.filter(s => s.roadCode === road.code);
+        const roadSegmentCodes = new Set(roadSegments.map(s => s.code));
+        const roadAssets = assetsData.filter(a => a.roadCode === road.code || roadSegmentCodes.has(a.segmentCode));
+        const segmentText = roadSegments.length
+          ? roadSegments.map((s, i) => `
+              <div class="road-info-row">
+                <div class="road-info-row-code code-segment">${i + 1}. ${esc(s.code || '-')}</div>
+                <div class="road-info-row-text">
+                  ${displayValue(s.bas)} km - ${displayValue(s.son)} km aralığı, ${displayValue(s.uzun)} km uzunluq.
+                  Kateqoriya: ${displayValue(s.kat)}, örtük: ${displayValue(s.ortuk)}, status: ${displayValue(s.status)}.
+                </div>
+              </div>
+            `).join('')
+          : '<p class="road-info-empty">Bu yol üzrə seqment məlumatı yoxdur.</p>';
+        const assetText = roadAssets.length
+          ? roadAssets.map((a, i) => `
+              <div class="road-info-row">
+                <div class="road-info-row-code code-asset">${i + 1}. ${esc(a.code || '-')}</div>
+                <div class="road-info-row-text">
+                  ${displayValue(a.grup)} / ${displayValue(a.nov)}. Seqment: ${displayValue(a.segmentCode)}, km/PK: ${displayValue(a.km)}.
+                  GİS tipi: ${displayValue(a.gis_tip)}, status: ${displayValue(a.status)}.
+                </div>
+              </div>
+            `).join('')
+          : '<p class="road-info-empty">Bu yol üzrə aktiv məlumatı yoxdur.</p>';
+        const segmentAssetText = roadSegments.length
+          ? roadSegments.map((s, i) => {
+              const linkedAssets = roadAssets.filter(a => a.segmentCode === s.code);
+              const assetsMarkup = linkedAssets.length
+                ? `<div class="road-info-asset-list">${linkedAssets.map((a, assetIdx) => `
+                    <div class="road-info-asset-item">
+                      <strong>${assetIdx + 1}. ${esc(a.code || '-')}</strong>
+                      ${displayValue(a.grup)} / ${displayValue(a.nov)}. Tip: ${displayValue(a.tip)}.
+                      km/PK: ${displayValue(a.km)}, GİS: ${displayValue(a.gis_tip)}, status: ${displayValue(a.status)}.
+                    </div>
+                  `).join('')}</div>`
+                : '<p class="road-info-empty compact">Bu seqmentə bağlı aktiv yoxdur.</p>';
+              return `
+                <div class="road-info-row">
+                  <div class="road-info-row-code code-segment">${i + 1}. ${esc(s.code || '-')}</div>
+                  <div class="road-info-row-text">
+                    <div class="road-info-row-title">
+                      ${displayValue(s.bas)}-${displayValue(s.son)} km, ${displayValue(s.uzun)} km
+                      · ${linkedAssets.length} aktiv
+                    </div>
+                    <div class="road-info-muted">
+                      Kateqoriya: ${displayValue(s.kat)}, örtük: ${displayValue(s.ortuk)}, status: ${displayValue(s.status)}.
+                    </div>
+                    ${assetsMarkup}
+                  </div>
+                </div>`;
+            }).join('')
+          : '<p class="road-info-empty">Bu yol üzrə seqment yoxdur.</p>';
+        const unlinkedAssets = roadAssets.filter(a => !roadSegmentCodes.has(a.segmentCode));
+        const unlinkedAssetText = unlinkedAssets.length
+          ? `
+            <div class="road-info-row">
+              <div class="road-info-row-code code-asset">Seqmentsiz</div>
+              <div class="road-info-row-text">
+                <div class="road-info-row-title">${unlinkedAssets.length} aktiv birbaşa yola bağlıdır</div>
+                <div class="road-info-asset-list">
+                  ${unlinkedAssets.map((a, i) => `
+                    <div class="road-info-asset-item">
+                      <strong>${i + 1}. ${esc(a.code || '-')}</strong>
+                      ${displayValue(a.grup)} / ${displayValue(a.nov)}. Seqment: ${displayValue(a.segmentCode)}.
+                      km/PK: ${displayValue(a.km)}, status: ${displayValue(a.status)}.
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>`
+          : '';
+
+        return `
+          <div class="road-info-hero">
+            <div class="road-info-topline">
+              <span class="road-info-code">${esc(road.code || '-')}</span>
+              ${statusBadge(road.status || '-')}
+            </div>
+            <h3>${esc(road.name || 'Adsız yol')}</h3>
+            <p class="road-info-summary">
+              ${displayValue(road.index)} indeksli, ${displayValue(road.category)} kateqoriyalı yol.
+              Mülkiyyət: ${displayValue(road.ownership)}, əhəmiyyət: ${displayValue(road.importance)}.
+            </p>
+          </div>
+          <div class="road-info-metrics">
+            ${roadInfoMetric('Uzunluq', road.length ? `${road.length} km` : '-')}
+            ${roadInfoMetric('Seqment', roadSegments.length)}
+            ${roadInfoMetric('Aktiv', roadAssets.length)}
+            ${roadInfoMetric('Sinif', road.classNo)}
+          </div>
+          ${roadInfoSection('Əsas məlumatlar', `
+            <div class="road-info-grid">
+              ${roadInfoItem('Reyestr kodu', road.code)}
+              ${roadInfoItem('Yol adı', road.name)}
+              ${roadInfoItem('İndeks', road.index)}
+              ${roadInfoItem('Sinif', road.classNo)}
+              ${roadInfoItem('Uzunluğu', road.length ? `${road.length} km` : '-')}
+              ${roadInfoItem('Mülkiyyət', road.ownership)}
+              ${roadInfoItem('Status', road.status)}
+              ${roadInfoItem('İstifadə', road.usage)}
+              ${roadInfoItem('Əhəmiyyəti', road.importance)}
+              ${roadInfoItem('Kateqoriyası', road.category)}
+            </div>
+          `)}
+          ${roadInfoSection('Seqmentlər', `<div class="road-info-list">${segmentText}</div>`)}
+          ${roadInfoSection('Seqment-aktiv bağlılığı', `<div class="road-info-list">${segmentAssetText}${unlinkedAssetText}</div>`)}
+          ${roadInfoSection('Aktivlər', `<div class="road-info-list">${assetText}</div>`)}`;
+      }
+
+      function openRoadInfoModal(code) {
+        const road = roadByCode(code);
+        const modal = document.getElementById('roadInfoModal');
+        if (!modal) return;
+        currentRoadInfoCode = road?.code || code || '';
+        if (typeof closeActionMenus === 'function') closeActionMenus();
+        const roadSegments = road ? segmentsData.filter(s => s.roadCode === road.code) : [];
+        const roadSegmentCodes = new Set(roadSegments.map(s => s.code));
+        const roadAssets = road ? assetsData.filter(a => a.roadCode === road.code || roadSegmentCodes.has(a.segmentCode)) : [];
+        document.getElementById('roadInfoTitle').textContent = road ? 'Yol pasportu' : 'Yol məlumatları';
+        document.getElementById('roadInfoSub').textContent = road ? `${road.code} üzrə ${roadSegments.length} seqment, ${roadAssets.length} aktiv` : 'Qeyd tapılmadı';
+        document.getElementById('roadInfoContent').innerHTML = buildRoadInfoHtml(road, code);
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeRoadInfoModal() {
+        const modal = document.getElementById('roadInfoModal');
+        if (!modal) return;
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+
+      function openRoadInfoSegmentCreate() {
+        const roadCode = currentRoadInfoCode;
+        if (!roadCode || !roadByCode(roadCode)) return;
+        closeRoadInfoModal();
+        openSegModal(-1, 'global', true);
+        const roadSelect = document.getElementById('sg_road');
+        if (roadSelect) roadSelect.value = roadCode;
+        if (typeof updateSegAssetBtnState === 'function') updateSegAssetBtnState();
+      }
+
+      function openRoadInfoAssetCreate() {
+        const roadCode = currentRoadInfoCode;
+        if (!roadCode || !roadByCode(roadCode)) return;
+        const firstSegment = segmentsData.find(s => s.roadCode === roadCode);
+        closeRoadInfoModal();
+        openGlobalAssetModal(-1, firstSegment?.code || '');
+        if (!firstSegment) {
+          const roadSelect = document.getElementById('ac_road');
+          if (roadSelect) roadSelect.value = roadCode;
+          if (typeof populateAssetSegmentSelect === 'function') populateAssetSegmentSelect();
+        }
+      }
+
+      function openRoadInfoEdit() {
+        const road = roadByCode(currentRoadInfoCode);
+        if (!road?.row) return;
+        closeRoadInfoModal();
+        openForm('edit', road.row);
+      }
+
+      function buildSegmentInfoHtml(segment, code) {
+        if (!segment) {
+          return `
+            <div class="road-info-section">
+              <div class="road-info-section-head">
+                <span class="road-info-dot"></span>
+                <h3>Qeyd tapılmadı</h3>
+              </div>
+              <p class="road-info-empty"><strong>${esc(code || '-')}</strong> kodlu seqment qeydi tapılmadı.</p>
+            </div>`;
+        }
+
+        const road = roadByCode(segment.roadCode);
+        const segmentAssets = assetsData.filter(a => a.segmentCode === segment.code);
+        const assetText = segmentAssets.length
+          ? segmentAssets.map((a, i) => `
+              <div class="road-info-row">
+                <div class="road-info-row-code code-asset">${i + 1}. ${esc(a.code || '-')}</div>
+                <div class="road-info-row-text">
+                  ${displayValue(a.grup)} / ${displayValue(a.nov)}. km/PK: ${displayValue(a.km)}.
+                  GİS tipi: ${displayValue(a.gis_tip)}, status: ${displayValue(a.status)}.
+                </div>
+              </div>
+            `).join('')
+          : '<p class="road-info-empty">Bu seqment üzrə aktiv məlumatı yoxdur.</p>';
+
+        return `
+          <div class="road-info-hero">
+            <div class="road-info-topline">
+              <span class="road-info-code code-segment">${esc(segment.code || '-')}</span>
+              ${statusBadge(segment.status || '-')}
+            </div>
+            <h3>${esc(road ? `${road.code} - ${road.name}` : 'Aid yol seçilməyib')}</h3>
+            <p class="road-info-summary">
+              ${displayValue(segment.bas)} km - ${displayValue(segment.son)} km aralığı.
+              Kateqoriya: ${displayValue(segment.kat)}, örtük: ${displayValue(segment.ortuk)}.
+            </p>
+          </div>
+          <div class="road-info-metrics">
+            ${roadInfoMetric('Başlanğıc', segment.bas ? `${segment.bas} km` : '-')}
+            ${roadInfoMetric('Son', segment.son ? `${segment.son} km` : '-')}
+            ${roadInfoMetric('Uzunluq', segment.uzun ? `${segment.uzun} km` : '-')}
+            ${roadInfoMetric('Aktiv', segmentAssets.length)}
+          </div>
+          ${roadInfoSection('Əsas məlumatlar', `
+            <div class="road-info-grid">
+              ${roadInfoItem('Seqment kodu', segment.code)}
+              ${roadInfoItem('Aid yol', road ? `${road.code} - ${road.name}` : segment.roadCode)}
+              ${roadInfoItem('Başlanğıc km', segment.bas)}
+              ${roadInfoItem('Son km', segment.son)}
+              ${roadInfoItem('Uzunluğu', segment.uzun ? `${segment.uzun} km` : '-')}
+              ${roadInfoItem('Kateqoriya', segment.kat)}
+              ${roadInfoItem('Örtük', segment.ortuk)}
+              ${roadInfoItem('Status', segment.status)}
+            </div>
+          `)}
+          ${roadInfoSection('Texniki parametrlər', `
+            <div class="road-info-grid">
+              ${roadInfoItem('Zolaq sayı', segment.zolaq)}
+              ${roadInfoItem('Yol eni', segment.en)}
+              ${roadInfoItem('Çiyin eni', segment.ciyin)}
+              ${roadInfoItem('Ayırıcı zolaq', segment.ayir)}
+              ${roadInfoItem('Sürət həddi', segment.suret)}
+              ${roadInfoItem('İstismara verilmə tarixi', segment.tarix)}
+              ${roadInfoItem('Hüquqi status', segment.huq)}
+              ${roadInfoItem('Qeyd', segment.qeyd)}
+            </div>
+          `)}
+          ${roadInfoSection('Aktivlər', `<div class="road-info-list">${assetText}</div>`)}`;
+      }
+
+      function openSegmentInfoModal(code) {
+        const segment = segmentByCode(code);
+        const modal = document.getElementById('segmentInfoModal');
+        if (!modal) return;
+        currentSegmentInfoCode = segment?.code || code || '';
+        if (typeof closeActionMenus === 'function') closeActionMenus();
+        document.getElementById('segmentInfoTitle').textContent = segment ? 'Seqment pasportu' : 'Seqment məlumatları';
+        document.getElementById('segmentInfoSub').textContent = segment ? `${segment.code} üzrə reyestr məlumatları` : 'Qeyd tapılmadı';
+        document.getElementById('segmentInfoContent').innerHTML = buildSegmentInfoHtml(segment, code);
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeSegmentInfoModal() {
+        const modal = document.getElementById('segmentInfoModal');
+        if (!modal) return;
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+
+      function openSegmentInfoAssetCreate() {
+        const segmentCode = currentSegmentInfoCode;
+        if (!segmentCode || !segmentByCode(segmentCode)) return;
+        closeSegmentInfoModal();
+        openGlobalAssetModal(-1, segmentCode);
+      }
+
+      function openSegmentInfoEdit() {
+        const segmentCode = currentSegmentInfoCode;
+        const idx = segmentsData.findIndex(s => s.code === segmentCode);
+        if (idx < 0) return;
+        closeSegmentInfoModal();
+        openSegModal(idx, 'global', true);
+      }
+
+      function buildAssetInfoHtml(asset, code) {
+        if (!asset) {
+          return `
+            <div class="road-info-section">
+              <div class="road-info-section-head">
+                <span class="road-info-dot"></span>
+                <h3>Qeyd tapılmadı</h3>
+              </div>
+              <p class="road-info-empty"><strong>${esc(code || '-')}</strong> kodlu aktiv qeydi tapılmadı.</p>
+            </div>`;
+        }
+
+        const road = roadByCode(asset.roadCode);
+        const segment = segmentByCode(asset.segmentCode);
+        const coords = asset.lat || asset.lon ? `${asset.lat || '-'}, ${asset.lon || '-'}` : '-';
+
+        return `
+          <div class="road-info-hero">
+            <div class="road-info-topline">
+              <span class="road-info-code code-asset">${esc(asset.code || '-')}</span>
+              ${statusBadge(asset.status || '-')}
+            </div>
+            <h3>${esc(asset.nov || asset.grup || 'Adsız aktiv')}</h3>
+            <p class="road-info-summary">
+              ${displayValue(asset.grup)} qrupu, ${displayValue(asset.tip)} tipi.
+              Aid yol: ${displayValue(road ? `${road.code} - ${road.name}` : asset.roadCode)}.
+            </p>
+          </div>
+          <div class="road-info-metrics">
+            ${roadInfoMetric('km / PK', asset.km)}
+            ${roadInfoMetric('GİS tipi', asset.gis_tip)}
+            ${roadInfoMetric('Seqment', asset.segmentCode)}
+            ${roadInfoMetric('Status', asset.status)}
+          </div>
+          ${roadInfoSection('Əsas məlumatlar', `
+            <div class="road-info-grid">
+              ${roadInfoItem('Aktiv kodu', asset.code)}
+              ${roadInfoItem('Aid yol', road ? `${road.code} - ${road.name}` : asset.roadCode)}
+              ${roadInfoItem('Aid seqment', segment ? `${segment.code} (${segment.bas || '-'}-${segment.son || '-'} km)` : asset.segmentCode)}
+              ${roadInfoItem('Aktiv qrupu', asset.grup)}
+              ${roadInfoItem('Aktiv növü', asset.nov)}
+              ${roadInfoItem('Aktiv tipi', asset.tip)}
+              ${roadInfoItem('GİS tipi', asset.gis_tip)}
+              ${roadInfoItem('km / PK', asset.km)}
+              ${roadInfoItem('Status', asset.status)}
+              ${roadInfoItem('Hüquqi status', asset.huq)}
+            </div>
+          `)}
+          ${roadInfoSection('Texniki məlumatlar', `
+            <div class="road-info-grid">
+              ${roadInfoItem('GİS koordinat', coords)}
+              ${roadInfoItem('İdarə edən qurum', asset['idarə'])}
+              ${roadInfoItem('İstismara verilmə tarixi', asset.tarix)}
+              ${roadInfoItem('Ümumi texniki vəziyyət', asset.veziyyet)}
+              ${roadInfoItem('Qeyd', asset.qeyd)}
+            </div>
+          `)}`;
+      }
+
+      function openAssetInfoModal(code) {
+        const asset = assetByCode(code);
+        const modal = document.getElementById('assetInfoModal');
+        if (!modal) return;
+        currentAssetInfoCode = asset?.code || code || '';
+        if (typeof closeActionMenus === 'function') closeActionMenus();
+        document.getElementById('assetInfoTitle').textContent = asset ? 'Aktiv pasportu' : 'Aktiv məlumatları';
+        document.getElementById('assetInfoSub').textContent = asset ? `${asset.code} üzrə reyestr məlumatları` : 'Qeyd tapılmadı';
+        document.getElementById('assetInfoContent').innerHTML = buildAssetInfoHtml(asset, code);
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeAssetInfoModal() {
+        const modal = document.getElementById('assetInfoModal');
+        if (!modal) return;
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+
+      function openAssetInfoEdit() {
+        const idx = assetsData.findIndex(a => a.code === currentAssetInfoCode);
+        if (idx < 0) return;
+        closeAssetInfoModal();
+        openGlobalAssetModal(idx);
       }
 
       function segmentCountByRoad(code) {
@@ -6950,7 +7883,7 @@
         const row = document.createElement('tr');
         row.innerHTML = `
       <td class="td-num">${allRows.length + 1}</td>
-      <td class="td-code">${esc(road.code)}</td>
+      <td class="td-code">${roadCodeButtonHtml(road.code)}</td>
       <td class="td-name">${esc(road.name)}</td>
       <td>${badge(road.index || '-', 'b-gray')}</td>
       <td>${esc(road.classNo || '-')}</td>
@@ -6968,7 +7901,7 @@
 
       function updateRoadRow(road) {
         if (!road.row) return;
-        road.row.cells[1].textContent = road.code;
+        setRoadCodeCell(road.row, road.code);
         road.row.cells[2].textContent = road.name;
         road.row.cells[3].innerHTML = badge(road.index || '-', 'b-gray');
         road.row.cells[4].textContent = road.classNo || '-';
@@ -7104,7 +8037,7 @@
         tbody.innerHTML = segmentsData.map((s, i) => `
       <tr>
         <td class="td-num">${i + 1}</td>
-        <td class="td-code">${esc(s.code)}</td>
+        <td class="td-code">${segmentCodeButtonHtml(s.code)}</td>
         <td class="td-name">${esc(roadLabel(s.roadCode))}</td>
         <td>${esc(s.bas || '-')}</td>
         <td>${esc(s.son || '-')}</td>
@@ -7145,9 +8078,9 @@
         tbody.innerHTML = assetsData.map((a, i) => `
       <tr>
         <td class="td-num">${i + 1}</td>
-        <td class="td-code">${esc(a.code)}</td>
+        <td class="td-code">${assetCodeButtonHtml(a.code)}</td>
         <td class="td-name">${esc(roadLabel(a.roadCode))}</td>
-        <td>${esc(a.segmentCode || '-')}</td>
+        <td class="td-code code-segment">${esc(a.segmentCode || '-')}</td>
         <td>${esc(a.grup || '-')}</td>
         <td>${esc(a.nov || '-')}</td>
         <td>${esc(a.tip || '-')}</td>
@@ -7238,8 +8171,21 @@
         });
       });
       document.getElementById('registryTableBody')?.addEventListener('click', e => {
+        const roadCodeBtn = e.target.closest('[data-road-code]');
+        const roadMenuBtn = e.target.closest('[data-reg-road]');
         const segBtn = e.target.closest('[data-reg-segs]');
         const assetBtn = e.target.closest('[data-reg-assets]');
+        if (roadCodeBtn) {
+          e.preventDefault();
+          e.stopPropagation();
+          openRoadInfoModal(roadCodeBtn.dataset.roadCode || roadCodeBtn.textContent.trim());
+          return;
+        }
+        if (roadMenuBtn) {
+          const idx = parseInt(roadMenuBtn.dataset.regRoad, 10);
+          openRoadInfoModal(roadsData[idx]?.code || '');
+          return;
+        }
         if (segBtn) {
           const idx = parseInt(segBtn.dataset.regSegs, 10);
           openRoadSegsPanel(roadsData[idx]?.code || '', 'registry');
@@ -7453,7 +8399,8 @@
       function registryRows() {
         return roadsData.map((road, idx) => {
           const segs = segmentsData.filter(s => s.roadCode === road.code);
-          const acts = assetsData.filter(a => a.roadCode === road.code);
+          const segCodes = new Set(segs.map(s => s.code));
+          const acts = assetsData.filter(a => a.roadCode === road.code || segCodes.has(a.segmentCode));
           return {
             road,
             idx,
@@ -7551,7 +8498,7 @@
         tbody.innerHTML = visible.map((item, i) => `
           <tr>
             <td class="td-num">${i + 1}</td>
-            <td class="td-code">${esc(item.road.code)}</td>
+            <td class="td-code code-road">${roadCodeButtonHtml(item.road.code)}</td>
             <td class="td-name">${esc(item.road.name)}</td>
             <td>${esc(item.road.length || '-')}</td>
             <td>${item.segCount}</td>
@@ -7654,7 +8601,7 @@
         tbody.innerHTML = visible.map((item, i) => `
           <tr>
             <td class="td-num">${i + 1}</td>
-            <td class="td-code">${esc(item.road.code)}</td>
+            <td class="td-code code-road">${roadCodeButtonHtml(item.road.code)}</td>
             <td class="td-name">${esc(item.road.name)}</td>
             <td>${esc(item.road.length || '-')}</td>
             <td>${item.segCount}</td>
@@ -8362,6 +9309,13 @@
         }
       });
       document.getElementById('assetsTableBody').addEventListener('click', e => {
+        const codeBtn = e.target.closest('[data-asset-code]');
+        if (codeBtn) {
+          e.preventDefault();
+          e.stopPropagation();
+          openAssetInfoModal(codeBtn.dataset.assetCode || codeBtn.textContent.trim());
+          return;
+        }
         const edit = e.target.closest('[data-asset-edit]');
         const del = e.target.closest('[data-asset-del]');
         if (edit) {
@@ -8438,8 +9392,8 @@
           const gi = assetsData.indexOf(a);
           return `<tr>
             <td class="td-num">${i + 1}</td>
-            <td class="td-code">${esc(a.code)}</td>
-            <td class="td-code" style="cursor:pointer;color:#2563eb;text-decoration:underline;" data-seg-nav="${a.segmentCode||''}">${esc(a.segmentCode||'-')}</td>
+            <td class="td-code code-asset">${esc(a.code)}</td>
+            <td class="td-code code-segment" style="cursor:pointer;text-decoration:underline;" data-seg-nav="${a.segmentCode||''}">${esc(a.segmentCode||'-')}</td>
             <td>${esc(a.grup || '-')}</td>
             <td>${esc(a.nov || '-')}</td>
             <td>${esc(a.tip || '-')}</td>
@@ -8528,7 +9482,7 @@
           const gi = assetsData.indexOf(a);
           return `<tr>
             <td class="td-num">${i + 1}</td>
-            <td class="td-code">${esc(a.code)}</td>
+            <td class="td-code code-asset">${esc(a.code)}</td>
             <td>${esc(a.grup || '-')}</td>
             <td>${esc(a.nov || '-')}</td>
             <td>${esc(a.tip || '-')}</td>
@@ -8598,7 +9552,7 @@
           const gi = segmentsData.indexOf(s);
           return `<tr>
             <td class="td-num">${i + 1}</td>
-            <td class="td-code">${esc(s.code)}</td>
+            <td class="td-code code-segment">${esc(s.code)}</td>
             <td>${esc(s.bas || '-')}</td>
             <td>${esc(s.son || '-')}</td>
             <td>${esc(s.uzun || '-')}</td>
@@ -8831,7 +9785,52 @@
       });
       window.openSegCreateModal = openSegCreateModal;
 
+      document.getElementById('tableBody')?.addEventListener('click', e => {
+        const codeBtn = e.target.closest('[data-road-code]');
+        if (!codeBtn) return;
+        e.preventDefault();
+        e.stopPropagation();
+        openRoadInfoModal(codeBtn.dataset.roadCode || codeBtn.textContent.trim());
+      });
+      document.getElementById('roadInfoClose')?.addEventListener('click', closeRoadInfoModal);
+      document.getElementById('roadInfoEdit')?.addEventListener('click', openRoadInfoEdit);
+      document.getElementById('roadInfoAddSegment')?.addEventListener('click', openRoadInfoSegmentCreate);
+      document.getElementById('roadInfoAddAsset')?.addEventListener('click', openRoadInfoAssetCreate);
+      document.getElementById('roadInfoModal')?.addEventListener('click', e => {
+        if (e.target === document.getElementById('roadInfoModal')) closeRoadInfoModal();
+      });
+      document.getElementById('segmentsTableBody')?.addEventListener('click', e => {
+        const codeBtn = e.target.closest('[data-segment-code]');
+        if (!codeBtn) return;
+        e.preventDefault();
+        e.stopPropagation();
+        openSegmentInfoModal(codeBtn.dataset.segmentCode || codeBtn.textContent.trim());
+      });
+      document.getElementById('segmentInfoClose')?.addEventListener('click', closeSegmentInfoModal);
+      document.getElementById('segmentInfoEdit')?.addEventListener('click', openSegmentInfoEdit);
+      document.getElementById('segmentInfoAddAsset')?.addEventListener('click', openSegmentInfoAssetCreate);
+      document.getElementById('segmentInfoModal')?.addEventListener('click', e => {
+        if (e.target === document.getElementById('segmentInfoModal')) closeSegmentInfoModal();
+      });
+      document.getElementById('assetInfoClose')?.addEventListener('click', closeAssetInfoModal);
+      document.getElementById('assetInfoEdit')?.addEventListener('click', openAssetInfoEdit);
+      document.getElementById('assetInfoModal')?.addEventListener('click', e => {
+        if (e.target === document.getElementById('assetInfoModal')) closeAssetInfoModal();
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && document.getElementById('roadInfoModal')?.classList.contains('open')) {
+          closeRoadInfoModal();
+        }
+        if (e.key === 'Escape' && document.getElementById('segmentInfoModal')?.classList.contains('open')) {
+          closeSegmentInfoModal();
+        }
+        if (e.key === 'Escape' && document.getElementById('assetInfoModal')?.classList.contains('open')) {
+          closeAssetInfoModal();
+        }
+      });
+
       syncRoadsFromRows();
+      refreshRoadCodeLinks();
       initDemoRelations();
       refreshRoadSelects();
       refreshRoadActionCells();
