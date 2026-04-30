@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="az">
 
 <head>
@@ -897,14 +897,14 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      background: #f5f8fd;
+      background: #6b9ee6;
     }
 
     /* TH — 2 rows */
     th {
-      background: #f5f8fd;
-      border-right: 1px solid #ecf1f8;
-      border-bottom: 1px solid #d8e4f0;
+      background: #6b9ee6;
+      border-right: 1px solid #5580da;
+      border-bottom: 1px solid #5580da;
       vertical-align: top;
       position: relative;
       padding: 0;
@@ -947,7 +947,7 @@
     .th-label {
       font-size: 11px;
       font-weight: 700;
-      color: #5a6a7e;
+      color: #ffffff;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -955,17 +955,17 @@
     }
 
     #mainTable thead {
-      background: #e8eef8;
+      background: #6b9ee6;
     }
 
     #mainTable th {
-      background: #e8eef8;
-      border-right-color: #d2deed;
-      border-bottom-color: #c4d3e5;
+      background: #6b9ee6;
+      border-right-color: #5580da;
+      border-bottom-color: #5580da;
     }
 
     #mainTable .th-label {
-      color: #334155;
+      color: #ffffff;
       font-weight: 700;
     }
 
@@ -987,19 +987,19 @@
       justify-content: center;
       font-size: 15px;
       font-weight: 700;
-      color: #b0bec8;
+      color: rgba(255,255,255,.55);
       line-height: 1;
       padding: 0 0 2px;
       transition: background .12s, color .12s;
     }
 
     .sort-btn:hover {
-      background: #e5edf8;
-      color: #1a2b3c;
+      background: rgba(255,255,255,.18);
+      color: #fff;
     }
 
     .sort-btn.on {
-      color: #2563eb;
+      color: #fff;
     }
 
     .filt-btn {
@@ -1012,19 +1012,19 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #b0bec8;
+      color: rgba(255,255,255,.55);
       padding: 0;
       transition: background .12s, color .12s;
     }
 
     .filt-btn:hover {
-      background: #e5edf8;
-      color: #1a2b3c;
+      background: rgba(255,255,255,.18);
+      color: #fff;
     }
 
     .filt-btn.on {
-      color: #2563eb;
-      background: #dbeafe;
+      color: #fff;
+      background: rgba(255,255,255,.25);
     }
 
     .filt-btn svg {
@@ -1591,6 +1591,42 @@
       display: flex;
     }
 
+    /* sfp-inner: page mode → transparent wrapper */
+    #segFormPanel:not(.seg-as-modal) .sfp-inner {
+      display: contents;
+    }
+
+    /* seg-as-modal: overlay mode */
+    #segFormPanel.seg-as-modal {
+      position: fixed;
+      inset: 0;
+      flex: none;
+      border: none;
+      border-radius: 0;
+      background: rgba(15,23,42,.32);
+      z-index: 600;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    #segFormPanel.seg-as-modal .sfp-inner {
+      background: #fff;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 640px;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 24px 60px rgba(15,23,42,.2);
+      overflow: hidden;
+    }
+
+    #segFormPanel.seg-as-modal .fp-head {
+      padding: 14px 18px;
+      border-bottom: 1px solid #ecf1f8;
+    }
+
     /* ══ Road Segments Modal ══ */
     @keyframes rsOvIn  { from { opacity: 0; } to { opacity: 1; } }
     @keyframes rsCardIn { from { opacity: 0; transform: translateY(20px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
@@ -1692,6 +1728,36 @@
       font-size: 15px;
     }
 
+    .rs-new-seg-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      height: 34px;
+      padding: 0 13px;
+      border: none;
+      border-radius: 9px;
+      background: #2057d4;
+      color: #fff;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background .14s;
+    }
+
+    .rs-new-seg-btn:hover {
+      background: #1a47b8;
+    }
+
+    .rs-new-seg-btn svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.4;
+    }
+
     .rs-close-btn {
       width: 34px;
       height: 34px;
@@ -1722,10 +1788,10 @@
     }
 
     #roadSegsTable thead th {
-      background: #f8fafd;
+      background: #6b9ee6;
       font-size: 11px;
       font-weight: 600;
-      color: #64748b;
+      color: #ffffff;
       text-transform: uppercase;
       letter-spacing: .04em;
     }
@@ -2123,6 +2189,12 @@
 
     .fbtn-secondary:hover {
       background: #0284c7;
+    }
+
+    .fbtn:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+      pointer-events: none;
     }
 
     .fbtn svg {
@@ -2835,9 +2907,9 @@
     table thead,
     table thead th,
     .table-wrap table th {
-      background: #475569 !important;
-      border-right-color: #64748b !important;
-      border-bottom-color: #64748b !important;
+      background: #6b9ee6 !important;
+      border-right-color: #5580da !important;
+      border-bottom-color: #5580da !important;
     }
 
     .table-wrap table th .th-label {
@@ -2846,17 +2918,17 @@
 
     .sort-btn,
     .filt-btn {
-      color: #cbd5e1 !important;
+      color: rgba(255,255,255,.55) !important;
     }
 
     .sort-btn:hover,
     .filt-btn:hover {
-      background: #334155 !important;
+      background: rgba(255,255,255,.18) !important;
       color: #fff !important;
     }
 
     .filt-btn.on {
-      background: #1d4ed8 !important;
+      background: rgba(255,255,255,.25) !important;
       color: #fff !important;
     }
 
@@ -4573,6 +4645,159 @@
 
     </div><!-- /form-panel -->
 
+    <!-- ══ SEG FORM PANEL ══ -->
+    <div class="form-panel" id="segFormPanel">
+      <div class="sfp-inner">
+        <div class="fp-head">
+          <button class="fp-back-btn" id="segModalClose">
+            <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>Geri
+          </button>
+          <div class="fp-title-block">
+            <div class="fp-title" id="segModalTitle">Seqment əlavə et</div>
+            <div class="fp-subtitle" id="segModalSub">Addım 1 / 2 — Ümumi məlumatlar</div>
+          </div>
+        </div>
+        <div class="modal-stepper">
+          <div class="msub ms-active" id="msub1">
+            <div class="msub-c">1</div>
+            <div class="msub-l">Ümumi məlumatlar</div>
+          </div>
+          <div class="msub-conn"></div>
+          <div class="msub" id="msub2">
+            <div class="msub-c">2</div>
+            <div class="msub-l">Texniki parametrlər</div>
+          </div>
+        </div>
+        <div class="modal-body">
+          <!-- Sub-step 1 -->
+          <div class="mpane mp-active" id="sp1">
+            <div class="fgrid">
+              <div class="frow full">
+                <label>Seqment kodu <span class="fauto-tag">AUTO</span></label>
+                <input class="finput f-auto" id="sg_kod" readonly>
+              </div>
+              <div class="frow">
+                <label>Başlanğıc (km) <span class="req">*</span></label>
+                <input class="finput" id="sg_bas" type="number" step="0.1" placeholder="0.0">
+              </div>
+              <div class="frow">
+                <label>Son (km) <span class="req">*</span></label>
+                <input class="finput" id="sg_son" type="number" step="0.1" placeholder="12.5">
+              </div>
+              <div class="frow">
+                <label>Uzunluq (km) <span class="fauto-tag">AUTO</span></label>
+                <input class="finput f-auto" id="sg_uzun" readonly placeholder="Avtomatik">
+              </div>
+              <div class="frow">
+                <label>Texniki kateqoriya <span class="req">*</span></label>
+                <select class="fselect" id="sg_kat">
+                  <option value="">Seçin...</option>
+                  <option>I</option><option>II</option><option>III</option><option>IV</option><option>V</option>
+                </select>
+              </div>
+              <div class="frow">
+                <label>Örtük növü <span class="req">*</span></label>
+                <select class="fselect" id="sg_ortuk">
+                  <option value="">Seçin...</option>
+                  <option>Asfalt</option><option>Beton</option><option>Torpaq</option><option>Çınqıl</option><option>Daş döşəmə</option>
+                </select>
+              </div>
+              <div class="frow">
+                <label>Seqment statusu <span class="req">*</span></label>
+                <select class="fselect" id="sg_status">
+                  <option value="">Seçin...</option>
+                  <option>Qaralama</option><option>Aktiv</option><option>Ləğv olunmuş</option><option>Arxivləşdirilmiş</option>
+                </select>
+              </div>
+              <div class="frow full" style="margin-top:4px;">
+                <label>GİS centerline <span class="req">*</span></label>
+                <div class="gis-box">
+                  <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6l9-3 9 3M3 18l9 3 9-3"/></svg>
+                  Xəritədən seqment xəttini çəkin (Polyline)
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Sub-step 2 -->
+          <div class="mpane" id="sp2">
+            <div class="fgrid">
+              <div class="frow">
+                <label>Zolaq sayı</label>
+                <input class="finput" id="sg_zolaq" type="number" placeholder="Nümunə: 2">
+              </div>
+              <div class="frow">
+                <label>Hərəkət hissəsi eni (m)</label>
+                <input class="finput" id="sg_en" type="number" step="0.1" placeholder="Nümunə: 7.0">
+              </div>
+              <div class="frow">
+                <label>Çiyin eni (m)</label>
+                <input class="finput" id="sg_ciyin" type="number" step="0.1" placeholder="Nümunə: 1.5">
+              </div>
+              <div class="frow">
+                <label>Ayırıcı zolaq</label>
+                <select class="fselect" id="sg_ayir">
+                  <option value="">Seçin...</option><option>Var</option><option>Yox</option>
+                </select>
+              </div>
+              <div class="frow">
+                <label>Hesabi sürət (km/s)</label>
+                <input class="finput" id="sg_suret" type="number" placeholder="Nümunə: 110">
+              </div>
+              <div class="frow">
+                <label>İstismara verilmə tarixi</label>
+                <input class="finput" id="sg_tarix" type="date">
+              </div>
+              <div class="frow">
+                <label>Hüquqi status</label>
+                <select class="fselect" id="sg_huq">
+                  <option value="">Seçin...</option><option>Aktiv</option><option>Ləğv</option><option>Mübahisəli</option><option>Qeydiyyatsız</option>
+                </select>
+              </div>
+              <div class="frow full">
+                <label>Qeyd</label>
+                <textarea class="ftextarea" id="sg_qeyd" placeholder="Seqment haqqında əlavə texniki qeydlər..."></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="inline-list-panel" id="segAssetsPanel" style="display:none;">
+            <div class="inline-list-head">
+              <div class="inline-list-title">Aktivlər siyahısı</div>
+              <div class="inline-list-hint">Seqmentə bağlı aktivlər burada görünür</div>
+            </div>
+            <div class="inline-list-body">
+              <div id="segAssetList" class="seg-list"></div>
+              <div id="segAssetEmpty" class="seg-empty">
+                <svg viewBox="0 0 24 24">
+                  <path d="M3 3h18v18H3z" rx="2"/>
+                  <path d="M3 9h18M9 21V9"/>
+                </svg>
+                Hələ heç bir aktiv yaradılmayıb.<br>Seqmenti yadda saxladıqdan sonra "Aktiv əlavə et" düyməsindən istifadə edin.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="fbtn fbtn-ghost" id="segModalCancel">Ləğv et</button>
+          <div class="modal-foot-r">
+            <button class="fbtn fbtn-outline" id="segPrev" style="display:none;">
+              <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>Əvvəlki
+            </button>
+            <button class="fbtn fbtn-primary" id="segNext">
+              İrəli<svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <button class="fbtn fbtn-success" id="segSave" style="display:none;">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Yadda saxla
+            </button>
+            <button class="fbtn fbtn-secondary" id="segAddAssetAfterSave" disabled style="display:none;">
+              <svg viewBox="0 0 24 24">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>Aktiv əlavə et
+            </button>
+          </div>
+        </div>
+      </div><!-- /sfp-inner -->
+    </div><!-- /segFormPanel -->
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -4608,6 +4833,10 @@
         <div class="rs-count-pill">
           <span id="roadSegsCount">0</span> seqment
         </div>
+        <button class="rs-new-seg-btn" id="roadSegsNewBtn" title="Yeni seqment yarat">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Yeni seqment
+        </button>
         <button class="rs-close-btn" id="roadSegsClose" title="Bağla">
           <svg viewBox="0 0 24 24">
             <line x1="18" y1="6" x2="6" y2="18"/>
@@ -4659,6 +4888,10 @@
         <div class="rs-count-pill" style="color:#0891b2;background:#ecfeff;border-color:#a5f3fc;">
           <span id="segAssetsCount">0</span> aktiv
         </div>
+        <button class="rs-new-seg-btn" id="segAssetsNewBtn" title="Yeni aktiv yarat">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Yeni aktiv
+        </button>
         <button class="rs-close-btn" id="segAssetsClose" title="Bağla">
           <svg viewBox="0 0 24 24">
             <line x1="18" y1="6" x2="6" y2="18"/>
@@ -4688,187 +4921,7 @@
   </div>
 
   <!-- ══ SEGMENT MODAL ══ -->
-  <div class="modal-ov" id="segModal">
-    <div class="modal-box">
-      <div class="modal-head">
-        <div class="modal-title-block">
-          <div class="mh-title" id="segModalTitle">Seqment əlavə et</div>
-          <div class="mh-sub" id="segModalSub">Addım 1 / 2 — Ümumi məlumatlar</div>
-        </div>
-        <button class="modal-close-btn" id="segModalClose">
-          <svg viewBox="0 0 24 24">
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </button>
-      </div>
-      <div class="modal-stepper">
-        <div class="msub ms-active" id="msub1">
-          <div class="msub-c">1</div>
-          <div class="msub-l">Ümumi məlumatlar</div>
-        </div>
-        <div class="msub-conn"></div>
-        <div class="msub" id="msub2">
-          <div class="msub-c">2</div>
-          <div class="msub-l">Texniki parametrlər</div>
-        </div>
-      </div>
-      <div class="modal-body">
-        <!-- Sub-step 1 -->
-        <div class="mpane mp-active" id="sp1">
-          <div class="fgrid">
-            <div class="frow full">
-              <label>Seqment kodu <span class="fauto-tag">AUTO</span></label>
-              <input class="finput f-auto" id="sg_kod" readonly>
-            </div>
-            <div class="frow">
-              <label>Başlanğıc (km) <span class="req">*</span></label>
-              <input class="finput" id="sg_bas" type="number" step="0.1" placeholder="0.0">
-            </div>
-            <div class="frow">
-              <label>Son (km) <span class="req">*</span></label>
-              <input class="finput" id="sg_son" type="number" step="0.1" placeholder="12.5">
-            </div>
-            <div class="frow">
-              <label>Uzunluq (km) <span class="fauto-tag">AUTO</span></label>
-              <input class="finput f-auto" id="sg_uzun" readonly placeholder="Avtomatik">
-            </div>
-            <div class="frow">
-              <label>Texniki kateqoriya <span class="req">*</span></label>
-              <select class="fselect" id="sg_kat">
-                <option value="">Seçin...</option>
-                <option>I</option>
-                <option>II</option>
-                <option>III</option>
-                <option>IV</option>
-                <option>V</option>
-              </select>
-            </div>
-            <div class="frow">
-              <label>Örtük növü <span class="req">*</span></label>
-              <select class="fselect" id="sg_ortuk">
-                <option value="">Seçin...</option>
-                <option>Asfalt</option>
-                <option>Beton</option>
-                <option>Torpaq</option>
-                <option>Çınqıl</option>
-                <option>Daş döşəmə</option>
-              </select>
-            </div>
-            <div class="frow">
-              <label>Seqment statusu <span class="req">*</span></label>
-              <select class="fselect" id="sg_status">
-                <option value="">Seçin...</option>
-                <option>Qaralama</option>
-                <option>Aktiv</option>
-                <option>Ləğv olunmuş</option>
-                <option>Arxivləşdirilmiş</option>
-              </select>
-            </div>
-            <div class="frow full" style="margin-top:4px;">
-              <label>GİS centerline <span class="req">*</span></label>
-              <div class="gis-box">
-                <svg viewBox="0 0 24 24">
-                  <path d="M3 12h18M3 6l9-3 9 3M3 18l9 3 9-3" />
-                </svg>
-                Xəritədən seqment xəttini çəkin (Polyline)
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Sub-step 2 -->
-        <div class="mpane" id="sp2">
-          <div class="fgrid">
-            <div class="frow">
-              <label>Zolaq sayı</label>
-              <input class="finput" id="sg_zolaq" type="number" placeholder="Nümunə: 2">
-            </div>
-            <div class="frow">
-              <label>Hərəkət hissəsi eni (m)</label>
-              <input class="finput" id="sg_en" type="number" step="0.1" placeholder="Nümunə: 7.0">
-            </div>
-            <div class="frow">
-              <label>Çiyin eni (m)</label>
-              <input class="finput" id="sg_ciyin" type="number" step="0.1" placeholder="Nümunə: 1.5">
-            </div>
-            <div class="frow">
-              <label>Ayırıcı zolaq</label>
-              <select class="fselect" id="sg_ayir">
-                <option value="">Seçin...</option>
-                <option>Var</option>
-                <option>Yox</option>
-              </select>
-            </div>
-            <div class="frow">
-              <label>Hesabi sürət (km/s)</label>
-              <input class="finput" id="sg_suret" type="number" placeholder="Nümunə: 110">
-            </div>
-            <div class="frow">
-              <label>İstismara verilmə tarixi</label>
-              <input class="finput" id="sg_tarix" type="date">
-            </div>
-            <div class="frow">
-              <label>Hüquqi status</label>
-              <select class="fselect" id="sg_huq">
-                <option value="">Seçin...</option>
-                <option>Aktiv</option>
-                <option>Ləğv</option>
-                <option>Mübahisəli</option>
-                <option>Qeydiyyatsız</option>
-              </select>
-            </div>
-            <div class="frow full">
-              <label>Qeyd</label>
-              <textarea class="ftextarea" id="sg_qeyd"
-                placeholder="Seqment haqqında əlavə texniki qeydlər..."></textarea>
-            </div>
-          </div>
-        </div>
-        <div class="inline-list-panel" id="segAssetsPanel" style="display:none;">
-          <div class="inline-list-head">
-            <div class="inline-list-title">Aktivlər siyahısı</div>
-            <div class="inline-list-hint">Seqmentə bağlı aktivlər burada görünür</div>
-          </div>
-          <div class="inline-list-body">
-            <div id="segAssetList" class="seg-list"></div>
-            <div id="segAssetEmpty" class="seg-empty">
-              <svg viewBox="0 0 24 24">
-                <path d="M3 3h18v18H3z" rx="2" />
-                <path d="M3 9h18M9 21V9" />
-              </svg>
-              Hələ heç bir aktiv yaradılmayıb.<br>Seqmenti yadda saxladıqdan sonra "Aktiv əlavə et" düyməsindən istifadə edin.
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-foot">
-        <button class="fbtn fbtn-ghost" id="segModalCancel">Ləğv et</button>
-        <div class="modal-foot-r">
-          <button class="fbtn fbtn-outline" id="segPrev" style="display:none;">
-            <svg viewBox="0 0 24 24">
-              <path d="m15 18-6-6 6-6" />
-            </svg>Əvvəlki
-          </button>
-          <button class="fbtn fbtn-primary" id="segNext">
-            İrəli<svg viewBox="0 0 24 24">
-              <path d="m9 18 6-6-6-6" />
-            </svg>
-          </button>
-          <button class="fbtn fbtn-success" id="segSave" style="display:none;">
-            <svg viewBox="0 0 24 24">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>Yadda saxla
-          </button>
-          <button class="fbtn fbtn-secondary" id="segAddAssetAfterSave" style="display:none;">
-            <svg viewBox="0 0 24 24">
-              <line x1="12" y1="5" x2="12" y2="19" />
-              <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>Aktiv əlavə et
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- segModal moved to segFormPanel inside .main -->
 
   <!-- ══ ASSET MODAL ══ -->
   <div class="road-segs-ov" id="roadAssetsOv">
@@ -4892,6 +4945,10 @@
         <div class="rs-count-pill" style="color:#6d28d9;background:#f5f3ff;border-color:#ddd6fe;">
           <span id="roadAssetsCount">0</span> aktiv
         </div>
+        <button class="rs-new-seg-btn" id="roadAssetsNewSegBtn" title="Yeni seqment yarat">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Yeni seqment
+        </button>
         <button class="rs-close-btn" id="roadAssetsClose" title="Bağla">
           <svg viewBox="0 0 24 24">
             <line x1="18" y1="6" x2="6" y2="18"/>
@@ -4900,11 +4957,12 @@
         </button>
       </div>
       <div class="table-wrap" style="flex:1;overflow:auto;">
-        <table id="roadAssetsTable" style="min-width:820px;">
+        <table id="roadAssetsTable" style="min-width:940px;">
           <thead>
             <tr>
               <th class="th-nof" style="width:36px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">#</span></div></th>
               <th><div class="th-top"><span class="th-label">Aktiv kodu</span></div></th>
+              <th><div class="th-top"><span class="th-label">Seqment</span></div></th>
               <th><div class="th-top"><span class="th-label">Qrup</span></div></th>
               <th><div class="th-top"><span class="th-label">Növ</span></div></th>
               <th><div class="th-top"><span class="th-label">Tip</span></div></th>
@@ -6119,6 +6177,17 @@
       else clearForm();
       goStep(1);
       renderSegList();
+
+      function updateAddSegBtnState() {
+        const btn = document.getElementById('fpAddSegmentAfterSave');
+        if (!btn || btn.style.display === 'none') return;
+        const hasData = document.getElementById('f_ad')?.value.trim() && document.getElementById('f_indeks')?.value.trim();
+        btn.disabled = !fp.savedRoadCode && !hasData;
+      }
+      ['f_ad', 'f_indeks'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', updateAddSegBtnState);
+      });
     }
 
     function closeForm() {
@@ -6168,7 +6237,11 @@
       document.getElementById('fpNext').style.display = n < TOTAL_STEPS ? '' : 'none';
       document.getElementById('fpSave').style.display = n === TOTAL_STEPS ? '' : 'none';
       const addSegmentBtn = document.getElementById('fpAddSegmentAfterSave');
-      if (addSegmentBtn) addSegmentBtn.style.display = n === TOTAL_STEPS && fp.savedRoadCode ? '' : 'none';
+      if (addSegmentBtn) {
+        addSegmentBtn.style.display = n === TOTAL_STEPS ? '' : 'none';
+        const hasData = document.getElementById('f_ad')?.value.trim() && document.getElementById('f_indeks')?.value.trim();
+        addSegmentBtn.disabled = !fp.savedRoadCode && !hasData;
+      }
     }
 
     document.getElementById('fpNext').addEventListener('click', () => {
@@ -6208,7 +6281,7 @@
 
       if (type === 'new-segment') {
         if (typeof openSegModal === 'function') {
-          openSegModal(-1, 'global');
+          openSegModal(-1, 'global', true);
           const roadSelect = document.getElementById('sg_road');
           if (roadSelect) roadSelect.value = code;
         }
@@ -6323,7 +6396,8 @@
         ].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
       }
       goSegStep(1);
-      document.getElementById('segModal').classList.add('open');
+      document.querySelectorAll('.view-card').forEach(c => { c.classList.add('is-hidden'); c.style.display = ''; });
+      document.getElementById('segFormPanel').classList.add('visible');
     }
 
     function editSeg(i) { openSegModal(i); }
@@ -6344,10 +6418,23 @@
       document.getElementById('segPrev').style.display = n > 1 ? '' : 'none';
       document.getElementById('segNext').style.display = n < 2 ? '' : 'none';
       document.getElementById('segSave').style.display = n === 2 ? '' : 'none';
+      document.getElementById('segAddAssetAfterSave').style.display = n === 2 ? '' : 'none';
     }
 
     function closeSegModal() {
-      document.getElementById('segModal').classList.remove('open');
+      const sfp = document.getElementById('segFormPanel');
+      const wasModal = sfp.classList.contains('seg-as-modal');
+      sfp.classList.remove('visible', 'seg-as-modal');
+      if (!wasModal) {
+        if (fp._prevSegFormPanel) {
+          document.getElementById('formPanel').classList.add('visible');
+        } else {
+          const prevView = fp._prevSegView || activeView || 'segments';
+          const target = document.getElementById(prevView + 'View');
+          if (target) { target.classList.remove('is-hidden'); target.style.display = 'flex'; }
+        }
+      }
+      fp._prevSegFormPanel = false;
       if (window._roadSegsCode && typeof window._renderRoadSegsTable === 'function') {
         window._renderRoadSegsTable(window._roadSegsCode);
       }
@@ -6361,6 +6448,10 @@
     document.getElementById('msub2').addEventListener('click', () => goSegStep(2));
     document.getElementById('segModalClose').addEventListener('click', closeSegModal);
     document.getElementById('segModalCancel').addEventListener('click', closeSegModal);
+    document.getElementById('segFormPanel').addEventListener('click', e => {
+      const sfp = document.getElementById('segFormPanel');
+      if (sfp.classList.contains('seg-as-modal') && e.target === sfp) closeSegModal();
+    });
 
     /* auto-calc segment length */
     ['sg_bas', 'sg_son'].forEach(id => {
@@ -6541,9 +6632,6 @@
     });
 
     /* close modals on overlay click */
-    document.getElementById('segModal').addEventListener('click', e => {
-      if (e.target === document.getElementById('segModal')) closeSegModal();
-    });
     document.getElementById('assetModal').addEventListener('click', e => {
       if (e.target === document.getElementById('assetModal')) closeAssetModal();
     });
@@ -7182,11 +7270,9 @@
           if (ci === 5 || ci === 6 || ci === 7 || ci === 8) return 'select';
         }
         if (tableId === 'roadAssetsTable') {
-          if (ci === 1) return 'text';
-          if (ci === 2) return 'select';
-          if (ci === 3) return 'text';
-          if (ci === 4 || ci === 5 || ci === 7) return 'select';
-          if (ci === 6) return 'range';
+          if (ci === 1 || ci === 2 || ci === 4) return 'text';
+          if (ci === 3 || ci === 5 || ci === 6 || ci === 8) return 'select';
+          if (ci === 7) return 'range';
         }
         if (tableId === 'segmentsTable') {
           if (ci === 6 || ci === 7 || ci === 8) return 'select';
@@ -7783,7 +7869,10 @@
 
       const originalOpenForm = openForm;
       openForm = function (mode, rowEl) {
-        switchView('registry');
+        document.querySelectorAll('.view-card').forEach(card => {
+          card.classList.add('is-hidden');
+          card.style.display = '';
+        });
         originalOpenForm(mode, rowEl);
       };
 
@@ -7839,16 +7928,29 @@
         refreshRoadActionCells();
         fp.savedRoadCode = road.code;
         document.getElementById('f_kod').value = road.code;
-        document.getElementById('fpAddSegmentAfterSave').style.display = '';
+        const addSegBtn = document.getElementById('fpAddSegmentAfterSave');
+        addSegBtn.style.display = '';
+        addSegBtn.disabled = false;
         renderSegList();
       });
 
       document.getElementById('fpAddSegmentAfterSave').addEventListener('click', () => {
-        const roadCode = fp.savedRoadCode || document.getElementById('f_kod').value;
-        if (!roadCode) return;
-        openSegModal(-1, 'global');
-        const roadSelect = document.getElementById('sg_road');
-        if (roadSelect) roadSelect.value = roadCode;
+        if (!fp.savedRoadCode) {
+          const road = collectRoadForm();
+          if (!road.name || !road.index) {
+            alert('Yolu yadda saxlamaq üçün yol adı və indeksi daxil edilməlidir.');
+            return;
+          }
+          addRoadRecord(road);
+          fp.mode = 'edit';
+          fp.editRow = road.row || roadByCode(road.code)?.row || null;
+          fp.savedRoadCode = road.code;
+          document.getElementById('f_kod').value = road.code;
+          document.getElementById('fpAddSegmentAfterSave').disabled = false;
+          renderSegList();
+        }
+        if (!fp.savedRoadCode) return;
+        openSegModal(-1, 'nested');
       });
 
       function selectedRoadName(code) {
@@ -7881,6 +7983,23 @@
         return true;
       }
 
+      function updateSegAssetBtnState() {
+        const btn = document.getElementById('segAddAssetAfterSave');
+        if (!btn) return;
+        if (fp.lastSavedSegmentCode) { btn.disabled = false; return; }
+        const ctx = fp.segContext || 'nested';
+        const fields = ['sg_bas', 'sg_son', 'sg_kat', 'sg_ortuk', 'sg_status'];
+        if (ctx === 'global') fields.unshift('sg_road');
+        const hasData = fields.every(id => String(document.getElementById(id)?.value || '').trim());
+        btn.disabled = !hasData;
+      }
+
+      const segInputIds = ['sg_bas', 'sg_son', 'sg_kat', 'sg_ortuk', 'sg_status', 'sg_road'];
+      segInputIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', updateSegAssetBtnState);
+      });
+
       function setSegmentModalContext(context) {
         const global = context === 'global';
         document.getElementById('sgRoadSelectRow').style.display = global ? '' : 'none';
@@ -7890,7 +8009,7 @@
           : 'Addım 1 / 2 — Ümumi məlumatlar';
       }
 
-      openSegModal = function (idx, context) {
+      openSegModal = function (idx, context, asModal) {
         const ctx = context || (activeView === 'segments' ? 'global' : 'nested');
         fp.segContext = ctx;
         fp.editSegIdx = ctx === 'nested' ? idx : -1;
@@ -7899,7 +8018,7 @@
         fp.lastSavedSegmentCode = '';
         fp.lastSavedSegmentContext = '';
         fp.lastSavedSegmentIndex = -1;
-        document.getElementById('segAddAssetAfterSave').style.display = 'none';
+        document.getElementById('segAddAssetAfterSave').disabled = true;
         refreshRoadSelects();
         setSegmentModalContext(ctx);
         const isEdit = idx >= 0;
@@ -7926,7 +8045,7 @@
           fp.lastSavedSegmentCode = s.code;
           fp.lastSavedSegmentContext = ctx;
           fp.lastSavedSegmentIndex = idx;
-          document.getElementById('segAddAssetAfterSave').style.display = '';
+          document.getElementById('segAddAssetAfterSave').disabled = false;
         } else {
           document.getElementById('sg_kod').value = nextCode('SEG', segmentsData.concat(fp.segments), segmentsData.length + fp.segments.length);
           if (ctx === 'global') document.getElementById('sg_road').value = '';
@@ -7937,7 +8056,20 @@
         goSegStep(1);
         setSegmentModalContext(ctx);
         renderSegAssetList();
-        document.getElementById('segModal').classList.add('open');
+        const sfp = document.getElementById('segFormPanel');
+        if (ctx === 'nested' || asModal) {
+          sfp.classList.add('seg-as-modal');
+          fp._prevSegFormPanel = false;
+          fp._prevSegView = activeView;
+        } else {
+          sfp.classList.remove('seg-as-modal');
+          fp._prevSegView = activeView;
+          fp._prevSegFormPanel = document.getElementById('formPanel').classList.contains('visible');
+          document.getElementById('formPanel').classList.remove('visible');
+          document.querySelectorAll('.view-card').forEach(c => { c.classList.add('is-hidden'); c.style.display = ''; });
+        }
+        sfp.classList.add('visible');
+        updateSegAssetBtnState();
       };
       editSeg = function (i) { openSegModal(i, 'nested'); };
 
@@ -8000,7 +8132,8 @@
         fp.lastSavedSegmentCode = seg.code;
         fp.lastSavedSegmentContext = ctx;
         fp.lastSavedSegmentIndex = savedIndex;
-        document.getElementById('segAddAssetAfterSave').style.display = '';
+        const addAssetBtn = document.getElementById('segAddAssetAfterSave');
+        addAssetBtn.disabled = false;
         populateAssetSegmentSelect();
         renderSegAssetList();
       });
@@ -8298,7 +8431,7 @@
         document.querySelectorAll('#roadAssetsTable .th-bot').forEach(bot => { bot.style.display = 'block'; });
         ensureFilterClearButtons('#roadAssetsTable', () => applyDomTable('roadAssetsTable', roadAssetTableState, 'assets'));
         if (!assets.length) {
-          tbody.innerHTML = `<tr><td colspan="9" class="empty-cell">Bu yol üzrə aktiv yoxdur.</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="10" class="empty-cell">Bu yol üzrə aktiv yoxdur.</td></tr>`;
           return;
         }
         tbody.innerHTML = assets.map((a, i) => {
@@ -8306,6 +8439,7 @@
           return `<tr>
             <td class="td-num">${i + 1}</td>
             <td class="td-code">${esc(a.code)}</td>
+            <td class="td-code" style="cursor:pointer;color:#2563eb;text-decoration:underline;" data-seg-nav="${a.segmentCode||''}">${esc(a.segmentCode||'-')}</td>
             <td>${esc(a.grup || '-')}</td>
             <td>${esc(a.nov || '-')}</td>
             <td>${esc(a.tip || '-')}</td>
@@ -8318,14 +8452,41 @@
             </div></div></div></td>
           </tr>`;
         }).join('');
-        setSelectOptions('roadAssetsTable', 2, assets.map(a => a.grup || '-'));
-        setSelectOptions('roadAssetsTable', 4, assets.map(a => a.tip || '-'));
-        setSelectOptions('roadAssetsTable', 5, assets.map(a => a.gis_tip || '-'));
-        setSelectOptions('roadAssetsTable', 7, assets.map(a => a.status || '-'));
+        setSelectOptions('roadAssetsTable', 3, assets.map(a => a.grup || '-'));
+        setSelectOptions('roadAssetsTable', 5, assets.map(a => a.tip || '-'));
+        setSelectOptions('roadAssetsTable', 6, assets.map(a => a.gis_tip || '-'));
+        setSelectOptions('roadAssetsTable', 8, assets.map(a => a.status || '-'));
         applyDomTable('roadAssetsTable', roadAssetTableState, 'assets');
       }
 
       document.getElementById('roadAssetsClose')?.addEventListener('click', closeRoadAssetsPanel);
+      document.getElementById('roadAssetsNewSegBtn')?.addEventListener('click', () => {
+        openSegModal(-1, 'global', true);
+        const roadSelect = document.getElementById('sg_road');
+        if (roadSelect && currentRoadAssetsCode) roadSelect.value = currentRoadAssetsCode;
+      });
+      document.getElementById('roadAssetsBody')?.addEventListener('click', e => {
+        const segNav = e.target.closest('[data-seg-nav]');
+        if (segNav) {
+          const segCode = segNav.dataset.segNav;
+          if (!segCode) return;
+          const segIdx = segmentsData.findIndex(s => s.code === segCode);
+          closeRoadAssetsPanel();
+          openSegAssetsPanel(segCode, segIdx);
+          return;
+        }
+        const editBtn = e.target.closest('[data-spa-edit]');
+        const delBtn  = e.target.closest('[data-spa-del]');
+        if (editBtn) { openGlobalAssetModal(parseInt(editBtn.dataset.spaEdit,10)); return; }
+        if (delBtn) {
+          if (!confirm('Bu aktivi silmək istədiyinizə əminsiniz?')) return;
+          const idx = parseInt(delBtn.dataset.spaDel,10);
+          const code = assetsData[idx]?.code;
+          assetsData.splice(idx,1);
+          renderAssetTable();
+          renderRoadAssetsTable(currentRoadAssetsCode);
+        }
+      });
       document.getElementById('roadAssetsBack')?.addEventListener('click', () => {
         closeRoadAssetsPanel();
         switchView(currentRoadAssetsOrigin === 'registry' ? 'registry' : 'roads');
@@ -8383,6 +8544,9 @@
       }
 
       document.getElementById('segAssetsClose').addEventListener('click', closeSegAssetsPanel);
+      document.getElementById('segAssetsNewBtn').addEventListener('click', () => {
+        openGlobalAssetModal(-1, currentSegAssetsCode);
+      });
       document.getElementById('segAssetsBack').addEventListener('click', () => {
         closeSegAssetsPanel();
         switchView('segments');
@@ -8459,6 +8623,12 @@
 
       window._renderRoadSegsTable = renderRoadSegsTable;
 
+      document.getElementById('roadSegsNewBtn').addEventListener('click', () => {
+        openSegModal(-1, 'global', true);
+        const roadSelect = document.getElementById('sg_road');
+        if (roadSelect && currentRoadSegsCode) roadSelect.value = currentRoadSegsCode;
+      });
+
       document.getElementById('roadSegsClose').addEventListener('click', closeRoadSegsPanel);
       document.getElementById('roadSegsBack').addEventListener('click', () => {
         closeRoadSegsPanel();
@@ -8474,7 +8644,7 @@
         const newAssetBtn = e.target.closest('[data-rsp-newasset]');
         const assetCountBtn = e.target.closest('[data-rsp-assetcount]');
         if (editBtn) {
-          openSegModal(parseInt(editBtn.dataset.rspEdit, 10), 'global');
+          openSegModal(parseInt(editBtn.dataset.rspEdit, 10), 'global', true);
           return;
         }
         if (delBtn) {
