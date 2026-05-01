@@ -3968,6 +3968,37 @@
       width: 1px; align-self: stretch;
       background: #d8e4f0; margin: 0 6px; flex-shrink: 0;
     }
+    .asset-dict-preview {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid #d8e4f0;
+      border-radius: 8px;
+      background: #f8fbff;
+    }
+    .asset-dict-preview-item {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .asset-dict-preview-item span {
+      font-size: 10px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .asset-dict-preview-item strong {
+      min-height: 18px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #1a2b3c;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
     .sq-names-btn {
       background: #2563eb !important;
       border-color: #2563eb !important;
@@ -7176,34 +7207,106 @@
       'Torpaq və zonalar': [{ n: 'Təhkim zolağı', t: 'Seqment atributu', g: 'Sahə' }, { n: 'Mühafizə zolağı', t: 'Seqment atributu', g: 'Sahə' }],
     };
 
-    function onAssetGroupChange() {
-      const grup = document.getElementById('ac_grup').value;
-      const novSel = document.getElementById('ac_nov');
-      novSel.innerHTML = '<option value="">Seçin...</option>';
-      document.getElementById('ac_tip').value = '';
-      document.getElementById('ac_gis_tip').value = '';
-      document.getElementById('ac_pasport').value = '';
-      if (grup && assetGroupMap[grup]) {
-        assetGroupMap[grup].forEach(item => {
-          const opt = document.createElement('option');
-          opt.value = item.n; opt.textContent = item.n;
-          novSel.appendChild(opt);
-        });
-      }
+    function assetEsc(value) {
+      return String(value ?? '').replace(/[&<>"']/g, ch => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[ch]));
     }
 
-    function onAssetTypeChange() {
-      const grup = document.getElementById('ac_grup').value;
-      const nov = document.getElementById('ac_nov').value;
-      if (grup && nov && assetGroupMap[grup]) {
-        const item = assetGroupMap[grup].find(x => x.n === nov);
-        if (item) {
-          document.getElementById('ac_tip').value = item.t;
-          document.getElementById('ac_gis_tip').value = item.g;
-          document.getElementById('ac_pasport').value = item.t === 'Pasportlaşdırılan' ? 'Bəli' : 'Xeyr';
-        }
-      }
+    function fallbackAssetSoraqcalar() {
+      let i = 0;
+      return Object.entries(assetGroupMap).flatMap(([groupName, items]) =>
+        items.map(item => ({
+          id: 'fallback-' + (++i),
+          name: item.n,
+          groupName,
+          typeName: item.t,
+          gisName: item.g,
+          status: 'active',
+        }))
+      );
     }
+
+    function assetSoraqcaList() {
+      if (typeof window.getAssetSoraqcalar === 'function') return window.getAssetSoraqcalar();
+      return fallbackAssetSoraqcalar();
+    }
+
+    function findAssetSoraqca(value, asset) {
+      const list = assetSoraqcaList();
+      const strValue = String(value || '');
+      return list.find(item => String(item.id) === strValue)
+        || list.find(item => asset && item.name === asset.nov && item.groupName === asset.grup)
+        || list.find(item => asset && item.name === asset.nov)
+        || null;
+    }
+
+    function setAssetSoraqcaFields(item) {
+      const values = {
+        ac_grup: item?.groupName || '',
+        ac_nov: item?.name || '',
+        ac_tip: item?.typeName || '',
+        ac_gis_tip: item?.gisName || '',
+        ac_pasport: item?.typeName === 'Pasportlaşdırılan' ? 'Bəli' : (item ? 'Xeyr' : ''),
+      };
+      Object.entries(values).forEach(([id, value]) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (el.tagName === 'SELECT') {
+          el.innerHTML = value ? `<option value="${assetEsc(value)}">${assetEsc(value)}</option>` : '<option value=""></option>';
+        }
+        el.value = value;
+      });
+      [
+        ['ac_grup_text', values.ac_grup],
+        ['ac_nov_text', values.ac_nov],
+        ['ac_tip_text', values.ac_tip],
+        ['ac_gis_tip_text', values.ac_gis_tip],
+      ].forEach(([id, value]) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value || '-';
+      });
+    }
+
+    function populateAssetSoraqcaSelect(selectedValue) {
+      const select = document.getElementById('ac_soraqca');
+      if (!select) return;
+      const selected = selectedValue !== undefined ? String(selectedValue || '') : select.value;
+      const list = assetSoraqcaList();
+      select.innerHTML = '<option value="">Soraqça seçin...</option>' + list.map(item =>
+        `<option value="${assetEsc(item.id)}">${assetEsc(item.name)}</option>`
+      ).join('');
+      if (selected && list.some(item => String(item.id) === selected)) select.value = selected;
+    }
+
+    function onAssetSoraqcaChange() {
+      const select = document.getElementById('ac_soraqca');
+      const item = findAssetSoraqca(select?.value);
+      setAssetSoraqcaFields(item);
+    }
+
+    function setAssetSoraqcaFromAsset(asset) {
+      const item = findAssetSoraqca(asset?.soraqcaId, asset);
+      populateAssetSoraqcaSelect(item?.id || asset?.soraqcaId || '');
+      const select = document.getElementById('ac_soraqca');
+      if (select) select.value = item?.id || '';
+      setAssetSoraqcaFields(item || (asset ? {
+        name: asset.nov || '',
+        groupName: asset.grup || '',
+        typeName: asset.tip || '',
+        gisName: asset.gis_tip || '',
+      } : null));
+    }
+
+    function resetAssetSoraqca() {
+      populateAssetSoraqcaSelect('');
+      const select = document.getElementById('ac_soraqca');
+      if (select) select.value = '';
+      setAssetSoraqcaFields(null);
+    }
+
+    function onAssetGroupChange() { onAssetSoraqcaChange(); }
+    function onAssetTypeChange() { onAssetSoraqcaChange(); }
 
     function openAssetModal(segIdx) {
       fp.currentSegForAsset = segIdx;
@@ -7212,10 +7315,10 @@
       const newCode = 'ACT-2026-' + String(assetCounter++).padStart(5, '0');
       document.getElementById('ac_kod').value = newCode;
       document.getElementById('ac_seg').value = fp.segments[segIdx]?.code || '';
-      ['ac_grup', 'ac_nov', 'ac_tip', 'ac_gis_tip', 'ac_pasport',
+      ['ac_soraqca', 'ac_grup', 'ac_nov', 'ac_tip', 'ac_gis_tip', 'ac_pasport',
         'ac_km', 'ac_lat', 'ac_lon', 'ac_status', 'ac_huq', 'ac_idarə', 'ac_tarix', 'ac_veziyyet', 'ac_qeyd'
       ].forEach(id => { const el = document.getElementById(id); if (el && id !== 'ac_kod' && id !== 'ac_seg') el.value = ''; });
-      onAssetGroupChange();
+      resetAssetSoraqca();
       goAssetStep(1);
       document.getElementById('assetModal').classList.add('open');
     }
@@ -7226,10 +7329,7 @@
       const a = fp.segments[segIdx].assets[assetIdx];
       document.getElementById('ac_kod').value = a.code;
       document.getElementById('ac_seg').value = fp.segments[segIdx].code;
-      document.getElementById('ac_grup').value = a.grup;
-      onAssetGroupChange();
-      document.getElementById('ac_nov').value = a.nov;
-      onAssetTypeChange();
+      setAssetSoraqcaFromAsset(a);
       document.getElementById('ac_km').value = a.km || '';
       document.getElementById('ac_lat').value = a.lat || '';
       document.getElementById('ac_lon').value = a.lon || '';
@@ -7278,8 +7378,14 @@
     document.getElementById('assetModalCancel').addEventListener('click', closeAssetModal);
 
     document.getElementById('assetSave').addEventListener('click', () => {
+      if (!document.getElementById('ac_nov').value) {
+        alert('Aktiv soraqçası seçilməlidir.');
+        goAssetStep(1);
+        return;
+      }
       const asset = {
         code: document.getElementById('ac_kod').value,
+        soraqcaId: document.getElementById('ac_soraqca')?.value || '',
         grup: document.getElementById('ac_grup').value,
         nov: document.getElementById('ac_nov').value,
         tip: document.getElementById('ac_tip').value,
@@ -7604,6 +7710,30 @@
     </div>`);
 
       const originalAcSegRow = document.getElementById('ac_seg').closest('.frow');
+      const acCodeRow = document.getElementById('ac_kod')?.closest('.frow');
+      const acGroupRow = document.getElementById('ac_grup')?.closest('.frow');
+      if (acCodeRow && acGroupRow && !document.getElementById('ac_soraqca')) {
+        acCodeRow.insertAdjacentHTML('afterend', `
+          <div class="frow" id="acSoraqcaRow">
+            <label>Aktiv soraqçası <span class="req">*</span></label>
+            <select class="fselect" id="ac_soraqca" onchange="onAssetSoraqcaChange()">
+              <option value="">Soraqça seçin...</option>
+            </select>
+          </div>
+          <div class="frow full" id="acSoraqcaInfoRow">
+            <label>Soraqça məlumatları <span class="fauto-tag">AUTO</span></label>
+            <div class="asset-dict-preview" id="ac_soraqca_preview">
+              <div class="asset-dict-preview-item"><span>Qrup</span><strong id="ac_grup_text">-</strong></div>
+              <div class="asset-dict-preview-item"><span>Soraqça</span><strong id="ac_nov_text">-</strong></div>
+              <div class="asset-dict-preview-item"><span>Növ</span><strong id="ac_tip_text">-</strong></div>
+              <div class="asset-dict-preview-item"><span>GİS tipi</span><strong id="ac_gis_tip_text">-</strong></div>
+            </div>
+          </div>`);
+      }
+      ['ac_grup', 'ac_nov', 'ac_tip', 'ac_gis_tip', 'ac_pasport'].forEach(id => {
+        const row = document.getElementById(id)?.closest('.frow');
+        if (row) row.style.display = 'none';
+      });
       const navItems = Array.from(document.querySelectorAll('.sb-body .nav-item'));
       const viewNames = ['registry', 'roads', 'segments', 'assets', 'soraqcalar'];
       navItems.slice(0, 5).forEach((item, idx) => {
@@ -9603,10 +9733,10 @@
         document.getElementById('assetModalTitle').textContent = 'Aktiv əlavə et';
         document.getElementById('ac_kod').value = nextCode('ACT', assetsData, assetsData.length);
         document.getElementById('ac_seg').value = fp.segments[segIdx]?.code || '';
-        ['ac_grup', 'ac_nov', 'ac_tip', 'ac_gis_tip', 'ac_pasport',
+        ['ac_soraqca', 'ac_grup', 'ac_nov', 'ac_tip', 'ac_gis_tip', 'ac_pasport',
           'ac_km', 'ac_lat', 'ac_lon', 'ac_status', 'ac_huq', 'ac_idarə', 'ac_tarix', 'ac_veziyyet', 'ac_qeyd'
         ].forEach(id => { const el = document.getElementById(id); if (el && id !== 'ac_kod' && id !== 'ac_seg') el.value = ''; });
-        onAssetGroupChange();
+        resetAssetSoraqca();
         goAssetStep(1);
         document.getElementById('assetModal').classList.add('open');
       };
@@ -9626,10 +9756,7 @@
           document.getElementById('ac_road').value = a.roadCode || '';
           populateAssetSegmentSelect();
           document.getElementById('ac_segment_select').value = a.segmentCode || '';
-          document.getElementById('ac_grup').value = a.grup || '';
-          onAssetGroupChange();
-          document.getElementById('ac_nov').value = a.nov || '';
-          onAssetTypeChange();
+          setAssetSoraqcaFromAsset(a);
           document.getElementById('ac_km').value = a.km || '';
           document.getElementById('ac_lat').value = a.lat || '';
           document.getElementById('ac_lon').value = a.lon || '';
@@ -9641,14 +9768,14 @@
           document.getElementById('ac_qeyd').value = a.qeyd || '';
         } else {
           document.getElementById('ac_kod').value = nextCode('ACT', assetsData, assetsData.length);
-          ['ac_grup', 'ac_nov', 'ac_tip', 'ac_gis_tip', 'ac_pasport',
+          ['ac_soraqca', 'ac_grup', 'ac_nov', 'ac_tip', 'ac_gis_tip', 'ac_pasport',
             'ac_km', 'ac_lat', 'ac_lon', 'ac_status', 'ac_huq', 'ac_idarə', 'ac_tarix', 'ac_veziyyet', 'ac_qeyd'
           ].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
           const seg = segmentsData.find(s => s.code === segmentCode);
           document.getElementById('ac_road').value = seg?.roadCode || '';
           populateAssetSegmentSelect();
           document.getElementById('ac_segment_select').value = segmentCode || '';
-          onAssetGroupChange();
+          resetAssetSoraqca();
         }
         goAssetStep(1);
         document.getElementById('assetModal').classList.add('open');
@@ -9664,10 +9791,7 @@
         const a = fp.segments[segIdx].assets[assetIdx];
         document.getElementById('ac_kod').value = a.code;
         document.getElementById('ac_seg').value = fp.segments[segIdx].code;
-        document.getElementById('ac_grup').value = a.grup;
-        onAssetGroupChange();
-        document.getElementById('ac_nov').value = a.nov;
-        onAssetTypeChange();
+        setAssetSoraqcaFromAsset(a);
         document.getElementById('ac_km').value = a.km || '';
         document.getElementById('ac_lat').value = a.lat || '';
         document.getElementById('ac_lon').value = a.lon || '';
@@ -9701,11 +9825,17 @@
           alert('Aktiv əlavə etmək üçün əvvəl seqmenti yadda saxlayın.');
           return;
         }
+        if (!document.getElementById('ac_nov').value) {
+          alert('Aktiv soraqçası seçilməlidir.');
+          goAssetStep(1);
+          return;
+        }
         const previousAsset = global && globalAssetEditIdx >= 0 ? assetsData[globalAssetEditIdx] : null;
         const asset = {
           code: document.getElementById('ac_kod').value,
           roadCode,
           segmentCode,
+          soraqcaId: document.getElementById('ac_soraqca')?.value || '',
           grup: document.getElementById('ac_grup').value,
           nov: document.getElementById('ac_nov').value,
           tip: document.getElementById('ac_tip').value,
@@ -10430,6 +10560,23 @@
           document.getElementById('sdCount-types')  && (document.getElementById('sdCount-types').textContent  = sqTypes.length  + ' qeyd');
           document.getElementById('sdCount-gis')    && (document.getElementById('sdCount-gis').textContent    = sqGis.length    + ' qeyd');
         }
+        window.getAssetSoraqcalar = function() {
+          return sqNames
+            .filter(n => n.status === 'active')
+            .map(n => {
+              const grp = sqGroups.find(g => g.id === n.groupId);
+              const typ = sqTypes.find(t => t.id === n.typeId);
+              const gis = sqGis.find(g => g.id === n.gisId);
+              return {
+                id: n.id,
+                name: n.name,
+                groupName: grp ? grp.name : '',
+                typeName: typ ? typ.name : '',
+                gisName: gis ? gis.name : '',
+                status: n.status,
+              };
+            });
+        };
 
         /* ─── RENDER TABLE ─── */
         function renderSubDictTable(key) {
