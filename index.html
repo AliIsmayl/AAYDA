@@ -3841,6 +3841,168 @@
       white-space: normal;
       line-height: 1.5;
     }
+
+    /* ══ SORAQÇALAR MODULE ══ */
+    .sq-tabs {
+      display: flex;
+      gap: 2px;
+      padding: 12px 16px 0;
+      border-bottom: 1px solid #d8e4f0;
+      background: #fff;
+      flex-shrink: 0;
+    }
+    .sq-tab {
+      padding: 7px 16px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #6b7a8d;
+      border: 1px solid transparent;
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      background: transparent;
+      font-family: inherit;
+      transition: color .15s, background .15s;
+    }
+    .sq-tab:hover { color: #2563eb; background: #f0f5ff; }
+    .sq-tab.active {
+      color: #2563eb;
+      background: #fff;
+      border-color: #d8e4f0;
+      border-bottom-color: #fff;
+      margin-bottom: -1px;
+    }
+    .sq-tab-pane { display: none; flex: 1; flex-direction: column; min-height: 0; }
+    .sq-tab-pane.active { display: flex; }
+    .sq-filter-bar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding: 10px 16px;
+      background: #f8fafc;
+      border-bottom: 1px solid #ecf1f8;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+    .sq-filter-bar .fselect { height: 34px; font-size: 12.5px; min-width: 150px; }
+    .sq-filter-bar .finput  { height: 34px; font-size: 12.5px; min-width: 200px; flex: 1; }
+    .sq-reset-btn {
+      height: 34px;
+      padding: 0 13px;
+      border-radius: 8px;
+      border: 1px solid #d8e4f0;
+      background: #fff;
+      color: #64748b;
+      font-size: 12px;
+      font-family: inherit;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .sq-reset-btn:hover { background: #f1f5f9; border-color: #b0c4de; }
+    .sq-reset-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .sq-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 60px 20px;
+      color: #94a3b8;
+      flex: 1;
+    }
+    .sq-placeholder svg { width: 44px; height: 44px; opacity: .3; }
+    .sq-placeholder p { font-size: 13px; }
+    .sq-subdict-bar {
+      display: flex;
+      gap: 10px;
+      padding: 14px 16px;
+      border-bottom: 1px solid #d8e4f0;
+      background: #f8fafc;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+    .sq-subdict-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border: 1.5px solid #d8e4f0;
+      border-radius: 10px;
+      background: #fff;
+      cursor: pointer;
+      font-family: inherit;
+      transition: border-color .15s, background .15s, box-shadow .15s;
+      min-width: 150px;
+    }
+    .sq-subdict-btn:hover { border-color: #93c5fd; background: #f0f7ff; }
+    .sq-subdict-btn.active {
+      border-color: #2563eb;
+      background: #eff6ff;
+      box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+    }
+    .sq-sdb-icon {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: #e8f0fe; display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+    }
+    .sq-subdict-btn.active .sq-sdb-icon { background: #dbeafe; }
+    .sq-sdb-icon svg { width: 16px; height: 16px; stroke: #2563eb; fill: none; stroke-width: 2; }
+    .sq-sdb-body { display: flex; flex-direction: column; gap: 1px; text-align: left; }
+    .sq-sdb-label { font-size: 12.5px; font-weight: 600; color: #1a2b3c; }
+    .sq-subdict-btn.active .sq-sdb-label { color: #2563eb; }
+    .sq-sdb-count { font-size: 11px; color: #94a3b8; }
+    .sq-subdict-btn.active .sq-sdb-count { color: #60a5fa; }
+    #soraqcalarView { flex-direction: column; }
+    .sq-sdb-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .sq-sdb-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+    .sq-sdb-actions .sq-reset-btn { height: 36px; }
+    .sq-sdb-sep {
+      width: 1px; align-self: stretch;
+      background: #d8e4f0; margin: 0 6px; flex-shrink: 0;
+    }
+    .sq-names-btn {
+      background: #2563eb !important;
+      border-color: #2563eb !important;
+    }
+    .sq-names-btn .sq-sdb-icon { background: rgba(255,255,255,.18) !important; }
+    .sq-names-btn .sq-sdb-label { color: #fff !important; }
+    .sq-names-btn .sq-sdb-count { color: rgba(255,255,255,.72) !important; }
+    .sq-names-btn:hover { background: #1d4ed8 !important; border-color: #1d4ed8 !important; }
+    .sq-names-btn.active { background: #1d4ed8 !important; border-color: #1a45c4 !important; }
+    #sqNewActiveModal .modal-box { max-width: 560px; }
+    .sna-modal-head-icon {
+      width: 40px; height: 40px; border-radius: 11px;
+      background: linear-gradient(135deg,#2563eb,#3b82f6);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .sna-modal-head-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; }
+    #sqNewActiveModal .modal-head { background: #f8fbff; border-bottom: 1px solid #e2eaf6; padding: 16px 20px; gap: 13px; }
+    #sqNewActiveModal .mh-title { font-size: 15px; font-weight: 700; }
+    #sqNewActiveModal .mh-sub { font-size: 12px; margin-top: 2px; }
+    #sqNewActiveModal .modal-body { padding: 20px; display: flex; flex-direction: column; gap: 16px; overflow-y: auto; }
+    .sna-field { display: flex; flex-direction: column; gap: 5px; }
+    .sna-field label { font-size: 12px; font-weight: 600; color: #475569; letter-spacing: .01em; }
+    .sna-field label .req { color: #ef4444; margin-left: 2px; }
+    .sna-field .finput, .sna-field .fselect { width: 100%; }
+    .sna-divider {
+      display: flex; align-items: center; gap: 10px; margin: 2px 0;
+    }
+    .sna-divider-label {
+      font-size: 11px; font-weight: 700; color: #94a3b8; letter-spacing: .06em;
+      text-transform: uppercase; white-space: nowrap;
+    }
+    .sna-divider-line { flex: 1; height: 1px; background: #e8eef6; }
+    .sna-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    #sqNewActiveModal .modal-foot { padding: 14px 20px; justify-content: flex-end; gap: 10px; }
+    #sqNewActiveModal .modal-foot .fbtn { min-width: 100px; }
   </style>
 </head>
 
@@ -3895,6 +4057,20 @@
             d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
         </svg>
         <span class="ni-label">Aktivlər</span>
+      </a>
+    </div>
+
+    <div class="sb-divider"></div>
+    <div class="sb-body">
+      <div class="nav-group-title">Soraqçalar</div>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+          <line x1="9" y1="8" x2="15" y2="8"/>
+          <line x1="9" y1="12" x2="15" y2="12"/>
+        </svg>
+        <span class="ni-label">Soraqçalar</span>
       </a>
     </div>
 
@@ -7271,6 +7447,91 @@
     </div>
   </div>`);
 
+      document.getElementById('assetsView').insertAdjacentHTML('afterend', `
+  <div class="table-card view-card is-hidden" id="soraqcalarView">
+    <div class="tc-head">
+      <div class="tc-title">
+        <h2>Soraqçalar</h2>
+        <span class="tc-badge">Master data idarəetmə</span>
+      </div>
+    </div>
+    <div class="sq-tabs">
+      <button class="sq-tab active" data-sq-tab="assets" type="button">Aktivlər</button>
+      <button class="sq-tab" data-sq-tab="roads" type="button">Yollar</button>
+      <button class="sq-tab" data-sq-tab="segments" type="button">Seqmentlər</button>
+      <button class="sq-tab" data-sq-tab="passports" type="button">Pasportlar</button>
+      <button class="sq-tab" data-sq-tab="documents" type="button">Sənədlər</button>
+    </div>
+    <div class="sq-tab-pane active" id="sqPane-assets">
+      <div class="sq-subdict-bar">
+        <div class="sq-sdb-left">
+          <button class="sq-subdict-btn active" data-subdict="groups" type="button">
+            <div class="sq-sdb-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 10h16M4 14h10M4 18h7"/></svg></div>
+            <div class="sq-sdb-body">
+              <div class="sq-sdb-label">Qrup</div>
+              <div class="sq-sdb-count" id="sdCount-groups">9 qeyd</div>
+            </div>
+          </button>
+          <button class="sq-subdict-btn" data-subdict="types" type="button">
+            <div class="sq-sdb-icon"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg></div>
+            <div class="sq-sdb-body">
+              <div class="sq-sdb-label">Növ</div>
+              <div class="sq-sdb-count" id="sdCount-types">3 qeyd</div>
+            </div>
+          </button>
+          <button class="sq-subdict-btn" data-subdict="gis" type="button">
+            <div class="sq-sdb-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
+            <div class="sq-sdb-body">
+              <div class="sq-sdb-label">GİS tipi</div>
+              <div class="sq-sdb-count" id="sdCount-gis">3 qeyd</div>
+            </div>
+          </button>
+          <button class="sq-subdict-btn sq-names-btn" data-subdict="names" type="button">
+            <div class="sq-sdb-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+            <div class="sq-sdb-body">
+              <div class="sq-sdb-label">Soraqçalar</div>
+              <div class="sq-sdb-count" id="sdCount-names">0 qeyd</div>
+            </div>
+          </button>
+        </div>
+        <div class="sq-sdb-actions">
+          <button class="sq-reset-btn" id="sdSearchReset" type="button" style="display:none;">
+            <svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg> Sıfırla
+          </button>
+          <button class="btn-new" id="btnSdNew" type="button" style="height:36px;padding:0 14px;font-size:12.5px;">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span id="btnSdNewLabel">Yeni qrup</span>
+          </button>
+        </div>
+      </div>
+      <div id="sqSubDictArea" style="display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;"></div>
+    </div>
+    <div class="sq-tab-pane" id="sqPane-roads">
+      <div class="sq-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17l4-8 4 4 4-6 4 4"/><path d="M3 21h18"/></svg>
+        <p>Yollar soraqçası hazırlanır</p>
+      </div>
+    </div>
+    <div class="sq-tab-pane" id="sqPane-segments">
+      <div class="sq-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1.2"/><rect x="14" y="3" width="7" height="7" rx="1.2"/><rect x="3" y="14" width="7" height="7" rx="1.2"/><rect x="14" y="14" width="7" height="7" rx="1.2"/></svg>
+        <p>Seqmentlər soraqçası hazırlanır</p>
+      </div>
+    </div>
+    <div class="sq-tab-pane" id="sqPane-passports">
+      <div class="sq-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <p>Pasportlar soraqçası hazırlanır</p>
+      </div>
+    </div>
+    <div class="sq-tab-pane" id="sqPane-documents">
+      <div class="sq-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/></svg>
+        <p>Sənədlər soraqçası hazırlanır</p>
+      </div>
+    </div>
+  </div>`);
+
       document.querySelector('#sp1 .fgrid').insertAdjacentHTML('afterbegin', `
     <div class="frow full" id="sgRoadSelectRow">
       <label>Aid yol <span class="req">*</span></label>
@@ -7344,8 +7605,8 @@
 
       const originalAcSegRow = document.getElementById('ac_seg').closest('.frow');
       const navItems = Array.from(document.querySelectorAll('.sb-body .nav-item'));
-      const viewNames = ['registry', 'roads', 'segments', 'assets'];
-      navItems.slice(0, 4).forEach((item, idx) => {
+      const viewNames = ['registry', 'roads', 'segments', 'assets', 'soraqcalar'];
+      navItems.slice(0, 5).forEach((item, idx) => {
         item.dataset.view = viewNames[idx];
         item.addEventListener('click', (e) => {
           e.preventDefault();
@@ -9006,19 +9267,21 @@
         targetView.classList.remove('is-hidden');
         targetView.style.display = 'flex';
         navItems.forEach(item => item.classList.toggle('active', item.dataset.view === view));
-        const titleMap = { registry: 'Vahid reyestr', roads: 'Yollar', segments: 'Seqmentlər', assets: 'Aktivlər' };
+        const titleMap = { registry: 'Vahid reyestr', roads: 'Yollar', segments: 'Seqmentlər', assets: 'Aktivlər', soraqcalar: 'Soraqçalar' };
         const subMap = {
           registry: 'Bütün yollara, seqmentlərə və aktivlərə vahid baxış',
           roads: 'Avtomobil Yolları İdarəsi agentliyi',
           segments: 'Yola bağlı seqmentlərin reyestri',
-          assets: 'Yol və seqmentə bağlı aktivlərin reyestri'
+          assets: 'Yol və seqmentə bağlı aktivlərin reyestri',
+          soraqcalar: 'Aktiv növləri və master data idarəetmə'
         };
-        document.querySelector('.topbar-title').textContent = titleMap[view];
-        document.querySelector('.topbar-sub').textContent = subMap[view];
+        document.querySelector('.topbar-title').textContent = titleMap[view] || view;
+        document.querySelector('.topbar-sub').textContent = subMap[view] || '';
         if (view === 'registry') renderRegistryTable();
         if (view === 'roads') renderTable();
         if (view === 'segments') renderSegmentTable();
         if (view === 'assets') renderAssetTable();
+        if (view === 'soraqcalar') renderSoraqcaTable();
       }
 
       const originalOpenForm = openForm;
@@ -10053,6 +10316,666 @@
       renderRegistryTable();
       renderSegmentTable();
       renderAssetTable();
+
+      /* ══ SORAQÇALAR MODULE v2 ══ */
+      (function () {
+        let _idSeq = 100;
+        function nid() { return ++_idSeq; }
+
+        /* ─── DATA STORES ─── */
+        let sqGroups = [
+          {id:1,  name:'Yol konstruksiyası',      description:'Yol konstruksiyasına aid aktivlər',        status:'active'},
+          {id:2,  name:'Mühəndis qurğuları',       description:'Mühəndis tikililərə aid aktivlər',         status:'active'},
+          {id:3,  name:'Suötürmə və drenaj',       description:'Su axını idarəetmə sistemləri',            status:'active'},
+          {id:4,  name:'Təhlükəsizlik',            description:'Yol təhlükəsizliyi avadanlıqları',         status:'active'},
+          {id:5,  name:'Yol hərəkətinin təşkili',  description:'Hərəkəti tənzimləyən elementlər',         status:'active'},
+          {id:6,  name:'Yolkənarı xidmət',         description:'Yol boyu xidmət infrastrukturu',          status:'active'},
+          {id:7,  name:'Monitorinq',               description:'İzləmə və ölçmə avadanlıqları',           status:'active'},
+          {id:8,  name:'Kommunikasiya keçidləri',  description:'Yol altından keçən kommunikasiya xətləri',status:'active'},
+          {id:9,  name:'Torpaq və zonalar',        description:'Yol torpaq zolaları',                     status:'active'},
+        ];
+        let sqTypes = [
+          {id:10, name:'Seqment atributu',  description:'Yolun ayrılmaz hissəsi olan elementlər',  status:'active'},
+          {id:11, name:'İnventar',          description:'Ayrıca qeydiyyatı aparılan aktivlər',      status:'active'},
+          {id:12, name:'Pasportlaşdırılan', description:'Texniki pasport tələb edən aktivlər',      status:'active'},
+        ];
+        let sqGis = [
+          {id:20, name:'Nöqtə', description:'Xəritədə nöqtə geometriyası ilə göstərilən aktiv', status:'active'},
+          {id:21, name:'Xətt',  description:'Xəritədə xətt geometriyası ilə göstərilən aktiv',  status:'active'},
+          {id:22, name:'Sahə',  description:'Xəritədə sahə (polygon) geometriyası ilə göstərilən aktiv', status:'active'},
+        ];
+        let sqNames = [
+          {id:30,name:'Üst örtük',          description:'Yol səthinin yuxarı layı',                       groupId:1,typeId:10,gisId:21,status:'active'},
+          {id:31,name:'Yol yatağı',         description:'Yolun alt konstruksiya qatı',                    groupId:1,typeId:10,gisId:21,status:'active'},
+          {id:32,name:'Dayaq divarı',       description:'Torpaq kütlələrini tutan konstruksiya',           groupId:1,typeId:12,gisId:21,status:'active'},
+          {id:33,name:'Körpü',              description:'Maneələr üzərindən keçidi təmin edən qurğu',     groupId:2,typeId:12,gisId:22,status:'active'},
+          {id:34,name:'Tunel',              description:'Dağ və ya torpaq altından keçid qurğusu',        groupId:2,typeId:12,gisId:21,status:'active'},
+          {id:35,name:'Estakada',           description:'Hündürlükdə yerləşən yol konstruksiyası',        groupId:2,typeId:12,gisId:21,status:'active'},
+          {id:36,name:'Keçid',              description:'Piyada və ya nəqliyyat keçid nöqtəsi',           groupId:2,typeId:11,gisId:20,status:'active'},
+          {id:37,name:'Boru keçid',         description:'Su axını üçün boru keçid elementi',              groupId:3,typeId:11,gisId:20,status:'active'},
+          {id:38,name:'Kanal',              description:'Su aparma kanalı',                               groupId:3,typeId:10,gisId:21,status:'active'},
+          {id:39,name:'Drenaj sistemi',     description:'Yeraltı su drenajı sistemi',                     groupId:3,typeId:11,gisId:21,status:'active'},
+          {id:40,name:'Hasarlar',           description:'Yol kənarında quraşdırılmış mühafizə hasarı',    groupId:4,typeId:11,gisId:21,status:'active'},
+          {id:41,name:'Maneə',              description:'Hərəkəti məhdudlaşdıran maneə',                  groupId:4,typeId:11,gisId:20,status:'active'},
+          {id:42,name:'Səs ekranı',         description:'Səs-küy azaltma üçün ekran konstruksiyası',      groupId:4,typeId:12,gisId:21,status:'active'},
+          {id:43,name:'Nişan',              description:'Yol hərəkət nişanı',                             groupId:5,typeId:11,gisId:20,status:'active'},
+          {id:44,name:'İşarə xətti',        description:'Yol üzərindəki üfüqi işarə',                    groupId:5,typeId:10,gisId:21,status:'active'},
+          {id:45,name:'İşıqfor',            description:'Hərəkəti tənzimləyən işıqfor qurğusu',          groupId:5,typeId:12,gisId:20,status:'active'},
+          {id:46,name:'Dayanacaq',          description:'Nəqliyyat dayanacağı zonası',                    groupId:6,typeId:11,gisId:22,status:'active'},
+          {id:47,name:'İstirahət zonası',   description:'Sürücülər üçün istirahət sahəsi',               groupId:6,typeId:11,gisId:22,status:'active'},
+          {id:48,name:'Yanacaq stansiyası', description:'Yanacaq doldurma stansiyası',                   groupId:6,typeId:11,gisId:20,status:'active'},
+          {id:49,name:'Kamera',             description:'Video müşahidə kamerası',                        groupId:7,typeId:11,gisId:20,status:'active'},
+          {id:50,name:'Hava sensoru',       description:'Meteoroloji ölçü sensoru',                       groupId:7,typeId:11,gisId:20,status:'active'},
+          {id:51,name:'Sayğac',             description:'Nəqliyyat axını sayğacı',                        groupId:7,typeId:11,gisId:20,status:'active'},
+          {id:52,name:'Elektrik keçidi',    description:'Yol altından keçən elektrik xətti',              groupId:8,typeId:12,gisId:20,status:'active'},
+          {id:53,name:'Boru xətti',         description:'Yol altından keçən boru xətti',                  groupId:8,typeId:12,gisId:21,status:'active'},
+          {id:54,name:'Təhkim zolağı',      description:'Yol hüdudlarını müəyyən edən zolaq',             groupId:9,typeId:10,gisId:22,status:'active'},
+          {id:55,name:'Mühafizə zolağı',    description:'Yol mühafizə zonası',                            groupId:9,typeId:10,gisId:22,status:'active'},
+        ];
+
+        /* ─── CONFIG ─── */
+        const SD_CFG = {
+          groups: {label:'Qrup',        store:()=>sqGroups, isNames:false},
+          types:  {label:'Növ',         store:()=>sqTypes,  isNames:false},
+          gis:    {label:'GİS tipi',    store:()=>sqGis,    isNames:false},
+          names:  {label:'Soraqça',     store:()=>sqNames,  isNames:true},
+        };
+        const SD_PER = 10;
+        let activeSD  = 'groups';
+        let sdPages   = {groups:1, types:1, gis:1, names:1};
+        let sdSearch  = {groups:'', types:'', gis:'', names:''};
+        let sdStatusF = {groups:'', types:'', gis:'', names:''};
+        let sdGroupF  = {groups:'', types:'', gis:'', names:''};
+        let sdTypeF   = {groups:'', types:'', gis:'', names:''};
+        let sdGisF    = {groups:'', types:'', gis:'', names:''};
+        let sdSortDir = {groups:'', types:'', gis:'', names:''};
+        let sdOpenBot = {groups:null, types:null, gis:null, names:null};
+        let sdEditId  = null;
+        let sdViewMode = false;
+
+        /* ─── HELPERS ─── */
+        function sdStore(key) { return SD_CFG[key].store(); }
+        function sdRelOptions(store, field, selected) {
+          const usedIds = new Set(sqNames.map(r => r[field]).filter(v => v !== undefined && v !== null && v !== ''));
+          return store
+            .filter(r => usedIds.has(r.id))
+            .sort((a,b) => a.name.localeCompare(b.name, 'az'))
+            .map(r => `<option value="${r.id}" ${String(selected) === String(r.id) ? 'selected' : ''}>${esc(r.name)}</option>`)
+            .join('');
+        }
+        function sdFiltered(key) {
+          const s  = sdSearch[key].toLowerCase();
+          const st = sdStatusF[key];
+          const so = sdSortDir[key];
+          const gf = sdGroupF[key];
+          const tf = sdTypeF[key];
+          const gi = sdGisF[key];
+          const isNames = SD_CFG[key].isNames;
+          let data = sdStore(key).filter(r =>
+            (!s  || r.name.toLowerCase().includes(s) || (r.description||'').toLowerCase().includes(s)) &&
+            (!st || r.status === st) &&
+            (!isNames || (
+              (!gf || String(r.groupId) === gf) &&
+              (!tf || String(r.typeId) === tf) &&
+              (!gi || String(r.gisId) === gi)
+            ))
+          );
+          if (so === 'asc')  data = [...data].sort((a,b) => a.name.localeCompare(b.name, 'az'));
+          if (so === 'desc') data = [...data].sort((a,b) => b.name.localeCompare(a.name, 'az'));
+          return data;
+        }
+        function updateCounts() {
+          document.getElementById('sdCount-groups') && (document.getElementById('sdCount-groups').textContent = sqGroups.length + ' qeyd');
+          document.getElementById('sdCount-names')  && (document.getElementById('sdCount-names').textContent  = sqNames.length  + ' qeyd');
+          document.getElementById('sdCount-types')  && (document.getElementById('sdCount-types').textContent  = sqTypes.length  + ' qeyd');
+          document.getElementById('sdCount-gis')    && (document.getElementById('sdCount-gis').textContent    = sqGis.length    + ' qeyd');
+        }
+
+        /* ─── RENDER TABLE ─── */
+        function renderSubDictTable(key) {
+          activeSD = key;
+          document.querySelectorAll('#sqPane-assets .sq-subdict-btn').forEach(b =>
+            b.classList.toggle('active', b.dataset.subdict === key));
+          updateCounts();
+
+          const isNames = SD_CFG[key].isNames;
+          const filtered = sdFiltered(key);
+          const total = filtered.length;
+          const page  = sdPages[key];
+          const pages = Math.max(1, Math.ceil(total / SD_PER));
+          if (sdPages[key] > pages) sdPages[key] = pages;
+          const slice = filtered.slice((page-1)*SD_PER, page*SD_PER);
+          const colCount = isNames ? 7 : 5;
+
+          const statusCI  = isNames ? 6 : 3;
+          const filterByCi = isNames
+            ? {'1':'name','3':'group','4':'type','5':'gis',[String(statusCI)]:'status'}
+            : {'1':'name',[String(statusCI)]:'status'};
+          const ciByFilter = isNames
+            ? {name:'1', group:'3', type:'4', gis:'5', status:String(statusCI)}
+            : {name:'1', status:String(statusCI)};
+          const nameBot   = sdOpenBot[key] === 'name'   ? 'block' : 'none';
+          const statusBot = sdOpenBot[key] === 'status' ? 'block' : 'none';
+          const filtSvg   = `<svg viewBox="0 0 24 24" style="width:11px;height:11px;fill:currentColor;flex-shrink:0;"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>`;
+          const relFilterTh = (ci, label, filterKey, selected, optionsHtml) => `
+              <th data-ci="${ci}">
+                <div class="th-top">
+                  <span class="th-label">${label}</span>
+                  <div class="th-ctrls">
+                    <button class="filt-btn${selected?' on':''}" type="button">${filtSvg}</button>
+                  </div>
+                </div>
+                <div class="th-bot" style="display:${sdOpenBot[key] === filterKey ? 'block' : 'none'};">
+                  <div class="th-filter-row">
+                    <select class="th-input" data-filter-kind="${filterKey}">
+                      <option value="">Hamısı</option>
+                      ${optionsHtml}
+                    </select>
+                  </div>
+                </div>
+              </th>`;
+          const relThs = isNames ? `
+              ${relFilterTh(3, 'Qrup', 'group', sdGroupF[key], sdRelOptions(sqGroups, 'groupId', sdGroupF[key]))}
+              ${relFilterTh(4, 'Növ', 'type', sdTypeF[key], sdRelOptions(sqTypes, 'typeId', sdTypeF[key]))}
+              ${relFilterTh(5, 'GİS tipi', 'gis', sdGisF[key], sdRelOptions(sqGis, 'gisId', sdGisF[key]))}
+            ` : '';
+          const ths = `
+            <th class="th-nof" style="width:44px;" data-ci="0"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">#</span></div></th>
+            <th data-ci="1">
+              <div class="th-top">
+                <span class="th-label">Adı</span>
+                <div class="th-ctrls">
+                  <button class="sort-btn${sdSortDir[key]?' on':''}" type="button">⋮</button>
+                  <button class="filt-btn${sdSearch[key]?' on':''}" type="button">${filtSvg}</button>
+                </div>
+                <div class="sort-menu">
+                  <div class="sort-opt" data-dir="asc">Artan sırala</div>
+                  <div class="sort-opt" data-dir="desc">Azalan sırala</div>
+                  <div class="sort-opt danger" data-dir="clear">Sıfırla</div>
+                </div>
+              </div>
+              <div class="th-bot" style="display:${nameBot};">
+                <div class="th-filter-row">
+                  <input class="th-input" data-filter-kind="text" placeholder="Axtar..." value="${esc(sdSearch[key])}">
+                  <button class="th-filter-clear${sdSearch[key]?' visible':''}" type="button">×</button>
+                </div>
+              </div>
+            </th>
+            <th data-ci="2"><div class="th-top"><span class="th-label">Təsviri</span></div></th>
+            ${relThs}
+            <th data-ci="${statusCI}">
+              <div class="th-top">
+                <span class="th-label">Status</span>
+                <div class="th-ctrls">
+                  <button class="filt-btn${sdStatusF[key]?' on':''}" type="button">${filtSvg}</button>
+                </div>
+              </div>
+              <div class="th-bot" style="display:${statusBot};">
+                <div class="th-filter-row">
+                  <select class="th-input" data-filter-kind="select">
+                    <option value="">Hamısı</option>
+                    <option value="active"  ${sdStatusF[key]==='active' ?'selected':''}>Aktiv</option>
+                    <option value="passive" ${sdStatusF[key]==='passive'?'selected':''}>Passiv</option>
+                  </select>
+                </div>
+              </div>
+            </th>
+            <th class="th-nof" data-ci="${statusCI+1}" style="width:120px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">Əməliyyatlar</span></div></th>`;
+
+          let rows = '';
+          if (!slice.length) {
+            rows = `<tr><td colspan="${colCount}" style="text-align:center;padding:36px;color:#94a3b8;font-size:13px;">Heç bir qeyd tapılmadı</td></tr>`;
+          } else {
+            rows = slice.map((r, i) => {
+              const stBadge = r.status === 'active' ? badge('Aktiv','b-green') : badge('Passiv','b-gray');
+              let relCols = '';
+              if (isNames) {
+                const grp = sqGroups.find(x => x.id === r.groupId);
+                const typ = sqTypes.find(x => x.id === r.typeId);
+                const gis = sqGis.find(x => x.id === r.gisId);
+                relCols = `<td style="font-size:12px;">${esc(grp?grp.name:'—')}</td>
+                           <td style="font-size:12px;">${esc(typ?typ.name:'—')}</td>
+                           <td style="font-size:12px;">${esc(gis?gis.name:'—')}</td>`;
+              }
+              return `<tr>
+                <td style="text-align:center;color:#94a3b8;font-size:11px;">${(page-1)*SD_PER+i+1}</td>
+                <td style="font-weight:500;color:#1a2b3c;">${esc(r.name)}</td>
+                <td style="font-size:12px;color:#64748b;max-width:240px;">${esc(r.description||'—')}</td>
+                ${relCols}
+                <td>${stBadge}</td>
+                <td><div class="row-acts"><div class="action-menu-wrap">
+                  <button class="action-menu-btn" data-action-menu type="button" aria-label="Əməliyyatlar">⋮</button>
+                  <div class="action-menu">
+                    <button class="action-menu-item" type="button" onclick="sdView('${key}',${r.id})">Bax</button>
+                    <button class="action-menu-item" type="button" onclick="sdEdit('${key}',${r.id})">Redaktə et</button>
+                    <button class="action-menu-item danger" type="button" onclick="sdDelete('${key}',${r.id})">Sil</button>
+                  </div>
+                </div></div></td>
+              </tr>`;
+            }).join('');
+          }
+
+          const from = total ? (page-1)*SD_PER+1 : 0;
+          const to   = Math.min(page*SD_PER, total);
+          let pagHtml = `<div class="tc-foot"><span class="pag-info">${from}–${to} / ${total} qeyd</span><div class="pag-btns">
+            <button class="pag-pg" ${page===1?'disabled':''} onclick="sdPage('${key}',${page-1})">‹</button>`;
+          for (let p=1; p<=pages; p++) pagHtml += `<button class="pag-pg${p===page?' active':''}" onclick="sdPage('${key}',${p})">${p}</button>`;
+          pagHtml += `<button class="pag-pg" ${page===pages?'disabled':''} onclick="sdPage('${key}',${page+1})">›</button></div></div>`;
+
+          const area = document.getElementById('sqSubDictArea');
+          if (!area) return;
+          const hasFilter = !!(sdSearch[key] || sdStatusF[key] || sdGroupF[key] || sdTypeF[key] || sdGisF[key] || sdSortDir[key]);
+          area.innerHTML = `
+            <div class="table-wrap" style="flex:1;">
+              <table id="sdTable" style="min-width:${isNames?'880':'580'}px;">
+                <thead><tr>${ths}</tr></thead>
+                <tbody>${rows}</tbody>
+              </table>
+            </div>
+            ${pagHtml}`;
+
+          const lbl = document.getElementById('btnSdNewLabel');
+          if (lbl) lbl.textContent = key === 'names' ? 'Yeni soraqça' : 'Yeni ' + SD_CFG[key].label.toLowerCase();
+          const resetBtn = document.getElementById('sdSearchReset');
+          if (resetBtn) {
+            resetBtn.style.display = hasFilter ? 'flex' : 'none';
+            resetBtn.onclick = () => {
+              sdSearch[key] = ''; sdStatusF[key] = ''; sdGroupF[key] = ''; sdTypeF[key] = ''; sdGisF[key] = ''; sdSortDir[key] = ''; sdOpenBot[key] = null; sdPages[key] = 1; renderSubDictTable(key);
+            };
+          }
+
+          const sdTable = area.querySelector('#sdTable');
+          if (sdTable) {
+            sdTable.querySelectorAll('.sort-btn').forEach(btn => {
+              btn.addEventListener('click', e => {
+                e.stopPropagation();
+                const menu = btn.closest('.th-top')?.querySelector('.sort-menu');
+                const open = menu?.classList.contains('open');
+                sdTable.querySelectorAll('.sort-menu').forEach(m => m.classList.remove('open'));
+                if (!open && menu) menu.classList.add('open');
+              });
+            });
+
+            sdTable.querySelectorAll('.filt-btn').forEach(btn => {
+              btn.addEventListener('click', e => {
+                e.stopPropagation();
+                const th   = btn.closest('th');
+                const bot  = th?.querySelector('.th-bot');
+                const ci   = th?.dataset.ci;
+                if (!bot) return;
+                const show = bot.style.display === 'none' || bot.style.display === '';
+                sdTable.querySelectorAll('.sort-menu').forEach(m => m.classList.remove('open'));
+                sdTable.querySelectorAll('.th-bot').forEach(b => { b.style.display = 'none'; });
+                sdTable.querySelectorAll('.filt-btn.on').forEach(b => b.classList.remove('on'));
+                if (show) {
+                  bot.style.display = 'block';
+                  btn.classList.add('on');
+                  sdOpenBot[key] = filterByCi[ci] || null;
+                } else {
+                  sdOpenBot[key] = null;
+                }
+                bot.querySelector('.th-input')?.focus();
+              });
+            });
+
+            sdTable.querySelectorAll('.sort-opt').forEach(opt => {
+              opt.addEventListener('click', e => {
+                e.stopPropagation();
+                sdSortDir[key] = opt.dataset.dir === 'clear' ? '' : opt.dataset.dir;
+                sdPages[key] = 1;
+                sdTable.querySelectorAll('.sort-menu').forEach(m => m.classList.remove('open'));
+                renderSubDictTable(key);
+              });
+            });
+
+            const nameInput = sdTable.querySelector('th[data-ci="1"] .th-input');
+            const nameClear = sdTable.querySelector('th[data-ci="1"] .th-filter-clear');
+            if (nameInput) {
+              nameInput.addEventListener('input', function() {
+                sdSearch[key] = this.value;
+                sdOpenBot[key] = 'name';
+                sdPages[key] = 1;
+                renderSubDictTable(key);
+              });
+            }
+            if (nameClear) {
+              nameClear.addEventListener('click', () => {
+                sdSearch[key] = '';
+                sdOpenBot[key] = 'name';
+                sdPages[key] = 1;
+                renderSubDictTable(key);
+              });
+            }
+
+            if (isNames) {
+              [
+                {ci:'3', state:sdGroupF, open:'group'},
+                {ci:'4', state:sdTypeF, open:'type'},
+                {ci:'5', state:sdGisF, open:'gis'},
+              ].forEach(f => {
+                const relSelect = sdTable.querySelector(`th[data-ci="${f.ci}"] .th-input`);
+                if (!relSelect) return;
+                relSelect.addEventListener('change', function() {
+                  f.state[key] = this.value;
+                  sdOpenBot[key] = f.open;
+                  sdPages[key] = 1;
+                  renderSubDictTable(key);
+                });
+              });
+            }
+
+            const statusSelect = sdTable.querySelector(`th[data-ci="${statusCI}"] .th-input`);
+            if (statusSelect) {
+              statusSelect.addEventListener('change', function() {
+                sdStatusF[key] = this.value;
+                sdOpenBot[key] = 'status';
+                sdPages[key] = 1;
+                renderSubDictTable(key);
+              });
+            }
+
+            const openCi = ciByFilter[sdOpenBot[key]];
+            const openInput = openCi ? sdTable.querySelector(`th[data-ci="${openCi}"] .th-input`) : null;
+            if (openInput) {
+              openInput.focus();
+              if (sdOpenBot[key] === 'name') openInput.setSelectionRange(openInput.value.length, openInput.value.length);
+            }
+          }
+        }
+        window.renderSoraqcaTable = () => renderSubDictTable(activeSD);
+        window.sdPage = (key, p) => { sdPages[key] = p; renderSubDictTable(key); };
+
+        /* ─── DELETE ─── */
+        window.sdDelete = function(key, id) {
+          const r = sdStore(key).find(x => x.id === id);
+          if (!r) return;
+          if (!confirm('"' + r.name + '" soraqçasını silmək istədiyinizə əminsiniz?')) return;
+          if (key === 'groups') sqGroups = sqGroups.filter(x => x.id !== id);
+          else if (key === 'types') sqTypes = sqTypes.filter(x => x.id !== id);
+          else if (key === 'gis')   sqGis   = sqGis.filter(x => x.id !== id);
+          else if (key === 'names') sqNames = sqNames.filter(x => x.id !== id);
+          renderSubDictTable(key);
+        };
+
+        /* ─── MODAL ─── */
+        function sdOpenModal(key, id, viewMode) {
+          sdEditId   = id   || null;
+          sdViewMode = !!viewMode;
+          const isNames = SD_CFG[key].isNames;
+          document.getElementById('sqModal').dataset.sdKey = key;
+          document.getElementById('sqModalTitle').textContent = id
+            ? (viewMode ? 'Bax — ' : 'Redaktə et — ') + SD_CFG[key].label
+            : 'Yeni ' + SD_CFG[key].label;
+          document.getElementById('sqModalSave').style.display = viewMode ? 'none' : '';
+          document.getElementById('sqModalEdit').style.display = viewMode ? ''     : 'none';
+
+          const relSection = document.getElementById('sqModalRelSection');
+          if (relSection) relSection.style.display = isNames ? '' : 'none';
+
+          if (isNames) {
+            const gSel  = document.getElementById('sq_modal_group');
+            const tSel  = document.getElementById('sq_modal_type');
+            const giSel = document.getElementById('sq_modal_gis');
+            gSel.innerHTML  = '<option value="">Seçin...</option>' + sqGroups.filter(g=>g.status==='active').map(g=>`<option value="${g.id}">${esc(g.name)}</option>`).join('');
+            tSel.innerHTML  = '<option value="">Seçin...</option>' + sqTypes.filter(t=>t.status==='active').map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join('');
+            giSel.innerHTML = '<option value="">Seçin...</option>' + sqGis.filter(g=>g.status==='active').map(g=>`<option value="${g.id}">${esc(g.name)}</option>`).join('');
+          }
+
+          if (id) {
+            const r = sdStore(key).find(x => x.id === id);
+            if (!r) return;
+            document.getElementById('sq_modal_name').value   = r.name;
+            document.getElementById('sq_modal_desc').value   = r.description || '';
+            document.getElementById('sq_modal_status').value = r.status;
+            if (isNames) {
+              document.getElementById('sq_modal_group').value = r.groupId || '';
+              document.getElementById('sq_modal_type').value  = r.typeId  || '';
+              document.getElementById('sq_modal_gis').value   = r.gisId   || '';
+            }
+          } else {
+            document.getElementById('sq_modal_name').value   = '';
+            document.getElementById('sq_modal_desc').value   = '';
+            document.getElementById('sq_modal_status').value = 'active';
+            if (isNames) {
+              document.getElementById('sq_modal_group').value = '';
+              document.getElementById('sq_modal_type').value  = '';
+              document.getElementById('sq_modal_gis').value   = '';
+            }
+          }
+          ['sq_modal_name','sq_modal_desc'].forEach(fid => {
+            const el = document.getElementById(fid);
+            if (el) el.readOnly = viewMode;
+          });
+          ['sq_modal_status','sq_modal_group','sq_modal_type','sq_modal_gis'].forEach(fid => {
+            const el = document.getElementById(fid);
+            if (el) el.disabled = viewMode;
+          });
+          document.getElementById('sqModal').classList.add('open');
+        }
+
+        function sdCloseModal() { document.getElementById('sqModal').classList.remove('open'); }
+
+        window.sdView = (key, id) => sdOpenModal(key, id, true);
+        window.sdEdit = (key, id) => sdOpenModal(key, id, false);
+
+        function sdSave() {
+          const key    = document.getElementById('sqModal').dataset.sdKey;
+          const name   = document.getElementById('sq_modal_name').value.trim();
+          const desc   = document.getElementById('sq_modal_desc').value.trim();
+          const status = document.getElementById('sq_modal_status').value;
+          if (!name) { alert('Adı boş ola bilməz.'); return; }
+          const store = sdStore(key);
+          if (store.find(x => x.name.toLowerCase() === name.toLowerCase() && x.id !== sdEditId)) {
+            alert('"' + name + '" artıq bu soraqçada mövcuddur.'); return;
+          }
+          let extra = {};
+          if (SD_CFG[key].isNames) {
+            const gId = +document.getElementById('sq_modal_group').value;
+            const tId = +document.getElementById('sq_modal_type').value;
+            const giId= +document.getElementById('sq_modal_gis').value;
+            if (!gId||!tId||!giId) { alert('Qrup, Növ və GİS tipi mütləq seçilməlidir.'); return; }
+            extra = {groupId:gId, typeId:tId, gisId:giId};
+          }
+          if (sdEditId) {
+            const r = store.find(x => x.id === sdEditId);
+            if (r) Object.assign(r, {name, description:desc, status, ...extra});
+          } else {
+            store.push({id:nid(), name, description:desc, status, ...extra});
+          }
+          sdCloseModal();
+          renderSubDictTable(key);
+        }
+
+        /* ─── INJECT MODAL HTML ─── */
+        document.body.insertAdjacentHTML('beforeend', `
+          <div class="modal-ov" id="sqModal">
+            <div class="modal-box" style="max-width:520px;">
+              <div class="modal-head">
+                <div class="modal-title-block">
+                  <div class="mh-title" id="sqModalTitle">Yeni soraqça</div>
+                  <div class="mh-sub">Soraqça məlumatlarını daxil edin</div>
+                </div>
+                <button class="modal-close-btn" id="sqModalClose" type="button" aria-label="Bağla">
+                  <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="fgrid">
+                  <div class="frow full">
+                    <label>Adı <span class="req">*</span></label>
+                    <input class="finput" id="sq_modal_name" type="text" placeholder="Adı daxil edin">
+                  </div>
+                  <div class="frow full">
+                    <label>Təsviri</label>
+                    <textarea class="finput" id="sq_modal_desc" rows="2" style="resize:vertical;height:60px;" placeholder="Qısa izah..."></textarea>
+                  </div>
+                  <div id="sqModalRelSection" class="frow full" style="display:none;">
+                    <div class="fgrid" style="grid-template-columns:1fr 1fr 1fr;gap:8px;width:100%;">
+                      <div class="frow">
+                        <label>Qrup <span class="req">*</span></label>
+                        <select class="fselect" id="sq_modal_group"></select>
+                      </div>
+                      <div class="frow">
+                        <label>Növ <span class="req">*</span></label>
+                        <select class="fselect" id="sq_modal_type"></select>
+                      </div>
+                      <div class="frow">
+                        <label>GİS tipi <span class="req">*</span></label>
+                        <select class="fselect" id="sq_modal_gis"></select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="frow">
+                    <label>Status</label>
+                    <select class="fselect" id="sq_modal_status">
+                      <option value="active">Aktiv</option>
+                      <option value="passive">Passiv</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-foot">
+                <button class="fbtn fbtn-outline" id="sqModalCancel" type="button">Ləğv et</button>
+                <button class="fbtn fbtn-primary" id="sqModalEdit" type="button" style="display:none;">Redaktə et</button>
+                <button class="fbtn fbtn-primary" id="sqModalSave" type="button">Saxla</button>
+              </div>
+            </div>
+          </div>`);
+
+        /* ─── EVENT BINDINGS ─── */
+        document.getElementById('sqModalSave').addEventListener('click', sdSave);
+        document.getElementById('sqModalCancel').addEventListener('click', sdCloseModal);
+        document.getElementById('sqModalClose').addEventListener('click', sdCloseModal);
+        document.getElementById('sqModalEdit').addEventListener('click', () => {
+          sdOpenModal(document.getElementById('sqModal').dataset.sdKey, sdEditId, false);
+        });
+        document.getElementById('sqModal').addEventListener('click', e => { if (e.target === document.getElementById('sqModal')) sdCloseModal(); });
+
+        /* ─── INJECT NEW-ACTIVE MODAL ─── */
+        document.body.insertAdjacentHTML('beforeend', `
+          <div class="modal-ov" id="sqNewActiveModal">
+            <div class="modal-box">
+              <div class="modal-head">
+                <div class="sna-modal-head-icon">
+                  <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                </div>
+                <div class="modal-title-block">
+                  <div class="mh-title">Yeni soraqça</div>
+                  <div class="mh-sub">Aktiv növü üçün yeni qeyd əlavə edin</div>
+                </div>
+                <button class="modal-close-btn" id="snaModalClose" type="button" aria-label="Bağla">
+                  <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="sna-field">
+                  <label>Aktivin adı <span class="req">*</span></label>
+                  <input class="finput" id="sna_name" type="text" placeholder="Adı daxil edin">
+                </div>
+                <div class="sna-field">
+                  <label>Təsviri</label>
+                  <textarea class="finput" id="sna_desc" rows="3" style="resize:vertical;" placeholder="Qısa izah..."></textarea>
+                </div>
+                <div class="sna-divider">
+                  <span class="sna-divider-line"></span>
+                  <span class="sna-divider-label">Klassifikasiya</span>
+                  <span class="sna-divider-line"></span>
+                </div>
+                <div class="sna-3col">
+                  <div class="sna-field">
+                    <label>Qrup <span class="req">*</span></label>
+                    <select class="fselect" id="sna_group"></select>
+                  </div>
+                  <div class="sna-field">
+                    <label>Növ <span class="req">*</span></label>
+                    <select class="fselect" id="sna_type"></select>
+                  </div>
+                  <div class="sna-field">
+                    <label>GİS tipi <span class="req">*</span></label>
+                    <select class="fselect" id="sna_gis"></select>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-foot">
+                <button class="fbtn fbtn-outline" id="snaModalCancel" type="button">Ləğv et</button>
+                <button class="fbtn fbtn-primary" id="snaModalSave" type="button">
+                  <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;margin-right:5px;"><polyline points="20 6 9 17 4 12"/></svg>
+                  Saxla
+                </button>
+              </div>
+            </div>
+          </div>`);
+
+        function openNewActiveModal() {
+          document.getElementById('sna_name').value = '';
+          document.getElementById('sna_desc').value = '';
+          document.getElementById('sna_group').innerHTML =
+            '<option value="">Seçin...</option>' +
+            sqGroups.filter(g => g.status === 'active').map(g => `<option value="${g.id}">${esc(g.name)}</option>`).join('');
+          document.getElementById('sna_type').innerHTML =
+            '<option value="">Seçin...</option>' +
+            sqTypes.filter(t => t.status === 'active').map(t => `<option value="${t.id}">${esc(t.name)}</option>`).join('');
+          document.getElementById('sna_gis').innerHTML =
+            '<option value="">Seçin...</option>' +
+            sqGis.filter(g => g.status === 'active').map(g => `<option value="${g.id}">${esc(g.name)}</option>`).join('');
+          document.getElementById('sqNewActiveModal').classList.add('open');
+          document.getElementById('sna_name').focus();
+        }
+
+        function closeNewActiveModal() {
+          document.getElementById('sqNewActiveModal').classList.remove('open');
+        }
+
+        function saveNewActive() {
+          const name    = document.getElementById('sna_name').value.trim();
+          const desc    = document.getElementById('sna_desc').value.trim();
+          const groupId = parseInt(document.getElementById('sna_group').value) || 0;
+          const typeId  = parseInt(document.getElementById('sna_type').value)  || 0;
+          const gisId   = parseInt(document.getElementById('sna_gis').value)   || 0;
+          if (!name)    { alert('Aktivin adı boş ola bilməz'); return; }
+          if (!groupId) { alert('Qrup seçilməlidir'); return; }
+          if (!typeId)  { alert('Növ seçilməlidir'); return; }
+          if (!gisId)   { alert('GİS tipi seçilməlidir'); return; }
+          if (sqNames.find(n => n.name.toLowerCase() === name.toLowerCase())) {
+            alert('Bu adda soraqça artıq mövcuddur'); return;
+          }
+          const newId = Math.max(0, ...sqNames.map(n => n.id)) + 1;
+          sqNames.push({ id: newId, name, description: desc, groupId, typeId, gisId, status: 'active' });
+          closeNewActiveModal();
+          if (activeSD === 'names') renderSubDictTable('names');
+          else updateCounts();
+        }
+        document.getElementById('snaModalClose').addEventListener('click', closeNewActiveModal);
+        document.getElementById('snaModalCancel').addEventListener('click', closeNewActiveModal);
+        document.getElementById('snaModalSave').addEventListener('click', saveNewActive);
+        document.getElementById('sqNewActiveModal').addEventListener('click', e => {
+          if (e.target === document.getElementById('sqNewActiveModal')) closeNewActiveModal();
+        });
+
+        document.getElementById('btnSdNew')?.addEventListener('click', () => {
+          if (activeSD === 'names') openNewActiveModal();
+          else sdOpenModal(activeSD, null, false);
+        });
+
+        document.getElementById('sqPane-assets')?.addEventListener('click', e => {
+          const btn = e.target.closest('.sq-subdict-btn');
+          if (btn) renderSubDictTable(btn.dataset.subdict);
+        });
+
+        document.getElementById('soraqcalarView')?.addEventListener('click', e => {
+          const tab = e.target.closest('.sq-tab');
+          if (!tab) return;
+          const k = tab.dataset.sqTab;
+          document.querySelectorAll('#soraqcalarView .sq-tab').forEach(t => t.classList.toggle('active', t === tab));
+          document.querySelectorAll('#soraqcalarView .sq-tab-pane').forEach(p => p.classList.toggle('active', p.id === 'sqPane-' + k));
+          if (k === 'assets') renderSubDictTable(activeSD);
+        });
+
+        renderSubDictTable('groups');
+
+
+      })();
+
       switchView('registry');
     })();
   </script>
