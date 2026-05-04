@@ -217,7 +217,7 @@
       font-size: 12px;
       font-weight: 600;
       line-height: 1.2;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, .22);
+      box-shadow: none;
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
@@ -404,7 +404,7 @@
       background: #fff;
       border: 1px solid #d8e4f0;
       border-radius: 14px;
-      box-shadow: 0 12px 40px rgba(15, 23, 42, .14);
+      box-shadow: none;
       z-index: 500;
       min-width: 280px;
       display: none;
@@ -926,7 +926,7 @@
       position: sticky;
       right: 0;
       z-index: 8;
-      box-shadow: -8px 0 14px rgba(15, 23, 42, .06);
+      box-shadow: none;
     }
 
     .table-wrap table th:last-child {
@@ -1048,7 +1048,7 @@
       border-radius: 10px;
       margin: 0;
       padding: 6px;
-      box-shadow: 0 8px 24px rgba(37, 99, 235, .13);
+      box-shadow: none;
       z-index: 780;
     }
 
@@ -1063,12 +1063,12 @@
       color: #1a2b3c;
       background: #fff;
       outline: none;
-      box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+      box-shadow: none;
     }
 
     .th-input:focus {
       border-color: #3b82f6;
-      box-shadow: 0 0 0 2px rgba(59, 130, 246, .13);
+      box-shadow: none;
     }
 
     .th-filter-row {
@@ -1143,7 +1143,7 @@
       background: #fff;
       border: 1px solid #d8e4f0;
       border-radius: 10px;
-      box-shadow: 0 8px 24px rgba(37, 99, 235, .13);
+      box-shadow: none;
       z-index: 800;
       min-width: 152px;
       overflow: hidden;
@@ -1345,7 +1345,7 @@
       background: #fff;
       border: 1px solid #d8e4f0;
       border-radius: 9px;
-      box-shadow: 0 12px 28px rgba(15, 23, 42, .14);
+      box-shadow: none;
       padding: 4px;
       display: none;
       flex-direction: column;
@@ -1634,7 +1634,7 @@
       max-height: 88vh;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 24px 60px rgba(15,23,42,.2);
+      box-shadow: none;
       overflow: hidden;
     }
 
@@ -1672,7 +1672,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 8px 32px rgba(15, 23, 42, .14);
+      box-shadow: none;
       animation: rsCardIn .22s cubic-bezier(.22,.68,0,1.2);
     }
 
@@ -2056,7 +2056,7 @@
     .fselect:focus,
     .ftextarea:focus {
       border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, .1);
+      box-shadow: none;
     }
 
     .finput.f-auto {
@@ -2615,7 +2615,7 @@
       max-height: 88vh;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 24px 60px rgba(15, 23, 42, .2);
+      box-shadow: none;
       overflow: hidden;
     }
 
@@ -3921,8 +3921,8 @@
     .sq-placeholder p { font-size: 13px; }
     .sq-subdict-bar {
       display: flex;
-      gap: 10px;
-      padding: 14px 16px;
+      gap: 6px;
+      padding: 7px 10px;
       border-bottom: 1px solid #d8e4f0;
       background: #f8fafc;
       flex-shrink: 0;
@@ -3931,35 +3931,65 @@
     .sq-subdict-btn {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 10px 16px;
+      gap: 7px;
+      padding: 5px 10px;
       border: 1.5px solid #d8e4f0;
-      border-radius: 10px;
+      border-radius: 8px;
       background: #fff;
       cursor: pointer;
       font-family: inherit;
       transition: border-color .15s, background .15s, box-shadow .15s;
-      min-width: 150px;
+      min-width: 110px;
     }
     .sq-subdict-btn:hover { border-color: #93c5fd; background: #f0f7ff; }
     .sq-subdict-btn.active {
       border-color: #2563eb;
       background: #eff6ff;
-      box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+      box-shadow: none;
     }
     .sq-sdb-icon {
-      width: 34px; height: 34px; border-radius: 8px;
+      width: 26px; height: 26px; border-radius: 6px;
       background: #e8f0fe; display: flex; align-items: center;
       justify-content: center; flex-shrink: 0;
     }
     .sq-subdict-btn.active .sq-sdb-icon { background: #dbeafe; }
-    .sq-sdb-icon svg { width: 16px; height: 16px; stroke: #2563eb; fill: none; stroke-width: 2; }
+    .sq-sdb-icon svg { width: 13px; height: 13px; stroke: #2563eb; fill: none; stroke-width: 2; }
     .sq-sdb-body { display: flex; flex-direction: column; gap: 1px; text-align: left; }
-    .sq-sdb-label { font-size: 12.5px; font-weight: 600; color: #1a2b3c; }
+    .sq-sdb-label { font-size: 11.5px; font-weight: 600; color: #1a2b3c; }
     .sq-subdict-btn.active .sq-sdb-label { color: #2563eb; }
     .sq-sdb-count { font-size: 11px; color: #94a3b8; }
     .sq-subdict-btn.active .sq-sdb-count { color: #60a5fa; }
     #soraqcalarView { flex-direction: column; }
+    #soraqcalarView .tc-head {
+      gap: 12px;
+    }
+    .sq-tabs {
+      display: flex;
+      gap: 2px;
+      padding: 0;
+      border-bottom: none;
+      background: transparent;
+      flex-shrink: 0;
+    }
+    .sq-tab {
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #6b7a8d;
+      border: 1px solid #d8e4f0;
+      border-radius: 7px;
+      cursor: pointer;
+      background: #fff;
+      font-family: inherit;
+      transition: color .15s, background .15s;
+    }
+    .sq-tab:hover { color: #2563eb; background: #f0f5ff; border-color: #93c5fd; }
+    .sq-tab.active {
+      color: #fff;
+      background: #2057d4;
+      border-color: #1a47b8;
+      margin-bottom: 0;
+    }
     .sq-sdb-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .sq-sdb-actions {
       display: flex;
@@ -7565,13 +7595,13 @@
         <h2>Soraqçalar</h2>
         <span class="tc-badge">Master data idarəetmə</span>
       </div>
-    </div>
-    <div class="sq-tabs">
-      <button class="sq-tab active" data-sq-tab="assets" type="button">Aktivlər</button>
-      <button class="sq-tab" data-sq-tab="roads" type="button">Yollar</button>
-      <button class="sq-tab" data-sq-tab="segments" type="button">Seqmentlər</button>
-      <button class="sq-tab" data-sq-tab="passports" type="button">Pasportlar</button>
-      <button class="sq-tab" data-sq-tab="documents" type="button">Sənədlər</button>
+      <div class="sq-tabs">
+        <button class="sq-tab active" data-sq-tab="assets" type="button">Aktivlər</button>
+        <button class="sq-tab" data-sq-tab="roads" type="button">Yollar</button>
+        <button class="sq-tab" data-sq-tab="segments" type="button">Seqmentlər</button>
+        <button class="sq-tab" data-sq-tab="passports" type="button">Pasportlar</button>
+        <button class="sq-tab" data-sq-tab="documents" type="button">Sənədlər</button>
+      </div>
     </div>
     <div class="sq-tab-pane active" id="sqPane-assets">
       <div class="sq-subdict-bar">
