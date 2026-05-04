@@ -2802,7 +2802,7 @@
     }
 
     #assetInfoModal .modal-box {
-      max-width: 860px;
+      max-width: 980px;
     }
 
     .road-info-text {
@@ -2927,6 +2927,60 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px 12px;
+    }
+
+    .road-info-grid.is-tech {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .road-info-grid.is-tech .road-info-item {
+      border: 1px solid #e6edf5;
+      border-radius: 10px;
+      background: #f8fafc;
+      padding: 10px 12px;
+    }
+
+    .road-info-grid.is-tech .road-info-item.full {
+      grid-column: 1 / -1;
+      background: #fff;
+    }
+
+    .road-info-grid.is-tech .road-info-label {
+      margin-bottom: 4px;
+    }
+
+    .road-info-grid.is-tech .road-info-value {
+      line-height: 1.35;
+    }
+
+    .road-info-subhead {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+      margin-top: 4px;
+      padding-top: 8px;
+      border-top: 1px solid #edf2f7;
+    }
+
+    .road-info-subhead:first-child {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .road-info-subhead::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #f59e0b;
+      flex: 0 0 auto;
     }
 
     .road-info-item {
@@ -3090,7 +3144,8 @@
 
     @media (max-width: 760px) {
       .road-info-metrics,
-      .road-info-grid {
+      .road-info-grid,
+      .road-info-grid.is-tech {
         grid-template-columns: 1fr;
       }
 
@@ -4102,7 +4157,7 @@
     }
     .asset-dict-preview {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
       gap: 8px;
       padding: 10px;
       border: 1px solid #d8e4f0;
@@ -4114,6 +4169,9 @@
       display: flex;
       flex-direction: column;
       gap: 2px;
+    }
+    .asset-dict-preview-item.full {
+      grid-column: 1 / -1;
     }
     .asset-dict-preview-item span {
       font-size: 10px;
@@ -4130,6 +4188,12 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+    .asset-dict-preview-item.full strong {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+      line-height: 1.45;
     }
     .sq-names-btn {
       background: #2563eb !important;
@@ -7693,13 +7757,42 @@
         || null;
     }
 
+    function renderAssetSoraqcaPreview(item, values) {
+      const preview = document.getElementById('ac_soraqca_preview');
+      if (!preview) return;
+      const detailItems = item?.detailItems || [];
+      const rows = item ? [
+        { label: 'Soraqça', value: values.ac_nov },
+        { label: 'Təsviri', value: item.description || '', full: true },
+        { label: 'Qrup', value: values.ac_grup },
+        { label: 'Növ', value: values.ac_tip },
+        { label: 'GİS tipi', value: values.ac_gis_tip },
+        { label: 'Pasport tələb?', value: values.ac_pasport },
+        { label: 'Status', value: item.status === 'active' ? 'Aktiv' : (item.status === 'passive' ? 'Passiv' : item.status) },
+        ...detailItems
+          .filter(detail => !['Qrup', 'Növ', 'GİS tipi'].includes(detail.label))
+          .map(detail => ({ label: detail.label, value: detail.value })),
+      ] : [
+        { label: 'Soraqça', value: '' },
+        { label: 'Qrup', value: '' },
+        { label: 'Növ', value: '' },
+        { label: 'GİS tipi', value: '' },
+      ];
+      preview.innerHTML = rows.map(row => `
+        <div class="asset-dict-preview-item${row.full ? ' full' : ''}">
+          <span>${assetEsc(row.label)}</span>
+          <strong>${row.value ? assetEsc(row.value) : '-'}</strong>
+        </div>
+      `).join('');
+    }
+
     function setAssetSoraqcaFields(item) {
       const values = {
         ac_grup: item?.groupName || '',
         ac_nov: item?.name || '',
         ac_tip: item?.typeName || '',
         ac_gis_tip: item?.gisName || '',
-        ac_pasport: item?.typeName === 'Pasportlaşdırılan' ? 'Bəli' : (item ? 'Xeyr' : ''),
+        ac_pasport: (item?.passportRequired || item?.typeName === 'Pasportlaşdırılan') ? 'Bəli' : (item ? 'Xeyr' : ''),
       };
       Object.entries(values).forEach(([id, value]) => {
         const el = document.getElementById(id);
@@ -7709,15 +7802,7 @@
         }
         el.value = value;
       });
-      [
-        ['ac_grup_text', values.ac_grup],
-        ['ac_nov_text', values.ac_nov],
-        ['ac_tip_text', values.ac_tip],
-        ['ac_gis_tip_text', values.ac_gis_tip],
-      ].forEach(([id, value]) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = value || '-';
-      });
+      renderAssetSoraqcaPreview(item, values);
     }
 
     function populateAssetSoraqcaSelect(selectedValue) {
@@ -7725,9 +7810,21 @@
       if (!select) return;
       const selected = selectedValue !== undefined ? String(selectedValue || '') : select.value;
       const list = assetSoraqcaList();
-      select.innerHTML = '<option value="">Soraqça seçin...</option>' + list.map(item =>
-        `<option value="${assetEsc(item.id)}">${assetEsc(item.name)}</option>`
-      ).join('');
+      const grouped = list.reduce((acc, item) => {
+        const groupName = item.groupName || 'Qrup seçilməyib';
+        if (!acc[groupName]) acc[groupName] = [];
+        acc[groupName].push(item);
+        return acc;
+      }, {});
+      const options = Object.keys(grouped).sort((a,b) => a.localeCompare(b, 'az')).map(groupName => {
+        const items = grouped[groupName].sort((a,b) => a.name.localeCompare(b.name, 'az'));
+        return `<optgroup label="${assetEsc(groupName)}">` + items.map(item => {
+          const meta = [item.typeName, item.gisName].filter(Boolean).join(' / ');
+          const label = meta ? `${item.name} — ${meta}` : item.name;
+          return `<option value="${assetEsc(item.id)}">${assetEsc(label)}</option>`;
+        }).join('') + '</optgroup>';
+      }).join('');
+      select.innerHTML = '<option value="">Soraqça seçin...</option>' + (options || '<option value="" disabled>Aktiv soraqçası yoxdur</option>');
       if (selected && list.some(item => String(item.id) === selected)) select.value = selected;
     }
 
@@ -7830,14 +7927,16 @@
     document.getElementById('assetModalCancel').addEventListener('click', closeAssetModal);
 
     document.getElementById('assetSave').addEventListener('click', () => {
-      if (!document.getElementById('ac_nov').value) {
+      const selectedSoraqca = findAssetSoraqca(document.getElementById('ac_soraqca')?.value);
+      if (!selectedSoraqca) {
         alert('Aktiv soraqçası seçilməlidir.');
         goAssetStep(1);
         return;
       }
+      setAssetSoraqcaFields(selectedSoraqca);
       const asset = {
         code: document.getElementById('ac_kod').value,
-        soraqcaId: document.getElementById('ac_soraqca')?.value || '',
+        soraqcaId: selectedSoraqca.id,
         grup: document.getElementById('ac_grup').value,
         nov: document.getElementById('ac_nov').value,
         tip: document.getElementById('ac_tip').value,
@@ -8312,12 +8411,17 @@
         return esc(shown);
       }
 
-      function roadInfoItem(label, value) {
+      function roadInfoItem(label, value, extraClass = '') {
+        const itemClass = extraClass ? ` ${extraClass}` : '';
         return `
-          <div class="road-info-item">
+          <div class="road-info-item${itemClass}">
             <span class="road-info-label">${esc(label)}</span>
             <span class="road-info-value">${displayValue(value)}</span>
           </div>`;
+      }
+
+      function roadInfoSubhead(title) {
+        return `<div class="road-info-subhead">${esc(title)}</div>`;
       }
 
       function roadInfoMetric(label, value) {
@@ -8634,7 +8738,23 @@
 
         const road = roadByCode(asset.roadCode);
         const segment = segmentByCode(asset.segmentCode);
-        const coords = asset.lat || asset.lon ? `${asset.lat || '-'}, ${asset.lon || '-'}` : '-';
+        const hasLat = asset.lat !== undefined && asset.lat !== null && asset.lat !== '';
+        const hasLon = asset.lon !== undefined && asset.lon !== null && asset.lon !== '';
+        const coords = hasLat || hasLon ? `${hasLat ? asset.lat : '-'}, ${hasLon ? asset.lon : '-'}` : '-';
+        const assetSoraqca = typeof findAssetSoraqca === 'function' ? findAssetSoraqca(asset.soraqcaId, asset) : null;
+        const passportRequired = assetSoraqca
+          ? ((assetSoraqca.passportRequired || assetSoraqca.typeName === 'Pasportlaşdırılan') ? 'Bəli' : 'Xeyr')
+          : (asset.tip ? (asset.tip === 'Pasportlaşdırılan' ? 'Bəli' : 'Xeyr') : '-');
+        const soraqcaStatus = assetSoraqca?.status === 'active'
+          ? 'Aktiv'
+          : (assetSoraqca?.status === 'passive' ? 'Passiv' : (assetSoraqca?.status || '-'));
+        const assetSoraqcaDetails = (assetSoraqca?.allDetailItems || assetSoraqca?.detailItems || [])
+          .filter(detail => !['Qrup', 'Növ', 'GİS tipi'].includes(detail.label));
+        const assetSoraqcaDetailRows = assetSoraqcaDetails.length
+          ? assetSoraqcaDetails.map(detail => roadInfoItem(detail.label, detail.value)).join('')
+          : roadInfoItem('Əlavə soraqça atributları', 'Məlumat daxil edilməyib', 'full');
+        const roadTitle = road ? `${road.code} - ${road.name}` : asset.roadCode;
+        const segmentTitle = segment ? `${segment.code} (${segment.bas || '-'}-${segment.son || '-'} km)` : asset.segmentCode;
 
         return `
           <div class="road-info-hero">
@@ -8651,14 +8771,14 @@
           <div class="road-info-metrics">
             ${roadInfoMetric('km / PK', asset.km)}
             ${roadInfoMetric('GİS tipi', asset.gis_tip)}
-            ${roadInfoMetric('Seqment', asset.segmentCode)}
+            ${roadInfoMetric('Pasport tələb?', passportRequired)}
             ${roadInfoMetric('Status', asset.status)}
           </div>
           ${roadInfoSection('Əsas məlumatlar', `
             <div class="road-info-grid">
               ${roadInfoItem('Aktiv kodu', asset.code)}
-              ${roadInfoItem('Aid yol', road ? `${road.code} - ${road.name}` : asset.roadCode)}
-              ${roadInfoItem('Aid seqment', segment ? `${segment.code} (${segment.bas || '-'}-${segment.son || '-'} km)` : asset.segmentCode)}
+              ${roadInfoItem('Aid yol', roadTitle)}
+              ${roadInfoItem('Aid seqment', segmentTitle)}
               ${roadInfoItem('Aktiv qrupu', asset.grup)}
               ${roadInfoItem('Aktiv növü', asset.nov)}
               ${roadInfoItem('Aktiv tipi', asset.tip)}
@@ -8669,12 +8789,32 @@
             </div>
           `)}
           ${roadInfoSection('Texniki məlumatlar', `
-            <div class="road-info-grid">
+            <div class="road-info-grid is-tech">
+              ${roadInfoSubhead('Soraqça məlumatları')}
+              ${roadInfoItem('Soraqça', assetSoraqca?.name || asset.nov)}
+              ${roadInfoItem('Qrup', assetSoraqca?.groupName || asset.grup)}
+              ${roadInfoItem('Növ', assetSoraqca?.typeName || asset.tip)}
+              ${roadInfoItem('GİS tipi', assetSoraqca?.gisName || asset.gis_tip)}
+              ${roadInfoItem('Pasport tələb?', passportRequired)}
+              ${roadInfoItem('Soraqça statusu', soraqcaStatus)}
+              ${roadInfoItem('Soraqça təsviri', assetSoraqca?.description || '', 'full')}
+              ${assetSoraqcaDetailRows}
+
+              ${roadInfoSubhead('Yerləşmə və koordinatlar')}
+              ${roadInfoItem('Aid yol', roadTitle)}
+              ${roadInfoItem('Aid seqment', segmentTitle)}
+              ${roadInfoItem('km / PK', asset.km)}
               ${roadInfoItem('GİS koordinat', coords)}
+              ${roadInfoItem('Enlik', asset.lat)}
+              ${roadInfoItem('Uzunluq', asset.lon)}
+
+              ${roadInfoSubhead('İstismar və qeyd')}
               ${roadInfoItem('İdarə edən qurum', asset['idarə'])}
               ${roadInfoItem('İstismara verilmə tarixi', asset.tarix)}
               ${roadInfoItem('Ümumi texniki vəziyyət', asset.veziyyet)}
-              ${roadInfoItem('Qeyd', asset.qeyd)}
+              ${roadInfoItem('Hüquqi status', asset.huq)}
+              ${roadInfoItem('Aktiv statusu', asset.status)}
+              ${roadInfoItem('Qeyd', asset.qeyd, 'full')}
             </div>
           `)}`;
       }
@@ -10292,17 +10432,19 @@
           alert('Aktiv əlavə etmək üçün əvvəl seqmenti yadda saxlayın.');
           return;
         }
-        if (!document.getElementById('ac_nov').value) {
+        const selectedSoraqca = findAssetSoraqca(document.getElementById('ac_soraqca')?.value);
+        if (!selectedSoraqca) {
           alert('Aktiv soraqçası seçilməlidir.');
           goAssetStep(1);
           return;
         }
+        setAssetSoraqcaFields(selectedSoraqca);
         const previousAsset = global && globalAssetEditIdx >= 0 ? assetsData[globalAssetEditIdx] : null;
         const asset = {
           code: document.getElementById('ac_kod').value,
           roadCode,
           segmentCode,
-          soraqcaId: document.getElementById('ac_soraqca')?.value || '',
+          soraqcaId: selectedSoraqca.id,
           grup: document.getElementById('ac_grup').value,
           nov: document.getElementById('ac_nov').value,
           tip: document.getElementById('ac_tip').value,
@@ -11107,8 +11249,13 @@
 
         /* ─── HELPERS ─── */
         function sdStore(key) { return SD_CFG[key].store(); }
+        function sdRowField(row, field) {
+          if (field === 'groupId') return row.groupId ?? row.groupsId;
+          if (field === 'typeId') return row.typeId ?? row.typesId;
+          return row[field];
+        }
         function sdRelOptions(store, field, selected) {
-          const usedIds = new Set(sqNames.map(r => r[field]).filter(v => v !== undefined && v !== null && v !== ''));
+          const usedIds = new Set(sqNames.map(r => sdRowField(r, field)).filter(v => v !== undefined && v !== null && v !== ''));
           return store
             .filter(r => usedIds.has(r.id))
             .sort((a,b) => a.name.localeCompare(b.name, 'az'))
@@ -11127,9 +11274,9 @@
             (!s  || r.name.toLowerCase().includes(s) || (r.description||'').toLowerCase().includes(s)) &&
             (!st || r.status === st) &&
             (!isNames || (
-              (!gf || String(r.groupId) === gf) &&
-              (!tf || String(r.typeId) === tf) &&
-              (!gi || String(r.gisId) === gi)
+              (!gf || String(sdRowField(r, 'groupId')) === gf) &&
+              (!tf || String(sdRowField(r, 'typeId')) === tf) &&
+              (!gi || String(sdRowField(r, 'gisId')) === gi)
             ))
           );
           if (so === 'asc')  data = [...data].sort((a,b) => a.name.localeCompare(b.name, 'az'));
@@ -11152,22 +11299,59 @@
             if (el) el.textContent = arr.length + ' qeyd';
           });
         }
+
+        function sqLookupName(store, id) {
+          const item = store.find(x => x.id === id);
+          return item ? item.name : '';
+        }
+
+        function assetSoraqcaDetailItems(n, includeEmpty = false) {
+          const groupId = n.groupId ?? n.groupsId;
+          const typeId = n.typeId ?? n.typesId;
+          const details = [
+            {label:'Qrup', value:sqLookupName(sqGroups, groupId)},
+            {label:'Növ', value:sqLookupName(sqTypes, typeId)},
+            {label:'GİS tipi', value:sqLookupName(sqGis, n.gisId)},
+            {label:'Aktivin tipi', value:sqLookupName(sqActTypes, n.actTypesId || n.actTypeId)},
+            {label:'Qurğunun tipi', value:sqLookupName(sqStructTypes, n.structTypesId || n.structTypeId)},
+            {label:'Tikinti üsulu', value:sqLookupName(sqConstrMethod, n.constrMethodId)},
+            {label:'Material', value:sqLookupName(sqMaterial, n.materialId)},
+            {label:'Daşıyıcı konstruksiya', value:sqLookupName(sqLoadStruct, n.loadStructId)},
+            {label:'Ventilyasiya', value:sqLookupName(sqVentilation, n.ventilationId)},
+            {label:'Su maneəsi', value:sqLookupName(sqWaterBarrier, n.waterBarrierId)},
+            {label:'Alt keçid tipi', value:sqLookupName(sqUnderpassType, n.underpassTypeId)},
+            {label:'İstismar vəziyyəti', value:sqLookupName(sqCondition, n.conditionId)},
+            {label:'Monitorinq', value:sqLookupName(sqMonitoring, n.monitoringId)},
+            {label:'Deformasiya əlamətləri', value:sqLookupName(sqDeformation, n.deformationId)},
+          ];
+          return includeEmpty ? details : details.filter(detail => detail.value);
+        }
+
         window.getAssetSoraqcalar = function() {
           return sqNames
             .filter(n => n.status === 'active')
             .map(n => {
-              const grp = sqGroups.find(g => g.id === n.groupId);
-              const typ = sqTypes.find(t => t.id === n.typeId);
-              const gis = sqGis.find(g => g.id === n.gisId);
+              const groupId = n.groupId ?? n.groupsId;
+              const typeId = n.typeId ?? n.typesId;
+              const gisId = n.gisId;
+              const typeName = sqLookupName(sqTypes, typeId);
               return {
                 id: n.id,
                 name: n.name,
-                groupName: grp ? grp.name : '',
-                typeName: typ ? typ.name : '',
-                gisName: gis ? gis.name : '',
+                description: n.description || '',
+                groupId,
+                typeId,
+                gisId,
+                groupName: sqLookupName(sqGroups, groupId),
+                typeName,
+                gisName: sqLookupName(sqGis, gisId),
+                passportRequired: typeName === 'Pasportlaşdırılan',
+                detailItems: assetSoraqcaDetailItems(n),
+                allDetailItems: assetSoraqcaDetailItems(n, true),
                 status: n.status,
               };
-            });
+            })
+            .sort((a,b) => a.name.localeCompare(b.name, 'az'));
         };
 
         function renderSimpleDictTable(key, areaId) {
@@ -11331,9 +11515,9 @@
               const stBadge = r.status === 'active' ? badge('Aktiv','b-green') : badge('Passiv','b-gray');
               let relCols = '';
               if (isNames) {
-                const grp = sqGroups.find(x => x.id === r.groupId);
-                const typ = sqTypes.find(x => x.id === r.typeId);
-                const gis = sqGis.find(x => x.id === r.gisId);
+                const grp = sqGroups.find(x => x.id === sdRowField(r, 'groupId'));
+                const typ = sqTypes.find(x => x.id === sdRowField(r, 'typeId'));
+                const gis = sqGis.find(x => x.id === sdRowField(r, 'gisId'));
                 relCols = `<td style="font-size:12px;">${esc(grp?grp.name:'—')}</td>
                            <td style="font-size:12px;">${esc(typ?typ.name:'—')}</td>
                            <td style="font-size:12px;">${esc(gis?gis.name:'—')}</td>`;
@@ -11531,9 +11715,9 @@
             document.getElementById('sq_modal_desc').value   = r.description || '';
             document.getElementById('sq_modal_status').value = r.status;
             if (isNames) {
-              document.getElementById('sq_modal_group').value = r.groupId || '';
-              document.getElementById('sq_modal_type').value  = r.typeId  || '';
-              document.getElementById('sq_modal_gis').value   = r.gisId   || '';
+              document.getElementById('sq_modal_group').value = sdRowField(r, 'groupId') || '';
+              document.getElementById('sq_modal_type').value  = sdRowField(r, 'typeId')  || '';
+              document.getElementById('sq_modal_gis').value   = sdRowField(r, 'gisId')   || '';
             }
           } else {
             document.getElementById('sq_modal_name').value   = '';
@@ -11814,6 +11998,12 @@
           }).join('');
         }
 
+        function snaAttrKey(catKey) {
+          if (catKey === 'groups') return 'groupId';
+          if (catKey === 'types') return 'typeId';
+          return catKey + 'Id';
+        }
+
         function openNewActiveModal() {
           document.getElementById('sna_name').value = '';
           document.getElementById('sna_desc').value = '';
@@ -11844,7 +12034,7 @@
             alert('Bu adda soraqça artıq mövcuddur'); return;
           }
           var attrs = {};
-          Object.keys(snaSelected).forEach(function(k){ attrs[k + 'Id'] = snaSelected[k].itemId; });
+          Object.keys(snaSelected).forEach(function(k){ attrs[snaAttrKey(k)] = snaSelected[k].itemId; });
           var newId = Math.max.apply(null, [0].concat(sqNames.map(function(n){ return n.id; }))) + 1;
           sqNames.push(Object.assign({ id:newId, name:name, description:desc, status:'active' }, attrs));
           closeNewActiveModal();
@@ -11984,6 +12174,9 @@
           document.getElementById('sqndSub').textContent   = r.status === 'active' ? 'Aktiv soraqça' : 'Passiv soraqça';
 
           const lk = (arr, fid) => { const it = arr.find(x => x.id === fid); return it ? esc(it.name) : null; };
+          const groupId = r.groupId ?? r.groupsId;
+          const typeId = r.typeId ?? r.typesId;
+          const gisId = r.gisId;
 
           const chip = (label, val) => val
             ? `<div class="sqnd-chip"><span class="sqnd-chip-lbl">${label}</span><span class="sqnd-chip-val">${val}</span></div>`
@@ -12008,9 +12201,9 @@
             <div class="sqnd-section">
               <div class="sqnd-section-title">Xüsusiyyətlər</div>
               <div class="sqnd-chips-grid">
-                ${chip('Qrup',                   lk(sqGroups, r.groupId))}
-                ${chip('Növ',                    lk(sqTypes,  r.typeId))}
-                ${chip('GİS tipi',               lk(sqGis,    r.gisId))}
+                ${chip('Qrup',                   lk(sqGroups, groupId))}
+                ${chip('Növ',                    lk(sqTypes,  typeId))}
+                ${chip('GİS tipi',               lk(sqGis,    gisId))}
                 ${chip('Aktivin tipi',           lk(sqActTypes,     r.actTypesId     || r.actTypeId))}
                 ${chip('Qurğunun tipi',          lk(sqStructTypes,  r.structTypesId  || r.structTypeId))}
                 ${chip('Tikinti üsulu',          lk(sqConstrMethod, r.constrMethodId))}
