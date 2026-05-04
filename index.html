@@ -3919,6 +3919,103 @@
     }
     .sq-placeholder svg { width: 44px; height: 44px; opacity: .3; }
     .sq-placeholder p { font-size: 13px; }
+    .sq-cat-combo {
+      position: relative;
+      min-width: 210px;
+      max-width: 260px;
+      flex-shrink: 0;
+    }
+    .sq-cat-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 6px 10px;
+      border: 1px solid #d8e4f0;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #fff;
+      font-size: 12px;
+      font-family: inherit;
+      color: #1a2b3c;
+      user-select: none;
+      transition: border-color .13s;
+    }
+    .sq-cat-trigger:hover { border-color: #93c5fd; }
+    .sq-cat-trigger.open { border-color: #3b82f6; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+    .sq-cat-trigger svg { width: 13px; height: 13px; stroke: #94a3b8; fill: none; stroke-width: 2; flex-shrink: 0; transition: transform .15s; }
+    .sq-cat-trigger.open svg { transform: rotate(180deg); }
+    .sq-cat-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sq-cat-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0; right: 0;
+      background: #fff;
+      border: 1px solid #3b82f6;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      z-index: 200;
+      display: none;
+      flex-direction: column;
+    }
+    .sq-cat-dropdown.open { display: flex; }
+    .sq-cat-search-wrap {
+      padding: 6px 7px;
+      border-bottom: 1px solid #e8f0fb;
+    }
+    .sq-cat-search-input {
+      width: 100%;
+      height: 28px;
+      border: 1px solid #d8e4f0;
+      border-radius: 6px;
+      padding: 0 8px;
+      font-size: 11.5px;
+      font-family: inherit;
+      color: #1a2b3c;
+      outline: none;
+      background: #f8fafc;
+    }
+    .sq-cat-search-input:focus { border-color: #3b82f6; background: #fff; }
+    .sq-cat-list {
+      max-height: 220px;
+      overflow-y: auto;
+      padding: 3px 0;
+      scrollbar-width: thin;
+      scrollbar-color: #3b82f6 transparent;
+    }
+    .sq-cat-list::-webkit-scrollbar { width: 4px; }
+    .sq-cat-list::-webkit-scrollbar-track { background: transparent; }
+    .sq-cat-list::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 999px; }
+    .sq-cat-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 11px;
+      font-size: 12px;
+      cursor: pointer;
+      color: #1a2b3c;
+      transition: background .1s;
+    }
+    .sq-cat-option svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.8; flex-shrink: 0; opacity: .65; }
+    .sq-cat-option:hover { background: #eff6ff; color: #2563eb; }
+    .sq-cat-option:hover svg { opacity: 1; }
+    .sq-cat-option.active { background: #2057d4; color: #fff; }
+    .sq-cat-option.active svg { opacity: 1; stroke: #fff; }
+    .sq-cat-group-label { padding: 4px 11px 2px; font-size: 10px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: .05em; }
+    .sq-cat-divider { height: 1px; background: #e8f0fb; margin: 3px 0; }
+    .sq-cat-names-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 12px; height: 34px;
+      border: 1px solid #d8e4f0; border-radius: 8px;
+      background: #fff; cursor: pointer;
+      font-size: 12px; color: #1a2b3c; font-family: inherit;
+      white-space: nowrap; flex-shrink: 0;
+      transition: border-color .13s, background .13s, color .13s;
+    }
+    .sq-cat-names-btn svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.8; opacity: .65; }
+    .sq-cat-names-btn:hover { border-color: #93c5fd; color: #2563eb; }
+    .sq-cat-names-btn.active { background: #2057d4; border-color: #2057d4; color: #fff; }
+    .sq-cat-names-btn.active svg { opacity: 1; stroke: #fff; }
     .sq-subdict-bar {
       display: flex;
       gap: 6px;
@@ -4067,8 +4164,328 @@
     }
     .sna-divider-line { flex: 1; height: 1px; background: #e8eef6; }
     .sna-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    #sqNewActiveModal .modal-box { max-width: 560px; overflow: visible; }
+    #sqNewActiveModal .modal-body { overflow: visible; }
     #sqNewActiveModal .modal-foot { padding: 14px 20px; justify-content: flex-end; gap: 10px; }
     #sqNewActiveModal .modal-foot .fbtn { min-width: 100px; }
+    .sna-modal-body { padding: 16px 20px; }
+
+    /* ─── 2-picker ─── */
+    .sna-2pick { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 10px; }
+    .sna-pick-col { flex: 1; position: relative; min-width: 0; }
+    .sna-pick-trigger { display: flex; align-items: center; gap: 6px; padding: 8px 11px; border: 1px solid #d8e4f0; border-radius: 8px; cursor: pointer; background: #fff; user-select: none; transition: border-color .13s, background .13s; }
+    .sna-pick-trigger:hover { border-color: #93c5fd; }
+    .sna-pick-trigger.open { border-color: #3b82f6; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+    .sna-pick-trigger span { flex: 1; font-size: 12px; color: #9ca3af; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sna-pick-trigger span.chosen { color: #1d4ed8; font-weight: 500; }
+    .sna-pick-trigger svg { width: 13px; height: 13px; fill: none; stroke: #94a3b8; stroke-width: 2.5; flex-shrink: 0; transition: transform .15s; }
+    .sna-pick-trigger.open svg { transform: rotate(180deg); }
+    .sna-pick-dropdown { display: none; position: absolute; left: 0; right: 0; top: 100%; z-index: 9999; background: #fff; border: 1px solid #3b82f6; border-top: none; border-radius: 0 0 8px 8px; }
+    .sna-pick-dropdown.open { display: block; }
+    .sna-pick-opts { max-height: 200px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #3b82f6 transparent; }
+    .sna-pick-opts::-webkit-scrollbar { width: 4px; }
+    .sna-pick-opts::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 999px; }
+    .sna-pick-opt { display: flex; align-items: center; gap: 8px; padding: 7px 11px; font-size: 12px; color: #1a2b3c; cursor: pointer; transition: background .1s; }
+    .sna-pick-opt svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.5; flex-shrink: 0; opacity: 0; }
+    .sna-pick-opt:hover { background: #eff6ff; color: #2563eb; }
+    .sna-pick-opt.chosen { background: #2057d4; color: #fff; }
+    .sna-pick-opt.chosen svg { opacity: 1; stroke: #fff; }
+    .sna-pick-opt.has-val { color: #15803d; }
+    .sna-pick-opt.has-val.chosen { background: #2057d4; color: #fff; }
+    .sna-opt-badge { font-size: 10.5px; background: #dbeafe; color: #1d4ed8; border-radius: 10px; padding: 1px 6px; margin-left: auto; flex-shrink: 0; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sna-pick-opt.chosen .sna-opt-badge { background: rgba(255,255,255,.2); color: #fff; }
+    .sna-pick-add { width: 36px; height: 36px; flex-shrink: 0; border: 1.5px solid #3b82f6; border-radius: 8px; background: #eff6ff; color: #2563eb; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .13s; }
+    .sna-pick-add:hover { background: #2057d4; color: #fff; border-color: #2057d4; }
+    .sna-pick-add svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.5; }
+
+    /* ─── selected chips ─── */
+    .sna-selected-list { min-height: 36px; border: 1px solid #e2eaf4; border-radius: 8px; padding: 6px 8px; display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; align-content: flex-start; }
+    .sna-selected-empty { font-size: 11.5px; color: #94a3b8; line-height: 24px; }
+    .sna-selected-chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 6px 3px 9px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 20px; font-size: 11.5px; }
+    .sna-selected-chip .chip-cat { font-weight: 600; color: #1d4ed8; }
+    .sna-selected-chip .chip-sep { color: #93c5fd; }
+    .sna-selected-chip .chip-val { color: #2563eb; }
+    .sna-selected-chip button { background: none; border: none; cursor: pointer; color: #93c5fd; padding: 1px; line-height: 1; display: flex; align-items: center; margin-left: 2px; }
+    .sna-selected-chip button:hover { color: #dc2626; }
+    .sna-selected-chip button svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2.5; }
+
+    /* ─── sqnd detail modal ─── */
+    .sq-name-cell {
+      font-weight: 600;
+      color: #1d4ed8;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color .12s;
+    }
+    .sq-name-cell:hover {
+      color: #153f9f;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .sq-name-cell:focus-visible {
+      outline: 2px solid #93c5fd;
+      outline-offset: -2px;
+    }
+    #sdTable tbody tr td {
+      transition: background .12s, color .12s;
+    }
+    #sdTable tbody tr:hover td,
+    #sdTable tbody tr:hover td:last-child:not(.empty-cell) {
+      background: #f3f8ff;
+    }
+    #sdTable tbody tr:hover .sq-name-cell {
+      color: #153f9f;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    #sqNameDetailModal {
+      z-index: 1200;
+      background: rgba(15, 23, 42, .42);
+      backdrop-filter: blur(2px);
+    }
+    #sqNameDetailModal .sqnd-box {
+      width: min(620px, calc(100vw - 32px));
+      max-height: min(720px, calc(100vh - 40px));
+      background: #fff;
+      border: 1px solid #dbe7f5;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 24px 70px rgba(15, 23, 42, .22);
+    }
+    .sqnd-head {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 20px;
+      background: linear-gradient(135deg, #1e3a5f 0%, #2057d4 100%);
+      color: #fff;
+    }
+    .sqnd-head-icon,
+    .sqnd-hero-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .sqnd-head-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      background: rgba(255, 255, 255, .15);
+    }
+    .sqnd-head-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.9;
+    }
+    .sqnd-head-text {
+      flex: 1;
+      min-width: 0;
+    }
+    .sqnd-head-title {
+      font-size: 17px;
+      font-weight: 750;
+      line-height: 1.25;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .sqnd-head-sub {
+      margin-top: 3px;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, .74);
+    }
+    .sqnd-close-btn {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: 9px;
+      background: rgba(255, 255, 255, .08);
+      color: rgba(255, 255, 255, .86);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .12s, border-color .12s, color .12s;
+    }
+    .sqnd-close-btn:hover {
+      background: rgba(255, 255, 255, .17);
+      border-color: rgba(255, 255, 255, .34);
+      color: #fff;
+    }
+    .sqnd-close-btn svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+    }
+    .sqnd-body {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      background: #fff;
+    }
+    .sqnd-body::-webkit-scrollbar { width: 4px; }
+    .sqnd-body::-webkit-scrollbar-thumb { background: #93c5fd; border-radius: 999px; }
+    .sqnd-hero {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 20px 22px 18px;
+      border-bottom: 1px solid #eef2f8;
+      background: #f8fbff;
+    }
+    .sqnd-hero-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #eff6ff;
+      border: 1px solid #dbeafe;
+      color: #2563eb;
+    }
+    .sqnd-hero-icon svg {
+      width: 21px;
+      height: 21px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+    }
+    .sqnd-hero-info { min-width: 0; }
+    .sqnd-hero-name {
+      font-size: 16px;
+      font-weight: 750;
+      color: #0f172a;
+      line-height: 1.35;
+      margin-bottom: 5px;
+      overflow-wrap: anywhere;
+    }
+    .sqnd-hero-desc {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+    .sqnd-section {
+      padding: 16px 22px;
+      border-bottom: 1px solid #eef2f8;
+    }
+    .sqnd-section:last-child {
+      border-bottom: none;
+      padding-bottom: 20px;
+    }
+    .sqnd-section-title {
+      font-size: 11px;
+      font-weight: 750;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 10px;
+    }
+    .sqnd-chips-row,
+    .sqnd-chips-grid {
+      display: grid;
+      gap: 8px;
+    }
+    .sqnd-chips-row {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .sqnd-chips-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .sqnd-chip {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: #f8fafc;
+      border: 1px solid #e2eaf6;
+    }
+    .sqnd-chip-empty {
+      background: #fbfdff;
+    }
+    .sqnd-chip-lbl {
+      font-size: 10px;
+      font-weight: 750;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      line-height: 1.2;
+    }
+    .sqnd-chip-val {
+      font-size: 13px;
+      font-weight: 650;
+      color: #1e3a5f;
+      line-height: 1.35;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .sqnd-chip-dash {
+      font-size: 13px;
+      color: #cbd5e1;
+      line-height: 1.35;
+    }
+    .sqnd-foot {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      padding: 14px 20px;
+      border-top: 1px solid #ecf1f8;
+      background: #fff;
+    }
+    .sqnd-foot .fbtn {
+      min-width: 96px;
+      justify-content: center;
+    }
+    @media (max-width: 640px) {
+      #sqNameDetailModal {
+        align-items: flex-end;
+        padding: 12px;
+      }
+      #sqNameDetailModal .sqnd-box {
+        width: 100%;
+        max-height: calc(100vh - 24px);
+        border-radius: 14px;
+      }
+      .sqnd-head {
+        padding: 15px 16px;
+      }
+      .sqnd-head-title {
+        font-size: 15px;
+      }
+      .sqnd-hero {
+        grid-template-columns: auto minmax(0, 1fr);
+        padding: 16px;
+      }
+      .sqnd-hero > div:last-child {
+        grid-column: 2;
+      }
+      .sqnd-section {
+        padding: 14px 16px;
+      }
+      .sqnd-chips-row,
+      .sqnd-chips-grid {
+        grid-template-columns: 1fr;
+      }
+      .sqnd-foot {
+        padding: 12px 16px;
+      }
+      .sqnd-foot .fbtn {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 
@@ -7597,44 +8014,43 @@
       </div>
       <div class="sq-tabs">
         <button class="sq-tab active" data-sq-tab="assets" type="button">Aktivlər</button>
-        <button class="sq-tab" data-sq-tab="roads" type="button">Yollar</button>
-        <button class="sq-tab" data-sq-tab="segments" type="button">Seqmentlər</button>
         <button class="sq-tab" data-sq-tab="passports" type="button">Pasportlar</button>
         <button class="sq-tab" data-sq-tab="documents" type="button">Sənədlər</button>
       </div>
     </div>
     <div class="sq-tab-pane active" id="sqPane-assets">
       <div class="sq-subdict-bar">
-        <div class="sq-sdb-left">
-          <button class="sq-subdict-btn active" data-subdict="groups" type="button">
-            <div class="sq-sdb-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 10h16M4 14h10M4 18h7"/></svg></div>
-            <div class="sq-sdb-body">
-              <div class="sq-sdb-label">Qrup</div>
-              <div class="sq-sdb-count" id="sdCount-groups">9 qeyd</div>
+        <div class="sq-cat-combo" id="sqCatCombo">
+          <div class="sq-cat-trigger" id="sqCatTrigger">
+            <span class="sq-cat-label" id="sqCatLabel">Qrup</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="sq-cat-dropdown" id="sqCatDropdown">
+            <div class="sq-cat-search-wrap">
+              <input type="text" id="sqCatSearch" class="sq-cat-search-input" placeholder="Axtar...">
             </div>
-          </button>
-          <button class="sq-subdict-btn" data-subdict="types" type="button">
-            <div class="sq-sdb-icon"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg></div>
-            <div class="sq-sdb-body">
-              <div class="sq-sdb-label">Növ</div>
-              <div class="sq-sdb-count" id="sdCount-types">3 qeyd</div>
+            <div class="sq-cat-list" id="sqCatList">
+              <div class="sq-cat-option active" data-value="groups"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Qrup</div>
+              <div class="sq-cat-option" data-value="types"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Növ</div>
+              <div class="sq-cat-option" data-value="gis"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z"/></svg>GİS tipi</div>
+              <div class="sq-cat-option" data-value="actTypes"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>Aktivin tipi</div>
+              <div class="sq-cat-option" data-value="structTypes"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Qurğunun tipi</div>
+              <div class="sq-cat-option" data-value="constrMethod"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Tikinti üsulu</div>
+              <div class="sq-cat-option" data-value="material"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Material</div>
+              <div class="sq-cat-option" data-value="loadStruct"><svg viewBox="0 0 24 24"><path d="M2 20h20"/><path d="M6 20V10"/><path d="M18 20V10"/><path d="M2 10c3-4 7-6 10-6s7 2 10 6"/></svg>Daşıyıcı konstruksiya tipi</div>
+              <div class="sq-cat-option" data-value="ventilation"><svg viewBox="0 0 24 24"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2 2 0 1 1 19 12H2"/></svg>Ventilyasiya sistemi</div>
+              <div class="sq-cat-option" data-value="waterBarrier"><svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>Su maneəsinin tipi</div>
+              <div class="sq-cat-option" data-value="underpassType"><svg viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M3 6c0 6 18 6 18 0"/><path d="M3 18h18"/></svg>Alt keçidin tipi</div>
+              <div class="sq-cat-option" data-value="condition"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>İstismar vəziyyəti</div>
+              <div class="sq-cat-option" data-value="monitoring"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Monitorinq sistemi</div>
+              <div class="sq-cat-option" data-value="deformation"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Deformasiya əlamətləri</div>
             </div>
-          </button>
-          <button class="sq-subdict-btn" data-subdict="gis" type="button">
-            <div class="sq-sdb-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
-            <div class="sq-sdb-body">
-              <div class="sq-sdb-label">GİS tipi</div>
-              <div class="sq-sdb-count" id="sdCount-gis">3 qeyd</div>
-            </div>
-          </button>
-          <button class="sq-subdict-btn sq-names-btn" data-subdict="names" type="button">
-            <div class="sq-sdb-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
-            <div class="sq-sdb-body">
-              <div class="sq-sdb-label">Soraqçalar</div>
-              <div class="sq-sdb-count" id="sdCount-names">0 qeyd</div>
-            </div>
-          </button>
+          </div>
         </div>
+        <button class="sq-cat-names-btn" id="sqCatNamesBtn" type="button">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Soraqçalar
+        </button>
         <div class="sq-sdb-actions">
           <button class="sq-reset-btn" id="sdSearchReset" type="button" style="display:none;">
             <svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg> Sıfırla
@@ -7647,29 +8063,45 @@
       </div>
       <div id="sqSubDictArea" style="display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;"></div>
     </div>
-    <div class="sq-tab-pane" id="sqPane-roads">
-      <div class="sq-placeholder">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17l4-8 4 4 4-6 4 4"/><path d="M3 21h18"/></svg>
-        <p>Yollar soraqçası hazırlanır</p>
-      </div>
-    </div>
-    <div class="sq-tab-pane" id="sqPane-segments">
-      <div class="sq-placeholder">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1.2"/><rect x="14" y="3" width="7" height="7" rx="1.2"/><rect x="3" y="14" width="7" height="7" rx="1.2"/><rect x="14" y="14" width="7" height="7" rx="1.2"/></svg>
-        <p>Seqmentlər soraqçası hazırlanır</p>
-      </div>
-    </div>
     <div class="sq-tab-pane" id="sqPane-passports">
-      <div class="sq-placeholder">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        <p>Pasportlar soraqçası hazırlanır</p>
+      <div class="sq-subdict-bar">
+        <div class="sq-sdb-left">
+          <button class="sq-subdict-btn active" type="button">
+            <span class="sq-sdb-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15l2 2 4-5"/></svg></span>
+            <span class="sq-sdb-body">
+              <span class="sq-sdb-label">Pasportun statusu</span>
+              <span class="sq-sdb-count" id="sdCount-passportStatus">0 qeyd</span>
+            </span>
+          </button>
+        </div>
+        <div class="sq-sdb-actions">
+          <button class="btn-new" id="btnPassportStatusNew" type="button" style="height:36px;padding:0 14px;font-size:12.5px;">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Yeni status
+          </button>
+        </div>
       </div>
+      <div id="sqPassportStatusArea" style="display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;"></div>
     </div>
     <div class="sq-tab-pane" id="sqPane-documents">
-      <div class="sq-placeholder">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/></svg>
-        <p>Sənədlər soraqçası hazırlanır</p>
+      <div class="sq-subdict-bar">
+        <div class="sq-sdb-left">
+          <button class="sq-subdict-btn active" type="button">
+            <span class="sq-sdb-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M8 13h8"/><path d="M8 17h5"/></svg></span>
+            <span class="sq-sdb-body">
+              <span class="sq-sdb-label">Sənəd növü</span>
+              <span class="sq-sdb-count" id="sdCount-documentTypes">0 qeyd</span>
+            </span>
+          </button>
+        </div>
+        <div class="sq-sdb-actions">
+          <button class="btn-new" id="btnDocumentTypeNew" type="button" style="height:36px;padding:0 14px;font-size:12.5px;">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Yeni sənəd növü
+          </button>
+        </div>
       </div>
+      <div id="sqDocumentTypeArea" style="display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;"></div>
     </div>
   </div>`);
 
@@ -10509,6 +10941,92 @@
           {id:21, name:'Xətt',  description:'Xəritədə xətt geometriyası ilə göstərilən aktiv',  status:'active'},
           {id:22, name:'Sahə',  description:'Xəritədə sahə (polygon) geometriyası ilə göstərilən aktiv', status:'active'},
         ];
+        let sqActTypes = [
+          {id:101, name:'Tunel',                  description:'Dağ, torpaq və ya su altından keçid qurğusu',          status:'active'},
+          {id:102, name:'Yeraltı keçid',          description:'Yerin altından keçən piyada və ya nəqliyyat keçidi',    status:'active'},
+          {id:103, name:'Yerüstü keçid',          description:'Hündürlükdə yerləşən piyada keçidi',                   status:'active'},
+          {id:104, name:'Körpü',                  description:'Maneə üzərindən keçidi təmin edən qurğu',              status:'active'},
+          {id:105, name:'Estakada',               description:'Hündürlükdə yerləşən yol konstruksiyası',              status:'active'},
+          {id:106, name:'Drenaj qurğusu',         description:'Suyun axımını tənzimləyən quruluş',                   status:'active'},
+          {id:107, name:'Hasarlama qurğusu',      description:'Yolu əhatə edən mühafizə qurğusu',                    status:'active'},
+          {id:108, name:'Nişanlama elementləri',  description:'Hərəkəti istiqamətləndirən nişan və işarələr',         status:'active'},
+        ];
+        let sqStructTypes = [
+          {id:201, name:'Avtomobil tuneli',        description:'Nəqliyyat vasitələri üçün nəzərdə tutulmuş tunel',     status:'active'},
+          {id:202, name:'Piyada tuneli',           description:'Piyada hərəkəti üçün yeraltı tunel',                  status:'active'},
+          {id:203, name:'Piyada keçidi',           description:'Yerüstü piyada körpüsü və ya keçidi',                 status:'active'},
+          {id:204, name:'Dəmir yolu tuneli',       description:'Dəmir yolu nəqliyyatı üçün tunel',                    status:'active'},
+          {id:205, name:'Kirişli körpü',           description:'Polad kiriş konstruksiyalı körpü',                    status:'active'},
+          {id:206, name:'Boks körpüsü',            description:'Qapalı qutu formalı körpü konstruksiyası',            status:'active'},
+          {id:207, name:'Asma körpü',              description:'Kabel dayaqları ilə saxlanılan körpü',                status:'active'},
+          {id:208, name:'Boru körpüsü',            description:'Boru formalı keçid qurğusu',                         status:'active'},
+        ];
+        let sqConstrMethod = [
+          {id:301, name:'Açıq üsul',         description:'Torpağı açaraq tikinti aparılan üsul',              status:'active'},
+          {id:302, name:'Qapalı üsul',        description:'Torpağı açmadan yeraltı tikinti üsulu',             status:'active'},
+          {id:303, name:'Prefabrik üsul',     description:'Hazır elementlərin quraşdırılması ilə tikinti',     status:'active'},
+          {id:304, name:'Monolit üsul',       description:'Yerində tökmə beton ilə tikinti',                   status:'active'},
+          {id:305, name:'Kombinəolunmuş',     description:'Açıq və qapalı üsulların birləşməsi',              status:'active'},
+        ];
+        let sqMaterial = [
+          {id:401, name:'Beton',              description:'Adi beton materialı',                               status:'active'},
+          {id:402, name:'Dəmir-beton',        description:'Armaturla gücləndirilmiş beton',                   status:'active'},
+          {id:403, name:'Polad',              description:'Konstruktiv polad elementlər',                      status:'active'},
+          {id:404, name:'Daş hörgü',          description:'Təbii daş materialından hörgü',                    status:'active'},
+          {id:405, name:'Kompozit material',  description:'Polad-beton kompozit konstruksiya',                 status:'active'},
+          {id:406, name:'Ağac',               description:'Ağac konstruktiv elementlər',                      status:'active'},
+        ];
+        let sqLoadStruct = [
+          {id:501, name:'Tağ konstruksiyası',    description:'Tağ formalı daşıyıcı konstruksiya',              status:'active'},
+          {id:502, name:'Çərçivə konstruksiyası',description:'Çərçivə tipli daşıyıcı sistem',                 status:'active'},
+          {id:503, name:'Kiriş konstruksiyası',  description:'Kiriş əsaslı daşıyıcı sistem',                  status:'active'},
+          {id:504, name:'Qövs konstruksiyası',   description:'Qövs formalı yük daşıyan element',              status:'active'},
+          {id:505, name:'Divar konstruksiyası',  description:'Dayaq divarı tipli konstruksiya',                status:'active'},
+        ];
+        let sqVentilation = [
+          {id:601, name:'Mexaniki ventilyasiya', description:'Ventilyator ilə hava dövranı',                   status:'active'},
+          {id:602, name:'Təbii ventilyasiya',    description:'Təbii hava axını ilə havalandırma',              status:'active'},
+          {id:603, name:'Uzununa ventilyasiya',  description:'Tunel boyunca axan hava cərəyanı',               status:'active'},
+          {id:604, name:'Köndələn ventilyasiya', description:'Tunel eninə hava dövranı sistemi',               status:'active'},
+          {id:605, name:'Yarımköndələn',         description:'Yarım köndələn ventilyasiya sistemi',            status:'active'},
+        ];
+        let sqWaterBarrier = [
+          {id:701, name:'Çay',                description:'Çay üzərindən keçid',                               status:'active'},
+          {id:702, name:'Kanal',              description:'Süni kanal üzərindən keçid',                        status:'active'},
+          {id:703, name:'Dəniz/göl',          description:'Dəniz və ya göl üzərindən keçid',                  status:'active'},
+          {id:704, name:'Bataqlıq',           description:'Bataqlıq ərazidən keçid',                          status:'active'},
+          {id:705, name:'Arx',                description:'Kiçik su axarı üzərindən keçid',                   status:'active'},
+        ];
+        let sqUnderpassType = [
+          {id:801, name:'Avtomobil yolu',     description:'Nəqliyyat yolu altından keçid',                    status:'active'},
+          {id:802, name:'Dəmir yolu',         description:'Dəmir yolu altından keçid',                        status:'active'},
+          {id:803, name:'Piyada yolu',        description:'Piyada ərazisi altından keçid',                    status:'active'},
+          {id:804, name:'Kanal/çay',          description:'Su obyekti altından keçid',                        status:'active'},
+          {id:805, name:'Bina',               description:'Bina altından keçid',                              status:'active'},
+        ];
+        let sqCondition = [
+          {id:901, name:'Yaxşı',              description:'Qüsursuz, tam istismar yararlı vəziyyət',           status:'active'},
+          {id:902, name:'Qənaətbəxş',        description:'Kiçik qüsurlar var, istismara yararlı',             status:'active'},
+          {id:903, name:'Orta',               description:'Mülayim zədələnmə, baxım tələb olunur',            status:'active'},
+          {id:904, name:'Qeyri-qənaətbəxş',  description:'Ciddi qüsurlar, təmir tələb olunur',               status:'active'},
+          {id:905, name:'Yararsız',           description:'İstismar üçün yararsız, bərpa lazımdır',           status:'active'},
+        ];
+        let sqMonitoring = [
+          {id:1001, name:'Kamera sistemi',      description:'Video müşahidə kameraları',                       status:'active'},
+          {id:1002, name:'Sensor sistemi',      description:'Mühit ölçü sensorları',                          status:'active'},
+          {id:1003, name:'Deformasiya sensoru', description:'Konstruksiya deformasiyasını ölçən sensor',      status:'active'},
+          {id:1004, name:'Hava stansiyası',     description:'Meteoroloji ölçmə qurğusu',                      status:'active'},
+          {id:1005, name:'Yanğın sistemi',      description:'Yanğın aşkarlama və söndürmə sistemi',            status:'active'},
+          {id:1006, name:'İşıqlandırma',        description:'Avtomatik işıqlandırma sistemi',                  status:'active'},
+        ];
+        let sqDeformation = [
+          {id:1101, name:'Çatlar',             description:'Konstruksiyada görünən çat izləri',                status:'active'},
+          {id:1102, name:'Çökmə',              description:'Torpaq və ya konstruksiyanın çökməsi',             status:'active'},
+          {id:1103, name:'Sızma',              description:'Su sızması və nəmlik',                             status:'active'},
+          {id:1104, name:'Korroziya',          description:'Metal elementlərin paslanması',                    status:'active'},
+          {id:1105, name:'Aşınma',             description:'Səthin aşınması və sürtünməsi',                   status:'active'},
+          {id:1106, name:'Deformasiya yoxdur', description:'Heç bir deformasiya əlaməti müşahidə edilmir',    status:'active'},
+        ];
         let sqNames = [
           {id:30,name:'Üst örtük',          description:'Yol səthinin yuxarı layı',                       groupId:1,typeId:10,gisId:21,status:'active'},
           {id:31,name:'Yol yatağı',         description:'Yolun alt konstruksiya qatı',                    groupId:1,typeId:10,gisId:21,status:'active'},
@@ -10537,24 +11055,53 @@
           {id:54,name:'Təhkim zolağı',      description:'Yol hüdudlarını müəyyən edən zolaq',             groupId:9,typeId:10,gisId:22,status:'active'},
           {id:55,name:'Mühafizə zolağı',    description:'Yol mühafizə zonası',                            groupId:9,typeId:10,gisId:22,status:'active'},
         ];
+        let sqPassportStatus = [
+          {id:1201, name:'Qaralama',              description:'Pasport hazırlanma mərhələsindədir və hələ təsdiqə göndərilməyib.', status:'active'},
+          {id:1202, name:'Təsdiqə göndərilib',    description:'Pasport təsdiqlənməsi üçün aidiyyəti məsul şəxsə göndərilib.',      status:'active'},
+          {id:1203, name:'Təsdiqlənib',           description:'Pasport yoxlanılıb və təsdiqlənmiş cari versiya kimi qüvvədədir.',  status:'active'},
+          {id:1204, name:'Düzəlişə qaytarılıb',   description:'Pasportda düzəliş tələb olunur və yenidən işlənməlidir.',           status:'active'},
+          {id:1205, name:'Arxivləşdirilib',       description:'Pasport cari istifadədən çıxarılıb və arxivə keçirilib.',           status:'active'},
+        ];
+        let sqDocumentTypes = [
+          {id:1301, name:'Texniki sənəd', description:'Texniki pasport, sxem, hesabat və digər texniki fayllar.', status:'active'},
+          {id:1302, name:'Layihə',        description:'Layihə sənədləri, çertyojlar və layihə paketləri.',        status:'active'},
+          {id:1303, name:'Şəkil',         description:'Foto və digər vizual materiallar.',                       status:'active'},
+          {id:1304, name:'Video',         description:'Video görüntülər və müşahidə materialları.',               status:'active'},
+          {id:1305, name:'Akt',           description:'Baxış, təhvil-təslim və ya yoxlama aktları.',              status:'active'},
+          {id:1306, name:'Digər',         description:'Standart sənəd növlərinə daxil olmayan əlavə fayllar.',    status:'active'},
+        ];
 
         /* ─── CONFIG ─── */
         const SD_CFG = {
-          groups: {label:'Qrup',        store:()=>sqGroups, isNames:false},
-          types:  {label:'Növ',         store:()=>sqTypes,  isNames:false},
-          gis:    {label:'GİS tipi',    store:()=>sqGis,    isNames:false},
-          names:  {label:'Soraqça',     store:()=>sqNames,  isNames:true},
+          groups:      {label:'Qrup',           store:()=>sqGroups,      isNames:false},
+          types:       {label:'Növ',            store:()=>sqTypes,       isNames:false},
+          gis:         {label:'GİS tipi',       store:()=>sqGis,         isNames:false},
+          actTypes:    {label:'Aktivin tipi',           store:()=>sqActTypes,     isNames:false},
+          structTypes: {label:'Qurğunun tipi',         store:()=>sqStructTypes,  isNames:false},
+          constrMethod:{label:'Tikinti üsulu',          store:()=>sqConstrMethod, isNames:false},
+          material:    {label:'Material',               store:()=>sqMaterial,     isNames:false},
+          loadStruct:  {label:'Daşıyıcı konstruksiya',  store:()=>sqLoadStruct,   isNames:false},
+          ventilation: {label:'Ventilyasiya sistemi',   store:()=>sqVentilation,  isNames:false},
+          waterBarrier:{label:'Su maneəsinin tipi',     store:()=>sqWaterBarrier, isNames:false},
+          underpassType:{label:'Alt keçidin tipi',      store:()=>sqUnderpassType,isNames:false},
+          condition:   {label:'İstismar vəziyyəti',     store:()=>sqCondition,    isNames:false},
+          monitoring:  {label:'Monitorinq sistemi',     store:()=>sqMonitoring,   isNames:false},
+          deformation: {label:'Deformasiya əlamətləri', store:()=>sqDeformation,  isNames:false},
+          names:       {label:'Soraqça',                store:()=>sqNames,        isNames:true},
+          passportStatus:{label:'Pasportun statusu',     store:()=>sqPassportStatus,isNames:false},
+          documentTypes: {label:'Sənəd növü',            store:()=>sqDocumentTypes, isNames:false},
         };
         const SD_PER = 10;
         let activeSD  = 'groups';
-        let sdPages   = {groups:1, types:1, gis:1, names:1};
-        let sdSearch  = {groups:'', types:'', gis:'', names:''};
-        let sdStatusF = {groups:'', types:'', gis:'', names:''};
-        let sdGroupF  = {groups:'', types:'', gis:'', names:''};
-        let sdTypeF   = {groups:'', types:'', gis:'', names:''};
-        let sdGisF    = {groups:'', types:'', gis:'', names:''};
-        let sdSortDir = {groups:'', types:'', gis:'', names:''};
-        let sdOpenBot = {groups:null, types:null, gis:null, names:null};
+        const SD_KEYS = ['groups','types','gis','actTypes','structTypes','constrMethod','material','loadStruct','ventilation','waterBarrier','underpassType','condition','monitoring','deformation','names','passportStatus','documentTypes'];
+        let sdPages   = Object.fromEntries(SD_KEYS.map(k=>[k,1]));
+        let sdSearch  = Object.fromEntries(SD_KEYS.map(k=>[k,'']));
+        let sdStatusF = Object.fromEntries(SD_KEYS.map(k=>[k,'']));
+        let sdGroupF  = Object.fromEntries(SD_KEYS.map(k=>[k,'']));
+        let sdTypeF   = Object.fromEntries(SD_KEYS.map(k=>[k,'']));
+        let sdGisF    = Object.fromEntries(SD_KEYS.map(k=>[k,'']));
+        let sdSortDir = Object.fromEntries(SD_KEYS.map(k=>[k,'']));
+        let sdOpenBot = Object.fromEntries(SD_KEYS.map(k=>[k,null]));
         let sdEditId  = null;
         let sdViewMode = false;
 
@@ -10590,10 +11137,20 @@
           return data;
         }
         function updateCounts() {
-          document.getElementById('sdCount-groups') && (document.getElementById('sdCount-groups').textContent = sqGroups.length + ' qeyd');
-          document.getElementById('sdCount-names')  && (document.getElementById('sdCount-names').textContent  = sqNames.length  + ' qeyd');
-          document.getElementById('sdCount-types')  && (document.getElementById('sdCount-types').textContent  = sqTypes.length  + ' qeyd');
-          document.getElementById('sdCount-gis')    && (document.getElementById('sdCount-gis').textContent    = sqGis.length    + ' qeyd');
+          const _countMap = {
+            groups: sqGroups, types: sqTypes, gis: sqGis,
+            actTypes: sqActTypes, structTypes: sqStructTypes,
+            constrMethod: sqConstrMethod, material: sqMaterial,
+            loadStruct: sqLoadStruct, ventilation: sqVentilation,
+            waterBarrier: sqWaterBarrier, underpassType: sqUnderpassType,
+            condition: sqCondition, monitoring: sqMonitoring,
+            deformation: sqDeformation, names: sqNames,
+            passportStatus: sqPassportStatus, documentTypes: sqDocumentTypes,
+          };
+          Object.entries(_countMap).forEach(([k,arr]) => {
+            const el = document.getElementById('sdCount-' + k);
+            if (el) el.textContent = arr.length + ' qeyd';
+          });
         }
         window.getAssetSoraqcalar = function() {
           return sqNames
@@ -10613,11 +11170,73 @@
             });
         };
 
+        function renderSimpleDictTable(key, areaId) {
+          const area = document.getElementById(areaId);
+          if (!area || !SD_CFG[key]) return;
+          updateCounts();
+          const data = [...sdStore(key)].sort((a,b) => a.name.localeCompare(b.name, 'az'));
+          const rows = data.length
+            ? data.map((r, i) => {
+                const stBadge = r.status === 'active' ? badge('Aktiv','b-green') : badge('Passiv','b-gray');
+                return `<tr>
+                  <td style="text-align:center;color:#94a3b8;font-size:11px;">${i + 1}</td>
+                  <td style="font-weight:600;color:#1a2b3c;">${esc(r.name)}</td>
+                  <td style="font-size:12px;color:#64748b;max-width:420px;white-space:normal;line-height:1.45;">${esc(r.description || '—')}</td>
+                  <td>${stBadge}</td>
+                  <td><div class="row-acts"><div class="action-menu-wrap">
+                    <button class="action-menu-btn" data-action-menu type="button" aria-label="Əməliyyatlar">⋮</button>
+                    <div class="action-menu">
+                      <button class="action-menu-item" type="button" onclick="sdView('${key}',${r.id})">Bax</button>
+                      <button class="action-menu-item" type="button" onclick="sdEdit('${key}',${r.id})">Redaktə et</button>
+                      <button class="action-menu-item danger" type="button" onclick="sdDelete('${key}',${r.id})">Sil</button>
+                    </div>
+                  </div></div></td>
+                </tr>`;
+              }).join('')
+            : `<tr><td colspan="5" style="text-align:center;padding:36px;color:#94a3b8;font-size:13px;">Heç bir qeyd tapılmadı</td></tr>`;
+
+          area.innerHTML = `
+            <div class="table-wrap" style="flex:1;">
+              <table id="${areaId}Table" style="min-width:680px;">
+                <thead>
+                  <tr>
+                    <th class="th-nof" style="width:44px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">#</span></div></th>
+                    <th><div class="th-top"><span class="th-label">Adı</span></div></th>
+                    <th><div class="th-top"><span class="th-label">Təsviri</span></div></th>
+                    <th><div class="th-top"><span class="th-label">Status</span></div></th>
+                    <th class="th-nof" style="width:120px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">Əməliyyatlar</span></div></th>
+                  </tr>
+                </thead>
+                <tbody>${rows}</tbody>
+              </table>
+            </div>`;
+        }
+
+        function renderDictionaryKey(key) {
+          if (key === 'passportStatus') {
+            renderSimpleDictTable('passportStatus', 'sqPassportStatusArea');
+            return;
+          }
+          if (key === 'documentTypes') {
+            renderSimpleDictTable('documentTypes', 'sqDocumentTypeArea');
+            return;
+          }
+          renderSubDictTable(key);
+        }
+
         /* ─── RENDER TABLE ─── */
         function renderSubDictTable(key) {
           activeSD = key;
-          document.querySelectorAll('#sqPane-assets .sq-subdict-btn').forEach(b =>
-            b.classList.toggle('active', b.dataset.subdict === key));
+          const _namesBtn = document.getElementById('sqCatNamesBtn');
+          if (_namesBtn) _namesBtn.classList.toggle('active', key === 'names');
+          const _lbl = document.getElementById('sqCatLabel');
+          if (key === 'names') {
+            if (_lbl) _lbl.textContent = 'Seçin...';
+            document.querySelectorAll('#sqCatList .sq-cat-option').forEach(o => o.classList.remove('active'));
+          } else {
+            if (_lbl) { const _opt = document.querySelector('#sqCatList .sq-cat-option[data-value="'+key+'"]'); if(_opt) { const _tn = [..._opt.childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); _lbl.textContent = _tn ? _tn.textContent.trim() : _opt.textContent.trim(); } }
+            document.querySelectorAll('#sqCatList .sq-cat-option').forEach(o => o.classList.toggle('active', o.dataset.value === key));
+          }
           updateCounts();
 
           const isNames = SD_CFG[key].isNames;
@@ -10719,9 +11338,12 @@
                            <td style="font-size:12px;">${esc(typ?typ.name:'—')}</td>
                            <td style="font-size:12px;">${esc(gis?gis.name:'—')}</td>`;
               }
+              const nameTd = isNames
+                ? `<td class="sq-name-cell" tabindex="0" role="button" onclick="sqNameDetail(${r.id})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();sqNameDetail(${r.id});}">${esc(r.name)}</td>`
+                : `<td style="font-weight:500;color:#1a2b3c;">${esc(r.name)}</td>`;
               return `<tr>
                 <td style="text-align:center;color:#94a3b8;font-size:11px;">${(page-1)*SD_PER+i+1}</td>
-                <td style="font-weight:500;color:#1a2b3c;">${esc(r.name)}</td>
+                ${nameTd}
                 <td style="font-size:12px;color:#64748b;max-width:240px;">${esc(r.description||'—')}</td>
                 ${relCols}
                 <td>${stBadge}</td>
@@ -10869,14 +11491,13 @@
 
         /* ─── DELETE ─── */
         window.sdDelete = function(key, id) {
-          const r = sdStore(key).find(x => x.id === id);
+          const store = sdStore(key);
+          const idx = store.findIndex(x => x.id === id);
+          const r = idx > -1 ? store[idx] : null;
           if (!r) return;
           if (!confirm('"' + r.name + '" soraqçasını silmək istədiyinizə əminsiniz?')) return;
-          if (key === 'groups') sqGroups = sqGroups.filter(x => x.id !== id);
-          else if (key === 'types') sqTypes = sqTypes.filter(x => x.id !== id);
-          else if (key === 'gis')   sqGis   = sqGis.filter(x => x.id !== id);
-          else if (key === 'names') sqNames = sqNames.filter(x => x.id !== id);
-          renderSubDictTable(key);
+          store.splice(idx, 1);
+          renderDictionaryKey(key);
         };
 
         /* ─── MODAL ─── */
@@ -10965,7 +11586,7 @@
             store.push({id:nid(), name, description:desc, status, ...extra});
           }
           sdCloseModal();
-          renderSubDictTable(key);
+          renderDictionaryKey(key);
         }
 
         /* ─── INJECT MODAL HTML ─── */
@@ -11049,33 +11670,45 @@
                   <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 </button>
               </div>
-              <div class="modal-body">
+              <div class="modal-body sna-modal-body">
                 <div class="sna-field">
-                  <label>Aktivin adı <span class="req">*</span></label>
+                  <label>Soraqçanın adı <span class="req">*</span></label>
                   <input class="finput" id="sna_name" type="text" placeholder="Adı daxil edin">
                 </div>
                 <div class="sna-field">
                   <label>Təsviri</label>
-                  <textarea class="finput" id="sna_desc" rows="3" style="resize:vertical;" placeholder="Qısa izah..."></textarea>
+                  <textarea class="finput" id="sna_desc" rows="2" style="resize:vertical;" placeholder="Qısa izah..."></textarea>
                 </div>
                 <div class="sna-divider">
                   <span class="sna-divider-line"></span>
-                  <span class="sna-divider-label">Klassifikasiya</span>
+                  <span class="sna-divider-label">Xüsusiyyətlər</span>
                   <span class="sna-divider-line"></span>
                 </div>
-                <div class="sna-3col">
-                  <div class="sna-field">
-                    <label>Qrup <span class="req">*</span></label>
-                    <select class="fselect" id="sna_group"></select>
+                <div class="sna-2pick">
+                  <div class="sna-pick-col" id="snaPickCatWrap">
+                    <div class="sna-pick-trigger" id="snaPickCatTrigger">
+                      <span id="snaPickCatLabel">Kateqoriya seçin</span>
+                      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="sna-pick-dropdown" id="snaPickCatDrop">
+                      <div class="sna-pick-opts" id="snaPickCatOpts"></div>
+                    </div>
                   </div>
-                  <div class="sna-field">
-                    <label>Növ <span class="req">*</span></label>
-                    <select class="fselect" id="sna_type"></select>
+                  <div class="sna-pick-col" id="snaPickValWrap">
+                    <div class="sna-pick-trigger sna-pick-trigger-right" id="snaPickValTrigger">
+                      <span id="snaPickValLabel">Dəyər seçin</span>
+                      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <div class="sna-pick-dropdown" id="snaPickValDrop">
+                      <div class="sna-pick-opts" id="snaPickValOpts"></div>
+                    </div>
                   </div>
-                  <div class="sna-field">
-                    <label>GİS tipi <span class="req">*</span></label>
-                    <select class="fselect" id="sna_gis"></select>
-                  </div>
+                  <button class="sna-pick-add" id="snaPickAdd" type="button" title="Əlavə et">
+                    <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  </button>
+                </div>
+                <div class="sna-selected-list" id="snaSelectedList">
+                  <div class="sna-selected-empty">Hələ heç bir xüsusiyyət seçilməyib</div>
                 </div>
               </div>
               <div class="modal-foot">
@@ -11088,45 +11721,221 @@
             </div>
           </div>`);
 
+        const SNA_CATS = [
+          { key:'groups',        label:'Qrup',                   store:function(){ return sqGroups; } },
+          { key:'types',         label:'Növ',                    store:function(){ return sqTypes; } },
+          { key:'gis',           label:'GİS tipi',               store:function(){ return sqGis; } },
+          { key:'actTypes',      label:'Aktivin tipi',           store:function(){ return sqActTypes; } },
+          { key:'structTypes',   label:'Qurğunun tipi',          store:function(){ return sqStructTypes; } },
+          { key:'constrMethod',  label:'Tikinti üsulu',          store:function(){ return sqConstrMethod; } },
+          { key:'material',      label:'Material',               store:function(){ return sqMaterial; } },
+          { key:'loadStruct',    label:'Daşıyıcı konstruksiya',  store:function(){ return sqLoadStruct; } },
+          { key:'ventilation',   label:'Ventilyasiya sistemi',   store:function(){ return sqVentilation; } },
+          { key:'waterBarrier',  label:'Su maneəsinin tipi',     store:function(){ return sqWaterBarrier; } },
+          { key:'underpassType', label:'Alt keçidin tipi',       store:function(){ return sqUnderpassType; } },
+          { key:'condition',     label:'İstismar vəziyyəti',     store:function(){ return sqCondition; } },
+          { key:'monitoring',    label:'Monitorinq sistemi',     store:function(){ return sqMonitoring; } },
+          { key:'deformation',   label:'Deformasiya əlamətləri', store:function(){ return sqDeformation; } },
+        ];
+        var snaSelected  = {};      // { catKey: { itemId, itemName } }
+        var snaCurCatKey = null;    // currently picked category
+        var snaCurItemId = null;
+        var snaCurItemName = null;
+
+        function snaCloseDrop(id) {
+          var d = document.getElementById(id);
+          if (d) d.classList.remove('open');
+        }
+        function snaOpenDrop(id) {
+          document.querySelectorAll('.sna-pick-dropdown.open').forEach(function(x){ x.classList.remove('open'); });
+          var d = document.getElementById(id);
+          if (d) d.classList.add('open');
+        }
+        function snaAllClose() {
+          document.querySelectorAll('.sna-pick-dropdown.open').forEach(function(x){ x.classList.remove('open'); });
+        }
+
+        function snaRenderCatOpts() {
+          var el = document.getElementById('snaPickCatOpts');
+          if (!el) return;
+          el.innerHTML = SNA_CATS.map(function(cat) {
+            var hasSel = !!snaSelected[cat.key];
+            var isActive = snaCurCatKey === cat.key;
+            return '<div class="sna-pick-opt' + (isActive ? ' chosen' : '') + (hasSel ? ' has-val' : '') + '" data-cat="' + cat.key + '">' +
+              '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>' +
+              esc(cat.label) +
+              (hasSel ? '<span class="sna-opt-badge">' + esc(snaSelected[cat.key].itemName) + '</span>' : '') +
+            '</div>';
+          }).join('');
+        }
+
+        function snaRenderValOpts(catKey) {
+          var el = document.getElementById('snaPickValOpts');
+          var lbl = document.getElementById('snaPickValLabel');
+          if (!el) return;
+          var cat = SNA_CATS.find(function(c){ return c.key === catKey; });
+          if (!cat) return;
+          var curSel = snaSelected[catKey];
+          // Only reset if switching to a different category
+          if (snaCurCatKey !== catKey || !snaCurItemId) {
+            snaCurItemId   = curSel ? curSel.itemId   : null;
+            snaCurItemName = curSel ? curSel.itemName : null;
+          }
+          if (lbl) lbl.textContent = snaCurItemName || 'Dəyər seçin';
+          if (lbl) lbl.classList.toggle('chosen', !!snaCurItemName);
+          var chosenId = snaCurItemId;
+          var items = cat.store().filter(function(x){ return x.status === 'active'; });
+          el.innerHTML = items.map(function(x){
+            var isChosen = x.id === chosenId;
+            return '<div class="sna-pick-opt' + (isChosen ? ' chosen' : '') + '" data-id="' + x.id + '" data-name="' + esc(x.name) + '">' +
+              '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>' +
+              esc(x.name) + '</div>';
+          }).join('');
+        }
+
+        function snaRenderSelected() {
+          var el = document.getElementById('snaSelectedList');
+          if (!el) return;
+          var keys = Object.keys(snaSelected);
+          if (!keys.length) {
+            el.innerHTML = '<div class="sna-selected-empty">Hələ heç bir xüsusiyyət seçilməyib</div>';
+            return;
+          }
+          el.innerHTML = keys.map(function(k){
+            var s = snaSelected[k];
+            var cat = SNA_CATS.find(function(c){ return c.key === k; });
+            return '<div class="sna-selected-chip">' +
+              '<span class="chip-cat">' + esc(cat ? cat.label : k) + '</span>' +
+              '<span class="chip-sep">·</span>' +
+              '<span class="chip-val">' + esc(s.itemName) + '</span>' +
+              '<button type="button" data-remove="' + k + '">' +
+                '<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+              '</button></div>';
+          }).join('');
+        }
+
         function openNewActiveModal() {
           document.getElementById('sna_name').value = '';
           document.getElementById('sna_desc').value = '';
-          document.getElementById('sna_group').innerHTML =
-            '<option value="">Seçin...</option>' +
-            sqGroups.filter(g => g.status === 'active').map(g => `<option value="${g.id}">${esc(g.name)}</option>`).join('');
-          document.getElementById('sna_type').innerHTML =
-            '<option value="">Seçin...</option>' +
-            sqTypes.filter(t => t.status === 'active').map(t => `<option value="${t.id}">${esc(t.name)}</option>`).join('');
-          document.getElementById('sna_gis').innerHTML =
-            '<option value="">Seçin...</option>' +
-            sqGis.filter(g => g.status === 'active').map(g => `<option value="${g.id}">${esc(g.name)}</option>`).join('');
+          snaSelected = {};
+          snaCurCatKey = null;
+          snaCurItemId = null;
+          snaCurItemName = null;
+          snaAllClose();
+          var catLbl = document.getElementById('snaPickCatLabel');
+          var valLbl = document.getElementById('snaPickValLabel');
+          if (catLbl) { catLbl.textContent = 'Kateqoriya seçin'; catLbl.classList.remove('chosen'); }
+          if (valLbl) { valLbl.textContent = 'Dəyər seçin'; valLbl.classList.remove('chosen'); }
+          document.getElementById('snaPickValOpts').innerHTML = '';
+          snaRenderCatOpts();
+          snaRenderSelected();
           document.getElementById('sqNewActiveModal').classList.add('open');
           document.getElementById('sna_name').focus();
         }
-
         function closeNewActiveModal() {
+          snaAllClose();
           document.getElementById('sqNewActiveModal').classList.remove('open');
         }
-
         function saveNewActive() {
-          const name    = document.getElementById('sna_name').value.trim();
-          const desc    = document.getElementById('sna_desc').value.trim();
-          const groupId = parseInt(document.getElementById('sna_group').value) || 0;
-          const typeId  = parseInt(document.getElementById('sna_type').value)  || 0;
-          const gisId   = parseInt(document.getElementById('sna_gis').value)   || 0;
-          if (!name)    { alert('Aktivin adı boş ola bilməz'); return; }
-          if (!groupId) { alert('Qrup seçilməlidir'); return; }
-          if (!typeId)  { alert('Növ seçilməlidir'); return; }
-          if (!gisId)   { alert('GİS tipi seçilməlidir'); return; }
-          if (sqNames.find(n => n.name.toLowerCase() === name.toLowerCase())) {
+          var name = document.getElementById('sna_name').value.trim();
+          var desc = document.getElementById('sna_desc').value.trim();
+          if (!name) { alert('Soraqçanın adı boş ola bilməz'); return; }
+          if (sqNames.find(function(n){ return n.name.toLowerCase() === name.toLowerCase(); })) {
             alert('Bu adda soraqça artıq mövcuddur'); return;
           }
-          const newId = Math.max(0, ...sqNames.map(n => n.id)) + 1;
-          sqNames.push({ id: newId, name, description: desc, groupId, typeId, gisId, status: 'active' });
+          var attrs = {};
+          Object.keys(snaSelected).forEach(function(k){ attrs[k + 'Id'] = snaSelected[k].itemId; });
+          var newId = Math.max.apply(null, [0].concat(sqNames.map(function(n){ return n.id; }))) + 1;
+          sqNames.push(Object.assign({ id:newId, name:name, description:desc, status:'active' }, attrs));
           closeNewActiveModal();
           if (activeSD === 'names') renderSubDictTable('names');
           else updateCounts();
         }
+
+        // Cat trigger
+        document.getElementById('snaPickCatTrigger').addEventListener('click', function(e) {
+          e.stopPropagation();
+          var d = document.getElementById('snaPickCatDrop');
+          if (d.classList.contains('open')) { snaAllClose(); }
+          else { snaRenderCatOpts(); snaOpenDrop('snaPickCatDrop'); }
+        });
+
+        // Cat opts
+        document.getElementById('snaPickCatOpts').addEventListener('click', function(e) {
+          var opt = e.target.closest('.sna-pick-opt');
+          if (!opt) return;
+          snaCurCatKey = opt.dataset.cat;
+          snaCurItemId = null;
+          snaCurItemName = null;
+          var cat = SNA_CATS.find(function(c){ return c.key === snaCurCatKey; });
+          var lbl = document.getElementById('snaPickCatLabel');
+          if (lbl && cat) { lbl.textContent = cat.label; lbl.classList.add('chosen'); }
+          snaAllClose();
+          snaRenderValOpts(snaCurCatKey);
+          snaOpenDrop('snaPickValDrop');
+        });
+
+        // Val trigger
+        document.getElementById('snaPickValTrigger').addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (!snaCurCatKey) return;
+          var d = document.getElementById('snaPickValDrop');
+          if (d.classList.contains('open')) { snaAllClose(); }
+          else { snaRenderValOpts(snaCurCatKey); snaOpenDrop('snaPickValDrop'); }
+        });
+
+        // Val opts
+        document.getElementById('snaPickValOpts').addEventListener('click', function(e) {
+          var opt = e.target.closest('.sna-pick-opt');
+          if (!opt || !snaCurCatKey) return;
+          snaCurItemId = parseInt(opt.dataset.id);
+          snaCurItemName = opt.dataset.name;
+          var valLbl = document.getElementById('snaPickValLabel');
+          if (valLbl) { valLbl.textContent = snaCurItemName; valLbl.classList.add('chosen'); }
+          snaAllClose();
+          // Re-render opts to show checkmark WITHOUT resetting snaCurItemId
+          var el = document.getElementById('snaPickValOpts');
+          var cat = SNA_CATS.find(function(c){ return c.key === snaCurCatKey; });
+          if (el && cat) {
+            var chosenId = snaCurItemId;
+            var items = cat.store().filter(function(x){ return x.status === 'active'; });
+            el.innerHTML = items.map(function(x){
+              var isChosen = x.id === chosenId;
+              return '<div class="sna-pick-opt' + (isChosen ? ' chosen' : '') + '" data-id="' + x.id + '" data-name="' + esc(x.name) + '">' +
+                '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>' +
+                esc(x.name) + '</div>';
+            }).join('');
+          }
+        });
+
+        // Add button
+        document.getElementById('snaPickAdd').addEventListener('click', function() {
+          if (!snaCurCatKey || !snaCurItemId) return;
+          snaSelected[snaCurCatKey] = { itemId: snaCurItemId, itemName: snaCurItemName };
+          snaRenderCatOpts();
+          snaRenderSelected();
+        });
+
+        // Remove chip
+        document.getElementById('snaSelectedList').addEventListener('click', function(e) {
+          var btn = e.target.closest('[data-remove]');
+          if (!btn) return;
+          delete snaSelected[btn.dataset.remove];
+          if (snaCurCatKey === btn.dataset.remove) {
+            snaCurItemId = null; snaCurItemName = null;
+            var valLbl = document.getElementById('snaPickValLabel');
+            if (valLbl) { valLbl.textContent = 'Dəyər seçin'; valLbl.classList.remove('chosen'); }
+          }
+          snaRenderCatOpts();
+          snaRenderSelected();
+        });
+
+        // Close on outside click
+        document.getElementById('sqNewActiveModal').addEventListener('click', function(e) {
+          if (e.target === document.getElementById('sqNewActiveModal')) closeNewActiveModal();
+          if (!e.target.closest('.sna-pick-col')) snaAllClose();
+        });
+
         document.getElementById('snaModalClose').addEventListener('click', closeNewActiveModal);
         document.getElementById('snaModalCancel').addEventListener('click', closeNewActiveModal);
         document.getElementById('snaModalSave').addEventListener('click', saveNewActive);
@@ -11138,11 +11947,149 @@
           if (activeSD === 'names') openNewActiveModal();
           else sdOpenModal(activeSD, null, false);
         });
-
-        document.getElementById('sqPane-assets')?.addEventListener('click', e => {
-          const btn = e.target.closest('.sq-subdict-btn');
-          if (btn) renderSubDictTable(btn.dataset.subdict);
+        document.getElementById('btnPassportStatusNew')?.addEventListener('click', () => {
+          sdOpenModal('passportStatus', null, false);
         });
+        document.getElementById('btnDocumentTypeNew')?.addEventListener('click', () => {
+          sdOpenModal('documentTypes', null, false);
+        });
+
+        /* ─── SORAQÇA DETAIL MODAL ─── */
+        document.body.insertAdjacentHTML('beforeend', `
+          <div class="modal-ov" id="sqNameDetailModal">
+            <div class="sqnd-box">
+              <div class="sqnd-head">
+                <div class="sqnd-head-icon">
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div class="sqnd-head-text">
+                  <div class="sqnd-head-title" id="sqndTitle">Soraqça</div>
+                  <div class="sqnd-head-sub"   id="sqndSub">Tam məlumat</div>
+                </div>
+                <button class="sqnd-close-btn" id="sqndClose" type="button" aria-label="Bağla">
+                  <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+              <div class="sqnd-body" id="sqndBody"></div>
+              <div class="sqnd-foot">
+                <button class="fbtn fbtn-outline" id="sqndCloseBtn" type="button">Bağla</button>
+              </div>
+            </div>
+          </div>`);
+
+        function sqNameDetail(id) {
+          const r = sqNames.find(x => x.id === id);
+          if (!r) return;
+          document.getElementById('sqndTitle').textContent = r.name;
+          document.getElementById('sqndSub').textContent   = r.status === 'active' ? 'Aktiv soraqça' : 'Passiv soraqça';
+
+          const lk = (arr, fid) => { const it = arr.find(x => x.id === fid); return it ? esc(it.name) : null; };
+
+          const chip = (label, val) => val
+            ? `<div class="sqnd-chip"><span class="sqnd-chip-lbl">${label}</span><span class="sqnd-chip-val">${val}</span></div>`
+            : `<div class="sqnd-chip sqnd-chip-empty"><span class="sqnd-chip-lbl">${label}</span><span class="sqnd-chip-dash">—</span></div>`;
+
+          const statusBadge = r.status === 'active'
+            ? '<span class="badge b-green" style="font-size:11px;">Aktiv</span>'
+            : '<span class="badge b-gray"  style="font-size:11px;">Passiv</span>';
+
+          document.getElementById('sqndBody').innerHTML = `
+            <div class="sqnd-hero">
+              <div class="sqnd-hero-icon">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div class="sqnd-hero-info">
+                <div class="sqnd-hero-name">${esc(r.name)}</div>
+                <div class="sqnd-hero-desc">${r.description ? esc(r.description) : '<span style="color:#94a3b8;font-style:italic;">Təsvir yoxdur</span>'}</div>
+              </div>
+              <div>${statusBadge}</div>
+            </div>
+
+            <div class="sqnd-section">
+              <div class="sqnd-section-title">Xüsusiyyətlər</div>
+              <div class="sqnd-chips-grid">
+                ${chip('Qrup',                   lk(sqGroups, r.groupId))}
+                ${chip('Növ',                    lk(sqTypes,  r.typeId))}
+                ${chip('GİS tipi',               lk(sqGis,    r.gisId))}
+                ${chip('Aktivin tipi',           lk(sqActTypes,     r.actTypesId     || r.actTypeId))}
+                ${chip('Qurğunun tipi',          lk(sqStructTypes,  r.structTypesId  || r.structTypeId))}
+                ${chip('Tikinti üsulu',          lk(sqConstrMethod, r.constrMethodId))}
+                ${chip('Material',               lk(sqMaterial,     r.materialId))}
+                ${chip('Daşıyıcı konstruksiya',  lk(sqLoadStruct,   r.loadStructId))}
+                ${chip('Ventilyasiya',           lk(sqVentilation,  r.ventilationId))}
+                ${chip('Su maneəsi',             lk(sqWaterBarrier, r.waterBarrierId))}
+                ${chip('Alt keçid tipi',         lk(sqUnderpassType,r.underpassTypeId))}
+                ${chip('İstismar vəziyyəti',     lk(sqCondition,    r.conditionId))}
+                ${chip('Monitorinq',             lk(sqMonitoring,   r.monitoringId))}
+                ${chip('Deformasiya əlamətləri', lk(sqDeformation,  r.deformationId))}
+              </div>
+            </div>`;
+
+          document.getElementById('sqNameDetailModal').classList.add('open');
+        }
+        window.sqNameDetail = sqNameDetail;
+
+        document.getElementById('sqndClose').addEventListener('click', () => document.getElementById('sqNameDetailModal').classList.remove('open'));
+        document.getElementById('sqndCloseBtn').addEventListener('click', () => document.getElementById('sqNameDetailModal').classList.remove('open'));
+        document.getElementById('sqNameDetailModal').addEventListener('click', e => {
+          if (e.target === document.getElementById('sqNameDetailModal')) document.getElementById('sqNameDetailModal').classList.remove('open');
+        });
+
+        (function() {
+          const trigger   = document.getElementById('sqCatTrigger');
+          const dropdown  = document.getElementById('sqCatDropdown');
+          const searchInp = document.getElementById('sqCatSearch');
+          const list      = document.getElementById('sqCatList');
+          if (!trigger || !dropdown || !list) return;
+
+          function openDropdown() {
+            dropdown.classList.add('open');
+            trigger.classList.add('open');
+            if (searchInp) { searchInp.value = ''; filterOptions(''); searchInp.focus(); }
+          }
+          function closeDropdown() {
+            dropdown.classList.remove('open');
+            trigger.classList.remove('open');
+          }
+          function filterOptions(q) {
+            list.querySelectorAll('.sq-cat-option').forEach(o => {
+              o.style.display = (!q || o.textContent.toLowerCase().includes(q.toLowerCase())) ? '' : 'none';
+            });
+          }
+
+          trigger.addEventListener('click', e => {
+            e.stopPropagation();
+            dropdown.classList.contains('open') ? closeDropdown() : openDropdown();
+          });
+
+          if (searchInp) {
+            searchInp.addEventListener('input', () => filterOptions(searchInp.value));
+            searchInp.addEventListener('keydown', e => {
+              if (e.key === 'Enter') {
+                const visible = list.querySelector('.sq-cat-option:not([style*="none"])');
+                if (visible) { renderSubDictTable(visible.dataset.value); closeDropdown(); }
+              }
+            });
+          }
+
+          list.addEventListener('click', e => {
+            const opt = e.target.closest('.sq-cat-option');
+            if (!opt) return;
+            renderSubDictTable(opt.dataset.value);
+            closeDropdown();
+          });
+
+          document.addEventListener('click', e => {
+            if (!e.target.closest('#sqCatCombo')) closeDropdown();
+          });
+
+          const _namesBtn = document.getElementById('sqCatNamesBtn');
+          if (_namesBtn) {
+            _namesBtn.addEventListener('click', () => {
+              renderSubDictTable('names');
+            });
+          }
+        })();
 
         document.getElementById('soraqcalarView')?.addEventListener('click', e => {
           const tab = e.target.closest('.sq-tab');
@@ -11151,6 +12098,8 @@
           document.querySelectorAll('#soraqcalarView .sq-tab').forEach(t => t.classList.toggle('active', t === tab));
           document.querySelectorAll('#soraqcalarView .sq-tab-pane').forEach(p => p.classList.toggle('active', p.id === 'sqPane-' + k));
           if (k === 'assets') renderSubDictTable(activeSD);
+          if (k === 'passports') renderSimpleDictTable('passportStatus', 'sqPassportStatusArea');
+          if (k === 'documents') renderSimpleDictTable('documentTypes', 'sqDocumentTypeArea');
         });
 
         renderSubDictTable('groups');
