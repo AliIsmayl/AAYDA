@@ -122,8 +122,18 @@
     }
 
     /* nav */
-    .sb-body {
+    .sb-nav-scroll {
       flex: 1;
+      overflow-y: auto;
+      min-height: 0;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,.2) transparent;
+    }
+    .sb-nav-scroll::-webkit-scrollbar { width: 3px; }
+    .sb-nav-scroll::-webkit-scrollbar-track { background: transparent; }
+    .sb-nav-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,.2); border-radius: 999px; }
+
+    .sb-body {
       overflow: hidden;
       padding: 0 0 4px;
     }
@@ -199,6 +209,9 @@
     }
 
     .sidebar.collapsed .sb-body {
+      overflow: visible;
+    }
+    .sidebar.collapsed .sb-nav-scroll {
       overflow: visible;
     }
 
@@ -4609,6 +4622,102 @@
       }
     }
   </style>
+  <style>
+    /* ═══ DASHBOARD VIEW ═══ */
+    #dashboardView {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+      background: #edf1f9;
+      border-radius: 16px;
+    }
+    .db-content-wrap {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding: 14px 14px 0;
+      scrollbar-width: thin;
+      scrollbar-color: #93c5fd transparent;
+    }
+    .db-content-wrap::-webkit-scrollbar { width: 4px; }
+    .db-content-wrap::-webkit-scrollbar-track { background: transparent; }
+    .db-content-wrap::-webkit-scrollbar-thumb { background: #93c5fd; border-radius: 999px; }
+    .db-content-wrap::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
+    .db-page { display:flex; flex-direction:column; height:100%; }
+    .db-hero { background: linear-gradient(135deg,#1a3a6b 0%,#1d53b8 50%,#2057d4 100%); color:#fff; border-radius:16px; padding:20px; }
+    .db-hero-top { display:flex; justify-content:space-between; gap:20px; align-items:flex-start; flex-wrap:wrap; }
+    .db-eyebrow { display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px; font-size:11px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.16); margin-bottom:10px; }
+    .db-pulse { width:7px; height:7px; border-radius:50%; background:#7ff1b0; flex-shrink:0; }
+    .db-h1 { font-size:20px; line-height:1.1; letter-spacing:-.01em; margin-bottom:6px; font-weight:700; }
+    .db-hero-p { color:rgba(255,255,255,.82); font-size:12px; max-width:560px; }
+    .db-status-board { min-width:200px; background:rgba(255,255,255,.11); border:1px solid rgba(255,255,255,.16); border-radius:14px; padding:13px; }
+    .db-status-title { font-size:10px; letter-spacing:.07em; color:rgba(255,255,255,.72); margin-bottom:10px; text-transform:uppercase; }
+    .db-status-row { display:flex; justify-content:space-between; gap:10px; padding:7px 0; border-bottom:1px solid rgba(255,255,255,.12); font-size:11px; }
+    .db-status-row:last-child { border-bottom:0; padding-bottom:0; }
+    .db-toolbar { background:#fff; border:1px solid #d8e4f0; border-radius:14px; padding:10px 14px; flex-shrink:0; margin:10px 10px 0; }
+    .db-filter-group { display:flex; gap:8px; flex-wrap:wrap; }
+    .db-chip { border:1px solid #d8e4f0; background:#fff; border-radius:8px; padding:6px 12px; font-size:12px; font-weight:500; color:#475569; font-family:inherit; cursor:pointer; transition:.13s; }
+    .db-chip.active { background:#eff6ff; color:#2563eb; border-color:#93c5fd; }
+    .db-content-grid { display:grid; grid-template-columns:minmax(0,7fr) minmax(260px,3fr); gap:18px; margin-top:14px; align-items:start; padding-bottom:16px; }
+    .db-main-col { display:grid; gap:16px; }
+    .db-aside-col { display:grid; gap:12px; position:sticky; top:12px; align-self:start; }
+    .db-section { background:#fff; border:1px solid #d8e4f0; border-radius:16px; }
+    .db-section-head { display:flex; justify-content:space-between; gap:16px; padding:16px 20px; cursor:pointer; border-bottom:1px solid #ecf1f8; }
+    .db-collapsed .db-section-head { border-bottom:0; }
+    .db-collapsed .db-section-body { display:none; }
+    .db-section-intro { display:flex; gap:12px; align-items:flex-start; }
+    .db-section-icon { width:36px; height:36px; border-radius:10px; display:grid; place-items:center; flex-shrink:0; }
+    .db-section-icon svg { width:17px; height:17px; }
+    .db-blue { color:#2563eb; background:#eff6ff; }
+    .db-amber { color:#b45309; background:#fef3c7; }
+    .db-teal { color:#0f766e; background:#ccfbf1; }
+    .db-h2 { font-size:14px; line-height:1.2; margin-bottom:3px; font-weight:700; color:#1a2b3c; }
+    .db-section-p { color:#64748b; font-size:11px; line-height:1.4; }
+    .db-section-actions { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+    .db-collapse { display:inline-flex; align-items:center; justify-content:center; border:1px solid #d8e4f0; border-radius:8px; background:#fff; width:28px; height:28px; cursor:pointer; }
+    .db-collapse svg { width:13px; height:13px; transition:transform .18s ease; }
+    .db-section:not(.db-collapsed) .db-collapse svg { transform:rotate(180deg); }
+    .db-section-body { padding:0 20px 20px; }
+    .db-subtabs { display:flex; gap:8px; flex-wrap:wrap; padding-top:14px; }
+    .db-subtab { display:inline-flex; align-items:center; padding:5px 11px; font-size:12px; font-weight:500; color:#475569; background:#fff; border:1px solid #d8e4f0; border-radius:8px; cursor:pointer; transition:.15s; font-family:inherit; }
+    .db-subtab.active { color:#2563eb; background:#eff6ff; border-color:#93c5fd; font-weight:600; }
+    .db-tabpanel { }
+    .db-panel-kicker { display:inline-flex; align-items:center; padding:0 8px; border-radius:999px; color:#64748b; font-size:11px; font-weight:700; margin-top:12px; }
+    .db-card-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0 10px; }
+    .db-info-card { background:#fff; border:1px solid #d8e4f0; border-radius:12px; padding:14px; margin-top:10px; }
+    .db-viz-card { background:#fff; border:1px solid #d8e4f0; border-radius:12px; padding:14px; margin-top:10px; }
+    .db-eyeline { font-size:11px; color:#64748b; margin-bottom:8px; font-weight:700; }
+    .db-big-number { font-size:18px; line-height:1; letter-spacing:-.02em; margin-bottom:6px; font-weight:700; color:#1a2b3c; }
+    .db-good { color:#16a34a; }
+    .db-info { color:#2563eb; }
+    .db-alert { color:#dc2626; }
+    .db-helper { color:#64748b; font-size:11px; line-height:1.4; }
+    .db-viz-title { font-size:13px; font-weight:700; margin-bottom:10px; }
+    .db-split-bars { display:grid; gap:12px; }
+    .db-split-row { display:grid; grid-template-columns:1fr 1fr auto; gap:8px; align-items:center; font-size:11px; }
+    .db-split-track { height:8px; border-radius:999px; background:#e2eaf6; overflow:hidden; }
+    .db-split-track span { display:block; height:100%; border-radius:999px; }
+    .db-overview-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .db-overview-box { background:#fff; border:1px solid #d8e4f0; border-radius:12px; padding:14px; margin-top:10px; }
+    .db-overview-box strong { display:block; font-size:15px; line-height:1; margin-bottom:4px; font-weight:700; }
+    .db-overview-box span { font-size:11px; line-height:1.3; color:#64748b; }
+    .db-aside-card { background:#fff; border:1px solid #d8e4f0; border-radius:16px; padding:14px; }
+    .db-aside-h3 { font-size:13px; font-weight:700; margin-bottom:10px; color:#1a2b3c; }
+    .db-metric-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+    .db-main-kpis { margin-bottom:10px; }
+    .db-mini-list { gap:8px; }
+    .db-metric-card { display:grid; grid-template-columns:minmax(0,1fr) 30px; gap:6px; align-items:end; padding:12px; border-radius:12px; background:#f8fafc; border:1px solid #e2eaf6; }
+    .db-metric-alert .db-metric-val { color:#bf3b35; }
+    .db-metric-alert .db-metric-icon { color:#bf3b35; }
+    .db-metric-val { display:block; font-size:16px; line-height:1; margin-bottom:5px; letter-spacing:-.01em; font-weight:700; color:#1a2b3c; }
+    .db-metric-note { display:block; font-size:11px; line-height:1.2; color:#64748b; }
+    .db-metric-icon { width:28px; height:28px; border-radius:7px; display:grid; place-items:center; border:1px solid #e2eaf6; background:#f0f4ff; color:#2563eb; align-self:end; justify-self:end; }
+    .db-metric-icon svg { width:16px; height:16px; stroke-width:1.8; }
+    .db-overview-note { font-size:11px; color:#64748b; margin-top:8px; }
+    @media (max-width:1100px) { .db-content-grid { grid-template-columns:1fr; } .db-aside-col { position:static; } }
+    @media (max-width:800px) { .db-card-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .db-hero-top { flex-direction:column; } }
+    @media (max-width:560px) { .db-card-grid { grid-template-columns:1fr; } .db-split-row { grid-template-columns:1fr; } }
+  </style>
 </head>
 
 <body>
@@ -4631,9 +4740,24 @@
 
     <div class="sb-divider"></div>
 
+    <div class="sb-nav-scroll">
+    <div class="sb-body">
+      <a class="nav-item" href="#" data-tip="Dashboard" aria-label="Dashboard" id="dashboardNavItem">
+        <svg viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+          <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+          <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+          <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+        </svg>
+        <span class="ni-label">Dashboard</span>
+      </a>
+    </div>
+
+    <div class="sb-divider"></div>
+
     <div class="sb-body">
       <div class="nav-group-title">Vahid Reyestr</div>
-      <a class="nav-item active" href="#">
+      <a class="nav-item" href="#">
         <svg viewBox="0 0 24 24">
           <path d="M3 7h18M3 12h18M3 17h18" />
           <path d="M6 4v16" />
@@ -4658,16 +4782,10 @@
       </a>
       <a class="nav-item" href="#">
         <svg viewBox="0 0 24 24">
-          <path
-            d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+          <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
         </svg>
         <span class="ni-label">Aktivlər</span>
       </a>
-    </div>
-
-    <div class="sb-divider"></div>
-    <div class="sb-body">
-      <div class="nav-group-title">Soraqçalar</div>
       <a class="nav-item" href="#">
         <svg viewBox="0 0 24 24">
           <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
@@ -4678,6 +4796,7 @@
         <span class="ni-label">Soraqçalar</span>
       </a>
     </div>
+    </div><!-- /sb-nav-scroll -->
 
     <div class="sb-footer">
       <a class="nav-item" href="#" style="color:rgba(255,255,255,.5);">
@@ -8195,6 +8314,226 @@
       roadsView.classList.add('view-card');
 
       roadsView.insertAdjacentHTML('beforebegin', `
+  <div class="view-card is-hidden" id="dashboardView">
+    <div class="db-page">
+    
+      <div class="db-toolbar">
+        <div class="db-filter-group">
+          <button class="db-chip active" data-dbfilter="all">Hamısı</button>
+          <button class="db-chip" data-dbfilter="network">Şəbəkə vəziyyəti</button>
+          <button class="db-chip" data-dbfilter="risk">Risk və nəzarət</button>
+          <button class="db-chip" data-dbfilter="performance">İcra və performans</button>
+        </div>
+      </div>
+      <div class="db-content-wrap">
+      <div class="db-content-grid">
+        <div class="db-main-col">
+
+          <section class="db-section" data-dbgroup="network">
+            <div class="db-section-head">
+              <div class="db-section-intro">
+                <div class="db-section-icon db-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8"/><path d="M12 16v4"/></svg></div>
+                <div><h2 class="db-h2">Şəbəkə vəziyyəti</h2><p class="db-section-p">Yol şəbəkəsinin ümumi mənzərəsi, seqmentlər, aktivlər və texniki durum göstəriciləri.</p></div>
+              </div>
+              <div class="db-section-actions"><button class="db-collapse" aria-label="Bölməni gizlət"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="m6 9 6 6 6-6"/></svg></button></div>
+            </div>
+            <div class="db-section-body">
+              <div class="db-subtabs">
+                <button class="db-subtab active" data-dbtab="__all__">Hamısı</button>
+                <button class="db-subtab" data-dbtab="db-net-overview">Yol şəbəkəsinin ümumi vəziyyəti</button>
+                <button class="db-subtab" data-dbtab="db-net-segments">Seqmentlər üzrə texniki vəziyyət</button>
+                <button class="db-subtab" data-dbtab="db-net-assets">Aktivlər üzrə ümumi statistika</button>
+                <button class="db-subtab" data-dbtab="db-net-health">Aktivlərin texniki vəziyyəti</button>
+              </div>
+              <div class="db-tabpanel" id="db-net-overview">
+                <div class="db-panel-kicker">Yol şəbəkəsinin ümumi vəziyyəti</div>
+                <div class="db-card-grid">
+                  <article class="db-info-card"><div class="db-eyeline">Ümumi yol uzunluğu</div><div class="db-big-number db-good">19 200 km</div><p class="db-helper">Respublika üzrə cəmi yol uzunluğu.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Respublika əhəmiyyətli yollar</div><div class="db-big-number">4 800 km</div><p class="db-helper">Respublika əhəmiyyətli şəbəkə.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Yerli yollar</div><div class="db-big-number db-info">14 400 km</div><p class="db-helper">Yerli yolların ümumi uzunluğu.</p></article>
+                </div>
+                <div class="db-viz-card">
+                  <div class="db-viz-title">Vəziyyət bölgüsü</div>
+                  <div class="db-split-bars">
+                    <div class="db-split-row"><span>Yaxşı vəziyyətdə yollar</span><div class="db-split-track"><span style="width:62%;background:#198754"></span></div><strong>62%</strong></div>
+                    <div class="db-split-row"><span>Orta vəziyyətdə yollar</span><div class="db-split-track"><span style="width:25%;background:#d7a61c"></span></div><strong>25%</strong></div>
+                    <div class="db-split-row"><span>Qənaətsiz vəziyyətdə yollar</span><div class="db-split-track"><span style="width:13%;background:#bf3b35"></span></div><strong>13%</strong></div>
+                  </div>
+                </div>
+              </div>
+              <div class="db-tabpanel" id="db-net-segments">
+                <div class="db-panel-kicker">Seqmentlər üzrə texniki vəziyyət</div>
+                <div class="db-card-grid">
+                  <article class="db-info-card"><div class="db-eyeline">Ümumi seqment sayı</div><div class="db-big-number">12 500</div><p class="db-helper">Yol şəbəkəsinin ümumi seqment sayı.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Monitoring olunan seqmentlər</div><div class="db-big-number db-info">9 200</div><p class="db-helper">Ümumi şəbəkənin 74%-i.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Təmir tələb edən seqmentlər</div><div class="db-big-number">2 100</div><p class="db-helper">Planlı təmirə ehtiyacı olan hissələr.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Kritik seqmentlər</div><div class="db-big-number db-alert">620</div><p class="db-helper">Dərhal müdaxilə tələb edən hissələr.</p></article>
+                </div>
+              </div>
+              <div class="db-tabpanel" id="db-net-assets">
+                <div class="db-panel-kicker">Aktivlər üzrə ümumi statistika</div>
+                <div class="db-card-grid">
+                  <article class="db-info-card"><div class="db-eyeline">Körpülər</div><div class="db-big-number">1 240</div><p class="db-helper">Ümumi körpü sayı.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Tunel və keçidlər</div><div class="db-big-number">185</div><p class="db-helper">Tunel və keçid qurğuları.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Suötürücü və drenaj</div><div class="db-big-number">8 500</div><p class="db-helper">Suötürücü və drenaj aktivləri.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Geotexniki qurğular</div><div class="db-big-number">2 300</div><p class="db-helper">Geotexniki qurğular.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Kommunikasiya keçidləri</div><div class="db-big-number">3 100</div><p class="db-helper">Kommunikasiya keçidləri.</p></article>
+                </div>
+              </div>
+              <div class="db-tabpanel" id="db-net-health">
+                <div class="db-panel-kicker">Aktivlərin texniki vəziyyəti</div>
+                <div class="db-card-grid">
+                  <article class="db-info-card"><div class="db-eyeline">Yaxşı</div><div class="db-big-number db-good">58%</div><p class="db-helper">Yaxşı vəziyyətdə olan aktivlər.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Qənaətbəxş</div><div class="db-big-number">28%</div><p class="db-helper">Orta vəziyyətdə olan aktivlər.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Qənaətsiz</div><div class="db-big-number db-alert">14%</div><p class="db-helper">Yenilənmə tələb edən aktivlər.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Ümumi defekt balı</div><div class="db-big-number db-alert">31 bal</div><p class="db-helper">Defektlərin yekun balı.</p></article>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="db-section db-collapsed" data-dbgroup="risk">
+            <div class="db-section-head">
+              <div class="db-section-intro">
+                <div class="db-section-icon db-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg></div>
+                <div><h2 class="db-h2">Risk və nəzarət</h2><p class="db-section-p">Hüquqi vəziyyət, torpaq məsələləri, hadisələr və operativ reaksiya göstəriciləri.</p></div>
+              </div>
+              <div class="db-section-actions"><button class="db-collapse" aria-label="Bölməni gizlət"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="m6 9 6 6 6-6"/></svg></button></div>
+            </div>
+            <div class="db-section-body">
+              <div class="db-subtabs">
+                <button class="db-subtab active" data-dbtab="__all__">Hamısı</button>
+                <button class="db-subtab" data-dbtab="db-risk-legal">Hüquqi və torpaq məsələləri</button>
+                <button class="db-subtab" data-dbtab="db-risk-events">Monitoring və hadisələr</button>
+              </div>
+              <div class="db-tabpanel" id="db-risk-legal">
+                <div class="db-panel-kicker">Hüquqi və torpaq məsələləri</div>
+                <div class="db-card-grid">
+                  <article class="db-info-card"><div class="db-eyeline">Təhkim zolağı üzrə qeydiyyat</div><div class="db-big-number">72%</div><p class="db-helper">Dövlət qeydiyyatında olan təhkim zolağı.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Mühafizə zolağı üzrə qeydiyyat</div><div class="db-big-number">64%</div><p class="db-helper">Qeydiyyatda olan qorunma zonaları.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Mübahisəli sahələr</div><div class="db-big-number db-alert">310</div><p class="db-helper">Mübahisəli və riskli sahələr.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">İcazə verilmiş keçidlər</div><div class="db-big-number">1 150</div><p class="db-helper">Rəsmi icazə ilə birləşən keçidlər.</p></article>
+                </div>
+                <div class="db-viz-card">
+                  <div class="db-viz-title">Qeydiyyat tərəqqisi</div>
+                  <div class="db-split-bars">
+                    <div class="db-split-row"><span>Təhkim zolağı</span><div class="db-split-track"><span style="width:72%;background:#1c67d7"></span></div><strong>72%</strong></div>
+                    <div class="db-split-row"><span>Mühafizə zolağı</span><div class="db-split-track"><span style="width:64%;background:#177d7f"></span></div><strong>64%</strong></div>
+                  </div>
+                </div>
+              </div>
+              <div class="db-tabpanel" id="db-risk-events">
+                <div class="db-panel-kicker">Monitoring və hadisələr</div>
+                <div class="db-card-grid">
+                  <article class="db-info-card"><div class="db-eyeline">Günlük hadisə sayı</div><div class="db-big-number">45</div><p class="db-helper">Gündəlik qeydə alınan hadisələr.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Aylıq hadisələr</div><div class="db-big-number">1 350</div><p class="db-helper">Ay üzrə ümumi hadisələr.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Kritik hadisələr</div><div class="db-big-number db-alert">120</div><p class="db-helper">Dərhal müdaxilə tələb edən hallar.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Orta reaksiya müddəti</div><div class="db-big-number">6 saat</div><p class="db-helper">Məlumatdan müdaxiləyə qədər orta vaxt.</p></article>
+                </div>
+                <div class="db-viz-card">
+                  <div class="db-viz-title">Hadisə göstəricisi</div>
+                  <div class="db-overview-grid">
+                    <div class="db-overview-box"><strong style="color:#bf3b35">120</strong><span>Kritik hadisə</span></div>
+                    <div class="db-overview-box"><strong>45</strong><span>Günlük hadisə</span></div>
+                    <div class="db-overview-box"><strong>1 350</strong><span>Aylıq hadisə</span></div>
+                    <div class="db-overview-box"><strong>6 saat</strong><span>Orta reaksiya</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="db-section db-collapsed" data-dbgroup="performance">
+            <div class="db-section-head">
+              <div class="db-section-intro">
+                <div class="db-section-icon db-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="m7 13 4-4 3 3 5-6"/></svg></div>
+                <div><h2 class="db-h2">İcra və performans</h2><p class="db-section-p">Pasportlaşdırma, layihə icrası, məlumat keyfiyyəti və sistem istifadəsi göstəriciləri.</p></div>
+              </div>
+              <div class="db-section-actions"><button class="db-collapse" aria-label="Bölməni gizlət"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="m6 9 6 6 6-6"/></svg></button></div>
+            </div>
+            <div class="db-section-body">
+              <div class="db-subtabs">
+                <button class="db-subtab active" data-dbtab="__all__">Hamısı</button>
+                <button class="db-subtab" data-dbtab="db-perf-passport">Pasportlaşdırma səviyyəsi</button>
+                <button class="db-subtab" data-dbtab="db-perf-projects">Layihə və təmir işləri</button>
+                <button class="db-subtab" data-dbtab="db-perf-quality">Məlumat keyfiyyəti</button>
+                <button class="db-subtab" data-dbtab="db-perf-usage">Sistem istifadə statistikası</button>
+              </div>
+              <div class="db-tabpanel" id="db-perf-passport">
+                <div class="db-panel-kicker">Pasportlaşdırma səviyyəsi</div>
+                <div class="db-card-grid">
+                  <article class="db-info-card"><div class="db-eyeline">Pasport tələb edən aktivlər</div><div class="db-big-number">6 200</div><p class="db-helper">Pasportlaşmalı olan aktivlər.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Pasportlaşdırılmış aktivlər</div><div class="db-big-number db-good">4 850</div><p class="db-helper">Ümumi sayın 78%-i.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Tam doldurulmuş pasportlar</div><div class="db-big-number">3 900</div><p class="db-helper">Tam mühəndis məlumatlı pasportlar.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Yenilənmə tələb edən pasportlar</div><div class="db-big-number db-alert">950</div><p class="db-helper">Yenidən baxış tələb edən sənədlər.</p></article>
+                </div>
+              </div>
+              <div class="db-tabpanel" id="db-perf-projects">
+                <div class="db-panel-kicker">Layihə və təmir işləri</div>
+                <div class="db-card-grid">
+                  <article class="db-info-card"><div class="db-eyeline">Aktiv layihələr</div><div class="db-big-number">210</div><p class="db-helper">İcra mərhələsində olan layihələr.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Gecikən layihələr</div><div class="db-big-number db-alert">38</div><p class="db-helper">Vaxt qrafikindən geri qalanlar.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Büdcə icra faizi</div><div class="db-big-number">81%</div><p class="db-helper">Büdcə icra göstəricisi.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Təmir işləri</div><div class="db-big-number">1 750</div><p class="db-helper">İllik təmir olunan seqment sayı.</p></article>
+                </div>
+              </div>
+              <div class="db-tabpanel" id="db-perf-quality">
+                <div class="db-panel-kicker">Məlumat keyfiyyəti</div>
+                <div class="db-card-grid">
+                  <article class="db-info-card"><div class="db-eyeline">Tam məlumatlı yollar</div><div class="db-big-number db-good">88%</div><p class="db-helper">Tam məlumatı olan yol qeydləri.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Tam məlumatlı seqmentlər</div><div class="db-big-number">76%</div><p class="db-helper">Tam məlumatlı seqmentlər.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Aktivlər üzrə boş data</div><div class="db-big-number db-alert">18%</div><p class="db-helper">Boş qalan mühəndis xanaları.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Uyğunsuzluqlar</div><div class="db-big-number db-alert">240</div><p class="db-helper">Aşkar edilmiş məlumat xətaları.</p></article>
+                </div>
+              </div>
+              <div class="db-tabpanel" id="db-perf-usage">
+                <div class="db-panel-kicker">Sistem istifadə statistikası</div>
+                <div class="db-card-grid">
+                  <article class="db-info-card"><div class="db-eyeline">Aktiv istifadəçi sayı</div><div class="db-big-number">320</div><p class="db-helper">Sistemdən istifadə edən əməkdaşlar.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Günlük əməliyyat sayı</div><div class="db-big-number">4 500</div><p class="db-helper">Məlumat girişi, baxış və redaktə.</p></article>
+                  <article class="db-info-card"><div class="db-eyeline">Mobil istifadə payı</div><div class="db-big-number">42%</div><p class="db-helper">Mobil tətbiqdən istifadə göstəricisi.</p></article>
+                </div>
+                <div class="db-viz-card">
+                  <div class="db-viz-title">İstifadə göstəriciləri</div>
+                  <div class="db-split-bars">
+                    <div class="db-split-row"><span>Mobil istifadə payı</span><div class="db-split-track"><span style="width:42%;background:#177d7f"></span></div><strong>42%</strong></div>
+                    <div class="db-split-row"><span>Günlük əməliyyatlar</span><div class="db-split-track"><span style="width:75%;background:#1c67d7"></span></div><strong>4 500</strong></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+        <aside class="db-aside-col">
+          <section class="db-aside-card">
+            <h3 class="db-aside-h3">Əsas göstəricilər</h3>
+            <div class="db-metric-grid db-main-kpis">
+              <div class="db-metric-card"><div class="db-metric-copy"><strong class="db-metric-val">19 200 km</strong><span class="db-metric-note">Ümumi yol uzunluğu</span></div><div class="db-metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 3h8"/><path d="M10 3v5"/><path d="M14 3v5"/><path d="M12 8v13"/></svg></div></div>
+              <div class="db-metric-card"><div class="db-metric-copy"><strong class="db-metric-val">12 500</strong><span class="db-metric-note">Ümumi seqment sayı</span></div><div class="db-metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="5" width="6" height="6" rx="1.4"/><rect x="14" y="5" width="6" height="6" rx="1.4"/><rect x="4" y="13" width="6" height="6" rx="1.4"/><rect x="14" y="13" width="6" height="6" rx="1.4"/></svg></div></div>
+              <div class="db-metric-card"><div class="db-metric-copy"><strong class="db-metric-val">15 325</strong><span class="db-metric-note">Ümumi aktiv sayı</span></div><div class="db-metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 9h6"/><path d="M9 12h6"/><path d="M9 15h4"/></svg></div></div>
+              <div class="db-metric-card db-metric-alert"><div class="db-metric-copy"><strong class="db-metric-val">120</strong><span class="db-metric-note">Kritik hadisə</span></div><div class="db-metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 4 4 18h16L12 4Z"/><path d="M12 9v4"/><path d="M12 16h.01"/></svg></div></div>
+            </div>
+            <div class="db-overview-note">Sənəddə verilən əsas göstəricilərin qısa xülasəsi</div>
+          </section>
+          <section class="db-aside-card">
+            <h3 class="db-aside-h3">Qısa statistika</h3>
+            <div class="db-metric-grid db-mini-list">
+              <div class="db-metric-card"><div class="db-metric-copy"><strong class="db-metric-val">72%</strong><span class="db-metric-note">Təhkim zolağı</span></div><div class="db-metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 18V8"/><path d="M12 18V4"/><path d="M19 18v-6"/></svg></div></div>
+              <div class="db-metric-card"><div class="db-metric-copy"><strong class="db-metric-val">64%</strong><span class="db-metric-note">Mühafizə zolağı</span></div><div class="db-metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 4 6 7v5c0 3.5 2.2 6.6 6 8 3.8-1.4 6-4.5 6-8V7l-6-3Z"/></svg></div></div>
+              <div class="db-metric-card"><div class="db-metric-copy"><strong class="db-metric-val">78%</strong><span class="db-metric-note">Pasportlar</span></div><div class="db-metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 4h7l3 3v13H8z"/><path d="M15 4v4h4"/><path d="M10 12h6"/><path d="M10 15h6"/></svg></div></div>
+              <div class="db-metric-card"><div class="db-metric-copy"><strong class="db-metric-val">81%</strong><span class="db-metric-note">Büdcə icrası</span></div><div class="db-metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 8h16"/><path d="M6 8V6h12v2"/><rect x="4" y="8" width="16" height="10" rx="2"/><path d="M9 13h6"/></svg></div></div>
+              <div class="db-metric-card"><div class="db-metric-copy"><strong class="db-metric-val">240</strong><span class="db-metric-note">Uyğunsuzluq</span></div><div class="db-metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="8"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg></div></div>
+              <div class="db-metric-card"><div class="db-metric-copy"><strong class="db-metric-val">42%</strong><span class="db-metric-note">Mobil istifadə</span></div><div class="db-metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="8" y="3" width="8" height="18" rx="2"/><path d="M11 6h2"/><path d="M12 17h.01"/></svg></div></div>
+            </div>
+          </section>
+        </aside>
+      </div>
+      </div><!-- /db-content-wrap -->
+    </div>
+  </div>`);
+
+      roadsView.insertAdjacentHTML('beforebegin', `
   <div class="table-card view-card is-hidden" id="registryView">
     <div class="tc-head">
       <div class="tc-title">
@@ -8530,8 +8869,8 @@
         populateAssetSoraqcaSelect();
       });
       const navItems = Array.from(document.querySelectorAll('.sb-body .nav-item'));
-      const viewNames = ['registry', 'roads', 'segments', 'assets', 'soraqcalar'];
-      navItems.slice(0, 5).forEach((item, idx) => {
+      const viewNames = ['dashboard', 'registry', 'roads', 'segments', 'assets', 'soraqcalar'];
+      navItems.slice(0, 6).forEach((item, idx) => {
         item.dataset.view = viewNames[idx];
         item.addEventListener('click', (e) => {
           e.preventDefault();
@@ -10239,6 +10578,51 @@
         }
       };
 
+      let dbInited = false;
+      function initDashboard() {
+        if (dbInited) { updateDbClock(); return; }
+        dbInited = true;
+        const chips = document.querySelectorAll('#dashboardView .db-chip');
+        const sections = document.querySelectorAll('#dashboardView .db-section[data-dbgroup]');
+        chips.forEach(chip => {
+          chip.addEventListener('click', () => {
+            chips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            const f = chip.dataset.dbfilter;
+            sections.forEach(s => { s.hidden = !(f === 'all' || s.dataset.dbgroup === f); });
+          });
+        });
+        document.querySelectorAll('#dashboardView .db-collapse').forEach(btn => {
+          btn.addEventListener('click', e => { e.stopPropagation(); btn.closest('.db-section').classList.toggle('db-collapsed'); });
+        });
+        document.querySelectorAll('#dashboardView .db-section-head').forEach(head => {
+          head.addEventListener('click', () => head.closest('.db-section').classList.toggle('db-collapsed'));
+        });
+        document.querySelectorAll('#dashboardView .db-subtabs').forEach(group => {
+          const btns = group.querySelectorAll('.db-subtab');
+          btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+              const body = group.parentElement;
+              const panels = Array.from(body.children).filter(el => el.classList.contains('db-tabpanel'));
+              btns.forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              if (btn.dataset.dbtab === '__all__') { panels.forEach(p => { p.hidden = false; }); return; }
+              panels.forEach(p => { p.hidden = true; });
+              const t = document.getElementById(btn.dataset.dbtab);
+              if (t) t.hidden = false;
+            });
+          });
+        });
+        updateDbClock();
+        setInterval(updateDbClock, 1000);
+      }
+      function updateDbClock() {
+        const now = new Date();
+        const cl = document.getElementById('db_clock'); const dt = document.getElementById('db_datebadge');
+        if (cl) cl.textContent = now.toLocaleTimeString('az-AZ', { hour: '2-digit', minute: '2-digit' });
+        if (dt) dt.textContent = now.toLocaleDateString('az-AZ', { day: '2-digit', month: '2-digit', year: 'numeric' });
+      }
+
       function switchView(view) {
         activeView = view;
         document.getElementById('formPanel').classList.remove('visible');
@@ -10248,10 +10632,11 @@
         });
         const targetView = document.getElementById(`${view}View`);
         targetView.classList.remove('is-hidden');
-        targetView.style.display = 'flex';
+        targetView.style.display = view === 'dashboard' ? 'block' : 'flex';
         navItems.forEach(item => item.classList.toggle('active', item.dataset.view === view));
-        const titleMap = { registry: 'Vahid reyestr', roads: 'Yollar', segments: 'Seqmentlər', assets: 'Aktivlər', soraqcalar: 'Soraqçalar' };
+        const titleMap = { dashboard: 'Dashboard', registry: 'Vahid reyestr', roads: 'Yollar', segments: 'Seqmentlər', assets: 'Aktivlər', soraqcalar: 'Soraqçalar' };
         const subMap = {
+          dashboard: 'Şəbəkə vəziyyəti, risk və nəzarət, icra və performans göstəriciləri',
           registry: 'Bütün yollara, seqmentlərə və aktivlərə vahid baxış',
           roads: 'Avtomobil Yolları İdarəsi agentliyi',
           segments: 'Yola bağlı seqmentlərin reyestri',
@@ -10260,6 +10645,7 @@
         };
         document.querySelector('.topbar-title').textContent = titleMap[view] || view;
         document.querySelector('.topbar-sub').textContent = subMap[view] || '';
+        if (view === 'dashboard') initDashboard();
         if (view === 'registry') renderRegistryTable();
         if (view === 'roads') renderTable();
         if (view === 'segments') renderSegmentTable();
@@ -12551,7 +12937,7 @@
 
       })();
 
-      switchView('registry');
+      switchView('dashboard');
     })();
   </script>
 </body>
