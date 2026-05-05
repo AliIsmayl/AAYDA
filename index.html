@@ -2802,6 +2802,7 @@
     }
 
     #assetInfoModal .modal-box {
+
       max-width: 980px;
     }
 
@@ -2937,7 +2938,7 @@
     .road-info-grid.is-tech .road-info-item {
       border: 1px solid #e6edf5;
       border-radius: 10px;
-      background: #f8fafc;
+      background: #fff;
       padding: 10px 12px;
     }
 
@@ -4164,6 +4165,17 @@
       border-radius: 8px;
       background: #f8fbff;
     }
+    .asset-soraqca-picker {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .asset-soraqca-search {
+      background: #fff;
+    }
+    .asset-soraqca-search:focus {
+      border-color: #3b82f6;
+    }
     .asset-dict-preview-item {
       min-width: 0;
       display: flex;
@@ -4195,6 +4207,47 @@
       text-overflow: clip;
       line-height: 1.45;
     }
+    .asset-passport-section {
+      grid-column: 1 / -1;
+      display: none;
+      border-top: 1px solid #d8e4f0;
+      border-bottom: 1px solid #d8e4f0;
+      background: #fff;
+      padding: 14px 0 16px;
+      margin-top: 4px;
+    }
+    .asset-passport-section.open {
+      display: block;
+    }
+    .asset-passport-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .asset-passport-title {
+      color: #0f172a;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+    .asset-passport-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #a16207;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .asset-passport-grid {
+      gap: 12px;
+    }
     .sq-names-btn {
       background: #2563eb !important;
       border-color: #2563eb !important;
@@ -4211,7 +4264,7 @@
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
     .sna-modal-head-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; }
-    #sqNewActiveModal .modal-head { background: #f8fbff; border-bottom: 1px solid #e2eaf6; padding: 16px 20px; gap: 13px; }
+    #sqNewActiveModal .modal-head { background: #f8fbff; border-bottom: 1px solid #e2eaf6; padding: 16px 20px; gap: 13px; border-radius: 16px 16px 0 0; }
     #sqNewActiveModal .mh-title { font-size: 15px; font-weight: 700; }
     #sqNewActiveModal .mh-sub { font-size: 12px; margin-top: 2px; }
     #sqNewActiveModal .modal-body { padding: 20px; display: flex; flex-direction: column; gap: 16px; overflow-y: auto; }
@@ -4476,6 +4529,9 @@
     }
     .sqnd-chip-empty {
       background: #fbfdff;
+    }
+    .sqnd-chip-full {
+      grid-column: 1 / -1;
     }
     .sqnd-chip-lbl {
       font-size: 10px;
@@ -6326,6 +6382,52 @@
               <label>Qeyd</label>
               <textarea class="ftextarea" id="ac_qeyd" placeholder="Aktiv haqqında əlavə texniki qeydlər..."></textarea>
             </div>
+            <div class="asset-passport-section" id="assetPassportPanel" aria-hidden="true">
+              <div class="asset-passport-head">
+                <div class="asset-passport-title">Pasport məlumatları</div>
+                <span class="asset-passport-badge">Pasportlaşdırılan</span>
+              </div>
+              <div class="fgrid asset-passport-grid">
+                <div class="frow">
+                  <label>Pasport nömrəsi</label>
+                  <input class="finput" id="ac_passport_no" placeholder="Nümunə: PSP-2026-00001">
+                </div>
+                <div class="frow">
+                  <label>Pasportun statusu</label>
+                  <select class="fselect" id="ac_passport_status">
+                    <option value="">Seçin...</option>
+                  </select>
+                </div>
+                <div class="frow">
+                  <label>Pasport tarixi</label>
+                  <input class="finput" id="ac_passport_date" type="date">
+                </div>
+                <div class="frow">
+                  <label>Təsdiq tarixi</label>
+                  <input class="finput" id="ac_passport_approved_date" type="date">
+                </div>
+                <div class="frow">
+                  <label>Təsdiq edən</label>
+                  <input class="finput" id="ac_passport_approved_by" placeholder="Şəxs və ya qurum">
+                </div>
+                <div class="frow">
+                  <label>Məsul şəxs</label>
+                  <input class="finput" id="ac_passport_responsible" placeholder="Məsul əməkdaş">
+                </div>
+                <div class="frow">
+                  <label>Son baxış tarixi</label>
+                  <input class="finput" id="ac_passport_last_inspection" type="date">
+                </div>
+                <div class="frow">
+                  <label>Növbəti baxış tarixi</label>
+                  <input class="finput" id="ac_passport_next_inspection" type="date">
+                </div>
+                <div class="frow full">
+                  <label>Pasport qeydi</label>
+                  <textarea class="ftextarea" id="ac_passport_note" placeholder="Pasport üzrə əlavə qeydlər..."></textarea>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -7738,6 +7840,7 @@
           groupName,
           typeName: item.t,
           gisName: item.g,
+          passportRequired: item.t === 'Pasportlaşdırılan',
           status: 'active',
         }))
       );
@@ -7755,6 +7858,109 @@
         || list.find(item => asset && item.name === asset.nov && item.groupName === asset.grup)
         || list.find(item => asset && item.name === asset.nov)
         || null;
+    }
+
+    function assetSoraqcaOptionLabel(item) {
+      const meta = [item.typeName, item.gisName].filter(Boolean).join(' / ');
+      return meta ? `${item.name} — ${meta}` : item.name;
+    }
+
+    function assetSoraqcaSearchText(value) {
+      return String(value || '').toLocaleLowerCase('az');
+    }
+
+    function assetSoraqcaMatches(item, query) {
+      if (!query) return true;
+      return [item.name, item.groupName, item.typeName, item.gisName, item.description]
+        .some(value => assetSoraqcaSearchText(value).includes(query));
+    }
+
+    const assetPassportFieldIds = [
+      'ac_passport_no',
+      'ac_passport_status',
+      'ac_passport_date',
+      'ac_passport_approved_date',
+      'ac_passport_approved_by',
+      'ac_passport_responsible',
+      'ac_passport_last_inspection',
+      'ac_passport_next_inspection',
+      'ac_passport_note',
+    ];
+
+    function assetPassportRequired(item) {
+      return !!(item && (item.passportRequired || item.typeName === 'Pasportlaşdırılan'));
+    }
+
+    function passportStatusList() {
+      if (typeof window.getPassportStatuses === 'function') return window.getPassportStatuses();
+      return ['Qaralama', 'Təsdiqə göndərilib', 'Təsdiqlənib', 'Düzəlişə qaytarılıb', 'Arxivləşdirilib']
+        .map((name, idx) => ({ id: 'fallback-passport-' + idx, name, status: 'active' }));
+    }
+
+    function populateAssetPassportStatusSelect(selectedValue) {
+      const select = document.getElementById('ac_passport_status');
+      if (!select) return;
+      const selected = selectedValue !== undefined ? String(selectedValue || '') : select.value;
+      const list = passportStatusList().filter(item => item.status !== 'passive');
+      select.innerHTML = '<option value="">Seçin...</option>' + list.map(item =>
+        `<option value="${assetEsc(item.name)}">${assetEsc(item.name)}</option>`
+      ).join('');
+      if (selected && list.some(item => item.name === selected)) select.value = selected;
+      if (!select.value && list.some(item => item.name === 'Qaralama')) select.value = 'Qaralama';
+    }
+
+    function clearAssetPassportFields() {
+      assetPassportFieldIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+    }
+
+    function syncAssetPassportSection(item, keepValues = true) {
+      const panel = document.getElementById('assetPassportPanel');
+      const required = assetPassportRequired(item);
+      if (panel) {
+        panel.classList.toggle('open', required);
+        panel.setAttribute('aria-hidden', required ? 'false' : 'true');
+      }
+      populateAssetPassportStatusSelect(document.getElementById('ac_passport_status')?.value || '');
+      if (!required) clearAssetPassportFields();
+      if (fp.assetStep === 2) {
+        document.getElementById('assetModalSub').textContent = required
+          ? 'Addım 2 / 2 — Məlumatlar və pasport'
+          : 'Addım 2 / 2 — Məlumatlar';
+      }
+      if (!required || keepValues) return;
+      clearAssetPassportFields();
+      populateAssetPassportStatusSelect('Qaralama');
+    }
+
+    function setAssetPassportFields(asset) {
+      const passport = asset?.passport || {};
+      document.getElementById('ac_passport_no').value = passport.no || asset?.passportNo || '';
+      populateAssetPassportStatusSelect(passport.status || asset?.passportStatus || '');
+      document.getElementById('ac_passport_date').value = passport.date || asset?.passportDate || '';
+      document.getElementById('ac_passport_approved_date').value = passport.approvedDate || asset?.passportApprovedDate || '';
+      document.getElementById('ac_passport_approved_by').value = passport.approvedBy || asset?.passportApprovedBy || '';
+      document.getElementById('ac_passport_responsible').value = passport.responsible || asset?.passportResponsible || '';
+      document.getElementById('ac_passport_last_inspection').value = passport.lastInspection || asset?.passportLastInspection || '';
+      document.getElementById('ac_passport_next_inspection').value = passport.nextInspection || asset?.passportNextInspection || '';
+      document.getElementById('ac_passport_note').value = passport.note || asset?.passportNote || '';
+    }
+
+    function collectAssetPassportData(required) {
+      if (!required) return null;
+      return {
+        no: document.getElementById('ac_passport_no')?.value || '',
+        status: document.getElementById('ac_passport_status')?.value || '',
+        date: document.getElementById('ac_passport_date')?.value || '',
+        approvedDate: document.getElementById('ac_passport_approved_date')?.value || '',
+        approvedBy: document.getElementById('ac_passport_approved_by')?.value || '',
+        responsible: document.getElementById('ac_passport_responsible')?.value || '',
+        lastInspection: document.getElementById('ac_passport_last_inspection')?.value || '',
+        nextInspection: document.getElementById('ac_passport_next_inspection')?.value || '',
+        note: document.getElementById('ac_passport_note')?.value || '',
+      };
     }
 
     function renderAssetSoraqcaPreview(item, values) {
@@ -7803,14 +8009,17 @@
         el.value = value;
       });
       renderAssetSoraqcaPreview(item, values);
+      syncAssetPassportSection(item);
     }
 
     function populateAssetSoraqcaSelect(selectedValue) {
       const select = document.getElementById('ac_soraqca');
       if (!select) return;
       const selected = selectedValue !== undefined ? String(selectedValue || '') : select.value;
+      const query = assetSoraqcaSearchText(document.getElementById('ac_soraqca_search')?.value || '');
       const list = assetSoraqcaList();
-      const grouped = list.reduce((acc, item) => {
+      const filtered = list.filter(item => assetSoraqcaMatches(item, query));
+      const grouped = filtered.reduce((acc, item) => {
         const groupName = item.groupName || 'Qrup seçilməyib';
         if (!acc[groupName]) acc[groupName] = [];
         acc[groupName].push(item);
@@ -7819,13 +8028,13 @@
       const options = Object.keys(grouped).sort((a,b) => a.localeCompare(b, 'az')).map(groupName => {
         const items = grouped[groupName].sort((a,b) => a.name.localeCompare(b.name, 'az'));
         return `<optgroup label="${assetEsc(groupName)}">` + items.map(item => {
-          const meta = [item.typeName, item.gisName].filter(Boolean).join(' / ');
-          const label = meta ? `${item.name} — ${meta}` : item.name;
+          const label = assetSoraqcaOptionLabel(item);
           return `<option value="${assetEsc(item.id)}">${assetEsc(label)}</option>`;
         }).join('') + '</optgroup>';
       }).join('');
-      select.innerHTML = '<option value="">Soraqça seçin...</option>' + (options || '<option value="" disabled>Aktiv soraqçası yoxdur</option>');
-      if (selected && list.some(item => String(item.id) === selected)) select.value = selected;
+      const emptyText = query ? 'Axtarışa uyğun soraqça yoxdur' : 'Aktiv soraqçası yoxdur';
+      select.innerHTML = '<option value="">Soraqça seçin...</option>' + (options || `<option value="" disabled>${assetEsc(emptyText)}</option>`);
+      if (selected && filtered.some(item => String(item.id) === selected)) select.value = selected;
     }
 
     function onAssetSoraqcaChange() {
@@ -7836,6 +8045,8 @@
 
     function setAssetSoraqcaFromAsset(asset) {
       const item = findAssetSoraqca(asset?.soraqcaId, asset);
+      const search = document.getElementById('ac_soraqca_search');
+      if (search) search.value = '';
       populateAssetSoraqcaSelect(item?.id || asset?.soraqcaId || '');
       const select = document.getElementById('ac_soraqca');
       if (select) select.value = item?.id || '';
@@ -7848,6 +8059,8 @@
     }
 
     function resetAssetSoraqca() {
+      const search = document.getElementById('ac_soraqca_search');
+      if (search) search.value = '';
       populateAssetSoraqcaSelect('');
       const select = document.getElementById('ac_soraqca');
       if (select) select.value = '';
@@ -7888,6 +8101,7 @@
       document.getElementById('ac_tarix').value = a.tarix || '';
       document.getElementById('ac_veziyyet').value = a.veziyyet || '';
       document.getElementById('ac_qeyd').value = a.qeyd || '';
+      setAssetPassportFields(a);
       document.getElementById('assetModalTitle').textContent = 'Aktivi Redaktə Et';
       goAssetStep(1);
       document.getElementById('assetModal').classList.add('open');
@@ -7906,7 +8120,11 @@
       document.getElementById('amsub1').classList.toggle('ms-done', n > 1);
       document.getElementById('amsub2').classList.toggle('ms-active', n === 2);
       document.getElementById('assetModalSub').textContent =
-        n === 1 ? 'Addım 1 / 2 — Növ və bağlılıq' : 'Addım 2 / 2 — Məlumatlar';
+        n === 1
+          ? 'Addım 1 / 2 — Növ və bağlılıq'
+          : (document.getElementById('assetPassportPanel')?.classList.contains('open')
+            ? 'Addım 2 / 2 — Məlumatlar və pasport'
+            : 'Addım 2 / 2 — Məlumatlar');
       document.getElementById('assetPrev').style.display = n > 1 ? '' : 'none';
       document.getElementById('assetNext').style.display = n < 2 ? '' : 'none';
       document.getElementById('assetSave').style.display = n === 2 ? '' : 'none';
@@ -7934,6 +8152,7 @@
         return;
       }
       setAssetSoraqcaFields(selectedSoraqca);
+      const selectedRequiresPassport = assetPassportRequired(selectedSoraqca);
       const asset = {
         code: document.getElementById('ac_kod').value,
         soraqcaId: selectedSoraqca.id,
@@ -7950,6 +8169,8 @@
         tarix: document.getElementById('ac_tarix').value,
         veziyyet: document.getElementById('ac_veziyyet').value,
         qeyd: document.getElementById('ac_qeyd').value,
+        passportRequired: selectedRequiresPassport,
+        passport: collectAssetPassportData(selectedRequiresPassport),
       };
       const seg = fp.segments[fp.currentSegForAsset];
       if (!seg.assets) seg.assets = [];
@@ -8282,9 +8503,12 @@
         acCodeRow.insertAdjacentHTML('afterend', `
           <div class="frow" id="acSoraqcaRow">
             <label>Aktiv soraqçası <span class="req">*</span></label>
-            <select class="fselect" id="ac_soraqca" onchange="onAssetSoraqcaChange()">
-              <option value="">Soraqça seçin...</option>
-            </select>
+            <div class="asset-soraqca-picker">
+              <input class="finput asset-soraqca-search" id="ac_soraqca_search" type="search" placeholder="Soraqça, qrup, növ və ya GİS tipinə görə axtar...">
+              <select class="fselect" id="ac_soraqca" onchange="onAssetSoraqcaChange()">
+                <option value="">Soraqça seçin...</option>
+              </select>
+            </div>
           </div>
           <div class="frow full" id="acSoraqcaInfoRow">
             <label>Soraqça məlumatları <span class="fauto-tag">AUTO</span></label>
@@ -8299,6 +8523,9 @@
       ['ac_grup', 'ac_nov', 'ac_tip', 'ac_gis_tip', 'ac_pasport'].forEach(id => {
         const row = document.getElementById(id)?.closest('.frow');
         if (row) row.style.display = 'none';
+      });
+      document.getElementById('ac_soraqca_search')?.addEventListener('input', () => {
+        populateAssetSoraqcaSelect();
       });
       const navItems = Array.from(document.querySelectorAll('.sb-body .nav-item'));
       const viewNames = ['registry', 'roads', 'segments', 'assets', 'soraqcalar'];
@@ -8742,9 +8969,11 @@
         const hasLon = asset.lon !== undefined && asset.lon !== null && asset.lon !== '';
         const coords = hasLat || hasLon ? `${hasLat ? asset.lat : '-'}, ${hasLon ? asset.lon : '-'}` : '-';
         const assetSoraqca = typeof findAssetSoraqca === 'function' ? findAssetSoraqca(asset.soraqcaId, asset) : null;
-        const passportRequired = assetSoraqca
-          ? ((assetSoraqca.passportRequired || assetSoraqca.typeName === 'Pasportlaşdırılan') ? 'Bəli' : 'Xeyr')
-          : (asset.tip ? (asset.tip === 'Pasportlaşdırılan' ? 'Bəli' : 'Xeyr') : '-');
+        const passportRequiredFlag = assetSoraqca
+          ? !!(assetSoraqca.passportRequired || assetSoraqca.typeName === 'Pasportlaşdırılan')
+          : !!(asset.passportRequired || asset.tip === 'Pasportlaşdırılan');
+        const passportRequired = passportRequiredFlag ? 'Bəli' : 'Xeyr';
+        const passport = asset.passport || {};
         const soraqcaStatus = assetSoraqca?.status === 'active'
           ? 'Aktiv'
           : (assetSoraqca?.status === 'passive' ? 'Passiv' : (assetSoraqca?.status || '-'));
@@ -8753,6 +8982,20 @@
         const assetSoraqcaDetailRows = assetSoraqcaDetails.length
           ? assetSoraqcaDetails.map(detail => roadInfoItem(detail.label, detail.value)).join('')
           : roadInfoItem('Əlavə soraqça atributları', 'Məlumat daxil edilməyib', 'full');
+        const passportRows = passportRequiredFlag
+          ? `
+              ${roadInfoSubhead('Pasport məlumatları')}
+              ${roadInfoItem('Pasport nömrəsi', passport.no || asset.passportNo)}
+              ${roadInfoItem('Pasportun statusu', passport.status || asset.passportStatus)}
+              ${roadInfoItem('Pasport tarixi', passport.date || asset.passportDate)}
+              ${roadInfoItem('Təsdiq tarixi', passport.approvedDate || asset.passportApprovedDate)}
+              ${roadInfoItem('Təsdiq edən', passport.approvedBy || asset.passportApprovedBy)}
+              ${roadInfoItem('Məsul şəxs', passport.responsible || asset.passportResponsible)}
+              ${roadInfoItem('Son baxış tarixi', passport.lastInspection || asset.passportLastInspection)}
+              ${roadInfoItem('Növbəti baxış tarixi', passport.nextInspection || asset.passportNextInspection)}
+              ${roadInfoItem('Pasport qeydi', passport.note || asset.passportNote, 'full')}
+            `
+          : '';
         const roadTitle = road ? `${road.code} - ${road.name}` : asset.roadCode;
         const segmentTitle = segment ? `${segment.code} (${segment.bas || '-'}-${segment.son || '-'} km)` : asset.segmentCode;
 
@@ -8799,6 +9042,7 @@
               ${roadInfoItem('Soraqça statusu', soraqcaStatus)}
               ${roadInfoItem('Soraqça təsviri', assetSoraqca?.description || '', 'full')}
               ${assetSoraqcaDetailRows}
+              ${passportRows}
 
               ${roadInfoSubhead('Yerləşmə və koordinatlar')}
               ${roadInfoItem('Aid yol', roadTitle)}
@@ -10373,6 +10617,7 @@
           document.getElementById('ac_tarix').value = a.tarix || '';
           document.getElementById('ac_veziyyet').value = a.veziyyet || '';
           document.getElementById('ac_qeyd').value = a.qeyd || '';
+          setAssetPassportFields(a);
         } else {
           document.getElementById('ac_kod').value = nextCode('ACT', assetsData, assetsData.length);
           ['ac_soraqca', 'ac_grup', 'ac_nov', 'ac_tip', 'ac_gis_tip', 'ac_pasport',
@@ -10408,6 +10653,7 @@
         document.getElementById('ac_tarix').value = a.tarix || '';
         document.getElementById('ac_veziyyet').value = a.veziyyet || '';
         document.getElementById('ac_qeyd').value = a.qeyd || '';
+        setAssetPassportFields(a);
         document.getElementById('assetModalTitle').textContent = 'Aktivi Redaktə Et';
         goAssetStep(1);
         document.getElementById('assetModal').classList.add('open');
@@ -10439,6 +10685,7 @@
           return;
         }
         setAssetSoraqcaFields(selectedSoraqca);
+        const selectedRequiresPassport = assetPassportRequired(selectedSoraqca);
         const previousAsset = global && globalAssetEditIdx >= 0 ? assetsData[globalAssetEditIdx] : null;
         const asset = {
           code: document.getElementById('ac_kod').value,
@@ -10458,6 +10705,8 @@
           tarix: document.getElementById('ac_tarix').value,
           veziyyet: document.getElementById('ac_veziyyet').value,
           qeyd: document.getElementById('ac_qeyd').value,
+          passportRequired: selectedRequiresPassport,
+          passport: collectAssetPassportData(selectedRequiresPassport),
         };
         if (global) {
           if (globalAssetEditIdx >= 0) assetsData[globalAssetEditIdx] = asset;
@@ -11354,6 +11603,16 @@
             .sort((a,b) => a.name.localeCompare(b.name, 'az'));
         };
 
+        window.getPassportStatuses = function() {
+          return sqPassportStatus
+            .map(item => ({
+              id: item.id,
+              name: item.name,
+              description: item.description || '',
+              status: item.status,
+            }));
+        };
+
         function renderSimpleDictTable(key, areaId) {
           const area = document.getElementById(areaId);
           if (!area || !SD_CFG[key]) return;
@@ -12187,20 +12446,10 @@
             : '<span class="badge b-gray"  style="font-size:11px;">Passiv</span>';
 
           document.getElementById('sqndBody').innerHTML = `
-            <div class="sqnd-hero">
-              <div class="sqnd-hero-icon">
-                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-              </div>
-              <div class="sqnd-hero-info">
-                <div class="sqnd-hero-name">${esc(r.name)}</div>
-                <div class="sqnd-hero-desc">${r.description ? esc(r.description) : '<span style="color:#94a3b8;font-style:italic;">Təsvir yoxdur</span>'}</div>
-              </div>
-              <div>${statusBadge}</div>
-            </div>
-
             <div class="sqnd-section">
-              <div class="sqnd-section-title">Xüsusiyyətlər</div>
               <div class="sqnd-chips-grid">
+                <div class="sqnd-chip sqnd-chip-full"><span class="sqnd-chip-lbl">Təsvir</span><span class="sqnd-chip-val">${r.description ? esc(r.description) : '<span style="color:#94a3b8;font-style:italic;">Təsvir yoxdur</span>'}</span></div>
+                <div class="sqnd-chip"><span class="sqnd-chip-lbl">Status</span><span class="sqnd-chip-val">${statusBadge}</span></div>
                 ${chip('Qrup',                   lk(sqGroups, groupId))}
                 ${chip('Növ',                    lk(sqTypes,  typeId))}
                 ${chip('GİS tipi',               lk(sqGis,    gisId))}
