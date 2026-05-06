@@ -3990,90 +3990,63 @@
     }
     .sq-placeholder svg { width: 44px; height: 44px; opacity: .3; }
     .sq-placeholder p { font-size: 13px; }
-    .sq-cat-combo {
-      position: relative;
-      min-width: 210px;
-      max-width: 260px;
-      flex-shrink: 0;
-    }
-    .sq-cat-trigger {
+    .sq-cat-slider {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 6px;
-      padding: 6px 10px;
-      border: 1px solid #d8e4f0;
-      border-radius: 8px;
-      cursor: pointer;
-      background: #fff;
-      font-size: 12px;
-      font-family: inherit;
-      color: #1a2b3c;
-      user-select: none;
-      transition: border-color .13s;
+      gap: 4px;
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
     }
-    .sq-cat-trigger:hover { border-color: #93c5fd; }
-    .sq-cat-trigger.open { border-color: #3b82f6; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
-    .sq-cat-trigger svg { width: 13px; height: 13px; stroke: #94a3b8; fill: none; stroke-width: 2; flex-shrink: 0; transition: transform .15s; }
-    .sq-cat-trigger.open svg { transform: rotate(180deg); }
-    .sq-cat-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .sq-cat-dropdown {
-      position: absolute;
-      top: 100%;
-      left: 0; right: 0;
-      background: #fff;
-      border: 1px solid #3b82f6;
-      border-top: none;
-      border-radius: 0 0 8px 8px;
-      z-index: 200;
-      display: none;
-      flex-direction: column;
-    }
-    .sq-cat-dropdown.open { display: flex; }
-    .sq-cat-search-wrap {
-      padding: 6px 7px;
-      border-bottom: 1px solid #e8f0fb;
-    }
-    .sq-cat-search-input {
-      width: 100%;
+    .sq-cat-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
       height: 28px;
       border: 1px solid #d8e4f0;
-      border-radius: 6px;
-      padding: 0 8px;
-      font-size: 11.5px;
+      border-radius: 7px;
+      background: #fff;
+      cursor: pointer;
+      flex-shrink: 0;
       font-family: inherit;
-      color: #1a2b3c;
-      outline: none;
-      background: #f8fafc;
+      transition: border-color .13s, background .13s;
     }
-    .sq-cat-search-input:focus { border-color: #3b82f6; background: #fff; }
-    .sq-cat-list {
-      max-height: 220px;
-      overflow-y: auto;
-      padding: 3px 0;
-      scrollbar-width: thin;
-      scrollbar-color: #3b82f6 transparent;
+    .sq-cat-nav:hover { border-color: #93c5fd; background: #f0f7ff; }
+    .sq-cat-nav svg { width: 14px; height: 14px; stroke: #64748b; fill: none; stroke-width: 2.5; }
+    .sq-cat-track {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      flex: 1;
+      min-width: 0;
+      scrollbar-width: none;
+      padding: 2px 0;
     }
-    .sq-cat-list::-webkit-scrollbar { width: 4px; }
-    .sq-cat-list::-webkit-scrollbar-track { background: transparent; }
-    .sq-cat-list::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 999px; }
-    .sq-cat-option {
+    .sq-cat-track::-webkit-scrollbar { display: none; }
+    .sq-cat-card {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 11px;
-      font-size: 12px;
+      gap: 6px;
+      padding: 5px 11px;
+      border: 1.5px solid #d8e4f0;
+      border-radius: 8px;
+      background: #fff;
       cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
       color: #1a2b3c;
-      transition: background .1s;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: border-color .13s, background .13s, color .13s;
     }
-    .sq-cat-option svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.8; flex-shrink: 0; opacity: .65; }
-    .sq-cat-option:hover { background: #eff6ff; color: #2563eb; }
-    .sq-cat-option:hover svg { opacity: 1; }
-    .sq-cat-option.active { background: #2057d4; color: #fff; }
-    .sq-cat-option.active svg { opacity: 1; stroke: #fff; }
-    .sq-cat-group-label { padding: 4px 11px 2px; font-size: 10px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: .05em; }
-    .sq-cat-divider { height: 1px; background: #e8f0fb; margin: 3px 0; }
+    .sq-cat-card svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.8; flex-shrink: 0; opacity: .65; }
+    .sq-cat-card:hover { border-color: #93c5fd; background: #f0f7ff; color: #2563eb; }
+    .sq-cat-card:hover svg { opacity: 1; }
+    .sq-cat-card.active { border-color: #2563eb; background: #2057d4; color: #fff; }
+    .sq-cat-card.active svg { opacity: 1; stroke: #fff; }
+    #sqPane-assets .sq-subdict-bar { flex-wrap: nowrap; }
     .sq-cat-names-btn {
       display: flex; align-items: center; gap: 6px;
       padding: 6px 12px; height: 34px;
@@ -8681,32 +8654,29 @@
     </div>
     <div class="sq-tab-pane active" id="sqPane-assets">
       <div class="sq-subdict-bar">
-        <div class="sq-cat-combo" id="sqCatCombo">
-          <div class="sq-cat-trigger" id="sqCatTrigger">
-            <span class="sq-cat-label" id="sqCatLabel">Qrup</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        <div class="sq-cat-slider" id="sqCatSlider">
+          <button class="sq-cat-nav" id="sqCatNavLeft" type="button" title="Sola">
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="sq-cat-track" id="sqCatTrack">
+            <div class="sq-cat-card active" data-value="groups"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Qrup</div>
+            <div class="sq-cat-card" data-value="types"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Növ</div>
+            <div class="sq-cat-card" data-value="gis"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z"/></svg>GİS tipi</div>
+            <div class="sq-cat-card" data-value="actTypes"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>Aktivin tipi</div>
+            <div class="sq-cat-card" data-value="structTypes"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Qurğunun tipi</div>
+            <div class="sq-cat-card" data-value="constrMethod"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Tikinti üsulu</div>
+            <div class="sq-cat-card" data-value="material"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Material</div>
+            <div class="sq-cat-card" data-value="loadStruct"><svg viewBox="0 0 24 24"><path d="M2 20h20"/><path d="M6 20V10"/><path d="M18 20V10"/><path d="M2 10c3-4 7-6 10-6s7 2 10 6"/></svg>Daşıyıcı konstruksiya tipi</div>
+            <div class="sq-cat-card" data-value="ventilation"><svg viewBox="0 0 24 24"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2 2 0 1 1 19 12H2"/></svg>Ventilyasiya sistemi</div>
+            <div class="sq-cat-card" data-value="waterBarrier"><svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>Su maneəsinin tipi</div>
+            <div class="sq-cat-card" data-value="underpassType"><svg viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M3 6c0 6 18 6 18 0"/><path d="M3 18h18"/></svg>Alt keçidin tipi</div>
+            <div class="sq-cat-card" data-value="condition"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>İstismar vəziyyəti</div>
+            <div class="sq-cat-card" data-value="monitoring"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Monitorinq sistemi</div>
+            <div class="sq-cat-card" data-value="deformation"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Deformasiya əlamətləri</div>
           </div>
-          <div class="sq-cat-dropdown" id="sqCatDropdown">
-            <div class="sq-cat-search-wrap">
-              <input type="text" id="sqCatSearch" class="sq-cat-search-input" placeholder="Axtar...">
-            </div>
-            <div class="sq-cat-list" id="sqCatList">
-              <div class="sq-cat-option active" data-value="groups"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Qrup</div>
-              <div class="sq-cat-option" data-value="types"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Növ</div>
-              <div class="sq-cat-option" data-value="gis"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z"/></svg>GİS tipi</div>
-              <div class="sq-cat-option" data-value="actTypes"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>Aktivin tipi</div>
-              <div class="sq-cat-option" data-value="structTypes"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Qurğunun tipi</div>
-              <div class="sq-cat-option" data-value="constrMethod"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Tikinti üsulu</div>
-              <div class="sq-cat-option" data-value="material"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Material</div>
-              <div class="sq-cat-option" data-value="loadStruct"><svg viewBox="0 0 24 24"><path d="M2 20h20"/><path d="M6 20V10"/><path d="M18 20V10"/><path d="M2 10c3-4 7-6 10-6s7 2 10 6"/></svg>Daşıyıcı konstruksiya tipi</div>
-              <div class="sq-cat-option" data-value="ventilation"><svg viewBox="0 0 24 24"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2 2 0 1 1 19 12H2"/></svg>Ventilyasiya sistemi</div>
-              <div class="sq-cat-option" data-value="waterBarrier"><svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>Su maneəsinin tipi</div>
-              <div class="sq-cat-option" data-value="underpassType"><svg viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M3 6c0 6 18 6 18 0"/><path d="M3 18h18"/></svg>Alt keçidin tipi</div>
-              <div class="sq-cat-option" data-value="condition"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>İstismar vəziyyəti</div>
-              <div class="sq-cat-option" data-value="monitoring"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Monitorinq sistemi</div>
-              <div class="sq-cat-option" data-value="deformation"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Deformasiya əlamətləri</div>
-            </div>
-          </div>
+          <button class="sq-cat-nav" id="sqCatNavRight" type="button" title="Sağa">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
         </div>
         <button class="sq-cat-names-btn" id="sqCatNamesBtn" type="button">
           <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
@@ -10590,6 +10560,16 @@
             chip.classList.add('active');
             const f = chip.dataset.dbfilter;
             sections.forEach(s => { s.hidden = !(f === 'all' || s.dataset.dbgroup === f); });
+            if (f === 'all') {
+              sections.forEach(s => {
+                if (s.dataset.dbgroup === 'network') s.classList.remove('db-collapsed');
+                else s.classList.add('db-collapsed');
+              });
+            } else {
+              sections.forEach(s => {
+                if (s.dataset.dbgroup === f) s.classList.remove('db-collapsed');
+              });
+            }
           });
         });
         document.querySelectorAll('#dashboardView .db-collapse').forEach(btn => {
@@ -12060,13 +12040,10 @@
           activeSD = key;
           const _namesBtn = document.getElementById('sqCatNamesBtn');
           if (_namesBtn) _namesBtn.classList.toggle('active', key === 'names');
-          const _lbl = document.getElementById('sqCatLabel');
           if (key === 'names') {
-            if (_lbl) _lbl.textContent = 'Seçin...';
-            document.querySelectorAll('#sqCatList .sq-cat-option').forEach(o => o.classList.remove('active'));
+            document.querySelectorAll('#sqCatTrack .sq-cat-card').forEach(o => o.classList.remove('active'));
           } else {
-            if (_lbl) { const _opt = document.querySelector('#sqCatList .sq-cat-option[data-value="'+key+'"]'); if(_opt) { const _tn = [..._opt.childNodes].find(n=>n.nodeType===3&&n.textContent.trim()); _lbl.textContent = _tn ? _tn.textContent.trim() : _opt.textContent.trim(); } }
-            document.querySelectorAll('#sqCatList .sq-cat-option').forEach(o => o.classList.toggle('active', o.dataset.value === key));
+            document.querySelectorAll('#sqCatTrack .sq-cat-card').forEach(o => o.classList.toggle('active', o.dataset.value === key));
           }
           updateCounts();
 
@@ -12866,58 +12843,24 @@
         });
 
         (function() {
-          const trigger   = document.getElementById('sqCatTrigger');
-          const dropdown  = document.getElementById('sqCatDropdown');
-          const searchInp = document.getElementById('sqCatSearch');
-          const list      = document.getElementById('sqCatList');
-          if (!trigger || !dropdown || !list) return;
+          const track    = document.getElementById('sqCatTrack');
+          const navLeft  = document.getElementById('sqCatNavLeft');
+          const navRight = document.getElementById('sqCatNavRight');
+          if (!track) return;
 
-          function openDropdown() {
-            dropdown.classList.add('open');
-            trigger.classList.add('open');
-            if (searchInp) { searchInp.value = ''; filterOptions(''); searchInp.focus(); }
-          }
-          function closeDropdown() {
-            dropdown.classList.remove('open');
-            trigger.classList.remove('open');
-          }
-          function filterOptions(q) {
-            list.querySelectorAll('.sq-cat-option').forEach(o => {
-              o.style.display = (!q || o.textContent.toLowerCase().includes(q.toLowerCase())) ? '' : 'none';
-            });
-          }
+          const scrollAmt = 200;
+          if (navLeft)  navLeft.addEventListener('click',  () => track.scrollBy({ left: -scrollAmt, behavior: 'smooth' }));
+          if (navRight) navRight.addEventListener('click', () => track.scrollBy({ left:  scrollAmt, behavior: 'smooth' }));
 
-          trigger.addEventListener('click', e => {
-            e.stopPropagation();
-            dropdown.classList.contains('open') ? closeDropdown() : openDropdown();
-          });
-
-          if (searchInp) {
-            searchInp.addEventListener('input', () => filterOptions(searchInp.value));
-            searchInp.addEventListener('keydown', e => {
-              if (e.key === 'Enter') {
-                const visible = list.querySelector('.sq-cat-option:not([style*="none"])');
-                if (visible) { renderSubDictTable(visible.dataset.value); closeDropdown(); }
-              }
-            });
-          }
-
-          list.addEventListener('click', e => {
-            const opt = e.target.closest('.sq-cat-option');
-            if (!opt) return;
-            renderSubDictTable(opt.dataset.value);
-            closeDropdown();
-          });
-
-          document.addEventListener('click', e => {
-            if (!e.target.closest('#sqCatCombo')) closeDropdown();
+          track.addEventListener('click', e => {
+            const card = e.target.closest('.sq-cat-card');
+            if (!card) return;
+            renderSubDictTable(card.dataset.value);
           });
 
           const _namesBtn = document.getElementById('sqCatNamesBtn');
           if (_namesBtn) {
-            _namesBtn.addEventListener('click', () => {
-              renderSubDictTable('names');
-            });
+            _namesBtn.addEventListener('click', () => renderSubDictTable('names'));
           }
         })();
 
