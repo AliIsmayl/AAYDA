@@ -4594,6 +4594,82 @@
         width: 100%;
       }
     }
+    /* ══ PASPORT SƏNƏDLƏRİ ══ */
+    #pasportView { flex-direction: column; }
+    .ps-filter-bar { display:flex; gap:8px; padding:9px 14px; border-bottom:1px solid #d8e4f0; background:#f8fafc; flex-shrink:0; flex-wrap:wrap; align-items:center; }
+    .ps-search { flex:1; min-width:200px; max-width:300px; height:34px; border:1px solid #d8e4f0; border-radius:8px; padding:0 10px 0 32px; font-size:12px; font-family:inherit; color:#1a2b3c; outline:none; background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E") no-repeat 9px center; transition:border-color .13s; }
+    .ps-search:focus { border-color:#3b82f6; }
+    .ps-fsel { height:34px; border:1px solid #d8e4f0; border-radius:8px; padding:0 28px 0 10px; font-size:12px; font-family:inherit; color:#1a2b3c; outline:none; background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat calc(100% - 8px) center; appearance:none; cursor:pointer; transition:border-color .13s; }
+    .ps-fsel:focus { border-color:#3b82f6; }
+    .ps-actions { margin-left:auto; display:flex; gap:8px; flex-shrink:0; }
+    /* status pills */
+    .pst { display:inline-flex; align-items:center; gap:4px; padding:2px 9px; border-radius:20px; font-size:11px; font-weight:600; white-space:nowrap; }
+    .pst::before { content:''; width:5px; height:5px; border-radius:50%; display:inline-block; flex-shrink:0; }
+    .pst-qaralama { background:#fef3c7; color:#92400e; } .pst-qaralama::before { background:#d97706; }
+    .pst-gonderilib { background:#dbeafe; color:#1d4ed8; } .pst-gonderilib::before { background:#3b82f6; }
+    .pst-tesdiqlenmib { background:#d1fae5; color:#065f46; } .pst-tesdiqlenmib::before { background:#10b981; }
+    .pst-aktiv { background:#d1fae5; color:#065f46; } .pst-aktiv::before { background:#10b981; }
+    .pst-arxiv { background:#f1f5f9; color:#64748b; } .pst-arxiv::before { background:#94a3b8; }
+    .pst-etibarsiz { background:#fee2e2; color:#991b1b; } .pst-etibarsiz::before { background:#ef4444; }
+    /* action btns in table */
+    .ps-btn { display:inline-flex; align-items:center; gap:3px; padding:3px 9px; border:1px solid #d8e4f0; border-radius:6px; background:#fff; font-size:11px; font-family:inherit; cursor:pointer; color:#1a2b3c; transition:.12s; white-space:nowrap; }
+    .ps-btn svg { width:11px; height:11px; stroke:currentColor; fill:none; stroke-width:2; flex-shrink:0; }
+    .ps-btn:hover { border-color:#93c5fd; background:#f0f7ff; color:#2563eb; }
+    .ps-btn.danger:hover { border-color:#fca5a5; background:#fff5f5; color:#dc2626; }
+    /* pasport modal */
+    #pasportModal .modal-box { max-width:860px; height:90vh; max-height:90vh; }
+    .pmo-head-meta { display:flex; align-items:center; gap:10px; }
+    .pmo-badge { display:flex; align-items:center; gap:4px; padding:3px 10px; border-radius:20px; background:#eff6ff; color:#2563eb; font-size:11px; font-weight:600; }
+    .pm-tabs { display:flex; gap:0; border-bottom:1px solid #d8e4f0; background:#f8fafc; padding:0 18px; flex-shrink:0; }
+    .pm-tab { padding:10px 16px; font-size:12px; font-weight:500; color:#6b7a8d; cursor:pointer; border:none; background:transparent; font-family:inherit; border-bottom:2.5px solid transparent; margin-bottom:-1px; transition:color .13s; }
+    .pm-tab:hover { color:#2563eb; }
+    .pm-tab.active { color:#2563eb; border-bottom-color:#2563eb; font-weight:600; }
+    .pm-pane { display:none; flex-direction:column; gap:14px; padding:18px; overflow-y:auto; flex:1; }
+    .pm-pane.active { display:flex; }
+    .pm-section { display:flex; flex-direction:column; gap:10px; }
+    .pm-section-title { font-size:10.5px; font-weight:700; color:#94a3b8; text-transform:uppercase; letter-spacing:.07em; border-bottom:1px solid #eef2f8; padding-bottom:5px; }
+    .pm-row { display:grid; gap:10px; }
+    .pm-row.c2 { grid-template-columns:1fr 1fr; }
+    .pm-row.c3 { grid-template-columns:1fr 1fr 1fr; }
+    .pm-row.c4 { grid-template-columns:1fr 1fr 1fr 1fr; }
+    .pm-field { display:flex; flex-direction:column; gap:4px; }
+    .pm-lbl { font-size:11px; font-weight:600; color:#64748b; }
+    .pm-inp { width:100%; height:34px; border:1px solid #d8e4f0; border-radius:7px; padding:0 10px; font-size:12.5px; font-family:inherit; color:#1a2b3c; outline:none; background:#fff; box-sizing:border-box; transition:border-color .13s; }
+    .pm-inp:focus { border-color:#3b82f6; }
+    .pm-inp[readonly] { background:#f8fafc; color:#64748b; cursor:default; }
+    .pm-sel { width:100%; height:34px; border:1px solid #d8e4f0; border-radius:7px; padding:0 28px 0 10px; font-size:12.5px; font-family:inherit; color:#1a2b3c; outline:none; background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat calc(100% - 8px) center; appearance:none; cursor:pointer; box-sizing:border-box; transition:border-color .13s; }
+    .pm-sel:focus { border-color:#3b82f6; }
+    .pm-ta { width:100%; min-height:68px; border:1px solid #d8e4f0; border-radius:7px; padding:8px 10px; font-size:12.5px; font-family:inherit; color:#1a2b3c; outline:none; background:#fff; resize:vertical; box-sizing:border-box; transition:border-color .13s; }
+    .pm-ta:focus { border-color:#3b82f6; }
+    .pm-toggle-row { display:flex; align-items:center; justify-content:space-between; padding:6px 10px; background:#f8fafc; border:1px solid #d8e4f0; border-radius:7px; }
+    .pm-toggle-lbl { font-size:12.5px; color:#1a2b3c; }
+    .pm-toggle { position:relative; width:38px; height:20px; flex-shrink:0; }
+    .pm-toggle input { opacity:0; width:0; height:0; position:absolute; }
+    .pm-toggle-slider { position:absolute; inset:0; background:#d8e4f0; border-radius:20px; cursor:pointer; transition:.2s; }
+    .pm-toggle-slider::after { content:''; position:absolute; left:2px; top:2px; width:16px; height:16px; background:#fff; border-radius:50%; transition:.2s; }
+    .pm-toggle input:checked + .pm-toggle-slider { background:#2563eb; }
+    .pm-toggle input:checked + .pm-toggle-slider::after { transform:translateX(18px); }
+    /* doc table */
+    .pmdoc-table { width:100%; border-collapse:collapse; font-size:12px; }
+    .pmdoc-table th { padding:7px 10px; background:#f0f6ff; color:#64748b; font-weight:600; text-align:left; border-bottom:1px solid #d8e4f0; font-size:11px; text-transform:uppercase; letter-spacing:.04em; }
+    .pmdoc-table td { padding:8px 10px; border-bottom:1px solid #eef2f8; color:#1a2b3c; vertical-align:middle; }
+    .pmdoc-table tr:last-child td { border-bottom:none; }
+    .pmdoc-table tr:hover td { background:#f8fbff; }
+    .pmdoc-act { display:flex; gap:4px; }
+    .pm-doc-toolbar { display:flex; justify-content:flex-end; margin-bottom:10px; }
+    .pm-empty { text-align:center; color:#94a3b8; font-size:12px; padding:28px 0; display:flex; flex-direction:column; align-items:center; gap:8px; }
+    .pm-empty svg { width:36px; height:36px; opacity:.25; }
+    /* status bar in modal footer */
+    .pm-status-bar { display:flex; align-items:center; gap:6px; flex:1; }
+    .pm-status-step { display:flex; align-items:center; gap:5px; font-size:11px; color:#94a3b8; }
+    .pm-status-step.done { color:#10b981; }
+    .pm-status-step.active { color:#2563eb; font-weight:600; }
+    .pm-status-step-dot { width:8px; height:8px; border-radius:50%; background:#d8e4f0; flex-shrink:0; }
+    .pm-status-step.done .pm-status-step-dot { background:#10b981; }
+    .pm-status-step.active .pm-status-step-dot { background:#2563eb; }
+    .pm-status-arrow { font-size:10px; color:#d8e4f0; }
+    /* doc modal */
+    #psDocModal .modal-box { max-width:580px; }
   </style>
   <style>
     /* ═══ DASHBOARD VIEW ═══ */
@@ -4767,6 +4843,14 @@
           <line x1="9" y1="12" x2="15" y2="12"/>
         </svg>
         <span class="ni-label">Soraqçalar</span>
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 24 24">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <path d="M9 15l2 2 4-5"/>
+        </svg>
+        <span class="ni-label">Pasport sənədləri</span>
       </a>
     </div>
     </div><!-- /sb-nav-scroll -->
@@ -8736,6 +8820,220 @@
     </div>
   </div>`);
 
+      document.getElementById('soraqcalarView').insertAdjacentHTML('afterend', `
+  <div class="table-card view-card is-hidden" id="pasportView">
+    <div class="tc-head">
+      <div class="tc-title">
+        <h2>Pasport sənədləri</h2>
+        <span class="tc-badge">Ümumi <span id="psTotalBadge">0</span> pasport reyestrdədir</span>
+      </div>
+      <div class="tc-actions">
+        <button class="btn-filter-reset" id="psFilterReset" type="button">
+          <svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+          Filteri sıfırla
+        </button>
+        <button class="btn-new" id="btnNewPasport" type="button">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Yeni pasport
+        </button>
+      </div>
+    </div>
+    <div class="ps-filter-bar">
+      <input class="ps-search" id="psSearch" type="text" placeholder="Aktiv adı və ya reyestr kodu ilə axtar...">
+      <select class="ps-fsel" id="psFilterGroup">
+        <option value="">Pasport qrupu</option>
+        <option>Körpü tipli qurğular</option>
+        <option>Tunel və keçid qurğuları</option>
+        <option>Geotexniki və mühafizə qurğuları</option>
+        <option>Kommunikasiya keçidləri</option>
+        <option>Torpaq və mühafizə zonaları</option>
+        <option>Suötürmə və drenaj qurğuları</option>
+      </select>
+      <select class="ps-fsel" id="psFilterStatus">
+        <option value="">Status</option>
+        <option>Qaralama</option>
+        <option>Təsdiqə göndərilib</option>
+        <option>Təsdiqlənib</option>
+        <option>Aktiv</option>
+        <option>Arxivləşdirilib</option>
+        <option>Etibarsız</option>
+      </select>
+      <select class="ps-fsel" id="psFilterType">
+        <option value="">Aktiv növü</option>
+        <option>Körpü</option><option>Estakada</option><option>Viyaduk</option>
+        <option>Tunel</option><option>Yeraltı piyada keçidi</option><option>Yerüstü piyada keçidi</option>
+        <option>İstinad divarı</option><option>Sürüşmə əleyhinə qurğu</option>
+        <option>Kabel keçidi</option><option>Boru keçidi</option>
+        <option>Suötürücü boru</option><option>Nasos stansiyası</option>
+        <option>Təhkim zolağı</option><option>Mühafizə zolağı</option>
+      </select>
+    </div>
+    <div class="table-wrap">
+      <table id="pasportTable" style="min-width:1100px;">
+        <thead>
+          <tr>
+            <th class="th-nof" style="width:36px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">#</span></div></th>
+            <th><div class="th-top"><span class="th-label">Reyestr kodu</span></div></th>
+            <th><div class="th-top"><span class="th-label">Aktiv adı</span></div></th>
+            <th><div class="th-top"><span class="th-label">Aktiv növü</span></div></th>
+            <th><div class="th-top"><span class="th-label">Pasport qrupu</span></div></th>
+            <th><div class="th-top"><span class="th-label">Status</span></div></th>
+            <th><div class="th-top"><span class="th-label">Versiya</span></div></th>
+            <th><div class="th-top"><span class="th-label">Son yenilənmə</span></div></th>
+            <th><div class="th-top"><span class="th-label">Təsdiq edən</span></div></th>
+            <th class="th-nof" style="width:180px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">Əməliyyatlar</span></div></th>
+          </tr>
+        </thead>
+        <tbody id="pasportTableBody"></tbody>
+      </table>
+    </div>
+    <div class="tc-foot">
+      <div class="pp-group"><span>Sətir:</span>
+        <select class="pp-select" id="psPerPage">
+          <option value="10" selected>10</option><option value="20">20</option><option value="50">50</option>
+        </select>
+      </div>
+      <div id="psPagInfo" class="pag-info">–</div>
+      <div class="pag-btns" id="psPagBtns"></div>
+    </div>
+  </div>
+
+  <!-- ══ PASPORT MODAL ══ -->
+  <div class="modal-ov" id="pasportModal">
+    <div class="modal-box" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <div class="modal-title-block">
+          <div class="mh-title" id="pmTitle">Pasport</div>
+          <div class="mh-sub" id="pmSub"></div>
+        </div>
+        <div class="pmo-head-meta" id="pmHeadMeta"></div>
+        <button class="modal-close-btn" id="pmClose" type="button">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="pm-tabs" id="pmTabs">
+        <button class="pm-tab active" data-pm-tab="general" type="button">Ümumi qeydiyyat</button>
+        <button class="pm-tab" data-pm-tab="specific" id="pmSpecificTabBtn" type="button">Qurğu məlumatları</button>
+        <button class="pm-tab" data-pm-tab="docs" type="button">Sənədlər</button>
+      </div>
+      <div class="pm-pane active" id="pmPane-general">
+        <div class="pm-section">
+          <div class="pm-section-title">Pasport identifikasiyası</div>
+          <div class="pm-row c3">
+            <div class="pm-field"><label class="pm-lbl">Pasport ID</label><input class="pm-inp" id="pm_id" readonly></div>
+            <div class="pm-field"><label class="pm-lbl">Reyestr kodu</label><input class="pm-inp" id="pm_regcode"></div>
+            <div class="pm-field"><label class="pm-lbl">Versiya nömrəsi</label><input class="pm-inp" id="pm_version" readonly></div>
+          </div>
+        </div>
+        <div class="pm-section">
+          <div class="pm-section-title">Aktiv bağlantısı</div>
+          <div class="pm-row c2">
+            <div class="pm-field"><label class="pm-lbl">Aktiv adı</label><input class="pm-inp" id="pm_assetname" readonly></div>
+            <div class="pm-field"><label class="pm-lbl">Aktiv növü</label><input class="pm-inp" id="pm_assettype" readonly></div>
+          </div>
+        </div>
+        <div class="pm-section">
+          <div class="pm-section-title">Status</div>
+          <div class="pm-row c2">
+            <div class="pm-field"><label class="pm-lbl">Pasport statusu</label>
+              <select class="pm-sel" id="pm_status">
+                <option>Qaralama</option><option>Təsdiqə göndərilib</option>
+                <option>Təsdiqlənib</option><option>Aktiv</option>
+                <option>Arxivləşdirilib</option><option>Etibarsız</option>
+              </select>
+            </div>
+            <div class="pm-field"><label class="pm-lbl">Qeydiyyatın əsas sənədi</label><input class="pm-inp" id="pm_regsrc" placeholder="Sərəncam / Qərar nömrəsi..."></div>
+          </div>
+        </div>
+        <div class="pm-section">
+          <div class="pm-section-title">Tarixlər</div>
+          <div class="pm-row c4">
+            <div class="pm-field"><label class="pm-lbl">İlkin tərtib tarixi</label><input class="pm-inp" id="pm_createdate" type="date" readonly></div>
+            <div class="pm-field"><label class="pm-lbl">Son yenilənmə tarixi</label><input class="pm-inp" id="pm_updatedate" type="date" readonly></div>
+            <div class="pm-field"><label class="pm-lbl">Təsdiq tarixi</label><input class="pm-inp" id="pm_approvedate" type="date"></div>
+            <div class="pm-field"><label class="pm-lbl">Etibarlılıq başlanğıcı</label><input class="pm-inp" id="pm_validfrom" type="date"></div>
+          </div>
+          <div class="pm-row c4">
+            <div class="pm-field"><label class="pm-lbl">Etibarlılıq sonu</label><input class="pm-inp" id="pm_validto" type="date"></div>
+            <div class="pm-field" style="grid-column:span 3;"><label class="pm-lbl">Təsdiq edən qurum / şəxs</label><input class="pm-inp" id="pm_approver"></div>
+          </div>
+        </div>
+        <div class="pm-section">
+          <div class="pm-section-title">Əlavə qeyd</div>
+          <div class="pm-field"><label class="pm-lbl">Qeyd</label><textarea class="pm-ta" id="pm_note" style="min-height:60px;"></textarea></div>
+        </div>
+      </div>
+
+      <div class="pm-pane" id="pmPane-specific">
+        <div id="pmSpecificForm"><div class="pm-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12h6M12 9v6"/></svg>Aktiv qrupu müəyyən edilməmişdir.</div></div>
+      </div>
+
+      <div class="pm-pane" id="pmPane-docs">
+        <div class="pm-doc-toolbar">
+          <button class="btn-new" id="pmAddDocBtn" type="button" style="height:32px;padding:0 14px;font-size:12px;">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Sənəd əlavə et
+          </button>
+        </div>
+        <div id="pmDocArea"></div>
+      </div>
+
+      <div class="modal-foot" style="align-items:center;">
+        <div class="pm-status-bar" id="pmStatusBar"></div>
+        <div style="display:flex;gap:8px;flex-shrink:0;">
+          <button class="fbtn fbtn-ghost" id="pmCancelBtn" type="button">Bağla</button>
+          <button class="fbtn fbtn-outline" id="pmSendApprove" type="button">Təsdiqə göndər</button>
+          <button class="fbtn fbtn-primary" id="pmSaveBtn" type="button">Yadda saxla</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SƏNƏD MODAL ══ -->
+  <div class="modal-ov" id="psDocModal">
+    <div class="modal-box" style="max-width:580px;">
+      <div class="modal-head">
+        <div class="modal-title-block"><div class="mh-title" id="psDocTitle">Sənəd əlavə et</div></div>
+        <button class="modal-close-btn" id="psDocClose" type="button">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body" style="padding:18px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;">
+        <input type="hidden" id="psd_editId">
+        <div class="pm-row c2">
+          <div class="pm-field"><label class="pm-lbl">Sənədin adı <span class="req">*</span></label><input class="pm-inp" id="psd_name"></div>
+          <div class="pm-field"><label class="pm-lbl">Sənəd növü</label>
+            <select class="pm-sel" id="psd_type"><option>Texniki sənəd</option><option>Layihə</option><option>Müqavilə</option><option>Hesabat</option><option>Rəsm / Çertyoj</option><option>Şəkil</option><option>Şəhadətnamə</option><option>Hüquqi sənəd</option><option>Digər</option></select>
+          </div>
+        </div>
+        <div class="pm-row c3">
+          <div class="pm-field"><label class="pm-lbl">Fayl tipi</label><input class="pm-inp" id="psd_filetype" placeholder="PDF, DOCX, DWG..."></div>
+          <div class="pm-field"><label class="pm-lbl">Fayl ölçüsü</label><input class="pm-inp" id="psd_filesize" placeholder="2.4 MB"></div>
+          <div class="pm-field"><label class="pm-lbl">Versiya nömrəsi</label><input class="pm-inp" id="psd_version" placeholder="v1"></div>
+        </div>
+        <div class="pm-row c3">
+          <div class="pm-field"><label class="pm-lbl">Sənəd statusu</label>
+            <select class="pm-sel" id="psd_status"><option>Aktiv</option><option>Arxiv</option><option>Etibarsız</option></select>
+          </div>
+          <div class="pm-field"><label class="pm-lbl">Yüklənmə tarixi</label><input class="pm-inp" id="psd_uploaded" type="date"></div>
+          <div class="pm-field"><label class="pm-lbl">Etibarlılıq tarixi</label><input class="pm-inp" id="psd_validto" type="date"></div>
+        </div>
+        <div class="pm-row c2">
+          <div class="pm-field"><label class="pm-lbl">Yükləyən istifadəçi</label><input class="pm-inp" id="psd_uploader"></div>
+          <div class="pm-field"><label class="pm-lbl">Əlaqəli sənəd ID</label><input class="pm-inp" id="psd_relid" placeholder="SD-..."></div>
+        </div>
+        <div class="pm-field"><label class="pm-lbl">Faylın saxlanma ünvanı</label><input class="pm-inp" id="psd_path" placeholder="/docs/pasport/..."></div>
+        <div class="pm-field"><label class="pm-lbl">Təsvir</label><textarea class="pm-ta" id="psd_desc" style="min-height:56px;"></textarea></div>
+      </div>
+      <div class="modal-foot">
+        <div style="display:flex;gap:8px;margin-left:auto;">
+          <button class="fbtn fbtn-ghost" id="psDocCancel" type="button">Ləğv et</button>
+          <button class="fbtn fbtn-primary" id="psDocSave" type="button">Yadda saxla</button>
+        </div>
+      </div>
+    </div>
+  </div>`);
+
       document.querySelector('#sp1 .fgrid').insertAdjacentHTML('afterbegin', `
     <div class="frow full" id="sgRoadSelectRow">
       <label>Aid yol <span class="req">*</span></label>
@@ -8839,8 +9137,8 @@
         populateAssetSoraqcaSelect();
       });
       const navItems = Array.from(document.querySelectorAll('.sb-body .nav-item'));
-      const viewNames = ['dashboard', 'registry', 'roads', 'segments', 'assets', 'soraqcalar'];
-      navItems.slice(0, 6).forEach((item, idx) => {
+      const viewNames = ['dashboard', 'registry', 'roads', 'segments', 'assets', 'soraqcalar', 'pasport'];
+      navItems.slice(0, 7).forEach((item, idx) => {
         item.dataset.view = viewNames[idx];
         item.addEventListener('click', (e) => {
           e.preventDefault();
@@ -10614,14 +10912,15 @@
         targetView.classList.remove('is-hidden');
         targetView.style.display = view === 'dashboard' ? 'block' : 'flex';
         navItems.forEach(item => item.classList.toggle('active', item.dataset.view === view));
-        const titleMap = { dashboard: 'Dashboard', registry: 'Vahid reyestr', roads: 'Yollar', segments: 'Seqmentlər', assets: 'Aktivlər', soraqcalar: 'Soraqçalar' };
+        const titleMap = { dashboard: 'Dashboard', registry: 'Vahid reyestr', roads: 'Yollar', segments: 'Seqmentlər', assets: 'Aktivlər', soraqcalar: 'Soraqçalar', pasport: 'Pasport sənədləri' };
         const subMap = {
           dashboard: 'Şəbəkə vəziyyəti, risk və nəzarət, icra və performans göstəriciləri',
           registry: 'Bütün yollara, seqmentlərə və aktivlərə vahid baxış',
           roads: 'Avtomobil Yolları İdarəsi agentliyi',
           segments: 'Yola bağlı seqmentlərin reyestri',
           assets: 'Yol və seqmentə bağlı aktivlərin reyestri',
-          soraqcalar: 'Aktiv növləri və master data idarəetmə'
+          soraqcalar: 'Aktiv növləri və master data idarəetmə',
+          pasport: 'Pasportlaşdırılan yol aktivlərinin texniki pasport reyestri'
         };
         document.querySelector('.topbar-title').textContent = titleMap[view] || view;
         document.querySelector('.topbar-sub').textContent = subMap[view] || '';
@@ -10631,6 +10930,7 @@
         if (view === 'segments') renderSegmentTable();
         if (view === 'assets') renderAssetTable();
         if (view === 'soraqcalar') renderSoraqcaTable();
+        if (view === 'pasport') renderPasportTable();
       }
 
       const originalOpenForm = openForm;
@@ -12877,6 +13177,387 @@
 
         renderSubDictTable('groups');
 
+      })();
+
+      /* ══════════════════════════════════════════
+         PASPORT SƏNƏDLƏRİ
+      ══════════════════════════════════════════ */
+      (function() {
+
+        /* ─── Dummy data ─── */
+        const psData = [
+          { id:'PS-001', regcode:'PRK-2024-001', assetId:'AKT-0001', assetName:'M1 Şamaxı körpüsü', assetType:'Körpü', group:'Körpü tipli qurğular', status:'Aktiv', version:'v3', createDate:'2020-03-15', updateDate:'2024-11-20', approveDate:'2024-01-10', approver:'Mühəndislik departamenti', validFrom:'2024-01-10', validTo:'2029-01-10', regSrc:'Sərəncam №45/2024', note:'Əsaslı baxış keçirilib.', docs:[{id:'SD-001',name:'Statik hesabat',type:'Texniki sənəd',filetype:'PDF',filesize:'4.2 MB',version:'v2',status:'Aktiv',uploaded:'2024-01-08',uploader:'Əli Hüseynov',path:'/docs/PS-001/statik.pdf',desc:'Statik hesabat sənədi.',validto:'2029-01-10',relid:''}], sp:{length:'180',width:'12.4',laneCount:'4',spanCount:'6',maxSpan:'30',pillarCount:'5',material:'Dəmir-beton',loadStructType:'Kirişli',loadCapacity:'80',condition:'Qənaətbəxş',buildYear:'1997',lastMajorRepair:'2018-06-01',lastMinorRepair:'2022-04-15',reconstructDate:'',passType:'Çay keçidi',lighting:true,safety:'Həsr, işıqlandırma sistemi',note:''}},
+          { id:'PS-002', regcode:'PRK-2024-002', assetId:'AKT-0002', assetName:'Biləcəri tuneli', assetType:'Tunel', group:'Tunel və keçid qurğuları', status:'Təsdiqlənib', version:'v2', createDate:'2021-07-10', updateDate:'2024-09-05', approveDate:'2024-09-05', approver:'Baş mühəndis K.Müəllimoğlu', validFrom:'2024-09-05', validTo:'2030-09-05', regSrc:'Sərəncam №112/2021', note:'', docs:[], sp:{actType:'Tunel',structType:'Avtomobil tuneli',totalLen:'420',width:'10',height:'5.5',laneCount:'2',pipeCount:'2',buildMethod:'Qapalı (qalxan)',material:'Polad',loadStructType:'Polad qövs',ventilation:'Zorla havalandırma',lighting:true,fireSafety:'YANĞINSÖNDÜRMƏ sistemi mövcuddur',drainage:'Lotu drenaj sistemi',electric:'Müstəqil elektrik xətti',monitoring:'Kamera və temperatur sensoru',emergencyExits:'4',condition:'Yaxşı',buildYear:'2005',lastMajorRepair:'2020-03-01',lastMinorRepair:'2023-08-10',reconstructDate:'',waterBarrier:'Polimer örtük',underpassType:'Nəqliyyat tuneli',note:''}},
+          { id:'PS-003', regcode:'PRK-2023-015', assetId:'AKT-0005', assetName:'Şimal-Qərb istinad divarı', assetType:'İstinad divarı', group:'Geotexniki və mühafizə qurğuları', status:'Qaralama', version:'v1', createDate:'2023-02-20', updateDate:'2023-08-14', approveDate:'', approver:'', validFrom:'', validTo:'', regSrc:'', note:'Sahə ölçüləri dəqiqləşdirilməlidir.', docs:[], sp:{actType:'İstinad divarı',len:'260',height:'8.5',width:'2.1',material:'Dəmir-beton',constructType:'Monolitik qravitasiya',slopeAngle:'75',soilType:'Gillicə',drainage:true,drainageType:'Perforasiyalı boru',riskLevel:'Orta',monitoring:false,monitoringNote:'',deformation:'Minimal səthi çatlar',condition:'Qənaətbəxş',buildYear:'2010',lastMajorRepair:'',lastMinorRepair:'2021-11-01',reconstructDate:'',note:''}},
+          { id:'PS-004', regcode:'PRK-2022-088', assetId:'AKT-0009', assetName:'Q3 Boru keçidi', assetType:'Boru keçidi', group:'Kommunikasiya keçidləri', status:'Aktiv', version:'v2', createDate:'2022-05-01', updateDate:'2023-12-10', approveDate:'2023-12-10', approver:'AzerGold ASC', validFrom:'2022-06-01', validTo:'2032-06-01', regSrc:'İcazə №KOM-2022-040', note:'', docs:[{id:'SD-002',name:'İcazə sənədi',type:'Hüquqi sənəd',filetype:'PDF',filesize:'1.1 MB',version:'v1',status:'Aktiv',uploaded:'2022-04-20',uploader:'Leyla Babayeva',path:'/docs/PS-004/icaze.pdf',desc:'İcazə sənədi.',validto:'2032-04-15',relid:''}], sp:{passType:'Boru keçidi',commType:'Neft kəməri',operator:'AzerGold ASC',legalDoc:'Konsessiya müqaviləsi',permitNo:'KOM-2022-040',permitDate:'2022-04-15',permitExpiry:'2032-04-15',len:'95',depth:'2.4',diameter:'DN250',material:'Polad',condition:'Yaxşı',monitoring:true,inspDate:'2023-11-20',respOrg:'AzerGold Texniki şöbəsi',note:''}},
+          { id:'PS-005', regcode:'PRK-2023-031', assetId:'AKT-0012', assetName:'Yaşıllıq zolağı km45', assetType:'Mühafizə zolağı', group:'Torpaq və mühafizə zonaları', status:'Təsdiqə göndərilib', version:'v1', createDate:'2023-06-10', updateDate:'2024-02-28', approveDate:'', approver:'', validFrom:'', validTo:'', regSrc:'', note:'Kadastr dəqiqləşməsi gözlənilir.', docs:[], sp:{zoneType:'Mühafizə zolağı',area:'12500',avgWidth:'15',minWidth:'12',maxWidth:'18',borderDesc:'Km 44.5 – Km 45.3 arası',soilCategory:'Sənaye torpağı',ownershipStatus:'Dövlət',useRight:'Daimi istifadə',restrictions:'Tikinti qadağandır',permittedAct:'Yaşıllaşdırma',prohibitedAct:'Tikinti, qazıntı',thirdParty:'',crossComm:'Elektrik kəməri (km 44.8)',legalDoc:'Qərar №23-G/2023',regDate:'2023-06-10',note:''}},
+          { id:'PS-006', regcode:'PRK-2021-009', assetId:'AKT-0020', assetName:'Seqment 8 Drenaj sistemi', assetType:'Suötürücü boru', group:'Suötürmə və drenaj qurğuları', status:'Aktiv', version:'v4', createDate:'2019-10-01', updateDate:'2024-07-15', approveDate:'2024-07-15', approver:'Hidravlika şöbəsi', validFrom:'2024-07-15', validTo:'2034-07-15', regSrc:'Layihə №HİD-2019-08', note:'Dördüncü versiya.', docs:[], sp:{actType:'Suötürücü boru',structType:'Qapalı boru sistemi',totalLen:'340',diameter:'DN600',material:'Beton',capacity:'1.8 m³/sn',hydraulicSlope:'0.005',locType:'Yeraltı',depth:'1.8',drainageType:'Qapalı',pump:false,pumpPower:'',blockage:'Yox',sediment:'Minimal',condition:'Yaxşı',buildYear:'2004',lastMajorRepair:'',lastMinorRepair:'2022-09-10',reconstructDate:'',note:''}},
+          { id:'PS-007', regcode:'PRK-2024-044', assetId:'AKT-0031', assetName:'Yeni Estakada', assetType:'Estakada', group:'Körpü tipli qurğular', status:'Qaralama', version:'v1', createDate:'2024-04-01', updateDate:'2024-04-01', approveDate:'', approver:'', validFrom:'', validTo:'', regSrc:'', note:'İlk pasport müsəddəsi.', docs:[], sp:{length:'320',width:'14',laneCount:'6',spanCount:'10',maxSpan:'32',pillarCount:'9',material:'Əvvəlcədən gərilmiş beton',loadStructType:'Kirişli sistem',loadCapacity:'100',condition:'Yeni',buildYear:'2024',lastMajorRepair:'',lastMinorRepair:'',reconstructDate:'',passType:'Avtomobil yolu',lighting:true,safety:'Həsr, kamera sistemi',note:''}},
+          { id:'PS-008', regcode:'PRK-2023-070', assetId:'AKT-0037', assetName:'Piyada keçidi №12', assetType:'Yeraltı piyada keçidi', group:'Tunel və keçid qurğuları', status:'Aktiv', version:'v2', createDate:'2018-09-12', updateDate:'2023-10-25', approveDate:'2023-10-25', approver:'Şəhərsalma komitəsi', validFrom:'2023-10-25', validTo:'2028-10-25', regSrc:'Qərar №SHK-2018-14', note:'', docs:[], sp:{actType:'Yeraltı piyada keçidi',structType:'Piyada tuneli',totalLen:'45',width:'5',height:'3',laneCount:'2',pipeCount:'1',buildMethod:'Açıq qazmaq',material:'Dəmir-beton',loadStructType:'Lövhəli örtük',ventilation:'Təbii',lighting:true,fireSafety:'Yox',drainage:'Nöqtəvi drenaj',electric:'Şəbəkə elektriyi',monitoring:'Kamera',emergencyExits:'2',condition:'Qənaətbəxş',buildYear:'2009',lastMajorRepair:'2019-05-01',lastMinorRepair:'2023-01-15',reconstructDate:'',waterBarrier:'',underpassType:'Piyada keçidi',note:''}},
+        ];
+
+        let psPage = 1;
+        let psPerPage = 10;
+        let psEditId = null;
+        let psOpenId = null;
+        let psDocEditId = null;
+
+        /* ─── helpers ─── */
+        const statusCls = { 'Qaralama':'pst-qaralama','Təsdiqə göndərilib':'pst-gonderilib','Təsdiqlənib':'pst-tesdiqlenmib','Aktiv':'pst-aktiv','Arxivləşdirilib':'pst-arxiv','Etibarsız':'pst-etibarsiz' };
+        function pstBadge(st){ return `<span class="pst ${statusCls[st]||'pst-qaralama'}">${esc(st)}</span>`; }
+
+        function statusSteps(st) {
+          const steps = ['Qaralama','Təsdiqə göndərilib','Təsdiqlənib','Aktiv'];
+          const cur = steps.indexOf(st);
+          return steps.map((s,i)=>{
+            const cls = i < cur ? 'done' : i===cur ? 'active' : '';
+            return `${i>0?'<span class="pm-status-arrow">›</span>':''}
+              <span class="pm-status-step ${cls}"><span class="pm-status-step-dot"></span>${s}</span>`;
+          }).join('');
+        }
+
+        function psFilter() {
+          const q = (document.getElementById('psSearch')?.value||'').toLowerCase();
+          const grp = document.getElementById('psFilterGroup')?.value||'';
+          const st = document.getElementById('psFilterStatus')?.value||'';
+          const tp = document.getElementById('psFilterType')?.value||'';
+          return psData.filter(r=>{
+            if (q && !r.assetName.toLowerCase().includes(q) && !r.regcode.toLowerCase().includes(q)) return false;
+            if (grp && r.group !== grp) return false;
+            if (st && r.status !== st) return false;
+            if (tp && r.assetType !== tp) return false;
+            return true;
+          });
+        }
+
+        function renderPasportTable() {
+          const list = psFilter();
+          const total = list.length;
+          psPerPage = parseInt(document.getElementById('psPerPage')?.value||10);
+          const pages = Math.max(1,Math.ceil(total/psPerPage));
+          if (psPage>pages) psPage=pages;
+          const slice = list.slice((psPage-1)*psPerPage, psPage*psPerPage);
+          const badge = document.getElementById('psTotalBadge');
+          if (badge) badge.textContent = total;
+          const tbody = document.getElementById('pasportTableBody');
+          if (!tbody) return;
+          tbody.innerHTML = slice.length ? slice.map((r,i)=>`
+            <tr>
+              <td style="text-align:center;">${(psPage-1)*psPerPage+i+1}</td>
+              <td><b>${esc(r.regcode)}</b></td>
+              <td>${esc(r.assetName)}</td>
+              <td>${esc(r.assetType)}</td>
+              <td>${esc(r.group)}</td>
+              <td>${pstBadge(r.status)}</td>
+              <td><span style="font-size:11px;color:#64748b;font-weight:600;">${esc(r.version)}</span></td>
+              <td>${esc(r.updateDate||'–')}</td>
+              <td>${esc(r.approver||'–')}</td>
+              <td style="text-align:center;">
+                <div style="display:flex;gap:4px;justify-content:center;">
+                  <button class="ps-btn ps-act-view" data-id="${esc(r.id)}" type="button"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Bax</button>
+                  <button class="ps-btn ps-act-edit" data-id="${esc(r.id)}" type="button"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 013 3L12 15l-4 1 1-4z"/></svg>Redaktə</button>
+                  <button class="ps-btn danger ps-act-del" data-id="${esc(r.id)}" type="button"><svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6l-1 14H6L5 6"/></svg></button>
+                </div>
+              </td>
+            </tr>`).join('')
+            : `<tr><td colspan="10" class="empty-cell">Nəticə tapılmadı</td></tr>`;
+          /* pagination */
+          const info = document.getElementById('psPagInfo');
+          const btns = document.getElementById('psPagBtns');
+          if (info) info.textContent = total ? `${(psPage-1)*psPerPage+1}–${Math.min(psPage*psPerPage,total)} / ${total}` : '–';
+          if (btns) {
+            btns.innerHTML='';
+            const mk=(lbl,p,dis)=>{ const b=document.createElement('button'); b.className='pag-pg'+(p===psPage?' active':''); b.textContent=lbl; b.disabled=dis||false; b.addEventListener('click',()=>{psPage=p;renderPasportTable();}); btns.appendChild(b); };
+            mk('‹',psPage-1,psPage<=1);
+            for(let p=1;p<=pages;p++) if(p===1||p===pages||Math.abs(p-psPage)<=1) mk(p,p,false);
+            mk('›',psPage+1,psPage>=pages);
+          }
+        }
+        window.renderPasportTable = renderPasportTable;
+
+        /* ─── Specific form templates ─── */
+        function buildSpecificForm(group) {
+          if (group==='Körpü tipli qurğular') return `
+            <div class="pm-section-title">Körpü tipli qurğular — ölçülər</div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Ümumi uzunluq (m)</label><input class="pm-inp" id="sp_length" type="number"></div><div class="pm-field"><label class="pm-lbl">Eni (m)</label><input class="pm-inp" id="sp_width" type="number"></div><div class="pm-field"><label class="pm-lbl">Hərəkət zolaqları</label><input class="pm-inp" id="sp_laneCount" type="number"></div></div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Aşırım sayı</label><input class="pm-inp" id="sp_spanCount" type="number"></div><div class="pm-field"><label class="pm-lbl">Maks. aşırım uzunluğu (m)</label><input class="pm-inp" id="sp_maxSpan" type="number"></div><div class="pm-field"><label class="pm-lbl">Dayaqların sayı</label><input class="pm-inp" id="sp_pillarCount" type="number"></div></div>
+            <div class="pm-section-title">Konstruksiya</div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Material</label><input class="pm-inp" id="sp_material"></div><div class="pm-field"><label class="pm-lbl">Daşıyıcı konstruksiya tipi</label><input class="pm-inp" id="sp_loadStructType"></div><div class="pm-field"><label class="pm-lbl">Yükləmə qabiliyyəti (t)</label><input class="pm-inp" id="sp_loadCapacity" type="number"></div></div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">İstismar vəziyyəti</label><input class="pm-inp" id="sp_condition"></div><div class="pm-field"><label class="pm-lbl">Tikinti ili</label><input class="pm-inp" id="sp_buildYear" type="number" placeholder="2005"></div><div class="pm-field"><label class="pm-lbl">Keçid tipi</label><input class="pm-inp" id="sp_passType"></div></div>
+            <div class="pm-section-title">Tarixlər</div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Son əsaslı təmir tarixi</label><input class="pm-inp" id="sp_lastMajorRepair" type="date"></div><div class="pm-field"><label class="pm-lbl">Son cari təmir tarixi</label><input class="pm-inp" id="sp_lastMinorRepair" type="date"></div><div class="pm-field"><label class="pm-lbl">Yenidənqurma tarixi</label><input class="pm-inp" id="sp_reconstructDate" type="date"></div></div>
+            <div class="pm-section-title">Əlavə</div>
+            <div class="pm-row c2"><div class="pm-toggle-row"><span class="pm-toggle-lbl">İşıqlandırma mövcudluğu</span><label class="pm-toggle"><input type="checkbox" id="sp_lighting"><span class="pm-toggle-slider"></span></label></div><div class="pm-field"><label class="pm-lbl">Təhlükəsizlik elementləri</label><input class="pm-inp" id="sp_safety"></div></div>
+            <div class="pm-field"><label class="pm-lbl">Qeyd</label><textarea class="pm-ta" id="sp_note" style="min-height:56px;"></textarea></div>`;
+
+          if (group==='Tunel və keçid qurğuları') return `
+            <div class="pm-section-title">Növ və ölçülər</div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Aktivin tipi</label><input class="pm-inp" id="sp_actType"></div><div class="pm-field"><label class="pm-lbl">Qurğunun tipi</label><input class="pm-inp" id="sp_structType"></div><div class="pm-field"><label class="pm-lbl">Ümumi uzunluq (m)</label><input class="pm-inp" id="sp_totalLen" type="number"></div></div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Eni (m)</label><input class="pm-inp" id="sp_width" type="number"></div><div class="pm-field"><label class="pm-lbl">Daxili hündürlük (m)</label><input class="pm-inp" id="sp_height" type="number"></div><div class="pm-field"><label class="pm-lbl">Hərəkət zolaqları</label><input class="pm-inp" id="sp_laneCount" type="number"></div></div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Boru sayı</label><input class="pm-inp" id="sp_pipeCount" type="number"></div><div class="pm-field"><label class="pm-lbl">Tikinti üsulu</label><input class="pm-inp" id="sp_buildMethod"></div><div class="pm-field"><label class="pm-lbl">Material</label><input class="pm-inp" id="sp_material"></div></div>
+            <div class="pm-section-title">Konstruksiya və sistemlər</div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Daşıyıcı konstruksiya tipi</label><input class="pm-inp" id="sp_loadStructType"></div><div class="pm-field"><label class="pm-lbl">Ventilyasiya sistemi</label><input class="pm-inp" id="sp_ventilation"></div><div class="pm-field"><label class="pm-lbl">Fövqəladə çıxış sayı</label><input class="pm-inp" id="sp_emergencyExits" type="number"></div></div>
+            <div class="pm-row c2"><div class="pm-toggle-row"><span class="pm-toggle-lbl">İşıqlandırma mövcudluğu</span><label class="pm-toggle"><input type="checkbox" id="sp_lighting"><span class="pm-toggle-slider"></span></label></div><div class="pm-field"><label class="pm-lbl">İstismar vəziyyəti</label><input class="pm-inp" id="sp_condition"></div></div>
+            <div class="pm-field"><label class="pm-lbl">Yanğın təhlükəsizlik sistemi</label><input class="pm-inp" id="sp_fireSafety"></div>
+            <div class="pm-row c2"><div class="pm-field"><label class="pm-lbl">Drenaj sistemi</label><input class="pm-inp" id="sp_drainage"></div><div class="pm-field"><label class="pm-lbl">Elektrik təminatı</label><input class="pm-inp" id="sp_electric"></div></div>
+            <div class="pm-row c2"><div class="pm-field"><label class="pm-lbl">Monitorinq sistemi</label><input class="pm-inp" id="sp_monitoring"></div><div class="pm-field"><label class="pm-lbl">Tikinti ili</label><input class="pm-inp" id="sp_buildYear" type="number"></div></div>
+            <div class="pm-section-title">Tarixlər</div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Son əsaslı təmir</label><input class="pm-inp" id="sp_lastMajorRepair" type="date"></div><div class="pm-field"><label class="pm-lbl">Son cari təmir</label><input class="pm-inp" id="sp_lastMinorRepair" type="date"></div><div class="pm-field"><label class="pm-lbl">Yenidənqurma tarixi</label><input class="pm-inp" id="sp_reconstructDate" type="date"></div></div>
+            <div class="pm-row c2"><div class="pm-field"><label class="pm-lbl">Su maneəsinin tipi</label><input class="pm-inp" id="sp_waterBarrier"></div><div class="pm-field"><label class="pm-lbl">Alt keçidin tipi</label><input class="pm-inp" id="sp_underpassType"></div></div>
+            <div class="pm-field"><label class="pm-lbl">Qeyd</label><textarea class="pm-ta" id="sp_note" style="min-height:56px;"></textarea></div>`;
+
+          if (group==='Geotexniki və mühafizə qurğuları') return `
+            <div class="pm-section-title">Növ və ölçülər</div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Aktivin tipi</label><input class="pm-inp" id="sp_actType"></div><div class="pm-field"><label class="pm-lbl">Uzunluq (m)</label><input class="pm-inp" id="sp_len" type="number"></div><div class="pm-field"><label class="pm-lbl">Hündürlük (m)</label><input class="pm-inp" id="sp_height" type="number"></div></div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">En / qalınlıq (m)</label><input class="pm-inp" id="sp_width" type="number"></div><div class="pm-field"><label class="pm-lbl">Material</label><input class="pm-inp" id="sp_material"></div><div class="pm-field"><label class="pm-lbl">Konstruksiya tipi</label><input class="pm-inp" id="sp_constructType"></div></div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Yamac bucağı (°)</label><input class="pm-inp" id="sp_slopeAngle" type="number"></div><div class="pm-field"><label class="pm-lbl">Torpaq növü</label><input class="pm-inp" id="sp_soilType"></div><div class="pm-field"><label class="pm-lbl">Risk səviyyəsi</label><input class="pm-inp" id="sp_riskLevel"></div></div>
+            <div class="pm-section-title">Drenaj və monitorinq</div>
+            <div class="pm-row c2"><div class="pm-toggle-row"><span class="pm-toggle-lbl">Drenaj sisteminin mövcudluğu</span><label class="pm-toggle"><input type="checkbox" id="sp_drainage"><span class="pm-toggle-slider"></span></label></div><div class="pm-field"><label class="pm-lbl">Drenaj sistemi tipi</label><input class="pm-inp" id="sp_drainageType"></div></div>
+            <div class="pm-row c2"><div class="pm-toggle-row"><span class="pm-toggle-lbl">Monitorinq mövcudluğu</span><label class="pm-toggle"><input type="checkbox" id="sp_monitoring"><span class="pm-toggle-slider"></span></label></div><div class="pm-field"><label class="pm-lbl">Monitorinq qeydi</label><input class="pm-inp" id="sp_monitoringNote"></div></div>
+            <div class="pm-row c2"><div class="pm-field"><label class="pm-lbl">Deformasiya əlamətləri</label><input class="pm-inp" id="sp_deformation"></div><div class="pm-field"><label class="pm-lbl">İstismar vəziyyəti</label><input class="pm-inp" id="sp_condition"></div></div>
+            <div class="pm-section-title">Tarixlər</div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Tikinti ili</label><input class="pm-inp" id="sp_buildYear" type="number"></div><div class="pm-field"><label class="pm-lbl">Son əsaslı təmir</label><input class="pm-inp" id="sp_lastMajorRepair" type="date"></div><div class="pm-field"><label class="pm-lbl">Son cari təmir</label><input class="pm-inp" id="sp_lastMinorRepair" type="date"></div></div>
+            <div class="pm-row c2"><div class="pm-field"><label class="pm-lbl">Yenidənqurma tarixi</label><input class="pm-inp" id="sp_reconstructDate" type="date"></div></div>
+            <div class="pm-field"><label class="pm-lbl">Qeyd</label><textarea class="pm-ta" id="sp_note" style="min-height:56px;"></textarea></div>`;
+
+          if (group==='Kommunikasiya keçidləri') return `
+            <div class="pm-section-title">Keçid məlumatları</div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Keçid tipi</label><input class="pm-inp" id="sp_passType"></div><div class="pm-field"><label class="pm-lbl">Kommunikasiya növü</label><input class="pm-inp" id="sp_commType"></div><div class="pm-field"><label class="pm-lbl">Operator / sahib</label><input class="pm-inp" id="sp_operator"></div></div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Hüquqi əsas sənəd</label><input class="pm-inp" id="sp_legalDoc"></div><div class="pm-field"><label class="pm-lbl">İcazə nömrəsi</label><input class="pm-inp" id="sp_permitNo"></div><div class="pm-field"><label class="pm-lbl">Məsul qurum</label><input class="pm-inp" id="sp_respOrg"></div></div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">İcazə verilmə tarixi</label><input class="pm-inp" id="sp_permitDate" type="date"></div><div class="pm-field"><label class="pm-lbl">İcazənin bitmə tarixi</label><input class="pm-inp" id="sp_permitExpiry" type="date"></div><div class="pm-field"><label class="pm-lbl">Son texniki baxış tarixi</label><input class="pm-inp" id="sp_inspDate" type="date"></div></div>
+            <div class="pm-section-title">Fiziki parametrlər</div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Keçidin uzunluğu (m)</label><input class="pm-inp" id="sp_len" type="number"></div><div class="pm-field"><label class="pm-lbl">Dərinlik / hündürlük (m)</label><input class="pm-inp" id="sp_depth" type="number"></div><div class="pm-field"><label class="pm-lbl">Diametr / ölçü</label><input class="pm-inp" id="sp_diameter"></div></div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Material</label><input class="pm-inp" id="sp_material"></div><div class="pm-field"><label class="pm-lbl">Texniki vəziyyət</label><input class="pm-inp" id="sp_condition"></div><div class="pm-toggle-row"><span class="pm-toggle-lbl">Monitorinq mövcudluğu</span><label class="pm-toggle"><input type="checkbox" id="sp_monitoring"><span class="pm-toggle-slider"></span></label></div></div>
+            <div class="pm-field"><label class="pm-lbl">Qeyd</label><textarea class="pm-ta" id="sp_note" style="min-height:56px;"></textarea></div>`;
+
+          if (group==='Torpaq və mühafizə zonaları') return `
+            <div class="pm-section-title">Zona məlumatları</div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Zona tipi</label><input class="pm-inp" id="sp_zoneType"></div><div class="pm-field"><label class="pm-lbl">Ümumi sahə (m²)</label><input class="pm-inp" id="sp_area" type="number"></div><div class="pm-field"><label class="pm-lbl">Qeydiyyat tarixi</label><input class="pm-inp" id="sp_regDate" type="date"></div></div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Orta en (m)</label><input class="pm-inp" id="sp_avgWidth" type="number"></div><div class="pm-field"><label class="pm-lbl">Minimum en (m)</label><input class="pm-inp" id="sp_minWidth" type="number"></div><div class="pm-field"><label class="pm-lbl">Maksimum en (m)</label><input class="pm-inp" id="sp_maxWidth" type="number"></div></div>
+            <div class="pm-section-title">Mülkiyyət və hüquq</div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Torpaq kateqoriyası</label><input class="pm-inp" id="sp_soilCategory"></div><div class="pm-field"><label class="pm-lbl">Mülkiyyət statusu</label><input class="pm-inp" id="sp_ownershipStatus"></div><div class="pm-field"><label class="pm-lbl">İstifadə hüququ</label><input class="pm-inp" id="sp_useRight"></div></div>
+            <div class="pm-row c2"><div class="pm-field"><label class="pm-lbl">Hüquqi əsas sənəd</label><input class="pm-inp" id="sp_legalDoc"></div><div class="pm-field"><label class="pm-lbl">Kəsişən kommunikasiya xətləri</label><input class="pm-inp" id="sp_crossComm"></div></div>
+            <div class="pm-section-title">Məhdudiyyətlər</div>
+            <div class="pm-field"><label class="pm-lbl">Məhdudiyyət rejimi</label><textarea class="pm-ta" id="sp_restrictions" style="min-height:52px;"></textarea></div>
+            <div class="pm-row c2"><div class="pm-field"><label class="pm-lbl">İcazə tələb olunan fəaliyyətlər</label><textarea class="pm-ta" id="sp_permittedAct" style="min-height:52px;"></textarea></div><div class="pm-field"><label class="pm-lbl">Qadağan olunmuş fəaliyyətlər</label><textarea class="pm-ta" id="sp_prohibitedAct" style="min-height:52px;"></textarea></div></div>
+            <div class="pm-field"><label class="pm-lbl">Sərhəd təsviri</label><textarea class="pm-ta" id="sp_borderDesc" style="min-height:52px;"></textarea></div>
+            <div class="pm-field"><label class="pm-lbl">Qeyd</label><textarea class="pm-ta" id="sp_note" style="min-height:52px;"></textarea></div>`;
+
+          if (group==='Suötürmə və drenaj qurğuları') return `
+            <div class="pm-section-title">Qurğu məlumatları</div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Aktivin tipi</label><input class="pm-inp" id="sp_actType"></div><div class="pm-field"><label class="pm-lbl">Qurğunun tipi</label><input class="pm-inp" id="sp_structType"></div><div class="pm-field"><label class="pm-lbl">Ümumi uzunluq (m)</label><input class="pm-inp" id="sp_totalLen" type="number"></div></div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Diametr / kəsik ölçüsü</label><input class="pm-inp" id="sp_diameter"></div><div class="pm-field"><label class="pm-lbl">Material</label><input class="pm-inp" id="sp_material"></div><div class="pm-field"><label class="pm-lbl">Keçiricilik qabiliyyəti</label><input class="pm-inp" id="sp_capacity"></div></div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Hidravlik meyillilik</label><input class="pm-inp" id="sp_hydraulicSlope" type="number"></div><div class="pm-field"><label class="pm-lbl">Yerləşmə tipi</label><input class="pm-inp" id="sp_locType"></div><div class="pm-field"><label class="pm-lbl">Yerləşmə dərinliyi (m)</label><input class="pm-inp" id="sp_depth" type="number"></div></div>
+            <div class="pm-row c2"><div class="pm-field"><label class="pm-lbl">Drenaj sistemi tipi</label><input class="pm-inp" id="sp_drainageType"></div><div class="pm-toggle-row"><span class="pm-toggle-lbl">Nasos mövcudluğu</span><label class="pm-toggle"><input type="checkbox" id="sp_pump"><span class="pm-toggle-slider"></span></label></div></div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Nasos gücü (kW)</label><input class="pm-inp" id="sp_pumpPower"></div><div class="pm-field"><label class="pm-lbl">İstismar vəziyyəti</label><input class="pm-inp" id="sp_condition"></div><div class="pm-field"><label class="pm-lbl">Tikinti ili</label><input class="pm-inp" id="sp_buildYear" type="number"></div></div>
+            <div class="pm-field"><label class="pm-lbl">Tıxanma vəziyyəti</label><input class="pm-inp" id="sp_blockage"></div>
+            <div class="pm-field"><label class="pm-lbl">Çöküntü səviyyəsi</label><input class="pm-inp" id="sp_sediment"></div>
+            <div class="pm-section-title">Tarixlər</div>
+            <div class="pm-row c3"><div class="pm-field"><label class="pm-lbl">Son əsaslı təmir</label><input class="pm-inp" id="sp_lastMajorRepair" type="date"></div><div class="pm-field"><label class="pm-lbl">Son cari təmir</label><input class="pm-inp" id="sp_lastMinorRepair" type="date"></div><div class="pm-field"><label class="pm-lbl">Yenidənqurma tarixi</label><input class="pm-inp" id="sp_reconstructDate" type="date"></div></div>
+            <div class="pm-field"><label class="pm-lbl">Qeyd</label><textarea class="pm-ta" id="sp_note" style="min-height:56px;"></textarea></div>`;
+          return '<div class="pm-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>Bu pasport qrubu üçün əlavə form yoxdur.</div>';
+        }
+
+        function fillSp(sp) {
+          if (!sp) return;
+          Object.entries(sp).forEach(([k,v])=>{
+            const el = document.getElementById('sp_'+k);
+            if (!el) return;
+            if (el.type==='checkbox') el.checked = !!v;
+            else el.value = v||'';
+          });
+        }
+
+        function collectSp() {
+          const obj={};
+          document.querySelectorAll('#pmSpecificForm [id^="sp_"]').forEach(el=>{
+            const k=el.id.replace('sp_','');
+            obj[k]= el.type==='checkbox'? el.checked : el.value;
+          });
+          return obj;
+        }
+
+        function renderDocTable(docs) {
+          const area = document.getElementById('pmDocArea');
+          if (!area) return;
+          if (!docs||!docs.length) { area.innerHTML='<div class="pm-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Hələ heç bir sənəd əlavə edilməyib.</div>'; return; }
+          area.innerHTML=`<table class="pmdoc-table"><thead><tr><th>#</th><th>Sənədin adı</th><th>Növ</th><th>Fayl tipi</th><th>Versiya</th><th>Status</th><th>Yüklənmə tarixi</th><th>Əməliyyatlar</th></tr></thead><tbody>${docs.map((d,i)=>`<tr><td>${i+1}</td><td>${esc(d.name)}</td><td>${esc(d.type)}</td><td>${esc(d.filetype)}</td><td>${esc(d.version)}</td><td>${esc(d.status)}</td><td>${esc(d.uploaded)}</td><td><div class="pmdoc-act"><button class="ps-btn ps-doc-edit" data-doc-id="${esc(d.id)}" type="button"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 013 3L12 15l-4 1 1-4z"/></svg>Redaktə</button><button class="ps-btn danger ps-doc-del" data-doc-id="${esc(d.id)}" type="button"><svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6l-1 14H6L5 6"/></svg></button></div></td></tr>`).join('')}</tbody></table>`;
+        }
+
+        /* ─── Modal open/close ─── */
+        function openPasportModal(id) {
+          const empty = { id:'', regcode:'', assetId:'', assetName:'', assetType:'', group:'', status:'Qaralama', version:'v1', createDate:new Date().toISOString().slice(0,10), updateDate:new Date().toISOString().slice(0,10), approveDate:'', approver:'', validFrom:'', validTo:'', regSrc:'', note:'', docs:[], sp:{} };
+          const r = id ? psData.find(x=>x.id===id)||empty : empty;
+          psEditId = id||null;
+          psOpenId = r.id;
+
+          document.getElementById('pmTitle').textContent = id ? 'Pasportu redaktə et' : 'Yeni pasport';
+          document.getElementById('pmSub').textContent = r.regcode ? `Reyestr: ${r.regcode}` : 'Yeni pasport qeydi';
+          const meta = document.getElementById('pmHeadMeta');
+          if (meta) meta.innerHTML = r.id ? `<span class="pmo-badge">${esc(r.version)}</span> ${pstBadge(r.status)}` : '';
+
+          document.getElementById('pm_id').value = r.id;
+          document.getElementById('pm_regcode').value = r.regcode;
+          document.getElementById('pm_version').value = r.version;
+          document.getElementById('pm_assetname').value = r.assetName;
+          document.getElementById('pm_assettype').value = r.assetType;
+          document.getElementById('pm_status').value = r.status;
+          document.getElementById('pm_createdate').value = r.createDate;
+          document.getElementById('pm_updatedate').value = r.updateDate;
+          document.getElementById('pm_approvedate').value = r.approveDate;
+          document.getElementById('pm_approver').value = r.approver;
+          document.getElementById('pm_validfrom').value = r.validFrom;
+          document.getElementById('pm_validto').value = r.validTo;
+          document.getElementById('pm_regsrc').value = r.regSrc;
+          document.getElementById('pm_note').value = r.note;
+
+          const tabBtn = document.getElementById('pmSpecificTabBtn');
+          if (tabBtn) tabBtn.textContent = r.group || 'Qurğu məlumatları';
+          document.getElementById('pmSpecificForm').innerHTML = r.group ? buildSpecificForm(r.group) : '<div class="pm-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>Aktiv qrupu müəyyən edilməmişdir.</div>';
+          fillSp(r.sp||{});
+          renderDocTable(r.docs||[]);
+
+          const bar = document.getElementById('pmStatusBar');
+          if (bar) bar.innerHTML = statusSteps(r.status);
+
+          /* activate first tab */
+          document.querySelectorAll('.pm-tab').forEach(t=>t.classList.remove('active'));
+          document.querySelectorAll('.pm-pane').forEach(p=>p.classList.remove('active'));
+          document.querySelector('.pm-tab[data-pm-tab="general"]')?.classList.add('active');
+          document.getElementById('pmPane-general')?.classList.add('active');
+
+          document.getElementById('pasportModal').classList.add('open');
+        }
+
+        function closePasportModal() {
+          document.getElementById('pasportModal').classList.remove('open');
+          psEditId = null; psOpenId = null;
+        }
+
+        /* tab switching */
+        document.getElementById('pmTabs')?.addEventListener('click', e=>{
+          const tab = e.target.closest('.pm-tab');
+          if (!tab) return;
+          document.querySelectorAll('.pm-tab').forEach(t=>t.classList.remove('active'));
+          document.querySelectorAll('.pm-pane').forEach(p=>p.classList.remove('active'));
+          tab.classList.add('active');
+          document.getElementById('pmPane-'+tab.dataset.pmTab)?.classList.add('active');
+        });
+
+        /* save */
+        function savePasport(extraStatus) {
+          const today = new Date().toISOString().slice(0,10);
+          const st = extraStatus || document.getElementById('pm_status')?.value || 'Qaralama';
+          if (psEditId) {
+            const r = psData.find(x=>x.id===psEditId);
+            if (r) {
+              r.regcode = document.getElementById('pm_regcode').value;
+              r.status = st;
+              r.approveDate = document.getElementById('pm_approvedate').value;
+              r.approver = document.getElementById('pm_approver').value;
+              r.validFrom = document.getElementById('pm_validfrom').value;
+              r.validTo = document.getElementById('pm_validto').value;
+              r.regSrc = document.getElementById('pm_regsrc').value;
+              r.note = document.getElementById('pm_note').value;
+              r.updateDate = today;
+              r.sp = collectSp();
+              const vNum = parseInt((r.version||'v1').replace('v',''))||1;
+              r.version = 'v'+(vNum+1);
+            }
+          } else {
+            const newId = 'PS-'+String(psData.length+1).padStart(3,'0');
+            const yr = new Date().getFullYear();
+            psData.push({ id:newId, regcode:document.getElementById('pm_regcode').value||`PRK-${yr}-${String(psData.length+1).padStart(3,'0')}`, assetId:'', assetName:document.getElementById('pm_assetname').value, assetType:document.getElementById('pm_assettype').value, group:document.getElementById('pmSpecificTabBtn')?.textContent||'', status:st, version:'v1', createDate:today, updateDate:today, approveDate:document.getElementById('pm_approvedate').value, approver:document.getElementById('pm_approver').value, validFrom:document.getElementById('pm_validfrom').value, validTo:document.getElementById('pm_validto').value, regSrc:document.getElementById('pm_regsrc').value, note:document.getElementById('pm_note').value, sp:collectSp(), docs:[] });
+          }
+          closePasportModal();
+          renderPasportTable();
+        }
+
+        document.getElementById('pmSaveBtn')?.addEventListener('click', ()=>savePasport());
+        document.getElementById('pmSendApprove')?.addEventListener('click', ()=>savePasport('Təsdiqə göndərilib'));
+        document.getElementById('pmClose')?.addEventListener('click', closePasportModal);
+        document.getElementById('pmCancelBtn')?.addEventListener('click', closePasportModal);
+        document.getElementById('pasportModal')?.addEventListener('click', e=>{ if(e.target===document.getElementById('pasportModal')) closePasportModal(); });
+
+        /* table row actions */
+        document.getElementById('pasportTableBody')?.addEventListener('click', e=>{
+          const id = e.target.closest('[data-id]')?.dataset.id;
+          if (!id) return;
+          if (e.target.closest('.ps-act-view')||e.target.closest('.ps-act-edit')) openPasportModal(id);
+          if (e.target.closest('.ps-act-del')) {
+            if (confirm('Bu pasportu arxivləşdirmək istədiyinizə əminsiniz?')) {
+              const r = psData.find(x=>x.id===id);
+              if (r) { r.status='Arxivləşdirilib'; r.updateDate=new Date().toISOString().slice(0,10); }
+              renderPasportTable();
+            }
+          }
+        });
+
+        /* new */
+        document.getElementById('btnNewPasport')?.addEventListener('click', ()=>openPasportModal(null));
+
+        /* filters */
+        ['psSearch','psFilterGroup','psFilterStatus','psFilterType'].forEach(fid=>{
+          document.getElementById(fid)?.addEventListener('input', ()=>{ psPage=1; renderPasportTable(); });
+          document.getElementById(fid)?.addEventListener('change', ()=>{ psPage=1; renderPasportTable(); });
+        });
+        document.getElementById('psFilterReset')?.addEventListener('click', ()=>{
+          ['psSearch','psFilterGroup','psFilterStatus','psFilterType'].forEach(fid=>{ const el=document.getElementById(fid); if(el) el.value=''; });
+          psPage=1; renderPasportTable();
+        });
+        document.getElementById('psPerPage')?.addEventListener('change', ()=>{ psPage=1; renderPasportTable(); });
+
+        /* doc CRUD */
+        document.getElementById('pmAddDocBtn')?.addEventListener('click', ()=>openDocModal(null));
+
+        document.getElementById('pmDocArea')?.addEventListener('click', e=>{
+          const docId = e.target.closest('[data-doc-id]')?.dataset.docId;
+          if (!docId) return;
+          if (e.target.closest('.ps-doc-edit')) openDocModal(docId);
+          if (e.target.closest('.ps-doc-del')) {
+            if (confirm('Sənədi silmək istədiyinizə əminsiniz?')) {
+              const r = psData.find(x=>x.id===psOpenId);
+              if (r) { r.docs=r.docs.filter(d=>d.id!==docId); renderDocTable(r.docs); }
+            }
+          }
+        });
+
+        function openDocModal(docId) {
+          const r = psData.find(x=>x.id===psOpenId);
+          const d = docId ? r?.docs?.find(x=>x.id===docId) : null;
+          psDocEditId = docId||null;
+          document.getElementById('psDocTitle').textContent = docId?'Sənədi redaktə et':'Sənəd əlavə et';
+          document.getElementById('psd_editId').value = d?.id||'';
+          document.getElementById('psd_name').value = d?.name||'';
+          document.getElementById('psd_type').value = d?.type||'Texniki sənəd';
+          document.getElementById('psd_filetype').value = d?.filetype||'';
+          document.getElementById('psd_filesize').value = d?.filesize||'';
+          document.getElementById('psd_version').value = d?.version||'v1';
+          document.getElementById('psd_status').value = d?.status||'Aktiv';
+          document.getElementById('psd_uploaded').value = d?.uploaded||new Date().toISOString().slice(0,10);
+          document.getElementById('psd_validto').value = d?.validto||'';
+          document.getElementById('psd_uploader').value = d?.uploader||'';
+          document.getElementById('psd_relid').value = d?.relid||'';
+          document.getElementById('psd_path').value = d?.path||'';
+          document.getElementById('psd_desc').value = d?.desc||'';
+          document.getElementById('psDocModal').classList.add('open');
+        }
+
+        function closeDocModal() { document.getElementById('psDocModal').classList.remove('open'); psDocEditId=null; }
+        document.getElementById('psDocClose')?.addEventListener('click', closeDocModal);
+        document.getElementById('psDocCancel')?.addEventListener('click', closeDocModal);
+        document.getElementById('psDocModal')?.addEventListener('click', e=>{ if(e.target===document.getElementById('psDocModal')) closeDocModal(); });
+
+        document.getElementById('psDocSave')?.addEventListener('click', ()=>{
+          const r = psData.find(x=>x.id===psOpenId);
+          if (!r) return;
+          const name = document.getElementById('psd_name').value.trim();
+          if (!name) { alert('Sənədin adını daxil edin.'); return; }
+          const obj = { id:psDocEditId||('SD-'+Date.now()), name, type:document.getElementById('psd_type').value, filetype:document.getElementById('psd_filetype').value, filesize:document.getElementById('psd_filesize').value, version:document.getElementById('psd_version').value, status:document.getElementById('psd_status').value, uploaded:document.getElementById('psd_uploaded').value, validto:document.getElementById('psd_validto').value, uploader:document.getElementById('psd_uploader').value, relid:document.getElementById('psd_relid').value, path:document.getElementById('psd_path').value, desc:document.getElementById('psd_desc').value };
+          if (psDocEditId) { const idx=r.docs.findIndex(x=>x.id===psDocEditId); if(idx>-1) r.docs[idx]=obj; } else r.docs.push(obj);
+          closeDocModal();
+          renderDocTable(r.docs);
+        });
 
       })();
 
