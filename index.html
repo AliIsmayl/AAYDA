@@ -322,6 +322,75 @@
       align-items: center;
     }
 
+    .tb-info-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .tb-info-btn {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1.5px solid #2563eb;
+      background: #fff;
+      color: #2563eb;
+      font-size: 11px;
+      font-weight: 700;
+      font-style: italic;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      padding: 0;
+      transition: background .15s, color .15s;
+      flex-shrink: 0;
+    }
+    .tb-info-btn:hover {
+      background: #2563eb;
+      color: #fff;
+    }
+    .tb-info-drop {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 180px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.10);
+      z-index: 9999;
+      display: none;
+      overflow: hidden;
+    }
+    .tb-info-drop.open { display: block; }
+    .tb-info-opt {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 14px;
+      font-size: 12.5px;
+      color: #1e293b;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .12s;
+      white-space: nowrap;
+    }
+    .tb-info-opt:hover { background: #f1f5f9; }
+    .tb-info-opt svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      flex-shrink: 0;
+      color: #2563eb;
+    }
+    .tb-info-opt + .tb-info-opt {
+      border-top: 1px solid #f1f5f9;
+    }
+
     .icon-btn {
       width: 34px;
       height: 34px;
@@ -5156,8 +5225,21 @@
     <!-- TOPBAR -->
     <header class="topbar">
       <div class="topbar-left">
-        <div class="topbar-title">Yollar</div>
-        <div class="topbar-sub">Avtomobil Yolları İdarəsi agentliyi</div>
+        <div class="topbar-title" id="topbarTitle">Yollar</div>
+        <div class="topbar-sub" id="topbarSub">Avtomobil Yolları İdarəsi agentliyi</div>
+        <div class="tb-info-wrap">
+          <button class="tb-info-btn" id="tbInfoBtn" type="button" title="Təlimat">i</button>
+          <div class="tb-info-drop" id="tbInfoDrop">
+            <a class="tb-info-opt" id="tbInfoVideo" href="BURAYA_VIDEO_LINK" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Video təlimat
+            </a>
+            <a class="tb-info-opt" id="tbInfoDoc" href="BURAYA_PDF_LINK" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5Z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/><line x1="9" y1="9" x2="11" y2="9"/></svg>
+              Sənəd təlimat
+            </a>
+          </div>
+        </div>
       </div>
       <div class="topbar-right">
 
@@ -7556,6 +7638,7 @@
     function closeTopbarPanels() {
       document.querySelectorAll('.tb-panel.open').forEach(panel => panel.classList.remove('open'));
       document.getElementById('profileTemplatesMenu')?.classList.remove('open');
+      document.getElementById('tbInfoDrop')?.classList.remove('open');
     }
 
     function toggleTopbarPanel(panelId) {
@@ -7581,6 +7664,14 @@
     document.getElementById('profileBtn')?.addEventListener('click', e => {
       e.stopPropagation();
       toggleTopbarPanel('profilePanel');
+    });
+
+    document.getElementById('tbInfoBtn')?.addEventListener('click', e => {
+      e.stopPropagation();
+      const drop = document.getElementById('tbInfoDrop');
+      const wasOpen = drop.classList.contains('open');
+      closeTopbarPanels();
+      if (!wasOpen) drop.classList.add('open');
     });
 
     document.getElementById('profileTemplatesBtn')?.addEventListener('click', e => {
