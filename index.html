@@ -2621,6 +2621,16 @@
       display: flex;
     }
 
+    #roadCreateModal.open,
+    #segCreateModal.open,
+    #assetModal.open {
+      z-index: 900;
+    }
+
+    #segFormPanel.seg-as-modal {
+      z-index: 900;
+    }
+
     .modal-box {
       background: #fff;
       border-radius: 16px;
@@ -4837,6 +4847,15 @@
       </a>
       <a class="nav-item" href="#">
         <svg viewBox="0 0 24 24">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="8" y1="13" x2="16" y2="13"/>
+          <line x1="8" y1="17" x2="13" y2="17"/>
+        </svg>
+        <span class="ni-label">Sənədlər</span>
+      </a>
+      <a class="nav-item" href="#">
+        <svg viewBox="0 0 24 24">
           <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
           <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
           <line x1="9" y1="8" x2="15" y2="8"/>
@@ -7029,6 +7048,7 @@
         <button class="action-menu-btn" data-action-menu type="button" aria-label="Əməliyyatlar">⋮</button>
         <div class="action-menu">
           <button class="action-menu-item" data-road-action="edit" type="button">Redaktə et</button>
+          <button class="action-menu-item" data-road-action="documents" type="button">Sənədlər</button>
           <button class="action-menu-item" data-road-action="new-segment" type="button">Yeni seqment yarat</button>
           <button class="action-menu-item" data-road-action="segment-count" type="button">${label}</button>
           <button class="action-menu-item danger" data-road-action="delete" type="button">Sil</button>
@@ -7077,6 +7097,7 @@
       if (!sourcePanel) return null;
       const keys = [
         'roadAction',
+        'documentAction',
         'regRoad', 'regSegs', 'regAssets',
         'segEdit', 'segDel', 'segAsset', 'segNewasset', 'segAssetcount',
         'assetEdit', 'assetDel',
@@ -7774,6 +7795,11 @@
 
       if (type === 'edit') {
         openForm('edit', row);
+        return;
+      }
+
+      if (type === 'documents') {
+        if (typeof window.openDocumentsPage === 'function') window.openDocumentsPage(code);
         return;
       }
 
@@ -8724,6 +8750,124 @@
   </div>`);
 
       document.getElementById('assetsView').insertAdjacentHTML('afterend', `
+  <div class="table-card view-card is-hidden" id="documentsView">
+    <div class="tc-head">
+      <div class="tc-title">
+        <h2>Sənədlər reyestri</h2>
+        <span class="tc-badge" id="documentsBadge">Bütün yol, seqment və aktiv sənədləri</span>
+      </div>
+      <div class="tc-actions">
+        <button class="btn-filter-reset" id="documentsResetBtn" type="button">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 6h18" />
+            <path d="M8 6v12a2 2 0 002 2h4a2 2 0 002-2V6" />
+            <path d="M10 11v6M14 11v6" />
+            <path d="M9 6V4h6v2" />
+          </svg>
+          Filteri sıfırla
+        </button>
+        <button class="btn-new" id="btnNewDocument" type="button">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Yeni sənəd
+        </button>
+      </div>
+    </div>
+    <div class="registry-stats">
+      <div class="registry-stat"><div class="rs-v" id="docTotalBadge">0</div><div class="rs-l">Sənəd</div></div>
+      <div class="registry-stat"><div class="rs-v" id="docRoadBadge">0</div><div class="rs-l">Yola aid</div></div>
+      <div class="registry-stat"><div class="rs-v" id="docSegmentBadge">0</div><div class="rs-l">Seqmentə aid</div></div>
+      <div class="registry-stat"><div class="rs-v" id="docAssetBadge">0</div><div class="rs-l">Aktivə aid</div></div>
+    </div>
+    <div class="table-wrap">
+      <table id="documentsTable" style="min-width:1320px;">
+        <thead>
+          <tr>
+            <th class="th-nof" style="width:36px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">#</span></div></th>
+            <th><div class="th-top"><span class="th-label">Sənəd adı</span></div></th>
+            <th><div class="th-top"><span class="th-label">Sənəd növü</span></div></th>
+            <th><div class="th-top"><span class="th-label">Sənəd nömrəsi</span></div></th>
+            <th><div class="th-top"><span class="th-label">Aidlik</span></div></th>
+            <th><div class="th-top"><span class="th-label">Aid yol</span></div></th>
+            <th><div class="th-top"><span class="th-label">Aid seqment</span></div></th>
+            <th><div class="th-top"><span class="th-label">Aid aktiv</span></div></th>
+            <th><div class="th-top"><span class="th-label">Tarix</span></div></th>
+            <th><div class="th-top"><span class="th-label">Status</span></div></th>
+            <th><div class="th-top"><span class="th-label">Fayl</span></div></th>
+            <th class="th-nof" style="width:150px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">Əməliyyatlar</span></div></th>
+          </tr>
+        </thead>
+        <tbody id="documentsTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="modal-ov" id="documentModal">
+    <div class="modal-box" style="max-width:780px;">
+      <div class="modal-head">
+        <div class="modal-title-block">
+          <div class="mh-title" id="documentModalTitle">Sənəd əlavə et</div>
+          <div class="mh-sub" id="documentModalSub">Yol, seqment və ya aktivə sənəd bağlayın</div>
+        </div>
+        <button class="modal-close-btn" id="documentClose" type="button" aria-label="Bağla">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="fgrid">
+          <div class="frow full">
+            <label>Aid yol <span class="req">*</span></label>
+            <div class="relation-row">
+              <select class="fselect" id="doc_road"></select>
+              <button class="fbtn fbtn-outline" id="docCreateRoadToggle" type="button">Yol yarat</button>
+            </div>
+          </div>
+          <div class="frow">
+            <label>Aid seqment</label>
+            <div class="relation-row">
+              <select class="fselect" id="doc_segment"></select>
+              <button class="fbtn fbtn-outline" id="docCreateSegmentToggle" type="button">Seqment yarat</button>
+            </div>
+            <span class="fhint">Boş qalarsa sənəd birbaşa yola aid sayılır.</span>
+          </div>
+          <div class="frow">
+            <label>Aid aktiv</label>
+            <div class="relation-row">
+              <select class="fselect" id="doc_asset"></select>
+              <button class="fbtn fbtn-outline" id="docCreateAssetToggle" type="button">Aktiv yarat</button>
+            </div>
+            <span class="fhint">Aktiv seçilərsə sənəd aktiv səviyyəsində görünəcək.</span>
+          </div>
+          <div class="frow full"><label>Sənəd adı <span class="req">*</span></label><input class="finput" id="doc_name" placeholder="Məlumat vərəqəsi"></div>
+          <div class="frow"><label>Sənəd növü</label><select class="fselect" id="doc_type"><option>Məlumat vərəqəsi</option><option>Xəritə</option><option>Hüquqi sənəd</option><option>Texniki sənəd</option><option>Reyestr çıxarışı</option><option>Akt</option><option>Layihə sənədi</option><option>Digər</option></select></div>
+          <div class="frow"><label>Sənəd nömrəsi</label><input class="finput" id="doc_number" placeholder="SN-2026-001"></div>
+          <div class="frow"><label>Tarix</label><input class="finput" id="doc_date" type="date"></div>
+          <div class="frow"><label>Status</label><select class="fselect" id="doc_status"><option>Aktiv</option><option>Qaralama</option><option>Arxiv</option><option>Ləğv olunmuş</option></select></div>
+          <div class="frow full"><label>Fayl</label><input class="finput" id="doc_file" type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx,application/pdf,image/jpeg,image/png"></div>
+          <div class="frow full"><label>Təsvir</label><textarea class="ftextarea" id="doc_desc" placeholder="Sənəd haqqında qeyd..."></textarea></div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="fbtn fbtn-ghost" id="documentCancel" type="button">Ləğv et</button>
+        <button class="fbtn fbtn-success" id="documentSave" type="button"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>Yadda saxla</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-ov" id="documentPreviewModal">
+    <div class="modal-box" style="max-width:920px;max-height:92vh;">
+      <div class="modal-head">
+        <div class="modal-title-block">
+          <div class="mh-title" id="documentPreviewTitle">Sənəd</div>
+          <div class="mh-sub" id="documentPreviewSub">Baxış</div>
+        </div>
+        <button class="modal-close-btn" id="documentPreviewClose" type="button" aria-label="Bağla">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="documentPreviewBody"></div>
+    </div>
+  </div>
+
   <div class="table-card view-card is-hidden" id="soraqcalarView">
     <div class="tc-head">
       <div class="tc-title">
@@ -9137,11 +9281,12 @@
         populateAssetSoraqcaSelect();
       });
       const navItems = Array.from(document.querySelectorAll('.sb-body .nav-item'));
-      const viewNames = ['dashboard', 'registry', 'roads', 'segments', 'assets', 'soraqcalar', 'pasport'];
-      navItems.slice(0, 7).forEach((item, idx) => {
+      const viewNames = ['dashboard', 'registry', 'roads', 'segments', 'assets', 'documents', 'soraqcalar', 'pasport'];
+      navItems.slice(0, 8).forEach((item, idx) => {
         item.dataset.view = viewNames[idx];
         item.addEventListener('click', (e) => {
           e.preventDefault();
+          if (viewNames[idx] === 'documents') currentDocumentsRoadCode = '';
           switchView(viewNames[idx]);
         });
       });
@@ -9150,13 +9295,18 @@
       let globalSegmentEditIdx = -1;
       let globalAssetEditIdx = -1;
       let preselectAssetSegmentCode = '';
+      let pendingDocumentSegmentCreate = false;
+      let pendingDocumentAssetCreate = false;
 
       const roadsData = [];
       const segmentsData = [];
       const assetsData = [];
+      const roadDocumentsData = [];
       let currentRoadInfoCode = '';
       let currentSegmentInfoCode = '';
       let currentAssetInfoCode = '';
+      let currentDocumentsRoadCode = '';
+      let editingDocumentId = '';
 
       function esc(value) {
         return String(value ?? '').replace(/[&<>"']/g, ch => ({
@@ -9240,6 +9390,18 @@
 
       function assetByCode(code) {
         return assetsData.find(a => a.code === code);
+      }
+
+      function roadDocumentById(id) {
+        return roadDocumentsData.find(doc => doc.id === id);
+      }
+
+      function nextRoadDocumentId() {
+        const max = roadDocumentsData.reduce((acc, doc) => {
+          const n = parseInt(String(doc.id || '').split('-').pop(), 10);
+          return Number.isFinite(n) ? Math.max(acc, n) : acc;
+        }, 0);
+        return `DOC-2026-${String(max + 1).padStart(5, '0')}`;
       }
 
       function displayValue(value) {
@@ -9723,9 +9885,14 @@
           }
         }
         refreshRoadSelects();
+        for (let i = roadDocumentsData.length - 1; i >= 0; i--) {
+          if (roadDocumentsData[i].roadCode === code) roadDocumentsData.splice(i, 1);
+        }
+        if (currentDocumentsRoadCode === code) currentDocumentsRoadCode = '';
         renderRegistryTable();
         renderSegmentTable();
         renderAssetTable();
+        renderDocumentsTable();
         refreshRoadActionCells();
       };
 
@@ -9775,6 +9942,7 @@
         refreshRoadSelects();
         renderRegistryTable();
         refreshRoadActionCells();
+        renderDocumentsTable();
         renderTable();
         return road;
       }
@@ -9800,15 +9968,22 @@
           const el = document.getElementById(`${prefix}_qr_${id}`);
           if (el) el.value = '';
         });
-        document.getElementById(`${prefix}QuickRoad`).classList.remove('open');
-        const select = document.getElementById(prefix === 'sg' ? 'sg_road' : 'ac_road');
-        select.value = road.code;
+        document.getElementById(`${prefix}QuickRoad`)?.classList.remove('open');
+        const selectMap = { sg: 'sg_road', ac: 'ac_road', doc: 'doc_road' };
+        const select = document.getElementById(selectMap[prefix]);
+        if (select) select.value = road.code;
         if (prefix === 'ac') populateAssetSegmentSelect();
+        if (prefix === 'doc') {
+          currentDocumentsRoadCode = road.code;
+          populateDocumentSegmentSelect('');
+          updateDocumentModalSubtitle();
+          renderDocumentsTable();
+        }
         return road;
       }
 
       function refreshRoadSelects() {
-        ['sg_road', 'ac_road'].forEach(id => {
+        ['sg_road', 'ac_road', 'doc_road'].forEach(id => {
           const selected = document.getElementById(id)?.value || '';
           const el = document.getElementById(id);
           if (!el) return;
@@ -9873,6 +10048,399 @@
         s1[0].assets.push(a3);
         s1[2].assets.push(a4);
         s2[0].assets.push(a5);
+      }
+
+      function segmentLabel(code) {
+        const seg = segmentByCode(code);
+        if (!seg) return code || '-';
+        return `${seg.code} — ${seg.bas || '-'}-${seg.son || '-'} km`;
+      }
+
+      function assetLabel(code) {
+        const asset = assetByCode(code);
+        if (!asset) return code || '-';
+        return `${asset.code} — ${asset.nov || asset.grup || '-'}`;
+      }
+
+      function documentRelationKind(doc) {
+        if (doc.assetCode) return 'Aktiv';
+        if (doc.segmentCode) return 'Seqment';
+        return 'Yol';
+      }
+
+      function documentRelationBadge(doc) {
+        const kind = documentRelationKind(doc);
+        if (kind === 'Aktiv') return badge(kind, 'b-teal');
+        if (kind === 'Seqment') return badge(kind, 'b-blue');
+        return badge(kind, 'b-gray');
+      }
+
+      function documentFileKind(doc) {
+        const name = String(doc?.fileName || '').toLowerCase();
+        const type = String(doc?.fileType || '').toLowerCase();
+        if (type.includes('pdf') || name.endsWith('.pdf')) return 'pdf';
+        if (type.includes('image') || /\.(jpg|jpeg|png)$/i.test(name)) return 'image';
+        if (/\.(doc|docx|xls|xlsx)$/i.test(name)) return 'office';
+        return doc?.fileName ? 'other' : 'none';
+      }
+
+      function documentActionMenu(doc) {
+        return `
+          <div class="row-acts">
+            <div class="action-menu-wrap">
+              <button class="action-menu-btn" data-action-menu type="button" aria-label="Əməliyyatlar">⋮</button>
+              <div class="action-menu">
+                <button class="action-menu-item" data-document-action="view" data-document-id="${esc(doc.id)}" type="button">Bax</button>
+                <button class="action-menu-item" data-document-action="preview" data-document-id="${esc(doc.id)}" type="button">PDF preview</button>
+                <button class="action-menu-item" data-document-action="download" data-document-id="${esc(doc.id)}" type="button">Yüklə</button>
+                <button class="action-menu-item" data-document-action="edit" data-document-id="${esc(doc.id)}" type="button">Redaktə et</button>
+                <button class="action-menu-item danger" data-document-action="delete" data-document-id="${esc(doc.id)}" type="button">Sil</button>
+              </div>
+            </div>
+          </div>`;
+      }
+
+      function initDemoDocuments() {
+        if (roadDocumentsData.length || !roadsData.length) return;
+        roadsData.forEach((road, index) => {
+          const roadSegments = segmentsData.filter(seg => seg.roadCode === road.code);
+          const firstSegment = roadSegments[0] || null;
+          const secondSegment = roadSegments[1] || firstSegment;
+          const firstAsset = assetsData.find(asset => asset.roadCode === road.code) || null;
+          roadDocumentsData.push({
+            id: nextRoadDocumentId(),
+            roadCode: road.code,
+            segmentCode: '',
+            assetCode: '',
+            name: `${road.index || road.code} ümumi reyestr sənədi`,
+            type: 'Reyestr çıxarışı',
+            number: `YR-2026-${String(index + 1).padStart(3, '0')}`,
+            date: '2026-05-07',
+            status: 'Aktiv',
+            fileName: `yol-reyestr-${String(index + 1).padStart(2, '0')}.pdf`,
+            fileType: 'application/pdf',
+            fileData: '',
+            description: `${road.name} üzrə birbaşa yola aid reyestr sənədi.`,
+          });
+          if (firstSegment) {
+            roadDocumentsData.push({
+              id: nextRoadDocumentId(),
+              roadCode: road.code,
+              segmentCode: firstSegment.code,
+              assetCode: '',
+              name: `${firstSegment.code} texniki akt`,
+              type: 'Texniki sənəd',
+              number: `SEG-AKT-2026-${String(index + 1).padStart(3, '0')}`,
+              date: '2026-05-07',
+              status: 'Aktiv',
+              fileName: '',
+              fileType: '',
+              fileData: '',
+              description: `${road.name} üzrə ${firstSegment.code} seqmentinə aid texniki akt.`,
+            });
+          }
+          if (index < 3 && firstAsset) {
+            roadDocumentsData.push({
+              id: nextRoadDocumentId(),
+              roadCode: road.code,
+              segmentCode: firstAsset.segmentCode || secondSegment?.code || '',
+              assetCode: firstAsset.code,
+              name: `${firstAsset.nov || firstAsset.code} pasport əlavəsi`,
+              type: 'Akt',
+              number: `AKT-2026-${String(index + 1).padStart(3, '0')}`,
+              date: '2026-05-07',
+              status: 'Aktiv',
+              fileName: '',
+              fileType: '',
+              fileData: '',
+              description: `${firstAsset.code} aktivinə aid sənəd.`,
+            });
+          }
+        });
+      }
+
+      function documentsForCurrentFilter() {
+        return currentDocumentsRoadCode
+          ? roadDocumentsData.filter(doc => doc.roadCode === currentDocumentsRoadCode)
+          : roadDocumentsData.slice();
+      }
+
+      function renderDocumentsTable() {
+        const tbody = document.getElementById('documentsTableBody');
+        if (!tbody) return;
+        const docs = documentsForCurrentFilter();
+        const filteredRoad = currentDocumentsRoadCode ? roadByCode(currentDocumentsRoadCode) : null;
+        const total = docs.length;
+        const assetDocs = docs.filter(doc => doc.assetCode).length;
+        const segmentDocs = docs.filter(doc => doc.segmentCode && !doc.assetCode).length;
+        const roadDocs = docs.filter(doc => !doc.segmentCode && !doc.assetCode).length;
+        document.getElementById('documentsBadge').textContent = filteredRoad
+          ? `${filteredRoad.code} — ${filteredRoad.name} üzrə sənədlər`
+          : 'Bütün yol, seqment və aktiv sənədləri';
+        document.getElementById('docTotalBadge').textContent = total;
+        document.getElementById('docRoadBadge').textContent = roadDocs;
+        document.getElementById('docSegmentBadge').textContent = segmentDocs;
+        document.getElementById('docAssetBadge').textContent = assetDocs;
+        decorateDomTable('documentsTable');
+        if (!docs.length) {
+          tbody.innerHTML = `<tr><td colspan="12" class="empty-cell">Sənəd yoxdur. Yeni sənəd düyməsi ilə əlavə edin.</td></tr>`;
+          updateTablePager('documentsTable', 0, 0, 0, 1);
+          syncFilterClearButtons('#documentsTable');
+          syncResetButtons();
+          return;
+        }
+        tbody.innerHTML = docs.map((doc, i) => {
+          const fileTone = documentFileKind(doc) === 'pdf' ? 'b-pink' : (documentFileKind(doc) === 'image' ? 'b-teal' : 'b-gray');
+          return `
+            <tr>
+              <td class="td-num">${i + 1}</td>
+              <td class="td-name">${esc(doc.name || '-')}</td>
+              <td>${esc(doc.type || '-')}</td>
+              <td>${esc(doc.number || '-')}</td>
+              <td>${documentRelationBadge(doc)}</td>
+              <td class="td-name">${esc(roadLabel(doc.roadCode))}</td>
+              <td class="td-code code-segment">${doc.segmentCode ? esc(segmentLabel(doc.segmentCode)) : '-'}</td>
+              <td class="td-code code-asset">${doc.assetCode ? esc(assetLabel(doc.assetCode)) : '-'}</td>
+              <td>${esc(doc.date || '-')}</td>
+              <td>${statusBadge(doc.status || 'Aktiv')}</td>
+              <td>${doc.fileName ? badge(doc.fileName, fileTone) : badge('Fayl yoxdur', 'b-gray')}</td>
+              <td>${documentActionMenu(doc)}</td>
+            </tr>`;
+        }).join('');
+        setSelectOptions('documentsTable', 2, docs.map(doc => doc.type || '-'));
+        setSelectOptions('documentsTable', 4, docs.map(documentRelationKind));
+        setSelectOptions('documentsTable', 5, docs.map(doc => roadLabel(doc.roadCode)));
+        setSelectOptions('documentsTable', 6, docs.map(doc => doc.segmentCode ? segmentLabel(doc.segmentCode) : '-'));
+        setSelectOptions('documentsTable', 7, docs.map(doc => doc.assetCode ? assetLabel(doc.assetCode) : '-'));
+        setSelectOptions('documentsTable', 9, docs.map(doc => doc.status || '-'));
+        applyDomTable('documentsTable', documentsTableState, 'documents');
+      }
+
+      function openDocumentsPage(roadCode = '') {
+        currentDocumentsRoadCode = roadCode || '';
+        switchView('documents');
+      }
+      window.openDocumentsPage = openDocumentsPage;
+
+      function refreshDocumentRoadSelect(selectedCode = '') {
+        const select = document.getElementById('doc_road');
+        if (!select) return;
+        const selected = selectedCode || select.value || currentDocumentsRoadCode || roadsData[0]?.code || '';
+        select.innerHTML = '<option value="">Yol seçin...</option>' + roadsData.map(road =>
+          `<option value="${esc(road.code)}">${esc(road.code)} — ${esc(road.name)}</option>`
+        ).join('');
+        if (selected) select.value = selected;
+      }
+
+      function populateDocumentSegmentSelect(selectedCode = '') {
+        const select = document.getElementById('doc_segment');
+        if (!select) return;
+        const roadCode = document.getElementById('doc_road')?.value || '';
+        const selected = selectedCode || select.value || '';
+        const list = segmentsData.filter(seg => seg.roadCode === roadCode);
+        select.innerHTML = '<option value="">Sırf yola aid</option>' + list.map(seg =>
+          `<option value="${esc(seg.code)}">${esc(seg.code)} — ${esc(seg.bas || '-')}-${esc(seg.son || '-')} km</option>`
+        ).join('');
+        if (selected) select.value = selected;
+        populateDocumentAssetSelect('');
+      }
+
+      function populateDocumentAssetSelect(selectedCode = '') {
+        const select = document.getElementById('doc_asset');
+        if (!select) return;
+        const roadCode = document.getElementById('doc_road')?.value || '';
+        const segmentCode = document.getElementById('doc_segment')?.value || '';
+        const selected = selectedCode || select.value || '';
+        const list = assetsData.filter(asset =>
+          (!roadCode || asset.roadCode === roadCode) &&
+          (!segmentCode || asset.segmentCode === segmentCode)
+        );
+        select.innerHTML = '<option value="">Aktivə aid deyil</option>' + list.map(asset =>
+          `<option value="${esc(asset.code)}">${esc(asset.code)} — ${esc(asset.nov || asset.grup || '-')}</option>`
+        ).join('');
+        if (selected) select.value = selected;
+      }
+
+      function updateDocumentModalSubtitle() {
+        const road = roadByCode(document.getElementById('doc_road')?.value || '');
+        const segmentCode = document.getElementById('doc_segment')?.value || '';
+        const assetCode = document.getElementById('doc_asset')?.value || '';
+        const relation = assetCode ? assetLabel(assetCode) : (segmentCode ? segmentLabel(segmentCode) : 'Sırf yola aid');
+        document.getElementById('documentModalSub').textContent = road
+          ? `${road.code} — ${road.name} / ${relation}`
+          : 'Yol, seqment və ya aktivə sənəd bağlayın';
+      }
+
+      function setDocumentRelationFields(doc) {
+        refreshDocumentRoadSelect(doc?.roadCode || currentDocumentsRoadCode || '');
+        populateDocumentSegmentSelect(doc?.segmentCode || '');
+        populateDocumentAssetSelect(doc?.assetCode || '');
+        updateDocumentModalSubtitle();
+      }
+
+      function closeDocumentModal() {
+        document.getElementById('documentModal')?.classList.remove('open');
+      }
+
+      function openDocumentModal(docId = '') {
+        const doc = docId ? roadDocumentById(docId) : null;
+        if (doc?.roadCode) currentDocumentsRoadCode = doc.roadCode;
+        editingDocumentId = docId || '';
+        document.getElementById('documentModalTitle').textContent = doc ? 'Sənədi redaktə et' : 'Sənəd əlavə et';
+        setDocumentRelationFields(doc);
+        document.getElementById('doc_name').value = doc?.name || '';
+        document.getElementById('doc_type').value = doc?.type || 'Məlumat vərəqəsi';
+        document.getElementById('doc_number').value = doc?.number || '';
+        document.getElementById('doc_date').value = doc?.date || '';
+        document.getElementById('doc_status').value = doc?.status || 'Aktiv';
+        document.getElementById('doc_desc').value = doc?.description || '';
+        document.getElementById('doc_file').value = '';
+        document.getElementById('documentModal')?.classList.add('open');
+      }
+
+      function collectDocumentPayload(filePayload) {
+        const roadCode = document.getElementById('doc_road')?.value || '';
+        let segmentCode = document.getElementById('doc_segment')?.value || '';
+        const assetCode = document.getElementById('doc_asset')?.value || '';
+        const asset = assetCode ? assetByCode(assetCode) : null;
+        if (asset) segmentCode = asset.segmentCode || segmentCode;
+        return {
+          roadCode: asset?.roadCode || roadCode,
+          segmentCode,
+          assetCode,
+          name: document.getElementById('doc_name')?.value.trim() || '',
+          type: document.getElementById('doc_type')?.value || 'Digər',
+          number: document.getElementById('doc_number')?.value.trim() || '',
+          date: document.getElementById('doc_date')?.value || '',
+          status: document.getElementById('doc_status')?.value || 'Aktiv',
+          description: document.getElementById('doc_desc')?.value.trim() || '',
+          ...(filePayload || {}),
+        };
+      }
+
+      function commitDocument(filePayload) {
+        const payload = collectDocumentPayload(filePayload);
+        if (!payload.roadCode) {
+          alert('Sənəd üçün aid yol seçilməlidir.');
+          return;
+        }
+        if (!payload.name) {
+          alert('Sənəd adı daxil edilməlidir.');
+          return;
+        }
+        const existing = editingDocumentId ? roadDocumentById(editingDocumentId) : null;
+        if (existing) {
+          Object.assign(existing, payload);
+        } else {
+          roadDocumentsData.push({
+            id: nextRoadDocumentId(),
+            ...payload,
+            fileName: payload.fileName || '',
+            fileType: payload.fileType || '',
+            fileData: payload.fileData || '',
+          });
+        }
+        editingDocumentId = '';
+        closeDocumentModal();
+        renderDocumentsTable();
+      }
+
+      function saveDocument() {
+        const file = document.getElementById('doc_file')?.files?.[0] || null;
+        if (!file) {
+          commitDocument(null);
+          return;
+        }
+        const allowed = ['pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx', 'xls', 'xlsx'];
+        const ext = String(file.name || '').split('.').pop().toLowerCase();
+        if (!allowed.includes(ext)) {
+          alert('Bu fayl formatı dəstəklənmir.');
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => commitDocument({
+          fileName: file.name,
+          fileType: file.type || ext,
+          fileData: reader.result || '',
+        });
+        reader.readAsDataURL(file);
+      }
+
+      function closeDocumentPreview() {
+        document.getElementById('documentPreviewModal')?.classList.remove('open');
+      }
+
+      function openDocumentPreview(title, sub, htmlOrNode) {
+        const body = document.getElementById('documentPreviewBody');
+        document.getElementById('documentPreviewTitle').textContent = title;
+        document.getElementById('documentPreviewSub').textContent = sub || '';
+        body.innerHTML = '';
+        if (typeof htmlOrNode === 'string') body.innerHTML = htmlOrNode;
+        else if (htmlOrNode) body.appendChild(htmlOrNode);
+        document.getElementById('documentPreviewModal')?.classList.add('open');
+      }
+
+      function viewDocument(doc) {
+        openDocumentPreview(doc.name || 'Sənəd', documentRelationKind(doc), `
+          <div class="fgrid">
+            <div class="frow"><label>Aidlik</label><input class="finput" readonly value="${esc(documentRelationKind(doc))}"></div>
+            <div class="frow"><label>Aid yol</label><input class="finput" readonly value="${esc(roadLabel(doc.roadCode))}"></div>
+            <div class="frow"><label>Aid seqment</label><input class="finput" readonly value="${esc(doc.segmentCode ? segmentLabel(doc.segmentCode) : 'Sırf yola aid')}"></div>
+            <div class="frow"><label>Aid aktiv</label><input class="finput" readonly value="${esc(doc.assetCode ? assetLabel(doc.assetCode) : 'Aktivə aid deyil')}"></div>
+            <div class="frow"><label>Sənəd adı</label><input class="finput" readonly value="${esc(doc.name || '-')}"></div>
+            <div class="frow"><label>Sənəd növü</label><input class="finput" readonly value="${esc(doc.type || '-')}"></div>
+            <div class="frow"><label>Sənəd nömrəsi</label><input class="finput" readonly value="${esc(doc.number || '-')}"></div>
+            <div class="frow"><label>Tarix</label><input class="finput" readonly value="${esc(doc.date || '-')}"></div>
+            <div class="frow"><label>Status</label><input class="finput" readonly value="${esc(doc.status || '-')}"></div>
+            <div class="frow"><label>Fayl</label><input class="finput" readonly value="${esc(doc.fileName || 'Fayl yoxdur')}"></div>
+            <div class="frow full"><label>Təsvir</label><textarea class="ftextarea" readonly>${esc(doc.description || '')}</textarea></div>
+          </div>`);
+      }
+
+      function previewDocumentPdf(doc) {
+        if (documentFileKind(doc) !== 'pdf') {
+          openDocumentPreview('PDF preview', doc.fileName || doc.name, '<div class="empty-cell" style="padding:34px;text-align:center;">Bu sənəd PDF faylı deyil.</div>');
+          return;
+        }
+        if (!doc.fileData) {
+          openDocumentPreview('PDF preview', doc.fileName || doc.name, '<div class="empty-cell" style="padding:34px;text-align:center;">PDF faylı hələ yüklənməyib.</div>');
+          return;
+        }
+        const iframe = document.createElement('iframe');
+        iframe.src = doc.fileData;
+        iframe.style.width = '100%';
+        iframe.style.minHeight = '60vh';
+        iframe.style.border = '1px solid #d8e4f0';
+        iframe.style.borderRadius = '10px';
+        openDocumentPreview('PDF preview', doc.fileName || doc.name, iframe);
+      }
+
+      function downloadDocument(doc) {
+        if (!doc.fileData) {
+          alert('Bu sənəd üçün yüklənmiş fayl yoxdur.');
+          return;
+        }
+        const link = document.createElement('a');
+        link.href = doc.fileData;
+        link.download = doc.fileName || doc.name || 'sened';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      }
+
+      function handleDocumentAction(action, id) {
+        const doc = roadDocumentById(id);
+        if (!doc) return;
+        if (action === 'view') viewDocument(doc);
+        if (action === 'preview') previewDocumentPdf(doc);
+        if (action === 'download') downloadDocument(doc);
+        if (action === 'edit') openDocumentModal(id);
+        if (action === 'delete') {
+          if (!confirm('Bu sənədi silmək istədiyinizə əminsiniz?')) return;
+          const idx = roadDocumentsData.findIndex(item => item.id === id);
+          if (idx >= 0) roadDocumentsData.splice(idx, 1);
+          renderDocumentsTable();
+        }
       }
 
       function renderSegmentTable() {
@@ -10057,6 +10625,7 @@
       const segAssetTableState = { sortCi: null, sortDir: 'asc' };
       const segmentTableState = { sortCi: null, sortDir: 'asc' };
       const assetTableState = { sortCi: null, sortDir: 'asc' };
+      const documentsTableState = { sortCi: null, sortDir: 'asc' };
 
       const DEFAULT_TABLE_PAGE_SIZE = 10;
       const tablePagerState = {};
@@ -10079,6 +10648,7 @@
         if (tableId === 'registryTable') { renderRegistryTable(); return; }
         if (tableId === 'segmentsTable') { applyDomTable('segmentsTable', segmentTableState, 'segments'); return; }
         if (tableId === 'assetsTable') { applyDomTable('assetsTable', assetTableState, 'assets'); return; }
+        if (tableId === 'documentsTable') { applyDomTable('documentsTable', documentsTableState, 'documents'); return; }
         if (tableId === 'roadSegsTable') { applyDomTable('roadSegsTable', roadSegTableState, 'segments'); return; }
         if (tableId === 'roadAssetsTable') { applyDomTable('roadAssetsTable', roadAssetTableState, 'assets'); return; }
         if (tableId === 'segAssetsTable') { applyDomTable('segAssetsTable', segAssetTableState, 'assets'); }
@@ -10191,6 +10761,9 @@
         } else if (tableId === 'assetsTable') {
           assetTableState.sortCi = null;
           assetTableState.sortDir = 'asc';
+        } else if (tableId === 'documentsTable') {
+          documentsTableState.sortCi = null;
+          documentsTableState.sortDir = 'asc';
         } else if (tableId === 'roadSegsTable') {
           roadSegTableState.sortCi = null;
           roadSegTableState.sortDir = 'asc';
@@ -10207,7 +10780,7 @@
       }
 
       function resetExtendedTables() {
-        ['registryTable', 'segmentsTable', 'assetsTable', 'roadSegsTable', 'roadAssetsTable', 'segAssetsTable']
+        ['registryTable', 'segmentsTable', 'assetsTable', 'documentsTable', 'roadSegsTable', 'roadAssetsTable', 'segAssetsTable']
           .forEach(resetExtendedTable);
       }
 
@@ -10253,6 +10826,9 @@
         if (tableId === 'assetsTable') {
           if (ci === 4 || ci === 5 || ci === 6 || ci === 7 || ci === 9) return 'select';
           if (ci === 8) return 'range';
+        }
+        if (tableId === 'documentsTable') {
+          if (ci === 2 || ci === 4 || ci === 5 || ci === 6 || ci === 7 || ci === 9) return 'select';
         }
         if (tableId === 'segAssetsTable') {
           if (ci === 2 || ci === 3 || ci === 4 || ci === 5 || ci === 7) return 'select';
@@ -10415,25 +10991,29 @@
         });
       }
 
-      ['registryTable', 'segmentsTable', 'assetsTable', 'roadSegsTable', 'roadAssetsTable', 'segAssetsTable']
+      ['registryTable', 'segmentsTable', 'assetsTable', 'documentsTable', 'roadSegsTable', 'roadAssetsTable', 'segAssetsTable']
         .forEach(ensureTablePager);
       decorateDomTable('segmentsTable');
       decorateDomTable('assetsTable');
+      decorateDomTable('documentsTable');
       decorateDomTable('roadSegsTable');
       decorateDomTable('roadAssetsTable');
       decorateDomTable('segAssetsTable');
       ensureFilterClearButtons('#segmentsTable', () => applyDomTable('segmentsTable', segmentTableState, 'segments'));
       ensureFilterClearButtons('#assetsTable', () => applyDomTable('assetsTable', assetTableState, 'assets'));
+      ensureFilterClearButtons('#documentsTable', () => applyDomTable('documentsTable', documentsTableState, 'documents'));
       ensureFilterClearButtons('#roadSegsTable', () => applyDomTable('roadSegsTable', roadSegTableState, 'segments'));
       ensureFilterClearButtons('#roadAssetsTable', () => applyDomTable('roadAssetsTable', roadAssetTableState, 'assets'));
       ensureFilterClearButtons('#segAssetsTable', () => applyDomTable('segAssetsTable', segAssetTableState, 'assets'));
       bindDomTable('segmentsTable', segmentTableState, 'segments', renderSegmentTable);
       bindDomTable('assetsTable', assetTableState, 'assets', renderAssetTable);
+      bindDomTable('documentsTable', documentsTableState, 'documents', renderDocumentsTable);
       bindDomTable('roadSegsTable', roadSegTableState, 'segments', () => applyDomTable('roadSegsTable', roadSegTableState, 'segments'));
       bindDomTable('roadAssetsTable', roadAssetTableState, 'assets', () => applyDomTable('roadAssetsTable', roadAssetTableState, 'assets'));
       bindDomTable('segAssetsTable', segAssetTableState, 'assets', () => applyDomTable('segAssetsTable', segAssetTableState, 'assets'));
       wireFilterDelegation('#segmentsTable', () => applyDomTable('segmentsTable', segmentTableState, 'segments'));
       wireFilterDelegation('#assetsTable', () => applyDomTable('assetsTable', assetTableState, 'assets'));
+      wireFilterDelegation('#documentsTable', () => applyDomTable('documentsTable', documentsTableState, 'documents'));
       wireFilterDelegation('#segAssetsTable', () => applyDomTable('segAssetsTable', segAssetTableState, 'assets'));
       wireFilterDelegation('#roadSegsTable', () => applyDomTable('roadSegsTable', roadSegTableState, 'segments'));
       wireFilterDelegation('#roadAssetsTable', () => applyDomTable('roadAssetsTable', roadAssetTableState, 'assets'));
@@ -10912,13 +11492,14 @@
         targetView.classList.remove('is-hidden');
         targetView.style.display = view === 'dashboard' ? 'block' : 'flex';
         navItems.forEach(item => item.classList.toggle('active', item.dataset.view === view));
-        const titleMap = { dashboard: 'Dashboard', registry: 'Vahid reyestr', roads: 'Yollar', segments: 'Seqmentlər', assets: 'Aktivlər', soraqcalar: 'Soraqçalar', pasport: 'Pasport sənədləri' };
+        const titleMap = { dashboard: 'Dashboard', registry: 'Vahid reyestr', roads: 'Yollar', segments: 'Seqmentlər', assets: 'Aktivlər', documents: 'Sənədlər', soraqcalar: 'Soraqçalar', pasport: 'Pasport sənədləri' };
         const subMap = {
           dashboard: 'Şəbəkə vəziyyəti, risk və nəzarət, icra və performans göstəriciləri',
           registry: 'Bütün yollara, seqmentlərə və aktivlərə vahid baxış',
           roads: 'Avtomobil Yolları İdarəsi agentliyi',
           segments: 'Yola bağlı seqmentlərin reyestri',
           assets: 'Yol və seqmentə bağlı aktivlərin reyestri',
+          documents: 'Yol, seqment və aktivlərə bağlı sənədlərin reyestri',
           soraqcalar: 'Aktiv növləri və master data idarəetmə',
           pasport: 'Pasportlaşdırılan yol aktivlərinin texniki pasport reyestri'
         };
@@ -10929,6 +11510,7 @@
         if (view === 'roads') renderTable();
         if (view === 'segments') renderSegmentTable();
         if (view === 'assets') renderAssetTable();
+        if (view === 'documents') renderDocumentsTable();
         if (view === 'soraqcalar') renderSoraqcaTable();
         if (view === 'pasport') renderPasportTable();
       }
@@ -11202,6 +11784,19 @@
         addAssetBtn.disabled = false;
         populateAssetSegmentSelect();
         renderSegAssetList();
+        if (pendingDocumentSegmentCreate && ctx === 'global') {
+          pendingDocumentSegmentCreate = false;
+          refreshDocumentRoadSelect(seg.roadCode);
+          const roadSelect = document.getElementById('doc_road');
+          if (roadSelect) roadSelect.value = seg.roadCode;
+          populateDocumentSegmentSelect(seg.code);
+          const segmentSelect = document.getElementById('doc_segment');
+          if (segmentSelect) segmentSelect.value = seg.code;
+          populateDocumentAssetSelect('');
+          updateDocumentModalSubtitle();
+          renderDocumentsTable();
+          if (typeof closeSegModal === 'function') closeSegModal();
+        }
       });
 
       document.getElementById('segAddAssetAfterSave').addEventListener('click', () => {
@@ -11404,6 +11999,20 @@
         }
         closeAssetModal();
         renderSegAssetList();
+        if (pendingDocumentAssetCreate && global) {
+          pendingDocumentAssetCreate = false;
+          refreshDocumentRoadSelect(asset.roadCode);
+          const roadSelect = document.getElementById('doc_road');
+          if (roadSelect) roadSelect.value = asset.roadCode;
+          populateDocumentSegmentSelect(asset.segmentCode);
+          const segmentSelect = document.getElementById('doc_segment');
+          if (segmentSelect) segmentSelect.value = asset.segmentCode;
+          populateDocumentAssetSelect(asset.code);
+          const assetSelect = document.getElementById('doc_asset');
+          if (assetSelect) assetSelect.value = asset.code;
+          updateDocumentModalSubtitle();
+          renderDocumentsTable();
+        }
       });
 
       document.getElementById('btnNewSegment').addEventListener('click', () => openSegModal(-1, 'global'));
@@ -11421,8 +12030,15 @@
           const code = segmentsData[idx]?.code;
           segmentsData.splice(idx, 1);
           for (let i = assetsData.length - 1; i >= 0; i--) if (assetsData[i].segmentCode === code) assetsData.splice(i, 1);
+          roadDocumentsData.forEach(doc => {
+            if (doc.segmentCode === code) {
+              doc.segmentCode = '';
+              doc.assetCode = '';
+            }
+          });
           renderSegmentTable();
           renderAssetTable();
+          renderDocumentsTable();
           refreshRoadActionCells();
         }
         if (newAsset) {
@@ -11454,9 +12070,80 @@
           segmentsData.forEach(seg => {
             if (seg.assets) seg.assets = seg.assets.filter(a => a.code !== code);
           });
+          roadDocumentsData.forEach(doc => {
+            if (doc.assetCode === code) doc.assetCode = '';
+          });
           renderAssetTable();
           renderSegmentTable();
+          renderDocumentsTable();
         }
+      });
+
+      document.getElementById('btnNewDocument')?.addEventListener('click', () => openDocumentModal());
+      document.getElementById('documentsTableBody')?.addEventListener('click', e => {
+        const action = e.target.closest('[data-document-action]');
+        if (!action) return;
+        handleDocumentAction(action.dataset.documentAction, action.dataset.documentId);
+      });
+      document.getElementById('documentClose')?.addEventListener('click', closeDocumentModal);
+      document.getElementById('documentCancel')?.addEventListener('click', closeDocumentModal);
+      document.getElementById('documentSave')?.addEventListener('click', saveDocument);
+      document.getElementById('documentModal')?.addEventListener('click', e => {
+        if (e.target === document.getElementById('documentModal')) closeDocumentModal();
+      });
+      document.getElementById('docCreateRoadToggle')?.addEventListener('click', () => {
+        openRoadCreateModal('doc');
+      });
+      document.getElementById('docCreateSegmentToggle')?.addEventListener('click', () => {
+        const roadCode = document.getElementById('doc_road')?.value || '';
+        if (!roadCode) {
+          alert('Seqment yaratmaq üçün əvvəl yol seçin və ya yeni yol yaradın.');
+          return;
+        }
+        pendingDocumentSegmentCreate = true;
+        openSegModal(-1, 'global', true);
+        const roadSelect = document.getElementById('sg_road');
+        if (roadSelect) roadSelect.value = roadCode;
+        if (typeof updateSegAssetBtnState === 'function') updateSegAssetBtnState();
+      });
+      document.getElementById('docCreateAssetToggle')?.addEventListener('click', () => {
+        const segmentCode = document.getElementById('doc_segment')?.value || '';
+        if (!segmentCode) {
+          alert('Aktiv yaratmaq üçün əvvəl seqment seçin və ya yeni seqment yaradın.');
+          return;
+        }
+        pendingDocumentAssetCreate = true;
+        openGlobalAssetModal(-1, segmentCode);
+      });
+      document.getElementById('doc_road')?.addEventListener('change', () => {
+        populateDocumentSegmentSelect('');
+        updateDocumentModalSubtitle();
+      });
+      document.getElementById('doc_segment')?.addEventListener('change', () => {
+        populateDocumentAssetSelect('');
+        updateDocumentModalSubtitle();
+      });
+      document.getElementById('doc_asset')?.addEventListener('change', () => {
+        const asset = assetByCode(document.getElementById('doc_asset')?.value || '');
+        if (asset?.segmentCode) {
+          const segmentSelect = document.getElementById('doc_segment');
+          if (segmentSelect) segmentSelect.value = asset.segmentCode;
+        }
+        updateDocumentModalSubtitle();
+      });
+      document.getElementById('documentPreviewClose')?.addEventListener('click', closeDocumentPreview);
+      document.getElementById('documentPreviewModal')?.addEventListener('click', e => {
+        if (e.target === document.getElementById('documentPreviewModal')) closeDocumentPreview();
+      });
+      document.getElementById('segModalClose')?.addEventListener('click', () => { pendingDocumentSegmentCreate = false; });
+      document.getElementById('segModalCancel')?.addEventListener('click', () => { pendingDocumentSegmentCreate = false; });
+      document.getElementById('segFormPanel')?.addEventListener('click', e => {
+        if (e.target === document.getElementById('segFormPanel')) pendingDocumentSegmentCreate = false;
+      });
+      document.getElementById('assetModalClose')?.addEventListener('click', () => { pendingDocumentAssetCreate = false; });
+      document.getElementById('assetModalCancel')?.addEventListener('click', () => { pendingDocumentAssetCreate = false; });
+      document.getElementById('assetModal')?.addEventListener('click', e => {
+        if (e.target === document.getElementById('assetModal')) pendingDocumentAssetCreate = false;
       });
 
       document.getElementById('sgCreateRoadToggle').addEventListener('click', () => openRoadCreateModal('sg'));
@@ -11830,11 +12517,19 @@
           category: document.getElementById('rm_funk').value || 'Magistral',
         });
         closeRoadCreateModal();
-        const selectId = rcmCallerPrefix === 'sg' ? 'sg_road' : 'ac_road';
+        const selectMap = { sg: 'sg_road', ac: 'ac_road', doc: 'doc_road' };
+        const selectId = selectMap[rcmCallerPrefix] || 'ac_road';
         const sel = document.getElementById(selectId);
         if (sel) {
           sel.value = road.code;
           if (rcmCallerPrefix === 'ac') populateAssetSegmentSelect();
+          if (rcmCallerPrefix === 'doc') {
+            currentDocumentsRoadCode = road.code;
+            populateDocumentSegmentSelect('');
+            populateDocumentAssetSelect('');
+            updateDocumentModalSubtitle();
+            renderDocumentsTable();
+          }
         }
       });
 
@@ -11967,11 +12662,13 @@
       syncRoadsFromRows();
       refreshRoadCodeLinks();
       initDemoRelations();
+      initDemoDocuments();
       refreshRoadSelects();
       refreshRoadActionCells();
       renderRegistryTable();
       renderSegmentTable();
       renderAssetTable();
+      renderDocumentsTable();
 
       /* ══ SORAQÇALAR MODULE v2 ══ */
       (function () {
