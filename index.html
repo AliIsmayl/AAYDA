@@ -2690,6 +2690,27 @@
       outline-offset: 3px;
     }
 
+    .doc-name-link {
+      border-radius: 6px;
+      background: #fff3e8;
+      color: #c2410c;
+      padding: 3px 7px;
+      text-align: left;
+      text-decoration: none;
+      letter-spacing: 0;
+    }
+
+    .doc-name-link:hover {
+      background: #fed7aa;
+      color: #9a3412;
+      text-decoration: none;
+    }
+
+    .doc-name-link:focus-visible {
+      outline: 2px solid #fb923c;
+      outline-offset: 3px;
+    }
+
     /* MODALS */
     .modal-ov {
       position: fixed;
@@ -4022,22 +4043,22 @@
 
     #documentsTable tbody tr.doc-group-segment td,
     #roadDocsTable tbody tr.doc-group-segment td {
-      background: #fffbea !important;
+      background: #f0fdf4 !important;
     }
 
     #documentsTable tbody tr.doc-group-segment:hover td,
     #roadDocsTable tbody tr.doc-group-segment:hover td {
-      background: #fef3c7 !important;
+      background: #dcfce7 !important;
     }
 
     #documentsTable tbody tr.doc-group-asset td,
     #roadDocsTable tbody tr.doc-group-asset td {
-      background: #f0fdf4 !important;
+      background: #fffbea !important;
     }
 
     #documentsTable tbody tr.doc-group-asset:hover td,
     #roadDocsTable tbody tr.doc-group-asset:hover td {
-      background: #dcfce7 !important;
+      background: #fef3c7 !important;
     }
 
     #documentsTable tbody tr.doc-group-road.doc-group-start td,
@@ -4052,22 +4073,22 @@
 
     #documentsTable tbody tr.doc-group-segment.doc-group-start td,
     #roadDocsTable tbody tr.doc-group-segment.doc-group-start td {
-      border-top: 2px solid #eab308;
+      border-top: 2px solid #16a34a;
     }
 
     #documentsTable tbody tr.doc-group-segment.doc-group-end td,
     #roadDocsTable tbody tr.doc-group-segment.doc-group-end td {
-      border-bottom: 2px solid #eab308;
+      border-bottom: 2px solid #16a34a;
     }
 
     #documentsTable tbody tr.doc-group-asset.doc-group-start td,
     #roadDocsTable tbody tr.doc-group-asset.doc-group-start td {
-      border-top: 2px solid #16a34a;
+      border-top: 2px solid #eab308;
     }
 
     #documentsTable tbody tr.doc-group-asset.doc-group-end td,
     #roadDocsTable tbody tr.doc-group-asset.doc-group-end td {
-      border-bottom: 2px solid #16a34a;
+      border-bottom: 2px solid #eab308;
     }
 
     #documentsTable tbody tr.doc-group-road td.doc-brace-col,
@@ -4079,16 +4100,16 @@
 
     #documentsTable tbody tr.doc-group-segment td.doc-brace-col,
     #roadDocsTable tbody tr.doc-group-segment td.doc-brace-col {
-      background: #fef3c7 !important;
-      border-left: 2px solid #eab308;
-      border-right-color: #eab308;
+      background: #dcfce7 !important;
+      border-left: 2px solid #16a34a;
+      border-right-color: #16a34a;
     }
 
     #documentsTable tbody tr.doc-group-asset td.doc-brace-col,
     #roadDocsTable tbody tr.doc-group-asset td.doc-brace-col {
-      background: #dcfce7 !important;
-      border-left: 2px solid #16a34a;
-      border-right-color: #16a34a;
+      background: #fef3c7 !important;
+      border-left: 2px solid #eab308;
+      border-right-color: #eab308;
     }
 
     .doc-brace-mark {
@@ -4125,12 +4146,12 @@
 
     #documentsTable tbody tr.doc-group-segment .doc-group-label-text,
     #roadDocsTable tbody tr.doc-group-segment .doc-group-label-text {
-      color: #ca8a04;
+      color: #15803d;
     }
 
     #documentsTable tbody tr.doc-group-asset .doc-group-label-text,
     #roadDocsTable tbody tr.doc-group-asset .doc-group-label-text {
-      color: #15803d;
+      color: #ca8a04;
     }
 
     .doc-brace-empty {
@@ -6691,6 +6712,7 @@
             <button class="fbtn fbtn-primary" id="assetNext">
               İrəli<svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
             </button>
+            <button class="fbtn fbtn-outline" id="assetSaveNew" style="display:none;"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5Z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>Yadda saxla və yenisini əlavə et</button>
             <button class="fbtn fbtn-success" id="assetSave" style="display:none;">
               <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Yadda saxla
             </button>
@@ -8692,6 +8714,7 @@
             : 'Addım 2 / 2 — Məlumatlar');
       document.getElementById('assetPrev').style.display = n > 1 ? '' : 'none';
       document.getElementById('assetNext').style.display = n < 2 ? '' : 'none';
+      document.getElementById('assetSaveNew').style.display = n === 2 ? '' : 'none';
       document.getElementById('assetSave').style.display = n === 2 ? '' : 'none';
     }
 
@@ -10506,7 +10529,6 @@
             <div class="action-menu-wrap">
               <button class="action-menu-btn" data-action-menu type="button" aria-label="Əməliyyatlar">⋮</button>
               <div class="action-menu">
-                <button class="action-menu-item" data-document-action="view" data-document-id="${esc(doc.id)}" type="button"><svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>Bax</button>
                 <button class="action-menu-item" data-document-action="preview" data-document-id="${esc(doc.id)}" type="button"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15h6"/><path d="M9 18h4"/></svg>PDF preview</button>
                 <button class="action-menu-item" data-document-action="download" data-document-id="${esc(doc.id)}" type="button"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Yüklə</button>
                 <button class="action-menu-item" data-document-action="edit" data-document-id="${esc(doc.id)}" type="button"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>Redaktə et</button>
@@ -10659,7 +10681,7 @@
             <tr class="${documentGroupRowClass(meta.count, meta.pos, meta.kind)}" data-doc-group="${esc(meta.key)}" data-doc-group-kind="${esc(meta.kind)}" data-doc-group-label="${esc(meta.label)}" data-doc-group-sort="${esc(documentGroupSortKey(doc))}" data-doc-order="${i}">
               <td class="doc-brace-col">${documentBraceMarkup(meta.count, meta.pos, meta.label)}</td>
               <td class="td-num">${i + 1}</td>
-              <td class="td-name">${esc(doc.name || '-')}</td>
+              <td class="td-name"><button class="link-btn doc-name-link" data-document-action="view" data-document-id="${esc(doc.id)}" type="button">${esc(doc.name || '-')}</button></td>
               <td>${esc(doc.type || '-')}</td>
               <td>${esc(doc.number || '-')}</td>
               <td>${documentRelationBadge(doc)}</td>
@@ -10679,6 +10701,7 @@
         setSelectOptions('documentsTable', 8, docs.map(doc => doc.assetCode ? assetLabel(doc.assetCode) : '-'));
         setSelectOptions('documentsTable', 10, docs.map(doc => doc.status || '-'));
         applyDomTable('documentsTable', documentsTableState, 'documents');
+        requestAnimationFrame(() => refreshDocumentGroupBraces('documentsTable'));
       }
 
       function openDocumentsPage(roadCode = '') {
@@ -10713,7 +10736,7 @@
           <tr class="${documentGroupRowClass(meta.count, meta.pos, meta.kind)}" data-doc-group="${esc(meta.key)}" data-doc-group-kind="${esc(meta.kind)}" data-doc-group-label="${esc(meta.label)}" data-doc-group-sort="${esc(documentGroupSortKey(doc))}" data-doc-order="${i}">
             <td class="doc-brace-col">${documentBraceMarkup(meta.count, meta.pos, meta.label)}</td>
             <td class="td-num">${i + 1}</td>
-            <td class="td-name">${esc(doc.name || '-')}</td>
+            <td class="td-name"><button class="link-btn doc-name-link" data-document-action="view" data-document-id="${esc(doc.id)}" type="button">${esc(doc.name || '-')}</button></td>
             <td>${esc(doc.type || '-')}</td>
             <td>${esc(doc.number || '-')}</td>
             <td>${documentRelationBadge(doc)}</td>
@@ -10730,6 +10753,7 @@
         setSelectOptions('roadDocsTable', 7, docs.map(doc => doc.assetCode ? assetLabel(doc.assetCode) : '-'));
         setSelectOptions('roadDocsTable', 9, docs.map(doc => doc.status || '-'));
         applyDomTable('roadDocsTable', roadDocsTableState, 'documents');
+        requestAnimationFrame(() => refreshDocumentGroupBraces('roadDocsTable'));
       }
 
       function relationDocsTitle(kind, code) {
@@ -11663,7 +11687,7 @@
           filtered.sort(compareRowsByCell);
         }
         filtered.forEach(row => tbody.appendChild(row));
-        refreshDocumentGroupBraces(tableId, filtered);
+        requestAnimationFrame(() => refreshDocumentGroupBraces(tableId, filtered));
         const pageRows = new Set(isDocumentGroupTable(tableId) ? paginateDocumentGroupRows(tableId, filtered) : paginateItems(tableId, filtered));
         rows.forEach(row => { row.style.display = pageRows.has(row) ? '' : 'none'; });
         if (tableId === 'segmentsTable') document.getElementById('segmentTotalBadge').textContent = filtered.length;
@@ -12682,9 +12706,7 @@
         renderSegList();
       };
 
-      const assetSaveOld = document.getElementById('assetSave');
-      assetSaveOld.replaceWith(assetSaveOld.cloneNode(true));
-      document.getElementById('assetSave').addEventListener('click', () => {
+      function doSaveAsset(keepOpen) {
         const global = fp.assetContext === 'global';
         const roadCode = global ? document.getElementById('ac_road').value : document.getElementById('f_kod').value;
         const segmentCode = global ? document.getElementById('ac_segment_select').value : document.getElementById('ac_seg').value;
@@ -12752,6 +12774,17 @@
           else seg.assets.push(asset);
           renderSegList();
         }
+        if (keepOpen) {
+          globalAssetEditIdx = -1;
+          fp.editAssetIdx = -1;
+          ['ac_soraqca', 'ac_grup', 'ac_nov', 'ac_tip', 'ac_gis_tip', 'ac_pasport',
+            'ac_km', 'ac_lat', 'ac_lon', 'ac_status', 'ac_huq', 'ac_idarə', 'ac_tarix', 'ac_veziyyet', 'ac_qeyd'
+          ].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+          resetAssetSoraqca();
+          goAssetStep(1);
+          document.getElementById('ac_soraqca_search')?.focus();
+          return;
+        }
         closeAssetModal();
         renderSegAssetList();
         if (pendingDocumentAssetCreate && global) {
@@ -12768,7 +12801,12 @@
           updateDocumentModalSubtitle();
           renderDocumentsTable();
         }
-      });
+      }
+
+      const assetSaveOld = document.getElementById('assetSave');
+      assetSaveOld.replaceWith(assetSaveOld.cloneNode(true));
+      document.getElementById('assetSave').addEventListener('click', () => doSaveAsset(false));
+      document.getElementById('assetSaveNew').addEventListener('click', () => doSaveAsset(true));
 
       document.getElementById('btnNewSegment').addEventListener('click', () => openSegModal(-1, 'global'));
       document.getElementById('btnNewAsset').addEventListener('click', () => {
