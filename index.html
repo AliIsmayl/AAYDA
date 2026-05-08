@@ -3906,6 +3906,162 @@
       background: #e2efff;
     }
 
+    #documentsTable th.doc-brace-head,
+    #roadDocsTable th.doc-brace-head {
+      width: 34px !important;
+      min-width: 34px !important;
+    }
+
+    #documentsTable th.doc-brace-head .th-top,
+    #roadDocsTable th.doc-brace-head .th-top {
+      justify-content: center;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    #documentsTable td.doc-brace-col,
+    #roadDocsTable td.doc-brace-col {
+      position: relative;
+      overflow: visible;
+      width: 34px;
+      min-width: 34px;
+      max-width: 34px;
+      padding: 0 !important;
+      text-align: center;
+      vertical-align: middle;
+      background: #f8fafc !important;
+      border-right: 1px solid #cbd5e1;
+      color: #334155;
+    }
+
+    #documentsTable tbody tr.doc-group-road td,
+    #roadDocsTable tbody tr.doc-group-road td {
+      background: #eef4ff !important;
+    }
+
+    #documentsTable tbody tr.doc-group-road:hover td,
+    #roadDocsTable tbody tr.doc-group-road:hover td {
+      background: #dbeafe !important;
+    }
+
+    #documentsTable tbody tr.doc-group-segment td,
+    #roadDocsTable tbody tr.doc-group-segment td {
+      background: #fffbea !important;
+    }
+
+    #documentsTable tbody tr.doc-group-segment:hover td,
+    #roadDocsTable tbody tr.doc-group-segment:hover td {
+      background: #fef3c7 !important;
+    }
+
+    #documentsTable tbody tr.doc-group-asset td,
+    #roadDocsTable tbody tr.doc-group-asset td {
+      background: #f0fdf4 !important;
+    }
+
+    #documentsTable tbody tr.doc-group-asset:hover td,
+    #roadDocsTable tbody tr.doc-group-asset:hover td {
+      background: #dcfce7 !important;
+    }
+
+    #documentsTable tbody tr.doc-group-road.doc-group-start td,
+    #roadDocsTable tbody tr.doc-group-road.doc-group-start td {
+      border-top: 2px solid #1e3a8a;
+    }
+
+    #documentsTable tbody tr.doc-group-road.doc-group-end td,
+    #roadDocsTable tbody tr.doc-group-road.doc-group-end td {
+      border-bottom: 2px solid #1e3a8a;
+    }
+
+    #documentsTable tbody tr.doc-group-segment.doc-group-start td,
+    #roadDocsTable tbody tr.doc-group-segment.doc-group-start td {
+      border-top: 2px solid #eab308;
+    }
+
+    #documentsTable tbody tr.doc-group-segment.doc-group-end td,
+    #roadDocsTable tbody tr.doc-group-segment.doc-group-end td {
+      border-bottom: 2px solid #eab308;
+    }
+
+    #documentsTable tbody tr.doc-group-asset.doc-group-start td,
+    #roadDocsTable tbody tr.doc-group-asset.doc-group-start td {
+      border-top: 2px solid #16a34a;
+    }
+
+    #documentsTable tbody tr.doc-group-asset.doc-group-end td,
+    #roadDocsTable tbody tr.doc-group-asset.doc-group-end td {
+      border-bottom: 2px solid #16a34a;
+    }
+
+    #documentsTable tbody tr.doc-group-road td.doc-brace-col,
+    #roadDocsTable tbody tr.doc-group-road td.doc-brace-col {
+      background: #dbeafe !important;
+      border-left: 2px solid #1e3a8a;
+      border-right-color: #1e3a8a;
+    }
+
+    #documentsTable tbody tr.doc-group-segment td.doc-brace-col,
+    #roadDocsTable tbody tr.doc-group-segment td.doc-brace-col {
+      background: #fef3c7 !important;
+      border-left: 2px solid #eab308;
+      border-right-color: #eab308;
+    }
+
+    #documentsTable tbody tr.doc-group-asset td.doc-brace-col,
+    #roadDocsTable tbody tr.doc-group-asset td.doc-brace-col {
+      background: #dcfce7 !important;
+      border-left: 2px solid #16a34a;
+      border-right-color: #16a34a;
+    }
+
+    .doc-brace-mark {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      overflow: visible;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .doc-group-label-text {
+      position: relative;
+      top: var(--doc-label-offset, 0px);
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: .4px;
+      text-align: center;
+      white-space: nowrap;
+      text-transform: uppercase;
+      transform: rotate(270deg);
+      transform-origin: center;
+    }
+
+    #documentsTable tbody tr.doc-group-road .doc-group-label-text,
+    #roadDocsTable tbody tr.doc-group-road .doc-group-label-text {
+      color: #1e3a8a;
+    }
+
+    #documentsTable tbody tr.doc-group-segment .doc-group-label-text,
+    #roadDocsTable tbody tr.doc-group-segment .doc-group-label-text {
+      color: #ca8a04;
+    }
+
+    #documentsTable tbody tr.doc-group-asset .doc-group-label-text,
+    #roadDocsTable tbody tr.doc-group-asset .doc-group-label-text {
+      color: #15803d;
+    }
+
+    .doc-brace-empty {
+      display: block;
+      min-height: 34px;
+    }
+
     #mainTable th:nth-child(3),
     #mainTable td:nth-child(3) {
       min-width: 320px;
@@ -6495,9 +6651,10 @@
         </button>
       </div>
       <div class="table-wrap" style="flex:1;overflow:auto;">
-        <table id="roadDocsTable" style="min-width:1060px;">
+        <table id="roadDocsTable" style="min-width:1100px;">
           <thead>
             <tr>
+              <th class="th-nof doc-brace-head" style="width:34px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;"></span></div></th>
               <th class="th-nof" style="width:36px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">#</span></div></th>
               <th><div class="th-top"><span class="th-label">Sənəd adı</span></div></th>
               <th><div class="th-top"><span class="th-label">Sənəd növü</span></div></th>
@@ -8865,9 +9022,10 @@
       <div class="registry-stat"><div class="rs-v" id="docAssetBadge">0</div><div class="rs-l">Aktivə aid</div></div>
     </div>
     <div class="table-wrap">
-      <table id="documentsTable" style="min-width:1320px;">
+      <table id="documentsTable" style="min-width:1360px;">
         <thead>
           <tr>
+            <th class="th-nof doc-brace-head" style="width:34px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;"></span></div></th>
             <th class="th-nof" style="width:36px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">#</span></div></th>
             <th><div class="th-top"><span class="th-label">Sənəd adı</span></div></th>
             <th><div class="th-top"><span class="th-label">Sənəd növü</span></div></th>
@@ -8934,6 +9092,7 @@
       </div>
       <div class="modal-foot">
         <button class="fbtn fbtn-ghost" id="documentCancel" type="button">Ləğv et</button>
+        <button class="fbtn fbtn-outline" id="documentSaveNew" type="button"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Yadda saxla və yenisini əlavə et</button>
         <button class="fbtn fbtn-success" id="documentSave" type="button"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>Yadda saxla</button>
       </div>
     </div>
@@ -10161,6 +10320,105 @@
         return badge(kind, 'b-gray');
       }
 
+      function documentRelationScope(doc) {
+        if (doc?.assetCode) {
+          return { kind: 'asset', code: doc.assetCode, order: 2, label: `Aktiv: ${assetLabel(doc.assetCode)}` };
+        }
+        if (doc?.segmentCode) {
+          return { kind: 'segment', code: doc.segmentCode, order: 1, label: `Seqment: ${segmentLabel(doc.segmentCode)}` };
+        }
+        return { kind: 'road', code: doc?.roadCode || '', order: 0, label: `Yol: ${roadLabel(doc?.roadCode)}` };
+      }
+
+      function documentGroupKey(doc) {
+        const scope = documentRelationScope(doc);
+        return `${scope.kind}:${scope.code}`;
+      }
+
+      function documentGroupSortKey(doc) {
+        const scope = documentRelationScope(doc);
+        return `${String(scope.order).padStart(2, '0')}|${scope.label}`;
+      }
+
+      function sortDocumentsByRelationGroup(docs) {
+        return docs.slice().sort((a, b) => {
+          const groupCompare = documentGroupSortKey(a).localeCompare(documentGroupSortKey(b), 'az');
+          if (groupCompare) return groupCompare;
+          const dateCompare = String(b.date || '').localeCompare(String(a.date || ''), 'az');
+          if (dateCompare) return dateCompare;
+          const nameCompare = String(a.name || '').localeCompare(String(b.name || ''), 'az');
+          if (nameCompare) return nameCompare;
+          return String(a.number || '').localeCompare(String(b.number || ''), 'az');
+        });
+      }
+
+      function documentGroupMeta(docs, index) {
+        const key = documentGroupKey(docs[index]);
+        let count = 0;
+        let pos = 0;
+        docs.forEach((doc, i) => {
+          if (documentGroupKey(doc) !== key) return;
+          if (i < index) pos += 1;
+          count += 1;
+        });
+        return { ...documentRelationScope(docs[index]), key, count, pos };
+      }
+
+      function documentGroupRowClass(count, pos, kind = '') {
+        if (count <= 1) return 'doc-group-single';
+        const kindClass = kind ? ` doc-group-${kind}` : '';
+        if (pos === 0) return `doc-group-row doc-group-start${kindClass}`;
+        if (pos === count - 1) return `doc-group-row doc-group-end${kindClass}`;
+        return `doc-group-row doc-group-middle${kindClass}`;
+      }
+
+      function documentGroupSideText(label) {
+        const raw = String(label || '').replace(/^(Yol|Seqment|Aktiv):\s*/i, '').trim();
+        return (raw.split(' — ')[0] || raw || 'Qrup').trim();
+      }
+
+      function documentBraceMarkup(count, pos, label, offset = 0) {
+        if (count <= 1) return '<span class="doc-brace-empty" aria-hidden="true"></span>';
+        const labelPos = Math.floor((count - 1) / 2);
+        if (pos !== labelPos) return '<span class="doc-brace-empty" aria-hidden="true"></span>';
+        const text = documentGroupSideText(label);
+        const title = label ? `${label} - ${count} sənəd` : `${count} sənəd`;
+        return `<span class="doc-brace-mark" style="--doc-label-offset:${Number(offset).toFixed(1)}px" title="${esc(title)}" aria-label="${esc(title)}"><span class="doc-group-label-text">${esc(text)}</span></span>`;
+      }
+
+      function isDocumentGroupTable(tableId) {
+        return tableId === 'documentsTable' || tableId === 'roadDocsTable';
+      }
+
+      function refreshDocumentGroupBraces(tableId, rows = null) {
+        if (!isDocumentGroupTable(tableId)) return;
+        const table = document.getElementById(tableId);
+        const sourceRows = rows || Array.from(table?.querySelectorAll('tbody tr') || []);
+        const list = sourceRows.filter(row => !row.querySelector('.empty-cell'));
+        const groups = new Map();
+        list.forEach((row, index) => {
+          const key = row.dataset.docGroup || `row:${index}`;
+          if (!groups.has(key)) groups.set(key, []);
+          groups.get(key).push(row);
+        });
+        list.forEach(row => { row.style.display = ''; });
+        list.forEach((row, index) => {
+          const key = row.dataset.docGroup || `row:${index}`;
+          const groupRows = groups.get(key) || [row];
+          const count = groupRows.length;
+          const pos = groupRows.indexOf(row);
+          const rowHeights = groupRows.map(item => item.getBoundingClientRect().height || item.offsetHeight || 34);
+          const labelPos = Math.floor((count - 1) / 2);
+          const totalHeight = rowHeights.reduce((sum, height) => sum + height, 0);
+          const beforeLabel = rowHeights.slice(0, labelPos).reduce((sum, height) => sum + height, 0);
+          const labelOffset = totalHeight / 2 - (beforeLabel + rowHeights[labelPos] / 2);
+          row.classList.remove('doc-group-single', 'doc-group-row', 'doc-group-start', 'doc-group-middle', 'doc-group-end', 'doc-group-road', 'doc-group-segment', 'doc-group-asset');
+          documentGroupRowClass(count, pos, row.dataset.docGroupKind || '').split(' ').filter(Boolean).forEach(cls => row.classList.add(cls));
+          const braceCell = row.querySelector('.doc-brace-col');
+          if (braceCell) braceCell.innerHTML = documentBraceMarkup(count, pos, row.dataset.docGroupLabel || '', labelOffset);
+        });
+      }
+
       function documentFileKind(doc) {
         const name = String(doc?.fileName || '').toLowerCase();
         const type = String(doc?.fileType || '').toLowerCase();
@@ -10180,6 +10438,7 @@
                 <button class="action-menu-item" data-document-action="preview" data-document-id="${esc(doc.id)}" type="button"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15h6"/><path d="M9 18h4"/></svg>PDF preview</button>
                 <button class="action-menu-item" data-document-action="download" data-document-id="${esc(doc.id)}" type="button"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Yüklə</button>
                 <button class="action-menu-item" data-document-action="edit" data-document-id="${esc(doc.id)}" type="button"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>Redaktə et</button>
+                <button class="action-menu-item" data-document-action="duplicate" data-document-id="${esc(doc.id)}" type="button">${actionIcon('documentAdd')}Oxşar sənəd yarat</button>
                 <button class="action-menu-item danger" data-document-action="delete" data-document-id="${esc(doc.id)}" type="button"><svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg>Sil</button>
               </div>
             </div>
@@ -10263,6 +10522,21 @@
         return documentsForRoad(code);
       }
 
+      function currentDocumentRelation() {
+        const assetCode = document.getElementById('doc_asset')?.value || '';
+        const segmentCode = document.getElementById('doc_segment')?.value || '';
+        const roadCode = document.getElementById('doc_road')?.value || '';
+        if (assetCode) return { kind: 'asset', code: assetCode };
+        if (segmentCode) return { kind: 'segment', code: segmentCode };
+        return { kind: 'road', code: roadCode };
+      }
+
+      function suggestDocumentNumber(kind, code) {
+        const prefix = kind === 'asset' ? 'AKT-SN' : (kind === 'segment' ? 'SEG-SN' : 'YOL-SN');
+        const count = documentsForRelation(kind, code).length + 1;
+        return `${prefix}-2026-${String(count).padStart(3, '0')}`;
+      }
+
       function documentCountForRoad(roadCode) {
         return documentsForRoad(roadCode).length;
       }
@@ -10299,16 +10573,19 @@
         document.getElementById('docAssetBadge').textContent = assetDocs;
         decorateDomTable('documentsTable');
         if (!docs.length) {
-          tbody.innerHTML = `<tr><td colspan="12" class="empty-cell">Sənəd yoxdur. Yeni sənəd düyməsi ilə əlavə edin.</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="13" class="empty-cell">Sənəd yoxdur. Yeni sənəd düyməsi ilə əlavə edin.</td></tr>`;
           updateTablePager('documentsTable', 0, 0, 0, 1);
           syncFilterClearButtons('#documentsTable');
           syncResetButtons();
           return;
         }
-        tbody.innerHTML = docs.map((doc, i) => {
+        const groupedDocs = sortDocumentsByRelationGroup(docs);
+        tbody.innerHTML = groupedDocs.map((doc, i) => {
           const fileTone = documentFileKind(doc) === 'pdf' ? 'b-pink' : (documentFileKind(doc) === 'image' ? 'b-teal' : 'b-gray');
+          const meta = documentGroupMeta(groupedDocs, i);
           return `
-            <tr>
+            <tr class="${documentGroupRowClass(meta.count, meta.pos, meta.kind)}" data-doc-group="${esc(meta.key)}" data-doc-group-kind="${esc(meta.kind)}" data-doc-group-label="${esc(meta.label)}" data-doc-group-sort="${esc(documentGroupSortKey(doc))}" data-doc-order="${i}">
+              <td class="doc-brace-col">${documentBraceMarkup(meta.count, meta.pos, meta.label)}</td>
               <td class="td-num">${i + 1}</td>
               <td class="td-name">${esc(doc.name || '-')}</td>
               <td>${esc(doc.type || '-')}</td>
@@ -10323,12 +10600,12 @@
               <td>${documentActionMenu(doc)}</td>
             </tr>`;
         }).join('');
-        setSelectOptions('documentsTable', 2, docs.map(doc => doc.type || '-'));
-        setSelectOptions('documentsTable', 4, docs.map(documentRelationKind));
-        setSelectOptions('documentsTable', 5, docs.map(doc => roadLabel(doc.roadCode)));
-        setSelectOptions('documentsTable', 6, docs.map(doc => doc.segmentCode ? segmentLabel(doc.segmentCode) : '-'));
-        setSelectOptions('documentsTable', 7, docs.map(doc => doc.assetCode ? assetLabel(doc.assetCode) : '-'));
-        setSelectOptions('documentsTable', 9, docs.map(doc => doc.status || '-'));
+        setSelectOptions('documentsTable', 3, docs.map(doc => doc.type || '-'));
+        setSelectOptions('documentsTable', 5, docs.map(documentRelationKind));
+        setSelectOptions('documentsTable', 6, docs.map(doc => roadLabel(doc.roadCode)));
+        setSelectOptions('documentsTable', 7, docs.map(doc => doc.segmentCode ? segmentLabel(doc.segmentCode) : '-'));
+        setSelectOptions('documentsTable', 8, docs.map(doc => doc.assetCode ? assetLabel(doc.assetCode) : '-'));
+        setSelectOptions('documentsTable', 10, docs.map(doc => doc.status || '-'));
         applyDomTable('documentsTable', documentsTableState, 'documents');
       }
 
@@ -10351,14 +10628,18 @@
         document.querySelectorAll('#roadDocsTable .th-bot').forEach(bot => { bot.style.display = 'block'; });
         ensureFilterClearButtons('#roadDocsTable', () => applyDomTable('roadDocsTable', roadDocsTableState, 'documents'));
         if (!docs.length) {
-          tbody.innerHTML = `<tr><td colspan="10" class="empty-cell">Bu yola aid sənəd yoxdur.</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="11" class="empty-cell">Bu əlaqəyə aid sənəd yoxdur.</td></tr>`;
           updateTablePager('roadDocsTable', 0, 0, 0, 1);
           syncFilterClearButtons('#roadDocsTable');
           syncResetButtons();
           return;
         }
-        tbody.innerHTML = docs.map((doc, i) => `
-          <tr>
+        const groupedDocs = sortDocumentsByRelationGroup(docs);
+        tbody.innerHTML = groupedDocs.map((doc, i) => {
+          const meta = documentGroupMeta(groupedDocs, i);
+          return `
+          <tr class="${documentGroupRowClass(meta.count, meta.pos, meta.kind)}" data-doc-group="${esc(meta.key)}" data-doc-group-kind="${esc(meta.kind)}" data-doc-group-label="${esc(meta.label)}" data-doc-group-sort="${esc(documentGroupSortKey(doc))}" data-doc-order="${i}">
+            <td class="doc-brace-col">${documentBraceMarkup(meta.count, meta.pos, meta.label)}</td>
             <td class="td-num">${i + 1}</td>
             <td class="td-name">${esc(doc.name || '-')}</td>
             <td>${esc(doc.type || '-')}</td>
@@ -10369,12 +10650,13 @@
             <td>${esc(doc.date || '-')}</td>
             <td>${statusBadge(doc.status || 'Aktiv')}</td>
             <td>${documentActionMenu(doc)}</td>
-          </tr>`).join('');
-        setSelectOptions('roadDocsTable', 2, docs.map(doc => doc.type || '-'));
-        setSelectOptions('roadDocsTable', 4, docs.map(documentRelationKind));
-        setSelectOptions('roadDocsTable', 5, docs.map(doc => doc.segmentCode ? segmentLabel(doc.segmentCode) : '-'));
-        setSelectOptions('roadDocsTable', 6, docs.map(doc => doc.assetCode ? assetLabel(doc.assetCode) : '-'));
-        setSelectOptions('roadDocsTable', 8, docs.map(doc => doc.status || '-'));
+          </tr>`;
+        }).join('');
+        setSelectOptions('roadDocsTable', 3, docs.map(doc => doc.type || '-'));
+        setSelectOptions('roadDocsTable', 5, docs.map(documentRelationKind));
+        setSelectOptions('roadDocsTable', 6, docs.map(doc => doc.segmentCode ? segmentLabel(doc.segmentCode) : '-'));
+        setSelectOptions('roadDocsTable', 7, docs.map(doc => doc.assetCode ? assetLabel(doc.assetCode) : '-'));
+        setSelectOptions('roadDocsTable', 9, docs.map(doc => doc.status || '-'));
         applyDomTable('roadDocsTable', roadDocsTableState, 'documents');
       }
 
@@ -10508,8 +10790,10 @@
         const segmentCode = document.getElementById('doc_segment')?.value || '';
         const assetCode = document.getElementById('doc_asset')?.value || '';
         const relation = assetCode ? assetLabel(assetCode) : (segmentCode ? segmentLabel(segmentCode) : 'Sırf yola aid');
+        const rel = currentDocumentRelation();
+        const relCount = rel.code ? documentsForRelation(rel.kind, rel.code).length : 0;
         document.getElementById('documentModalSub').textContent = road
-          ? `${road.code} — ${road.name} / ${relation}`
+          ? `${road.code} — ${road.name} / ${relation} · ${relCount} sənəd`
           : 'Yol, seqment və ya aktivə sənəd bağlayın';
       }
 
@@ -10524,6 +10808,18 @@
         document.getElementById('documentModal')?.classList.remove('open');
       }
 
+      function resetDocumentDraftFields() {
+        const rel = currentDocumentRelation();
+        document.getElementById('doc_name').value = '';
+        document.getElementById('doc_type').value = 'Məlumat vərəqəsi';
+        document.getElementById('doc_number').value = rel.code ? suggestDocumentNumber(rel.kind, rel.code) : '';
+        document.getElementById('doc_date').value = new Date().toISOString().slice(0, 10);
+        document.getElementById('doc_status').value = 'Aktiv';
+        document.getElementById('doc_desc').value = '';
+        document.getElementById('doc_file').value = '';
+        updateDocumentModalSubtitle();
+      }
+
       function openDocumentModal(docId = '') {
         const doc = docId ? roadDocumentById(docId) : null;
         if (doc?.roadCode) currentDocumentsRoadCode = doc.roadCode;
@@ -10532,8 +10828,8 @@
         setDocumentRelationFields(doc);
         document.getElementById('doc_name').value = doc?.name || '';
         document.getElementById('doc_type').value = doc?.type || 'Məlumat vərəqəsi';
-        document.getElementById('doc_number').value = doc?.number || '';
-        document.getElementById('doc_date').value = doc?.date || '';
+        document.getElementById('doc_number').value = doc?.number || (doc ? '' : suggestDocumentNumber(currentDocumentRelation().kind, currentDocumentRelation().code));
+        document.getElementById('doc_date').value = doc?.date || new Date().toISOString().slice(0, 10);
         document.getElementById('doc_status').value = doc?.status || 'Aktiv';
         document.getElementById('doc_desc').value = doc?.description || '';
         document.getElementById('doc_file').value = '';
@@ -10560,7 +10856,19 @@
         };
       }
 
-      function commitDocument(filePayload) {
+      function refreshAfterDocumentChange() {
+        renderDocumentsTable();
+        renderRegistryTable();
+        refreshRoadActionCells();
+        renderSegmentTable();
+        renderAssetTable();
+        if (currentRoadDocsCode) renderRoadDocsTable(currentRoadDocsCode, currentRoadDocsKind);
+        if (typeof currentRoadSegsCode !== 'undefined' && currentRoadSegsCode) renderRoadSegsTable(currentRoadSegsCode);
+        if (typeof currentRoadAssetsCode !== 'undefined' && currentRoadAssetsCode) renderRoadAssetsTable(currentRoadAssetsCode);
+        if (typeof currentSegAssetsCode !== 'undefined' && currentSegAssetsCode) renderSegAssetsTable(currentSegAssetsCode);
+      }
+
+      function commitDocument(filePayload, options = {}) {
         const payload = collectDocumentPayload(filePayload);
         if (!payload.roadCode) {
           alert('Sənəd üçün aid yol seçilməlidir.');
@@ -10583,22 +10891,19 @@
           });
         }
         editingDocumentId = '';
+        refreshAfterDocumentChange();
+        if (options.keepOpen) {
+          resetDocumentDraftFields();
+          document.getElementById('doc_name')?.focus();
+          return;
+        }
         closeDocumentModal();
-        renderDocumentsTable();
-        renderRegistryTable();
-        refreshRoadActionCells();
-        renderSegmentTable();
-        renderAssetTable();
-        if (currentRoadDocsCode) renderRoadDocsTable(currentRoadDocsCode, currentRoadDocsKind);
-        if (typeof currentRoadSegsCode !== 'undefined' && currentRoadSegsCode) renderRoadSegsTable(currentRoadSegsCode);
-        if (typeof currentRoadAssetsCode !== 'undefined' && currentRoadAssetsCode) renderRoadAssetsTable(currentRoadAssetsCode);
-        if (typeof currentSegAssetsCode !== 'undefined' && currentSegAssetsCode) renderSegAssetsTable(currentSegAssetsCode);
       }
 
-      function saveDocument() {
+      function saveDocument(options = {}) {
         const file = document.getElementById('doc_file')?.files?.[0] || null;
         if (!file) {
-          commitDocument(null);
+          commitDocument(null, options);
           return;
         }
         const allowed = ['pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx', 'xls', 'xlsx'];
@@ -10612,7 +10917,7 @@
           fileName: file.name,
           fileType: file.type || ext,
           fileData: reader.result || '',
-        });
+        }, options);
         reader.readAsDataURL(file);
       }
 
@@ -10678,6 +10983,28 @@
         link.remove();
       }
 
+      function duplicateDocument(doc) {
+        currentDocumentsRoadCode = doc.roadCode || '';
+        openDocumentModal();
+        const roadSelect = document.getElementById('doc_road');
+        if (roadSelect) roadSelect.value = doc.roadCode || '';
+        populateDocumentSegmentSelect(doc.segmentCode || '');
+        const segmentSelect = document.getElementById('doc_segment');
+        if (segmentSelect) segmentSelect.value = doc.segmentCode || '';
+        populateDocumentAssetSelect(doc.assetCode || '');
+        const assetSelect = document.getElementById('doc_asset');
+        if (assetSelect) assetSelect.value = doc.assetCode || '';
+        const rel = currentDocumentRelation();
+        document.getElementById('doc_name').value = doc.name ? `${doc.name} - yeni` : '';
+        document.getElementById('doc_type').value = doc.type || 'Məlumat vərəqəsi';
+        document.getElementById('doc_number').value = rel.code ? suggestDocumentNumber(rel.kind, rel.code) : '';
+        document.getElementById('doc_date').value = new Date().toISOString().slice(0, 10);
+        document.getElementById('doc_status').value = 'Aktiv';
+        document.getElementById('doc_desc').value = doc.description || '';
+        document.getElementById('doc_file').value = '';
+        updateDocumentModalSubtitle();
+      }
+
       function handleDocumentAction(action, id) {
         const doc = roadDocumentById(id);
         if (!doc) return;
@@ -10685,19 +11012,12 @@
         if (action === 'preview') previewDocumentPdf(doc);
         if (action === 'download') downloadDocument(doc);
         if (action === 'edit') openDocumentModal(id);
+        if (action === 'duplicate') duplicateDocument(doc);
         if (action === 'delete') {
           if (!confirm('Bu sənədi silmək istədiyinizə əminsiniz?')) return;
           const idx = roadDocumentsData.findIndex(item => item.id === id);
           if (idx >= 0) roadDocumentsData.splice(idx, 1);
-          renderDocumentsTable();
-          renderRegistryTable();
-          refreshRoadActionCells();
-          renderSegmentTable();
-          renderAssetTable();
-          if (currentRoadDocsCode) renderRoadDocsTable(currentRoadDocsCode, currentRoadDocsKind);
-          if (typeof currentRoadSegsCode !== 'undefined' && currentRoadSegsCode) renderRoadSegsTable(currentRoadSegsCode);
-          if (typeof currentRoadAssetsCode !== 'undefined' && currentRoadAssetsCode) renderRoadAssetsTable(currentRoadAssetsCode);
-          if (typeof currentSegAssetsCode !== 'undefined' && currentSegAssetsCode) renderSegAssetsTable(currentSegAssetsCode);
+          refreshAfterDocumentChange();
         }
       }
 
@@ -11019,6 +11339,42 @@
         return items.slice(start, end);
       }
 
+      function paginateDocumentGroupRows(tableId, items) {
+        ensureTablePager(tableId);
+        const state = getTablePagerState(tableId);
+        const groups = [];
+        items.forEach((row, index) => {
+          const key = row.dataset.docGroup || `row:${index}`;
+          const last = groups[groups.length - 1];
+          if (last && last.key === key) {
+            last.rows.push(row);
+          } else {
+            groups.push({ key, rows: [row] });
+          }
+        });
+        const pages = [];
+        let pageGroups = [];
+        let pageSize = 0;
+        groups.forEach(group => {
+          if (pageGroups.length && pageSize + group.rows.length > state.perPage) {
+            pages.push(pageGroups);
+            pageGroups = [];
+            pageSize = 0;
+          }
+          pageGroups.push(group);
+          pageSize += group.rows.length;
+        });
+        if (pageGroups.length) pages.push(pageGroups);
+        const total = items.length;
+        const totalPages = Math.max(1, pages.length);
+        state.page = Math.min(Math.max(1, state.page), totalPages);
+        const rowsBefore = pages.slice(0, state.page - 1)
+          .reduce((acc, groupPage) => acc + groupPage.reduce((sum, group) => sum + group.rows.length, 0), 0);
+        const pageRows = (pages[state.page - 1] || []).flatMap(group => group.rows);
+        updateTablePager(tableId, total, rowsBefore, rowsBefore + pageRows.length, totalPages);
+        return pageRows;
+      }
+
       function resetExtendedTable(tableId) {
         const table = document.getElementById(tableId);
         if (!table) return;
@@ -11107,10 +11463,10 @@
           if (ci === 8) return 'range';
         }
         if (tableId === 'documentsTable') {
-          if (ci === 2 || ci === 4 || ci === 5 || ci === 6 || ci === 7 || ci === 9) return 'select';
+          if (ci === 3 || ci === 5 || ci === 6 || ci === 7 || ci === 8 || ci === 10) return 'select';
         }
         if (tableId === 'roadDocsTable') {
-          if (ci === 2 || ci === 4 || ci === 5 || ci === 6 || ci === 8) return 'select';
+          if (ci === 3 || ci === 5 || ci === 6 || ci === 7 || ci === 9) return 'select';
         }
         if (tableId === 'segAssetsTable') {
           if (ci === 2 || ci === 3 || ci === 4 || ci === 5 || ci === 7) return 'select';
@@ -11134,7 +11490,7 @@
         const ths = Array.from(headRow.children);
         const lastIdx = ths.length - 1;
         ths.forEach((th, idx) => {
-          if (idx === 0 || idx === lastIdx) return;
+          if (idx === 0 || idx === lastIdx || th.classList.contains('th-nof')) return;
           const label = th.querySelector('.th-label')?.textContent.trim() || th.textContent.trim();
           const kind = getDecoratedFilterKind(tableId, idx, label);
           th.dataset.ci = String(idx);
@@ -11200,18 +11556,27 @@
             return matchesFilterValue(f.value, cells[f.ci] || '', f.kind);
           });
         });
-        if (Number.isInteger(state.sortCi)) {
+        const compareRowsByCell = (a, b) => {
+          const av = a.cells[state.sortCi]?.textContent.trim() || '';
+          const bv = b.cells[state.sortCi]?.textContent.trim() || '';
+          const an = parseFloat(av);
+          const bn = parseFloat(bv);
+          if (Number.isFinite(an) && Number.isFinite(bn)) return state.sortDir === 'asc' ? an - bn : bn - an;
+          return state.sortDir === 'asc' ? av.localeCompare(bv, 'az') : bv.localeCompare(av, 'az');
+        };
+        if (isDocumentGroupTable(tableId)) {
           filtered.sort((a, b) => {
-            const av = a.cells[state.sortCi]?.textContent.trim() || '';
-            const bv = b.cells[state.sortCi]?.textContent.trim() || '';
-            const an = parseFloat(av);
-            const bn = parseFloat(bv);
-            if (Number.isFinite(an) && Number.isFinite(bn)) return state.sortDir === 'asc' ? an - bn : bn - an;
-            return state.sortDir === 'asc' ? av.localeCompare(bv, 'az') : bv.localeCompare(av, 'az');
+            const groupCompare = (a.dataset.docGroupSort || '').localeCompare(b.dataset.docGroupSort || '', 'az');
+            if (groupCompare) return groupCompare;
+            if (Number.isInteger(state.sortCi)) return compareRowsByCell(a, b);
+            return (parseInt(a.dataset.docOrder || '0', 10) || 0) - (parseInt(b.dataset.docOrder || '0', 10) || 0);
           });
+        } else if (Number.isInteger(state.sortCi)) {
+          filtered.sort(compareRowsByCell);
         }
         filtered.forEach(row => tbody.appendChild(row));
-        const pageRows = new Set(paginateItems(tableId, filtered));
+        refreshDocumentGroupBraces(tableId, filtered);
+        const pageRows = new Set(isDocumentGroupTable(tableId) ? paginateDocumentGroupRows(tableId, filtered) : paginateItems(tableId, filtered));
         rows.forEach(row => { row.style.display = pageRows.has(row) ? '' : 'none'; });
         if (tableId === 'segmentsTable') document.getElementById('segmentTotalBadge').textContent = filtered.length;
         if (tableId === 'assetsTable') document.getElementById('assetTotalBadge').textContent = filtered.length;
@@ -12413,6 +12778,7 @@
       document.getElementById('documentClose')?.addEventListener('click', closeDocumentModal);
       document.getElementById('documentCancel')?.addEventListener('click', closeDocumentModal);
       document.getElementById('documentSave')?.addEventListener('click', saveDocument);
+      document.getElementById('documentSaveNew')?.addEventListener('click', () => saveDocument({ keepOpen: true }));
       document.getElementById('documentModal')?.addEventListener('click', e => {
         if (e.target === document.getElementById('documentModal')) closeDocumentModal();
       });
