@@ -815,13 +815,13 @@
     .btn-new {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       background: #2563eb;
       color: #fff;
       border: none;
-      border-radius: 8px;
-      padding: 7px 14px;
-      font-size: 12px;
+      border-radius: 7px;
+      padding: 5px 11px;
+      font-size: 11px;
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
@@ -1637,6 +1637,78 @@
       display: contents;
     }
 
+    /* afp-inner: page mode → transparent wrapper */
+    #assetFormPanel:not(.asset-as-modal) .afp-inner {
+      display: contents;
+    }
+
+    /* dfp-inner: page mode → transparent wrapper */
+    #documentFormPanel:not(.doc-as-modal) .dfp-inner {
+      display: contents;
+    }
+
+    /* doc-as-modal: overlay mode */
+    #documentFormPanel.doc-as-modal {
+      position: fixed;
+      inset: 0;
+      flex: none;
+      border: none;
+      border-radius: 0;
+      background: rgba(15,23,42,.32);
+      z-index: 600;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    #documentFormPanel.doc-as-modal .dfp-inner {
+      background: #fff;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 780px;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: none;
+      overflow: hidden;
+    }
+
+    #documentFormPanel.doc-as-modal .fp-head {
+      padding: 14px 18px;
+      border-bottom: 1px solid #ecf1f8;
+    }
+
+    /* asset-as-modal: overlay mode */
+    #assetFormPanel.asset-as-modal {
+      position: fixed;
+      inset: 0;
+      flex: none;
+      border: none;
+      border-radius: 0;
+      background: rgba(15,23,42,.32);
+      z-index: 600;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    #assetFormPanel.asset-as-modal .afp-inner {
+      background: #fff;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 640px;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: none;
+      overflow: hidden;
+    }
+
+    #assetFormPanel.asset-as-modal .fp-head {
+      padding: 14px 18px;
+      border-bottom: 1px solid #ecf1f8;
+    }
+
     /* seg-as-modal: overlay mode */
     #segFormPanel.seg-as-modal {
       position: fixed;
@@ -1857,12 +1929,12 @@
     .fp-back-btn {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       border: 1px solid #d8e4f0;
-      border-radius: 8px;
+      border-radius: 7px;
       background: #fff;
-      padding: 6px 12px;
-      font-size: 12px;
+      padding: 4px 10px;
+      font-size: 11px;
       font-weight: 500;
       color: #475569;
       cursor: pointer;
@@ -1886,7 +1958,7 @@
     }
 
     .fp-title-block {
-      flex: 1;
+      flex-shrink: 0;
     }
 
     .fp-title {
@@ -1905,10 +1977,11 @@
     .stepper {
       display: flex;
       align-items: center;
-      padding: 14px 24px 10px;
-      border-bottom: 1px solid #ecf1f8;
+      padding: 0;
+      border-bottom: none;
       flex-shrink: 0;
       overflow-x: auto;
+      margin-left: auto;
     }
 
     .stepper::-webkit-scrollbar {
@@ -2068,7 +2141,7 @@
       width: 100%;
       border: 1px solid #cdd8e8;
       border-radius: 8px;
-      padding: 8px 10px;
+      padding: 5px 8px;
       font-size: 12px;
       font-family: inherit;
       color: #1a2b3c;
@@ -2169,16 +2242,16 @@
     }
 
     .fbtn {
-      border-radius: 8px;
-      padding: 8px 16px;
-      font-size: 12px;
+      border-radius: 7px;
+      padding: 5px 10px;
+      font-size: 11px;
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
       transition: .14s;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       border: none;
     }
 
@@ -2514,9 +2587,10 @@
     }
 
     .relation-row .fbtn {
-      height: 34px;
+      height: 28px;
       white-space: nowrap;
-      padding: 0 12px;
+      padding: 0 8px;
+      font-size: 11px;
     }
 
     .quick-create {
@@ -2634,7 +2708,7 @@
 
     #roadCreateModal.open,
     #segCreateModal.open,
-    #assetModal.open {
+    #assetFormPanel.asset-as-modal {
       z-index: 900;
     }
 
@@ -2721,9 +2795,10 @@
     .modal-stepper {
       display: flex;
       align-items: center;
-      padding: 10px 18px;
-      border-bottom: 1px solid #ecf1f8;
+      padding: 0;
+      border-bottom: none;
       flex-shrink: 0;
+      margin-left: auto;
     }
 
     .msub {
@@ -3346,10 +3421,10 @@
     }
 
     .btn-new {
-      gap: 8px;
-      padding: 10px 18px;
-      font-size: 14px;
-      border-radius: 10px;
+      gap: 5px;
+      padding: 6px 13px;
+      font-size: 12px;
+      border-radius: 8px;
     }
 
     .btn-new svg {
@@ -3584,9 +3659,9 @@
     }
 
     .fp-back-btn {
-      padding: 9px 15px;
-      font-size: 14px;
-      border-radius: 10px;
+      padding: 5px 11px;
+      font-size: 12px;
+      border-radius: 8px;
     }
 
     .fp-back-btn svg {
@@ -3603,7 +3678,7 @@
     }
 
     .stepper {
-      padding: 18px 28px 14px;
+      padding: 0;
     }
 
     .step-item {
@@ -3655,9 +3730,9 @@
     .finput,
     .fselect,
     .ftextarea {
-      font-size: 14px;
-      padding: 11px 12px;
-      border-radius: 10px;
+      font-size: 12px;
+      padding: 6px 9px;
+      border-radius: 8px;
     }
 
     .fselect {
@@ -3702,10 +3777,10 @@
     }
 
     .fbtn {
-      font-size: 14px;
-      padding: 10px 18px;
-      border-radius: 10px;
-      gap: 7px;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      gap: 5px;
     }
 
     .fbtn svg {
@@ -3799,8 +3874,9 @@
     }
 
     .relation-row .fbtn {
-      height: 42px;
-      padding: 0 16px;
+      height: 30px;
+      padding: 0 9px;
+      font-size: 11px;
     }
 
     .quick-create {
@@ -3852,7 +3928,7 @@
     }
 
     .modal-stepper {
-      padding: 14px 22px;
+      padding: 0;
     }
 
     .msub {
@@ -6010,28 +6086,27 @@
           <div class="fp-title" id="fpTitle">Yeni Yol Əlavə Et</div>
           <div class="fp-subtitle" id="fpSub">Addım 1 / 4</div>
         </div>
-      </div>
-
-      <!-- Stepper -->
-      <div class="stepper" id="mainStepper">
-        <div class="step-item s-active" data-s="1">
-          <div class="step-circle">1</div>
-          <div class="step-label">Əsas məlumatlar</div>
-        </div>
-        <div class="step-conn" id="sc1"></div>
-        <div class="step-item" data-s="2">
-          <div class="step-circle">2</div>
-          <div class="step-label">Mülkiyyət</div>
-        </div>
-        <div class="step-conn" id="sc2"></div>
-        <div class="step-item" data-s="3">
-          <div class="step-circle">3</div>
-          <div class="step-label">Təsnifat</div>
-        </div>
-        <div class="step-conn" id="sc3"></div>
-        <div class="step-item" data-s="4">
-          <div class="step-circle">4</div>
-          <div class="step-label">GİS / Məkan</div>
+        <!-- Stepper -->
+        <div class="stepper" id="mainStepper">
+          <div class="step-item s-active" data-s="1">
+            <div class="step-circle">1</div>
+            <div class="step-label">Əsas məlumatlar</div>
+          </div>
+          <div class="step-conn" id="sc1"></div>
+          <div class="step-item" data-s="2">
+            <div class="step-circle">2</div>
+            <div class="step-label">Mülkiyyət</div>
+          </div>
+          <div class="step-conn" id="sc2"></div>
+          <div class="step-item" data-s="3">
+            <div class="step-circle">3</div>
+            <div class="step-label">Təsnifat</div>
+          </div>
+          <div class="step-conn" id="sc3"></div>
+          <div class="step-item" data-s="4">
+            <div class="step-circle">4</div>
+            <div class="step-label">GİS / Məkan</div>
+          </div>
         </div>
       </div>
 
@@ -6040,7 +6115,6 @@
 
         <!-- ── Step 1: Əsas məlumatlar ── -->
         <div class="step-pane sp-active" id="pane1">
-          <div class="fsec-title">Əsas məlumatlar</div>
           <div class="fgrid">
             <div class="frow full">
               <label>Reyestr kodu <span class="fauto-tag">AUTO</span></label>
@@ -6072,7 +6146,6 @@
 
         <!-- ── Step 2: Mülkiyyət ── -->
         <div class="step-pane" id="pane2">
-          <div class="fsec-title">Mülkiyyət və idarəetmə</div>
           <div class="fgrid">
             <div class="frow">
               <label>Mülkiyyət növü <span class="req">*</span></label>
@@ -6116,7 +6189,6 @@
 
         <!-- ── Step 3: Təsnifat ── -->
         <div class="step-pane" id="pane3">
-          <div class="fsec-title">Təsnifat</div>
           <div class="fgrid">
             <div class="frow">
               <label>Əhəmiyyətinə görə növü <span class="req">*</span></label>
@@ -6164,7 +6236,6 @@
 
         <!-- ── Step 4: GİS / Məkan ── -->
         <div class="step-pane" id="pane4">
-          <div class="fsec-title">GİS / Məkan</div>
           <div class="fgrid">
             <div class="frow">
               <label>Başlanğıc nöqtə <span class="req">*</span></label>
@@ -6234,7 +6305,6 @@
 
         <!-- ── Step 5: Seqmentlər ── -->
         <div class="step-pane" id="pane5">
-          <div class="fsec-title">Seqmentlər</div>
           <div id="segListLegacy" class="seg-list"></div>
           <div id="segEmptyLegacy" class="seg-empty">
             <svg viewBox="0 0 24 24">
@@ -6295,16 +6365,16 @@
             <div class="fp-title" id="segModalTitle">Seqment əlavə et</div>
             <div class="fp-subtitle" id="segModalSub">Addım 1 / 2 — Ümumi məlumatlar</div>
           </div>
-        </div>
-        <div class="modal-stepper">
-          <div class="msub ms-active" id="msub1">
-            <div class="msub-c">1</div>
-            <div class="msub-l">Ümumi məlumatlar</div>
-          </div>
-          <div class="msub-conn"></div>
-          <div class="msub" id="msub2">
-            <div class="msub-c">2</div>
-            <div class="msub-l">Texniki parametrlər</div>
+          <div class="modal-stepper">
+            <div class="msub ms-active" id="msub1">
+              <div class="msub-c">1</div>
+              <div class="msub-l">Ümumi məlumatlar</div>
+            </div>
+            <div class="msub-conn"></div>
+            <div class="msub" id="msub2">
+              <div class="msub-c">2</div>
+              <div class="msub-l">Texniki parametrlər</div>
+            </div>
           </div>
         </div>
         <div class="modal-body">
@@ -6437,6 +6507,253 @@
         </div>
       </div><!-- /sfp-inner -->
     </div><!-- /segFormPanel -->
+
+    <!-- ══ ASSET FORM PANEL ══ -->
+    <div class="form-panel" id="assetFormPanel">
+      <div class="afp-inner">
+        <div class="fp-head">
+          <button class="fp-back-btn" id="assetModalClose">
+            <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>Geri
+          </button>
+          <div class="fp-title-block">
+            <div class="fp-title" id="assetModalTitle">Aktiv əlavə et</div>
+            <div class="fp-subtitle" id="assetModalSub">Addım 1 / 2 — Növ və bağlılıq</div>
+          </div>
+          <div class="modal-stepper">
+            <div class="msub ms-active" id="amsub1">
+              <div class="msub-c">1</div>
+              <div class="msub-l">Növ və bağlılıq</div>
+            </div>
+            <div class="msub-conn"></div>
+            <div class="msub" id="amsub2">
+              <div class="msub-c">2</div>
+              <div class="msub-l">Məlumatlar</div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="mpane mp-active" id="asp1">
+            <div class="fgrid">
+              <div class="frow">
+                <label>Aktiv kodu <span class="fauto-tag">AUTO</span></label>
+                <input class="finput f-auto" id="ac_kod" readonly>
+              </div>
+              <div class="frow">
+                <label>Aid seqment <span class="fauto-tag">AUTO</span></label>
+                <input class="finput f-auto" id="ac_seg" readonly>
+              </div>
+              <div class="frow">
+                <label>Aktiv qrubu <span class="req">*</span></label>
+                <select class="fselect" id="ac_grup" onchange="onAssetGroupChange()">
+                  <option value="">Seçin...</option>
+                  <option>Yol konstruksiyası</option>
+                  <option>Mühəndis qurğuları</option>
+                  <option>Suötürmə/drenaj</option>
+                  <option>Təhlükəsizlik</option>
+                  <option>Yol hərəkəti təşkili</option>
+                  <option>Yolkənarı xidmət</option>
+                  <option>Monitorinq</option>
+                  <option>Kommunikasiya keçidləri</option>
+                  <option>Torpaq və zonalar</option>
+                </select>
+              </div>
+              <div class="frow">
+                <label>Aktiv növü <span class="req">*</span></label>
+                <select class="fselect" id="ac_nov" onchange="onAssetTypeChange()">
+                  <option value="">Əvvəlcə qrup seçin</option>
+                </select>
+              </div>
+              <div class="frow">
+                <label>Aktiv tipi <span class="fauto-tag">AUTO</span></label>
+                <input class="finput f-auto" id="ac_tip" readonly placeholder="Növdən müəyyən olunur">
+              </div>
+              <div class="frow">
+                <label>GİS tipi <span class="fauto-tag">AUTO</span></label>
+                <input class="finput f-auto" id="ac_gis_tip" readonly placeholder="Növdən müəyyən olunur">
+              </div>
+              <div class="frow full">
+                <label>Pasport tələb? <span class="fauto-tag">AUTO</span></label>
+                <input class="finput f-auto" id="ac_pasport" readonly placeholder="Növdən müəyyən olunur">
+              </div>
+            </div>
+          </div>
+          <div class="mpane" id="asp2">
+            <div class="fgrid">
+              <div class="frow">
+                <label>km / PK <span class="req">*</span></label>
+                <input class="finput" id="ac_km" type="number" step="0.001" placeholder="Nümunə: 5.800">
+              </div>
+              <div class="frow">
+                <label>GİS koordinat <span class="req">*</span></label>
+                <div class="coord-row">
+                  <input class="finput" id="ac_lat" placeholder="Lat">
+                  <input class="finput" id="ac_lon" placeholder="Lon">
+                </div>
+              </div>
+              <div class="frow">
+                <label>Aktivin statusu <span class="req">*</span></label>
+                <select class="fselect" id="ac_status">
+                  <option value="">Seçin...</option>
+                  <option>Qaralama</option>
+                  <option>Aktiv</option>
+                  <option>Qismən işlək</option>
+                  <option>Qəza vəziyyətində</option>
+                  <option>Ləğv olunmuş</option>
+                  <option>Arxivləşdirilmiş</option>
+                </select>
+              </div>
+              <div class="frow">
+                <label>Hüquqi status</label>
+                <select class="fselect" id="ac_huq">
+                  <option value="">Seçin...</option>
+                  <option>Aktiv</option>
+                  <option>Ləğv</option>
+                  <option>Mübahisəli</option>
+                  <option>Qeydiyyatsız</option>
+                </select>
+              </div>
+              <div class="frow">
+                <label>İdarə edən qurum</label>
+                <input class="finput" id="ac_idarə" placeholder="Nümunə: Bakı Yol İdarəsi">
+              </div>
+              <div class="frow">
+                <label>İstismara verilmə tarixi</label>
+                <input class="finput" id="ac_tarix" type="date">
+              </div>
+              <div class="frow">
+                <label>Ümumi texniki vəziyyət</label>
+                <select class="fselect" id="ac_veziyyet">
+                  <option value="">Seçin...</option>
+                  <option>Yaxşı</option>
+                  <option>Qənaətbəxş</option>
+                  <option>Qənaətsiz</option>
+                </select>
+              </div>
+              <div class="frow full">
+                <label>Qeyd</label>
+                <textarea class="ftextarea" id="ac_qeyd" placeholder="Aktiv haqqında əlavə texniki qeydlər..."></textarea>
+              </div>
+              <div class="asset-passport-section" id="assetPassportPanel" aria-hidden="true">
+                <div class="asset-passport-head">
+                  <div class="asset-passport-title">Pasport məlumatları</div>
+                  <span class="asset-passport-badge">Pasportlaşdırılan</span>
+                </div>
+                <div class="fgrid asset-passport-grid">
+                  <div class="frow">
+                    <label>Pasport nömrəsi</label>
+                    <input class="finput" id="ac_passport_no" placeholder="Nümunə: PSP-2026-00001">
+                  </div>
+                  <div class="frow">
+                    <label>Pasportun statusu</label>
+                    <select class="fselect" id="ac_passport_status">
+                      <option value="">Seçin...</option>
+                    </select>
+                  </div>
+                  <div class="frow">
+                    <label>Pasport tarixi</label>
+                    <input class="finput" id="ac_passport_date" type="date">
+                  </div>
+                  <div class="frow">
+                    <label>Təsdiq tarixi</label>
+                    <input class="finput" id="ac_passport_approved_date" type="date">
+                  </div>
+                  <div class="frow">
+                    <label>Təsdiq edən</label>
+                    <input class="finput" id="ac_passport_approved_by" placeholder="Şəxs və ya qurum">
+                  </div>
+                  <div class="frow">
+                    <label>Məsul şəxs</label>
+                    <input class="finput" id="ac_passport_responsible" placeholder="Məsul əməkdaş">
+                  </div>
+                  <div class="frow">
+                    <label>Son baxış tarixi</label>
+                    <input class="finput" id="ac_passport_last_inspection" type="date">
+                  </div>
+                  <div class="frow">
+                    <label>Növbəti baxış tarixi</label>
+                    <input class="finput" id="ac_passport_next_inspection" type="date">
+                  </div>
+                  <div class="frow full">
+                    <label>Pasport qeydi</label>
+                    <textarea class="ftextarea" id="ac_passport_note" placeholder="Pasport üzrə əlavə qeydlər..."></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fp-foot">
+          <button class="fbtn fbtn-ghost" id="assetModalCancel">Ləğv et</button>
+          <div class="fp-foot-r">
+            <button class="fbtn fbtn-outline" id="assetPrev" style="display:none;">
+              <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>Əvvəlki
+            </button>
+            <button class="fbtn fbtn-primary" id="assetNext">
+              İrəli<svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <button class="fbtn fbtn-success" id="assetSave" style="display:none;">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Yadda saxla
+            </button>
+          </div>
+        </div>
+      </div><!-- /afp-inner -->
+    </div><!-- /assetFormPanel -->
+
+    <!-- ══ DOCUMENT FORM PANEL ══ -->
+    <div class="form-panel" id="documentFormPanel">
+      <div class="dfp-inner">
+        <div class="fp-head">
+          <button class="fp-back-btn" id="documentClose" type="button">
+            <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>Geri
+          </button>
+          <div class="fp-title-block">
+            <div class="fp-title" id="documentModalTitle">Sənəd əlavə et</div>
+            <div class="fp-subtitle" id="documentModalSub">Yol, seqment və ya aktivə sənəd bağlayın</div>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="fgrid">
+            <div class="frow full">
+              <label>Aid yol <span class="req">*</span></label>
+              <div class="relation-row">
+                <select class="fselect" id="doc_road"></select>
+                <button class="fbtn fbtn-outline" id="docCreateRoadToggle" type="button">Yol yarat</button>
+              </div>
+            </div>
+            <div class="frow">
+              <label>Aid seqment</label>
+              <div class="relation-row">
+                <select class="fselect" id="doc_segment"></select>
+                <button class="fbtn fbtn-outline" id="docCreateSegmentToggle" type="button">Seqment yarat</button>
+              </div>
+              <span class="fhint">Boş qalarsa sənəd birbaşa yola aid sayılır.</span>
+            </div>
+            <div class="frow">
+              <label>Aid aktiv</label>
+              <div class="relation-row">
+                <select class="fselect" id="doc_asset"></select>
+                <button class="fbtn fbtn-outline" id="docCreateAssetToggle" type="button">Aktiv yarat</button>
+              </div>
+              <span class="fhint">Aktiv seçilərsə sənəd aktiv səviyyəsində görünəcək.</span>
+            </div>
+            <div class="frow full"><label>Sənəd adı <span class="req">*</span></label><input class="finput" id="doc_name" placeholder="Məlumat vərəqəsi"></div>
+            <div class="frow"><label>Sənəd növü</label><select class="fselect" id="doc_type"><option>Məlumat vərəqəsi</option><option>Xəritə</option><option>Hüquqi sənəd</option><option>Texniki sənəd</option><option>Reyestr çıxarışı</option><option>Akt</option><option>Layihə sənədi</option><option>Digər</option></select></div>
+            <div class="frow"><label>Sənəd nömrəsi</label><input class="finput" id="doc_number" placeholder="SN-2026-001"></div>
+            <div class="frow"><label>Tarix</label><input class="finput" id="doc_date" type="date"></div>
+            <div class="frow"><label>Status</label><select class="fselect" id="doc_status"><option>Aktiv</option><option>Qaralama</option><option>Arxiv</option><option>Ləğv olunmuş</option></select></div>
+            <div class="frow full"><label>Fayl</label><input class="finput" id="doc_file" type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx,application/pdf,image/jpeg,image/png"></div>
+            <div class="frow full"><label>Təsvir</label><textarea class="ftextarea" id="doc_desc" placeholder="Sənəd haqqında qeyd..."></textarea></div>
+          </div>
+        </div>
+        <div class="fp-foot">
+          <button class="fbtn fbtn-ghost" id="documentCancel" type="button">Ləğv et</button>
+          <div class="fp-foot-r">
+            <button class="fbtn fbtn-outline" id="documentSaveNew" type="button"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5Z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>Yadda saxla və yenisini əlavə et</button>
+            <button class="fbtn fbtn-success" id="documentSave" type="button"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Yadda saxla</button>
+          </div>
+        </div>
+      </div><!-- /dfp-inner -->
+    </div><!-- /documentFormPanel -->
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -6673,207 +6990,6 @@
     </div>
   </div>
 
-  <div class="modal-ov" id="assetModal">
-    <div class="modal-box">
-      <div class="modal-head">
-        <div class="modal-title-block">
-          <div class="mh-title" id="assetModalTitle">Aktiv əlavə et</div>
-          <div class="mh-sub" id="assetModalSub">Addım 1 / 2 — Növ və bağlılıq</div>
-        </div>
-        <button class="modal-close-btn" id="assetModalClose">
-          <svg viewBox="0 0 24 24">
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </button>
-      </div>
-      <div class="modal-stepper">
-        <div class="msub ms-active" id="amsub1">
-          <div class="msub-c">1</div>
-          <div class="msub-l">Növ və bağlılıq</div>
-        </div>
-        <div class="msub-conn"></div>
-        <div class="msub" id="amsub2">
-          <div class="msub-c">2</div>
-          <div class="msub-l">Məlumatlar</div>
-        </div>
-      </div>
-      <div class="modal-body">
-        <!-- Asset sub-step 1 -->
-        <div class="mpane mp-active" id="asp1">
-          <div class="fgrid">
-            <div class="frow">
-              <label>Aktiv kodu <span class="fauto-tag">AUTO</span></label>
-              <input class="finput f-auto" id="ac_kod" readonly>
-            </div>
-            <div class="frow">
-              <label>Aid seqment <span class="fauto-tag">AUTO</span></label>
-              <input class="finput f-auto" id="ac_seg" readonly>
-            </div>
-            <div class="frow">
-              <label>Aktiv qrubu <span class="req">*</span></label>
-              <select class="fselect" id="ac_grup" onchange="onAssetGroupChange()">
-                <option value="">Seçin...</option>
-                <option>Yol konstruksiyası</option>
-                <option>Mühəndis qurğuları</option>
-                <option>Suötürmə/drenaj</option>
-                <option>Təhlükəsizlik</option>
-                <option>Yol hərəkəti təşkili</option>
-                <option>Yolkənarı xidmət</option>
-                <option>Monitorinq</option>
-                <option>Kommunikasiya keçidləri</option>
-                <option>Torpaq və zonalar</option>
-              </select>
-            </div>
-            <div class="frow">
-              <label>Aktiv növü <span class="req">*</span></label>
-              <select class="fselect" id="ac_nov" onchange="onAssetTypeChange()">
-                <option value="">Əvvəlcə qrup seçin</option>
-              </select>
-            </div>
-            <div class="frow">
-              <label>Aktiv tipi <span class="fauto-tag">AUTO</span></label>
-              <input class="finput f-auto" id="ac_tip" readonly placeholder="Növdən müəyyən olunur">
-            </div>
-            <div class="frow">
-              <label>GİS tipi <span class="fauto-tag">AUTO</span></label>
-              <input class="finput f-auto" id="ac_gis_tip" readonly placeholder="Növdən müəyyən olunur">
-            </div>
-            <div class="frow full">
-              <label>Pasport tələb? <span class="fauto-tag">AUTO</span></label>
-              <input class="finput f-auto" id="ac_pasport" readonly placeholder="Növdən müəyyən olunur">
-            </div>
-          </div>
-        </div>
-        <!-- Asset sub-step 2 -->
-        <div class="mpane" id="asp2">
-          <div class="fgrid">
-            <div class="frow">
-              <label>km / PK <span class="req">*</span></label>
-              <input class="finput" id="ac_km" type="number" step="0.001" placeholder="Nümunə: 5.800">
-            </div>
-            <div class="frow">
-              <label>GİS koordinat <span class="req">*</span></label>
-              <div class="coord-row">
-                <input class="finput" id="ac_lat" placeholder="Lat">
-                <input class="finput" id="ac_lon" placeholder="Lon">
-              </div>
-            </div>
-            <div class="frow">
-              <label>Aktivin statusu <span class="req">*</span></label>
-              <select class="fselect" id="ac_status">
-                <option value="">Seçin...</option>
-                <option>Qaralama</option>
-                <option>Aktiv</option>
-                <option>Qismən işlək</option>
-                <option>Qəza vəziyyətində</option>
-                <option>Ləğv olunmuş</option>
-                <option>Arxivləşdirilmiş</option>
-              </select>
-            </div>
-            <div class="frow">
-              <label>Hüquqi status</label>
-              <select class="fselect" id="ac_huq">
-                <option value="">Seçin...</option>
-                <option>Aktiv</option>
-                <option>Ləğv</option>
-                <option>Mübahisəli</option>
-                <option>Qeydiyyatsız</option>
-              </select>
-            </div>
-            <div class="frow">
-              <label>İdarə edən qurum</label>
-              <input class="finput" id="ac_idarə" placeholder="Nümunə: Bakı Yol İdarəsi">
-            </div>
-            <div class="frow">
-              <label>İstismara verilmə tarixi</label>
-              <input class="finput" id="ac_tarix" type="date">
-            </div>
-            <div class="frow">
-              <label>Ümumi texniki vəziyyət</label>
-              <select class="fselect" id="ac_veziyyet">
-                <option value="">Seçin...</option>
-                <option>Yaxşı</option>
-                <option>Qənaətbəxş</option>
-                <option>Qənaətsiz</option>
-              </select>
-            </div>
-            <div class="frow full">
-              <label>Qeyd</label>
-              <textarea class="ftextarea" id="ac_qeyd" placeholder="Aktiv haqqında əlavə texniki qeydlər..."></textarea>
-            </div>
-            <div class="asset-passport-section" id="assetPassportPanel" aria-hidden="true">
-              <div class="asset-passport-head">
-                <div class="asset-passport-title">Pasport məlumatları</div>
-                <span class="asset-passport-badge">Pasportlaşdırılan</span>
-              </div>
-              <div class="fgrid asset-passport-grid">
-                <div class="frow">
-                  <label>Pasport nömrəsi</label>
-                  <input class="finput" id="ac_passport_no" placeholder="Nümunə: PSP-2026-00001">
-                </div>
-                <div class="frow">
-                  <label>Pasportun statusu</label>
-                  <select class="fselect" id="ac_passport_status">
-                    <option value="">Seçin...</option>
-                  </select>
-                </div>
-                <div class="frow">
-                  <label>Pasport tarixi</label>
-                  <input class="finput" id="ac_passport_date" type="date">
-                </div>
-                <div class="frow">
-                  <label>Təsdiq tarixi</label>
-                  <input class="finput" id="ac_passport_approved_date" type="date">
-                </div>
-                <div class="frow">
-                  <label>Təsdiq edən</label>
-                  <input class="finput" id="ac_passport_approved_by" placeholder="Şəxs və ya qurum">
-                </div>
-                <div class="frow">
-                  <label>Məsul şəxs</label>
-                  <input class="finput" id="ac_passport_responsible" placeholder="Məsul əməkdaş">
-                </div>
-                <div class="frow">
-                  <label>Son baxış tarixi</label>
-                  <input class="finput" id="ac_passport_last_inspection" type="date">
-                </div>
-                <div class="frow">
-                  <label>Növbəti baxış tarixi</label>
-                  <input class="finput" id="ac_passport_next_inspection" type="date">
-                </div>
-                <div class="frow full">
-                  <label>Pasport qeydi</label>
-                  <textarea class="ftextarea" id="ac_passport_note" placeholder="Pasport üzrə əlavə qeydlər..."></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-foot">
-        <button class="fbtn fbtn-ghost" id="assetModalCancel">Ləğv et</button>
-        <div class="modal-foot-r">
-          <button class="fbtn fbtn-outline" id="assetPrev" style="display:none;">
-            <svg viewBox="0 0 24 24">
-              <path d="m15 18-6-6 6-6" />
-            </svg>Əvvəlki
-          </button>
-          <button class="fbtn fbtn-primary" id="assetNext">
-            İrəli<svg viewBox="0 0 24 24">
-              <path d="m9 18 6-6-6-6" />
-            </svg>
-          </button>
-          <button class="fbtn fbtn-success" id="assetSave" style="display:none;">
-            <svg viewBox="0 0 24 24">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>Yadda saxla
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- ══ ROAD CREATE MODAL ══ -->
   <div class="modal-ov" id="roadCreateModal">
     <div class="modal-box">
@@ -6882,33 +6998,33 @@
           <div class="mh-title">Yol yarat</div>
           <div class="mh-sub" id="rcmSub">Addım 1 / 4 — Əsas məlumatlar</div>
         </div>
+        <div class="modal-stepper">
+          <div class="msub ms-active" id="rmsub1">
+            <div class="msub-c">1</div>
+            <div class="msub-l">Əsas məlumatlar</div>
+          </div>
+          <div class="msub-conn" id="rmsc1"></div>
+          <div class="msub" id="rmsub2">
+            <div class="msub-c">2</div>
+            <div class="msub-l">Mülkiyyət</div>
+          </div>
+          <div class="msub-conn" id="rmsc2"></div>
+          <div class="msub" id="rmsub3">
+            <div class="msub-c">3</div>
+            <div class="msub-l">Təsnifat</div>
+          </div>
+          <div class="msub-conn" id="rmsc3"></div>
+          <div class="msub" id="rmsub4">
+            <div class="msub-c">4</div>
+            <div class="msub-l">GİS / Məkan</div>
+          </div>
+        </div>
         <button class="modal-close-btn" id="rcmClose">
           <svg viewBox="0 0 24 24">
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
         </button>
-      </div>
-      <div class="modal-stepper">
-        <div class="msub ms-active" id="rmsub1">
-          <div class="msub-c">1</div>
-          <div class="msub-l">Əsas məlumatlar</div>
-        </div>
-        <div class="msub-conn" id="rmsc1"></div>
-        <div class="msub" id="rmsub2">
-          <div class="msub-c">2</div>
-          <div class="msub-l">Mülkiyyət</div>
-        </div>
-        <div class="msub-conn" id="rmsc2"></div>
-        <div class="msub" id="rmsub3">
-          <div class="msub-c">3</div>
-          <div class="msub-l">Təsnifat</div>
-        </div>
-        <div class="msub-conn" id="rmsc3"></div>
-        <div class="msub" id="rmsub4">
-          <div class="msub-c">4</div>
-          <div class="msub-l">GİS / Məkan</div>
-        </div>
       </div>
       <div class="modal-body">
         <!-- Step 1: Əsas məlumatlar -->
@@ -7111,23 +7227,23 @@
           <div class="mh-title">Seqment yarat</div>
           <div class="mh-sub" id="scmSub">Addım 1 / 2 — Ümumi məlumatlar</div>
         </div>
+        <div class="modal-stepper">
+          <div class="msub ms-active" id="smsub1">
+            <div class="msub-c">1</div>
+            <div class="msub-l">Ümumi məlumatlar</div>
+          </div>
+          <div class="msub-conn" id="smsc1"></div>
+          <div class="msub" id="smsub2">
+            <div class="msub-c">2</div>
+            <div class="msub-l">Texniki parametrlər</div>
+          </div>
+        </div>
         <button class="modal-close-btn" id="scmClose">
           <svg viewBox="0 0 24 24">
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
         </button>
-      </div>
-      <div class="modal-stepper">
-        <div class="msub ms-active" id="smsub1">
-          <div class="msub-c">1</div>
-          <div class="msub-l">Ümumi məlumatlar</div>
-        </div>
-        <div class="msub-conn" id="smsc1"></div>
-        <div class="msub" id="smsub2">
-          <div class="msub-c">2</div>
-          <div class="msub-l">Texniki parametrlər</div>
-        </div>
       </div>
       <div class="modal-body">
         <!-- Step 1: Ümumi məlumatlar -->
@@ -8529,7 +8645,8 @@
       ].forEach(id => { const el = document.getElementById(id); if (el && id !== 'ac_kod' && id !== 'ac_seg') el.value = ''; });
       resetAssetSoraqca();
       goAssetStep(1);
-      document.getElementById('assetModal').classList.add('open');
+      const afp = document.getElementById('assetFormPanel');
+      afp.classList.add('asset-as-modal', 'visible');
     }
 
     function editAsset(segIdx, assetIdx) {
@@ -8551,7 +8668,8 @@
       setAssetPassportFields(a);
       document.getElementById('assetModalTitle').textContent = 'Aktivi Redaktə Et';
       goAssetStep(1);
-      document.getElementById('assetModal').classList.add('open');
+      const afp = document.getElementById('assetFormPanel');
+      afp.classList.add('asset-as-modal', 'visible');
     }
 
     function removeAsset(segIdx, assetIdx) {
@@ -8578,7 +8696,13 @@
     }
 
     function closeAssetModal() {
-      document.getElementById('assetModal').classList.remove('open');
+      const afp = document.getElementById('assetFormPanel');
+      const wasModal = afp.classList.contains('asset-as-modal');
+      afp.classList.remove('visible', 'asset-as-modal');
+      if (!wasModal) {
+        const targetView = document.getElementById(`${fp._prevAssetView || activeView || 'assets'}View`);
+        if (targetView) { targetView.classList.remove('is-hidden'); targetView.style.display = 'flex'; }
+      }
       if (window._segAssetsCode && typeof window._renderSegAssetsTable === 'function') {
         window._renderSegAssetsTable(window._segAssetsCode);
       }
@@ -8628,8 +8752,9 @@
     });
 
     /* close modals on overlay click */
-    document.getElementById('assetModal').addEventListener('click', e => {
-      if (e.target === document.getElementById('assetModal')) closeAssetModal();
+    document.getElementById('assetFormPanel').addEventListener('click', e => {
+      const afp = document.getElementById('assetFormPanel');
+      if (afp.classList.contains('asset-as-modal') && e.target === afp) closeAssetModal();
     });
   </script>
   <script>
@@ -9042,59 +9167,6 @@
         </thead>
         <tbody id="documentsTableBody"></tbody>
       </table>
-    </div>
-  </div>
-
-  <div class="modal-ov" id="documentModal">
-    <div class="modal-box" style="max-width:780px;">
-      <div class="modal-head">
-        <div class="modal-title-block">
-          <div class="mh-title" id="documentModalTitle">Sənəd əlavə et</div>
-          <div class="mh-sub" id="documentModalSub">Yol, seqment və ya aktivə sənəd bağlayın</div>
-        </div>
-        <button class="modal-close-btn" id="documentClose" type="button" aria-label="Bağla">
-          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="fgrid">
-          <div class="frow full">
-            <label>Aid yol <span class="req">*</span></label>
-            <div class="relation-row">
-              <select class="fselect" id="doc_road"></select>
-              <button class="fbtn fbtn-outline" id="docCreateRoadToggle" type="button">Yol yarat</button>
-            </div>
-          </div>
-          <div class="frow">
-            <label>Aid seqment</label>
-            <div class="relation-row">
-              <select class="fselect" id="doc_segment"></select>
-              <button class="fbtn fbtn-outline" id="docCreateSegmentToggle" type="button">Seqment yarat</button>
-            </div>
-            <span class="fhint">Boş qalarsa sənəd birbaşa yola aid sayılır.</span>
-          </div>
-          <div class="frow">
-            <label>Aid aktiv</label>
-            <div class="relation-row">
-              <select class="fselect" id="doc_asset"></select>
-              <button class="fbtn fbtn-outline" id="docCreateAssetToggle" type="button">Aktiv yarat</button>
-            </div>
-            <span class="fhint">Aktiv seçilərsə sənəd aktiv səviyyəsində görünəcək.</span>
-          </div>
-          <div class="frow full"><label>Sənəd adı <span class="req">*</span></label><input class="finput" id="doc_name" placeholder="Məlumat vərəqəsi"></div>
-          <div class="frow"><label>Sənəd növü</label><select class="fselect" id="doc_type"><option>Məlumat vərəqəsi</option><option>Xəritə</option><option>Hüquqi sənəd</option><option>Texniki sənəd</option><option>Reyestr çıxarışı</option><option>Akt</option><option>Layihə sənədi</option><option>Digər</option></select></div>
-          <div class="frow"><label>Sənəd nömrəsi</label><input class="finput" id="doc_number" placeholder="SN-2026-001"></div>
-          <div class="frow"><label>Tarix</label><input class="finput" id="doc_date" type="date"></div>
-          <div class="frow"><label>Status</label><select class="fselect" id="doc_status"><option>Aktiv</option><option>Qaralama</option><option>Arxiv</option><option>Ləğv olunmuş</option></select></div>
-          <div class="frow full"><label>Fayl</label><input class="finput" id="doc_file" type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx,application/pdf,image/jpeg,image/png"></div>
-          <div class="frow full"><label>Təsvir</label><textarea class="ftextarea" id="doc_desc" placeholder="Sənəd haqqında qeyd..."></textarea></div>
-        </div>
-      </div>
-      <div class="modal-foot">
-        <button class="fbtn fbtn-ghost" id="documentCancel" type="button">Ləğv et</button>
-        <button class="fbtn fbtn-outline" id="documentSaveNew" type="button"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Yadda saxla və yenisini əlavə et</button>
-        <button class="fbtn fbtn-success" id="documentSave" type="button"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>Yadda saxla</button>
-      </div>
     </div>
   </div>
 
@@ -10805,7 +10877,14 @@
       }
 
       function closeDocumentModal() {
-        document.getElementById('documentModal')?.classList.remove('open');
+        const dfp = document.getElementById('documentFormPanel');
+        if (!dfp) return;
+        const wasModal = dfp.classList.contains('doc-as-modal');
+        dfp.classList.remove('visible', 'doc-as-modal');
+        if (!wasModal) {
+          const targetView = document.getElementById(`${fp._prevDocView || activeView || 'documents'}View`);
+          if (targetView) { targetView.classList.remove('is-hidden'); targetView.style.display = 'flex'; }
+        }
       }
 
       function resetDocumentDraftFields() {
@@ -10833,7 +10912,16 @@
         document.getElementById('doc_status').value = doc?.status || 'Aktiv';
         document.getElementById('doc_desc').value = doc?.description || '';
         document.getElementById('doc_file').value = '';
-        document.getElementById('documentModal')?.classList.add('open');
+        const dfp = document.getElementById('documentFormPanel');
+        if (activeView === 'documents') {
+          dfp.classList.remove('doc-as-modal');
+          fp._prevDocView = activeView;
+          document.querySelectorAll('.view-card').forEach(c => { c.classList.add('is-hidden'); c.style.display = ''; });
+        } else {
+          dfp.classList.add('doc-as-modal');
+          fp._prevDocView = activeView;
+        }
+        dfp.classList.add('visible');
       }
 
       function collectDocumentPayload(filePayload) {
@@ -12139,6 +12227,8 @@
       function switchView(view) {
         activeView = view;
         document.getElementById('formPanel').classList.remove('visible');
+        document.getElementById('assetFormPanel').classList.remove('visible', 'asset-as-modal');
+        document.getElementById('documentFormPanel').classList.remove('visible', 'doc-as-modal');
         document.querySelectorAll('.view-card').forEach(card => {
           card.classList.add('is-hidden');
           card.style.display = '';
@@ -12507,7 +12597,8 @@
         ].forEach(id => { const el = document.getElementById(id); if (el && id !== 'ac_kod' && id !== 'ac_seg') el.value = ''; });
         resetAssetSoraqca();
         goAssetStep(1);
-        document.getElementById('assetModal').classList.add('open');
+        const afp2 = document.getElementById('assetFormPanel');
+        afp2.classList.add('asset-as-modal', 'visible');
       };
 
       function openGlobalAssetModal(idx, segmentCode) {
@@ -12548,7 +12639,16 @@
           resetAssetSoraqca();
         }
         goAssetStep(1);
-        document.getElementById('assetModal').classList.add('open');
+        const afp = document.getElementById('assetFormPanel');
+        if (activeView === 'assets') {
+          afp.classList.remove('asset-as-modal');
+          fp._prevAssetView = activeView;
+          document.querySelectorAll('.view-card').forEach(c => { c.classList.add('is-hidden'); c.style.display = ''; });
+        } else {
+          afp.classList.add('asset-as-modal');
+          fp._prevAssetView = activeView;
+        }
+        afp.classList.add('visible');
         preselectAssetSegmentCode = '';
       }
 
@@ -12779,8 +12879,9 @@
       document.getElementById('documentCancel')?.addEventListener('click', closeDocumentModal);
       document.getElementById('documentSave')?.addEventListener('click', saveDocument);
       document.getElementById('documentSaveNew')?.addEventListener('click', () => saveDocument({ keepOpen: true }));
-      document.getElementById('documentModal')?.addEventListener('click', e => {
-        if (e.target === document.getElementById('documentModal')) closeDocumentModal();
+      document.getElementById('documentFormPanel')?.addEventListener('click', e => {
+        const dfp = document.getElementById('documentFormPanel');
+        if (dfp.classList.contains('doc-as-modal') && e.target === dfp) closeDocumentModal();
       });
       document.getElementById('docCreateRoadToggle')?.addEventListener('click', () => {
         openRoadCreateModal('doc');
