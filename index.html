@@ -14953,7 +14953,10 @@
             const phones = (o.phones || []).map(p => owEsc(p)).join(', ') || '—';
             return `<tr>
               <td style="text-align:center;color:#94a3b8;font-size:11px;">${i+1}</td>
-              <td style="font-weight:600;color:#1a2b3c;cursor:pointer;" onclick="owView(${o.id})">${owEsc(o.name || '—')}</td>
+              <td style="cursor:pointer;" onclick="owView(${o.id})">
+                <span style="font-weight:600;color:#1a2b3c;">${owEsc(o.name || '—')}</span>
+                ${o.shortName ? `<span style="margin-left:6px;font-size:10.5px;font-weight:650;color:#2057d4;background:#eff6ff;border:1px solid #bfdbfe;border-radius:4px;padding:1px 6px;">${owEsc(o.shortName)}</span>` : ''}
+              </td>
               <td>${typeBadge}</td>
               <td style="font-size:12px;color:#64748b;">${owEsc(o.email || '—')}</td>
               <td style="font-size:12px;color:#64748b;">${phones}</td>
@@ -15106,7 +15109,8 @@
             b.disabled = viewMode;
           });
 
-          document.getElementById('owName').value    = o?.name    || '';
+          document.getElementById('owName').value      = o?.name      || '';
+          document.getElementById('owShortName').value = o?.shortName || '';
           document.getElementById('owEmail').value   = o?.email   || '';
           document.getElementById('owAddress').value = o?.address || '';
           document.getElementById('owLat').value     = o?.lat     || '';
@@ -15120,7 +15124,7 @@
           document.getElementById('owAddrMapPane').classList.toggle('active', useMap);
           document.querySelectorAll('.ow-addr-tab').forEach(t => t.disabled = viewMode);
 
-          ['owName','owEmail','owAddress'].forEach(fid => {
+          ['owName','owShortName','owEmail','owAddress'].forEach(fid => {
             const el = document.getElementById(fid);
             if (el) el.readOnly = viewMode;
           });
@@ -15151,10 +15155,11 @@
           if (activeAddrTab === 'map' && !lat) {
             alert('Xəritədə yer seçin və ya Yazılı tabına keçib ünvan daxil edin.'); return;
           }
-          const type   = document.querySelector('.ow-type-card.active')?.dataset.owType || 'qurum';
-          const email  = document.getElementById('owEmail').value.trim();
-          const phones = [...document.querySelectorAll('.ow-phone-input')].map(i => i.value.trim()).filter(Boolean);
-          const data   = { type, name, email, address, lat, lng, phones };
+          const type      = document.querySelector('.ow-type-card.active')?.dataset.owType || 'qurum';
+          const shortName = document.getElementById('owShortName').value.trim();
+          const email     = document.getElementById('owEmail').value.trim();
+          const phones    = [...document.querySelectorAll('.ow-phone-input')].map(i => i.value.trim()).filter(Boolean);
+          const data      = { type, name, shortName, email, address, lat, lng, phones };
           if (owEditId) {
             const r = sqOwners.find(x => x.id === owEditId);
             if (r) Object.assign(r, data);
@@ -15211,9 +15216,15 @@
                   </div>
 
                   <!-- Name -->
-                  <div class="frow full">
-                    <label>Adı <span class="req">*</span></label>
-                    <input class="finput" id="owName" type="text" placeholder="Ad, soyad / qurum adı" style="margin-top:6px;">
+                  <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;">
+                    <div class="frow full">
+                      <label>Tam adı <span class="req">*</span></label>
+                      <input class="finput" id="owName" type="text" placeholder="Ad, soyad / qurum adı" style="margin-top:6px;">
+                    </div>
+                    <div class="frow">
+                      <label>Qısa adı</label>
+                      <input class="finput" id="owShortName" type="text" placeholder="Abbreviatura" style="margin-top:6px;width:120px;">
+                    </div>
                   </div>
 
                   <div class="ow-section-div">Əlaqə</div>
