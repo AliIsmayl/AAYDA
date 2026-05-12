@@ -4296,10 +4296,16 @@
     .sq-tab-pane { display: none; flex: 1; flex-direction: column; min-height: 0; }
     .sq-tab-pane.active { display: flex; }
     /* ── Owner pane ── */
-    .ow-type-toggle { display:flex; gap:0; border-radius:9px; overflow:hidden; border:1px solid #e2e8f0; width:fit-content; box-shadow:0 1px 3px rgba(0,0,0,.06); }
-    .ow-type-btn { padding:8px 22px; font-size:12.5px; font-weight:600; border:none; cursor:pointer; background:#f8fafc; color:#64748b; transition:background .14s,color .14s; }
-    .ow-type-btn:first-child { border-right:1px solid #e2e8f0; }
-    .ow-type-btn.active { background:#1e3a5f; color:#fff; }
+    /* Type card selectors */
+    .ow-type-cards { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .ow-type-card { display:flex; flex-direction:column; align-items:center; gap:7px; padding:14px 12px 12px; border:1.5px solid #e2e8f0; border-radius:11px; background:#f8fafc; color:#64748b; cursor:pointer; transition:border-color .14s,background .14s,color .14s; }
+    .ow-type-card:hover:not(:disabled) { border-color:#93c5fd; background:#f5f9ff; color:#1e3a5f; }
+    .ow-type-card.active { border-color:#2057d4; background:#eff6ff; color:#1e3a5f; }
+    .ow-type-card:disabled { opacity:.55; cursor:not-allowed; }
+    .ow-tc-icon { width:38px; height:38px; border-radius:10px; background:#e9eef5; display:flex; align-items:center; justify-content:center; transition:background .14s; flex-shrink:0; }
+    .ow-type-card.active .ow-tc-icon { background:#dbeafe; }
+    .ow-tc-icon svg { width:19px; height:19px; fill:none; stroke:currentColor; stroke-width:1.8; }
+    .ow-tc-label { font-size:12.5px; font-weight:650; line-height:1.2; }
     /* Section divider inside modal */
     .ow-section-div { display:flex; align-items:center; gap:8px; font-size:10.5px; font-weight:750; color:#94a3b8; text-transform:uppercase; letter-spacing:.06em; width:100%; margin:2px 0; }
     .ow-section-div::before,.ow-section-div::after { content:''; flex:1; height:1px; background:#e9eef5; }
@@ -4311,10 +4317,16 @@
     .ow-phone-remove:hover { background:#fee2e2; }
     .ow-phone-add { display:inline-flex; align-items:center; justify-content:center; gap:5px; font-size:12px; font-weight:650; color:#2057d4; background:#f0f6ff; border:1.5px dashed #93c5fd; border-radius:8px; padding:6px 12px; cursor:pointer; width:100%; margin-top:4px; transition:background .12s,border-color .12s; }
     .ow-phone-add:hover { background:#dbeafe; border-color:#60a5fa; }
-    /* Address block */
-    .ow-addr-block { display:flex; flex-direction:column; gap:8px; }
-    .ow-map-row { display:flex; align-items:center; gap:8px; margin-top:2px; flex-wrap:wrap; }
-    .ow-loc-btn { display:inline-flex; align-items:center; gap:6px; padding:0 14px; height:34px; font-size:12px; font-weight:650; color:#2057d4; background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; cursor:pointer; white-space:nowrap; transition:background .12s; flex-shrink:0; }
+    /* Address toggle (Yazılı / Xəritə) */
+    .ow-addr-seg { display:flex; background:#f1f5f9; border-radius:9px; padding:3px; gap:2px; }
+    .ow-addr-tab { flex:1; padding:7px 10px; font-size:12px; font-weight:650; border:none; border-radius:7px; cursor:pointer; background:transparent; color:#64748b; display:flex; align-items:center; justify-content:center; gap:5px; transition:all .13s; }
+    .ow-addr-tab svg { width:13px; height:13px; fill:none; stroke:currentColor; stroke-width:2; flex-shrink:0; }
+    .ow-addr-tab.active { background:#fff; color:#1e3a5f; box-shadow:0 1px 4px rgba(0,0,0,.09); }
+    .ow-addr-pane { display:none; margin-top:8px; }
+    .ow-addr-pane.active { display:block; }
+    /* Map row inside addr pane */
+    .ow-map-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+    .ow-loc-btn { display:inline-flex; align-items:center; gap:6px; padding:0 14px; height:36px; font-size:12px; font-weight:650; color:#2057d4; background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; cursor:pointer; white-space:nowrap; transition:background .12s; flex-shrink:0; }
     .ow-loc-btn:hover { background:#dbeafe; }
     .ow-loc-btn svg { width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2; flex-shrink:0; }
     .ow-coord-chip { display:inline-flex; align-items:center; gap:5px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:99px; padding:4px 10px 4px 8px; font-size:12px; font-weight:600; color:#15803d; }
@@ -15089,21 +15101,29 @@
           document.getElementById('owModalEdit').style.display = viewMode ? '' : 'none';
 
           const type = o?.type || 'qurum';
-          document.querySelectorAll('.ow-type-btn').forEach(b => {
+          document.querySelectorAll('.ow-type-card').forEach(b => {
             b.classList.toggle('active', b.dataset.owType === type);
             b.disabled = viewMode;
           });
 
-          ['owName','owEmail','owAddress'].forEach(fid => {
-            const el = document.getElementById(fid);
-            if (el) { el.value = o?.[fid.replace('ow','').toLowerCase()] ?? ''; el.readOnly = viewMode; }
-          });
           document.getElementById('owName').value    = o?.name    || '';
           document.getElementById('owEmail').value   = o?.email   || '';
           document.getElementById('owAddress').value = o?.address || '';
           document.getElementById('owLat').value     = o?.lat     || '';
           document.getElementById('owLng').value     = o?.lng     || '';
           owUpdateCoordChip(o?.lat, o?.lng);
+
+          /* set address tab: if has coords → map tab, else text tab */
+          const useMap = !!(o?.lat && o?.lng);
+          document.querySelectorAll('.ow-addr-tab').forEach(t => t.classList.toggle('active', t.dataset.addrTab === (useMap ? 'map' : 'text')));
+          document.getElementById('owAddrTextPane').classList.toggle('active', !useMap);
+          document.getElementById('owAddrMapPane').classList.toggle('active', useMap);
+          document.querySelectorAll('.ow-addr-tab').forEach(t => t.disabled = viewMode);
+
+          ['owName','owEmail','owAddress'].forEach(fid => {
+            const el = document.getElementById(fid);
+            if (el) el.readOnly = viewMode;
+          });
 
           owRenderPhones(o?.phones || [], viewMode);
 
@@ -15124,10 +15144,14 @@
           const lat     = document.getElementById('owLat').value.trim();
           const lng     = document.getElementById('owLng').value.trim();
           if (!name) { alert('Ad boş ola bilməz.'); return; }
-          if (!address && !lat) {
-            alert('Ünvan mütləq daxil edilməlidir: yazılı ünvan və ya xəritə seçimi.'); return;
+          const activeAddrTab = document.querySelector('.ow-addr-tab.active')?.dataset.addrTab || 'text';
+          if (activeAddrTab === 'text' && !address) {
+            alert('Yazılı ünvan daxil edin və ya Xəritə tabına keçib yer seçin.'); return;
           }
-          const type   = document.querySelector('.ow-type-btn.active')?.dataset.owType || 'qurum';
+          if (activeAddrTab === 'map' && !lat) {
+            alert('Xəritədə yer seçin və ya Yazılı tabına keçib ünvan daxil edin.'); return;
+          }
+          const type   = document.querySelector('.ow-type-card.active')?.dataset.owType || 'qurum';
           const email  = document.getElementById('owEmail').value.trim();
           const phones = [...document.querySelectorAll('.ow-phone-input')].map(i => i.value.trim()).filter(Boolean);
           const data   = { type, name, email, address, lat, lng, phones };
@@ -15167,15 +15191,21 @@
               <div class="modal-body" style="padding:20px;">
                 <div style="display:flex;flex-direction:column;gap:14px;">
 
-                  <!-- Type -->
+                  <!-- Type cards -->
                   <div class="frow full">
-                    <label style="margin-bottom:7px;">Növü</label>
-                    <div class="ow-type-toggle">
-                      <button class="ow-type-btn active" data-ow-type="qurum" type="button">
-                        <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;vertical-align:-2px;margin-right:4px;"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>Qurum
+                    <label style="margin-bottom:8px;display:block;">Növü</label>
+                    <div class="ow-type-cards">
+                      <button class="ow-type-card active" data-ow-type="qurum" type="button">
+                        <div class="ow-tc-icon">
+                          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                        </div>
+                        <span class="ow-tc-label">Qurum</span>
                       </button>
-                      <button class="ow-type-btn" data-ow-type="fardi" type="button">
-                        <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;vertical-align:-2px;margin-right:4px;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Fərdi şəxs
+                      <button class="ow-type-card" data-ow-type="fardi" type="button">
+                        <div class="ow-tc-icon">
+                          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        </div>
+                        <span class="ow-tc-label">Fərdi şəxs</span>
                       </button>
                     </div>
                   </div>
@@ -15188,11 +15218,13 @@
 
                   <div class="ow-section-div">Əlaqə</div>
 
-                  <!-- Email + Phone -->
+                  <!-- Email -->
                   <div class="frow full">
                     <label>Email</label>
                     <input class="finput" id="owEmail" type="email" placeholder="email@..." style="margin-top:6px;">
                   </div>
+
+                  <!-- Phone -->
                   <div class="frow full">
                     <label>Telefon nömrəsi</label>
                     <div id="owPhoneList" class="ow-phone-list" style="margin-top:6px;"></div>
@@ -15202,26 +15234,38 @@
                     </button>
                   </div>
 
-                  <div class="ow-section-div">Ünvan <span style="font-size:10px;font-weight:500;text-transform:none;color:#b0bec5;">(yazılı və ya xəritə — ən azı biri)</span></div>
+                  <div class="ow-section-div">Ünvan</div>
 
-                  <!-- Address text -->
+                  <!-- Address seg toggle -->
                   <div class="frow full">
-                    <label>Yazılı ünvan</label>
-                    <input class="finput" id="owAddress" type="text" placeholder="Küçə, şəhər, rayon..." style="margin-top:6px;">
-                  </div>
-
-                  <!-- Map location -->
-                  <div class="frow full">
-                    <label>Xəritə ilə yer</label>
-                    <div class="ow-map-row" style="margin-top:6px;">
-                      <button class="ow-loc-btn" id="owLocBtn" type="button">
-                        <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z"/></svg>
-                        Xəritədə seç
+                    <div class="ow-addr-seg" id="owAddrSeg">
+                      <button class="ow-addr-tab active" data-addr-tab="text" type="button">
+                        <svg viewBox="0 0 24 24"><line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/></svg>
+                        Yazılı
                       </button>
-                      <div class="ow-coord-chip" id="owCoordChip" style="display:none;">
+                      <button class="ow-addr-tab" data-addr-tab="map" type="button">
                         <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z"/></svg>
-                        <span id="owCoordText"></span>
-                        <button class="ow-coord-clear" id="owCoordClear" type="button" title="Sil">×</button>
+                        Xəritə
+                      </button>
+                    </div>
+
+                    <!-- Text pane -->
+                    <div class="ow-addr-pane active" id="owAddrTextPane">
+                      <input class="finput" id="owAddress" type="text" placeholder="Küçə, şəhər, rayon...">
+                    </div>
+
+                    <!-- Map pane -->
+                    <div class="ow-addr-pane" id="owAddrMapPane">
+                      <div class="ow-map-row">
+                        <button class="ow-loc-btn" id="owLocBtn" type="button">
+                          <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z"/></svg>
+                          Xəritədə seç
+                        </button>
+                        <div class="ow-coord-chip" id="owCoordChip" style="display:none;">
+                          <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z"/></svg>
+                          <span id="owCoordText"></span>
+                          <button class="ow-coord-clear" id="owCoordClear" type="button" title="Sil">×</button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -15272,12 +15316,22 @@
 
         document.getElementById('owPhoneAdd').addEventListener('click', () => owAddPhoneRow('', false));
 
-        document.querySelectorAll('.ow-type-btn').forEach(btn => {
+        document.querySelectorAll('.ow-type-card').forEach(btn => {
           btn.addEventListener('click', () => {
             if (btn.disabled) return;
-            document.querySelectorAll('.ow-type-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.ow-type-card').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
           });
+        });
+
+        document.getElementById('owAddrSeg').addEventListener('click', e => {
+          const tab = e.target.closest('.ow-addr-tab');
+          if (!tab || tab.classList.contains('active')) return;
+          document.querySelectorAll('.ow-addr-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          const k = tab.dataset.addrTab;
+          document.getElementById('owAddrTextPane').classList.toggle('active', k === 'text');
+          document.getElementById('owAddrMapPane').classList.toggle('active', k === 'map');
         });
 
         document.getElementById('owLocBtn').addEventListener('click', () => owOpenMap());
