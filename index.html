@@ -4297,15 +4297,15 @@
     .sq-tab-pane.active { display: flex; }
     /* ── Owner pane ── */
     /* Type card selectors */
-    .ow-type-cards { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-    .ow-type-card { display:flex; flex-direction:column; align-items:center; gap:7px; padding:14px 12px 12px; border:1.5px solid #e2e8f0; border-radius:11px; background:#f8fafc; color:#64748b; cursor:pointer; transition:border-color .14s,background .14s,color .14s; }
+    .ow-type-cards { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+    .ow-type-card { display:flex; flex-direction:row; align-items:center; gap:9px; padding:10px 14px; border:1.5px solid #e2e8f0; border-radius:9px; background:#f8fafc; color:#64748b; cursor:pointer; transition:border-color .14s,background .14s,color .14s; }
     .ow-type-card:hover:not(:disabled) { border-color:#93c5fd; background:#f5f9ff; color:#1e3a5f; }
     .ow-type-card.active { border-color:#2057d4; background:#eff6ff; color:#1e3a5f; }
-    .ow-type-card:disabled { opacity:.55; cursor:not-allowed; }
-    .ow-tc-icon { width:38px; height:38px; border-radius:10px; background:#e9eef5; display:flex; align-items:center; justify-content:center; transition:background .14s; flex-shrink:0; }
+    .ow-type-card:disabled { opacity:.5; cursor:not-allowed; }
+    .ow-tc-icon { width:30px; height:30px; border-radius:7px; background:#e9eef5; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .14s; }
     .ow-type-card.active .ow-tc-icon { background:#dbeafe; }
-    .ow-tc-icon svg { width:19px; height:19px; fill:none; stroke:currentColor; stroke-width:1.8; }
-    .ow-tc-label { font-size:12.5px; font-weight:650; line-height:1.2; }
+    .ow-tc-icon svg { width:15px; height:15px; fill:none; stroke:currentColor; stroke-width:2; }
+    .ow-tc-label { font-size:13px; font-weight:600; line-height:1; }
     /* Section divider inside modal */
     .ow-section-div { display:flex; align-items:center; gap:8px; font-size:10.5px; font-weight:750; color:#94a3b8; text-transform:uppercase; letter-spacing:.06em; width:100%; margin:2px 0; }
     .ow-section-div::before,.ow-section-div::after { content:''; flex:1; height:1px; background:#e9eef5; }
