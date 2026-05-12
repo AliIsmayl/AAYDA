@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yollar — AAYDA</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     /* ─── RESET ─── */
     * {
@@ -4293,6 +4295,53 @@
     }
     .sq-tab-pane { display: none; flex: 1; flex-direction: column; min-height: 0; }
     .sq-tab-pane.active { display: flex; }
+    /* ── Owner pane ── */
+    .ow-type-toggle { display:flex; gap:0; border-radius:8px; overflow:hidden; border:1px solid #e2e8f0; width:fit-content; }
+    .ow-type-btn { padding:7px 18px; font-size:12.5px; font-weight:600; border:none; cursor:pointer; background:#f8fafc; color:#64748b; transition:background .12s,color .12s; }
+    .ow-type-btn.active { background:#1e3a5f; color:#fff; }
+    .ow-phone-list { display:flex; flex-direction:column; gap:6px; margin-bottom:4px; }
+    .ow-phone-row { display:flex; gap:6px; align-items:center; }
+    .ow-phone-row .finput { flex:1; }
+    .ow-phone-remove { flex-shrink:0; width:30px; height:30px; border:1px solid #fca5a5; border-radius:7px; background:#fef2f2; color:#ef4444; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:18px; line-height:1; }
+    .ow-phone-remove:hover { background:#fee2e2; }
+    .ow-phone-add { display:inline-flex; align-items:center; gap:5px; font-size:12px; font-weight:650; color:#2057d4; background:#eff6ff; border:1px dashed #93c5fd; border-radius:7px; padding:5px 12px; cursor:pointer; width:100%; justify-content:center; transition:background .12s; }
+    .ow-phone-add:hover { background:#dbeafe; border-color:#60a5fa; }
+    .ow-addr-row { display:flex; gap:6px; align-items:flex-start; }
+    .ow-addr-row .finput { flex:1; }
+    .ow-loc-btn { flex-shrink:0; display:flex; align-items:center; gap:5px; padding:0 12px; height:36px; font-size:12px; font-weight:600; color:#2057d4; background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; cursor:pointer; white-space:nowrap; transition:background .12s; }
+    .ow-loc-btn:hover { background:#dbeafe; }
+    .ow-loc-btn svg { width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2; flex-shrink:0; }
+    .ow-coords-row { display:flex; gap:6px; margin-top:5px; }
+    .ow-coord-field { flex:1; }
+    .ow-coord-field label { font-size:10px; font-weight:700; color:#94a3b8; text-transform:uppercase; display:block; margin-bottom:3px; }
+    /* Map picker modal */
+    #owMapModal { z-index:1500; }
+    #owMapModal .modal-box { max-width:700px; height:80vh; max-height:600px; display:flex; flex-direction:column; }
+    #owMapContainer { flex:1; min-height:0; border-radius:0 0 12px 12px; }
+    .ow-map-tip { font-size:12px; color:#64748b; padding:8px 16px; background:#f8fafc; border-bottom:1px solid #e2e8f0; flex-shrink:0; }
+    /* Owner table row */
+    .ow-type-badge { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:650; padding:3px 8px; border-radius:99px; }
+    .ow-type-qurum { background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe; }
+    .ow-type-fardi { background:#f0fdf4; color:#15803d; border:1px solid #bbf7d0; }
+    /* Detail panel */
+    .ow-detail-box { background:#fff; border:1px solid #dbe7f5; border-radius:16px; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 24px 70px rgba(15,23,42,.18); width:min(640px,calc(100vw - 32px)); max-height:min(740px,calc(100vh - 40px)); }
+    .ow-detail-head { flex-shrink:0; display:flex; align-items:center; gap:12px; padding:18px 20px; background:linear-gradient(135deg,#1e3a5f 0%,#2057d4 100%); color:#fff; }
+    .ow-detail-icon { width:40px; height:40px; border-radius:11px; background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .ow-detail-icon svg { width:20px; height:20px; fill:none; stroke:#fff; stroke-width:1.9; }
+    .ow-detail-title { font-size:17px; font-weight:750; line-height:1.25; }
+    .ow-detail-sub { font-size:12px; color:rgba(255,255,255,.74); margin-top:3px; }
+    .ow-detail-body { flex:1; overflow-y:auto; padding:18px 20px; display:flex; flex-direction:column; gap:14px; }
+    .ow-detail-section-title { font-size:11px; font-weight:750; color:#64748b; text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px; }
+    .ow-detail-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+    .ow-detail-chip { padding:10px 12px; border-radius:8px; background:#f8fafc; border:1px solid #e2eaf6; }
+    .ow-detail-chip-full { grid-column:1/-1; }
+    .ow-detail-lbl { font-size:10px; font-weight:750; color:#94a3b8; text-transform:uppercase; letter-spacing:.04em; display:block; margin-bottom:3px; }
+    .ow-detail-val { font-size:13px; font-weight:650; color:#1e3a5f; line-height:1.4; word-break:break-word; }
+    .ow-phone-tags { display:flex; flex-wrap:wrap; gap:5px; margin-top:4px; }
+    .ow-phone-tag { display:inline-flex; align-items:center; gap:4px; font-size:12px; font-weight:600; color:#1e3a5f; background:#eff6ff; border:1px solid #bfdbfe; border-radius:99px; padding:3px 10px; }
+    .ow-phone-tag svg { width:11px; height:11px; fill:none; stroke:currentColor; stroke-width:2; }
+    .ow-detail-foot { flex-shrink:0; display:flex; justify-content:flex-end; gap:8px; padding:14px 20px; border-top:1px solid #ecf1f8; }
+    #owDetailModal { z-index:1300; }
     .sq-filter-bar {
       display: flex;
       gap: 8px;
@@ -9309,6 +9358,7 @@
         <button class="sq-tab active" data-sq-tab="assets" type="button">Aktivlər</button>
         <button class="sq-tab" data-sq-tab="passports" type="button">Pasportlar</button>
         <button class="sq-tab" data-sq-tab="documents" type="button">Sənədlər</button>
+        <button class="sq-tab" data-sq-tab="owners" type="button">Mülkiyyətçi</button>
       </div>
     </div>
     <div class="sq-tab-pane active" id="sqPane-assets">
@@ -9392,6 +9442,26 @@
         </div>
       </div>
       <div id="sqDocumentTypeArea" style="display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;"></div>
+    </div>
+    <div class="sq-tab-pane" id="sqPane-owners">
+      <div class="sq-subdict-bar">
+        <div class="sq-sdb-left">
+          <button class="sq-subdict-btn active" type="button" style="pointer-events:none;cursor:default;">
+            <span class="sq-sdb-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            <span class="sq-sdb-body">
+              <span class="sq-sdb-label">Mülkiyyətçilər</span>
+              <span class="sq-sdb-count" id="ownerCount">0 qeyd</span>
+            </span>
+          </button>
+        </div>
+        <div class="sq-sdb-actions">
+          <button class="btn-new" id="btnOwnerNew" type="button" style="height:36px;padding:0 14px;font-size:12.5px;">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Yeni mülkiyyətçi
+          </button>
+        </div>
+      </div>
+      <div id="sqOwnerArea" style="display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;"></div>
     </div>
   </div>`);
 
@@ -14836,9 +14906,342 @@
           if (k === 'assets') renderSubDictTable(activeSD);
           if (k === 'passports') renderSimpleDictTable('passportStatus', 'sqPassportStatusArea');
           if (k === 'documents') renderSimpleDictTable('documentTypes', 'sqDocumentTypeArea');
+          if (k === 'owners') renderOwnersTable();
         });
 
         renderSubDictTable('groups');
+
+      })();
+
+      /* ══════════════════════════════════════════
+         MÜLKİYYƏTÇİLƏR
+      ══════════════════════════════════════════ */
+      (function() {
+        let sqOwners = [];
+        let owEditId = null;
+        let owMap = null, owMarker = null;
+
+        function owNid() {
+          return sqOwners.length ? Math.max(...sqOwners.map(o => o.id)) + 1 : 1;
+        }
+
+        function owEsc(s) {
+          return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        /* ── Table ── */
+        window.renderOwnersTable = function() {
+          const area = document.getElementById('sqOwnerArea');
+          if (!area) return;
+          const cnt = document.getElementById('ownerCount');
+          if (cnt) cnt.textContent = sqOwners.length + ' qeyd';
+
+          if (!sqOwners.length) {
+            area.innerHTML = `<div style="text-align:center;padding:48px 24px;color:#94a3b8;font-size:13px;">Heç bir mülkiyyətçi qeydə alınmayıb</div>`;
+            return;
+          }
+
+          const rows = sqOwners.map((o, i) => {
+            const typeBadge = o.type === 'fardi'
+              ? `<span class="ow-type-badge ow-type-fardi">Fərdi şəxs</span>`
+              : `<span class="ow-type-badge ow-type-qurum">Qurum</span>`;
+            const phones = (o.phones || []).map(p => owEsc(p)).join(', ') || '—';
+            return `<tr>
+              <td style="text-align:center;color:#94a3b8;font-size:11px;">${i+1}</td>
+              <td style="font-weight:600;color:#1a2b3c;cursor:pointer;" onclick="owView(${o.id})">${owEsc(o.name || '—')}</td>
+              <td>${typeBadge}</td>
+              <td style="font-size:12px;color:#64748b;">${owEsc(o.email || '—')}</td>
+              <td style="font-size:12px;color:#64748b;">${phones}</td>
+              <td style="font-size:12px;color:#64748b;max-width:220px;white-space:normal;">${owEsc(o.address || '—')}</td>
+              <td style="font-size:12px;color:#64748b;">${o.lat ? owEsc(Number(o.lat).toFixed(5) + ', ' + Number(o.lng).toFixed(5)) : '—'}</td>
+              <td><div class="row-acts"><div class="action-menu-wrap">
+                <button class="action-menu-btn" data-action-menu type="button">⋮</button>
+                <div class="action-menu">
+                  <button class="action-menu-item" type="button" onclick="owView(${o.id})">Bax</button>
+                  <button class="action-menu-item" type="button" onclick="owEdit(${o.id})">Redaktə et</button>
+                  <button class="action-menu-item danger" type="button" onclick="owDelete(${o.id})">Sil</button>
+                </div>
+              </div></div></td>
+            </tr>`;
+          }).join('');
+
+          area.innerHTML = `<div class="table-wrap" style="flex:1;">
+            <table style="min-width:960px;">
+              <thead><tr>
+                <th class="th-nof" style="width:44px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">#</span></div></th>
+                <th><div class="th-top"><span class="th-label">Adı</span></div></th>
+                <th><div class="th-top"><span class="th-label">Növü</span></div></th>
+                <th><div class="th-top"><span class="th-label">Email</span></div></th>
+                <th><div class="th-top"><span class="th-label">Nömrə(lər)</span></div></th>
+                <th><div class="th-top"><span class="th-label">Ünvan</span></div></th>
+                <th><div class="th-top"><span class="th-label">Koordinat</span></div></th>
+                <th class="th-nof" style="width:120px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">Əməliyyatlar</span></div></th>
+              </tr></thead>
+              <tbody>${rows}</tbody>
+            </table>
+          </div>`;
+
+          area.querySelectorAll('[data-action-menu]').forEach(btn => {
+            btn.addEventListener('click', e => {
+              e.stopPropagation();
+              const menu = btn.nextElementSibling;
+              document.querySelectorAll('.action-menu.open').forEach(m => { if (m !== menu) m.classList.remove('open'); });
+              menu.classList.toggle('open');
+            });
+          });
+        };
+
+        /* ── Phone rows ── */
+        function owRenderPhones(phones, readOnly) {
+          const list = document.getElementById('owPhoneList');
+          if (!list) return;
+          list.innerHTML = '';
+          const vals = (phones && phones.length) ? phones : (readOnly ? [] : ['']);
+          vals.forEach(v => owAddPhoneRow(v, readOnly));
+        }
+        function owAddPhoneRow(val, readOnly) {
+          const list = document.getElementById('owPhoneList');
+          if (!list) return;
+          const row = document.createElement('div');
+          row.className = 'ow-phone-row';
+          const inp = document.createElement('input');
+          inp.className = 'finput ow-phone-input';
+          inp.type = 'tel';
+          inp.placeholder = '+994 XX XXX XX XX';
+          inp.value = val || '';
+          inp.readOnly = !!readOnly;
+          row.appendChild(inp);
+          if (!readOnly) {
+            const rm = document.createElement('button');
+            rm.className = 'ow-phone-remove';
+            rm.type = 'button';
+            rm.title = 'Sil';
+            rm.textContent = '×';
+            rm.addEventListener('click', () => row.remove());
+            row.appendChild(rm);
+          }
+          list.appendChild(row);
+        }
+
+        /* ── Map picker ── */
+        function owOpenMap(readOnly) {
+          document.getElementById('owMapModal').classList.add('open');
+          const lat = parseFloat(document.getElementById('owLat').value) || 40.4093;
+          const lng = parseFloat(document.getElementById('owLng').value) || 49.8671;
+          if (!owMap) {
+            owMap = L.map('owMapContainer').setView([lat, lng], 12);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              attribution: '© OpenStreetMap'
+            }).addTo(owMap);
+            if (!readOnly) {
+              owMap.on('click', function(e) {
+                const {lat, lng} = e.latlng;
+                document.getElementById('owLat').value = lat.toFixed(6);
+                document.getElementById('owLng').value = lng.toFixed(6);
+                if (owMarker) owMarker.setLatLng(e.latlng);
+                else owMarker = L.marker(e.latlng).addTo(owMap);
+              });
+            }
+          } else {
+            owMap.setView([lat, lng], 12);
+            owMap.invalidateSize();
+          }
+          if (document.getElementById('owLat').value && document.getElementById('owLng').value) {
+            const pos = [parseFloat(document.getElementById('owLat').value), parseFloat(document.getElementById('owLng').value)];
+            if (owMarker) owMarker.setLatLng(pos);
+            else owMarker = L.marker(pos).addTo(owMap);
+          }
+          setTimeout(() => owMap.invalidateSize(), 120);
+        }
+        function owCloseMap() {
+          document.getElementById('owMapModal').classList.remove('open');
+        }
+
+        /* ── Modal open/close ── */
+        function owOpenModal(id, viewMode) {
+          owEditId = id || null;
+          const isNew = !id;
+          const o = id ? sqOwners.find(x => x.id === id) : null;
+
+          document.getElementById('owModalTitle').textContent = isNew ? 'Yeni mülkiyyətçi' : (viewMode ? 'Bax — ' + (o?.name||'') : 'Redaktə — ' + (o?.name||''));
+          document.getElementById('owModalSave').style.display = viewMode ? 'none' : '';
+          document.getElementById('owModalEdit').style.display = viewMode ? '' : 'none';
+
+          /* type toggle */
+          const type = o?.type || 'qurum';
+          document.querySelectorAll('.ow-type-btn').forEach(b => b.classList.toggle('active', b.dataset.owType === type));
+
+          /* fields */
+          const fields = ['owName','owEmail','owAddress','owLat','owLng'];
+          const vals   = { owName: o?.name||'', owEmail: o?.email||'', owAddress: o?.address||'', owLat: o?.lat||'', owLng: o?.lng||'' };
+          fields.forEach(f => {
+            const el = document.getElementById(f);
+            if (el) { el.value = vals[f]; el.readOnly = viewMode; }
+          });
+
+          owRenderPhones(o?.phones || [], viewMode);
+
+          const addPhoneBtn = document.getElementById('owPhoneAdd');
+          if (addPhoneBtn) addPhoneBtn.style.display = viewMode ? 'none' : '';
+          const locBtn = document.getElementById('owLocBtn');
+          if (locBtn) locBtn.style.display = viewMode ? 'none' : '';
+          if (viewMode) {
+            const viewLocBtn = document.getElementById('owLocViewBtn');
+            if (viewLocBtn) viewLocBtn.style.display = (o?.lat && o?.lng) ? '' : 'none';
+          }
+          document.querySelectorAll('.ow-type-btn').forEach(b => b.disabled = viewMode);
+
+          document.getElementById('owModal').classList.add('open');
+        }
+        function owCloseModal() {
+          document.getElementById('owModal').classList.remove('open');
+        }
+
+        /* ── CRUD ── */
+        function owSave() {
+          const name  = document.getElementById('owName').value.trim();
+          if (!name) { alert('Ad boş ola bilməz.'); return; }
+          const type    = document.querySelector('.ow-type-btn.active')?.dataset.owType || 'qurum';
+          const email   = document.getElementById('owEmail').value.trim();
+          const address = document.getElementById('owAddress').value.trim();
+          const lat     = document.getElementById('owLat').value.trim();
+          const lng     = document.getElementById('owLng').value.trim();
+          const phones  = [...document.querySelectorAll('.ow-phone-input')].map(i => i.value.trim()).filter(Boolean);
+          const data    = { type, name, email, address, lat, lng, phones };
+          if (owEditId) {
+            const r = sqOwners.find(x => x.id === owEditId);
+            if (r) Object.assign(r, data);
+          } else {
+            sqOwners.push({ id: owNid(), ...data });
+          }
+          owCloseModal();
+          renderOwnersTable();
+        }
+
+        window.owView   = (id) => owOpenModal(id, true);
+        window.owEdit   = (id) => owOpenModal(id, false);
+        window.owDelete = (id) => {
+          const o = sqOwners.find(x => x.id === id);
+          if (!o) return;
+          if (!confirm('"' + o.name + '" mülkiyyətçisini silmək istədiyinizə əminsiniz?')) return;
+          sqOwners = sqOwners.filter(x => x.id !== id);
+          renderOwnersTable();
+        };
+
+        /* ── Inject modal HTML ── */
+        document.body.insertAdjacentHTML('beforeend', `
+          <div class="modal-ov" id="owModal">
+            <div class="modal-box" style="max-width:580px;">
+              <div class="modal-head">
+                <div class="modal-title-block">
+                  <div class="mh-title" id="owModalTitle">Yeni mülkiyyətçi</div>
+                  <div class="mh-sub">Mülkiyyətçi məlumatlarını daxil edin</div>
+                </div>
+                <button class="modal-close-btn" id="owModalClose" type="button" aria-label="Bağla">
+                  <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="fgrid" style="gap:12px;">
+                  <div class="frow full">
+                    <label>Mülkiyyətçi növü</label>
+                    <div class="ow-type-toggle">
+                      <button class="ow-type-btn active" data-ow-type="qurum" type="button">Qurum</button>
+                      <button class="ow-type-btn" data-ow-type="fardi" type="button">Fərdi şəxs</button>
+                    </div>
+                  </div>
+                  <div class="frow full">
+                    <label>Adı <span class="req">*</span></label>
+                    <input class="finput" id="owName" type="text" placeholder="Ad, soyad / qurum adı">
+                  </div>
+                  <div class="frow">
+                    <label>Email</label>
+                    <input class="finput" id="owEmail" type="email" placeholder="email@...">
+                  </div>
+                  <div class="frow full">
+                    <label>Nömrə(lər)</label>
+                    <div id="owPhoneList" class="ow-phone-list"></div>
+                    <button class="ow-phone-add" id="owPhoneAdd" type="button">+ Nömrə əlavə et</button>
+                  </div>
+                  <div class="frow full">
+                    <label>Ünvan (yazılı)</label>
+                    <input class="finput" id="owAddress" type="text" placeholder="Küçə, şəhər, rayon...">
+                  </div>
+                  <div class="frow full">
+                    <label>Ünvan (xəritə)</label>
+                    <div class="ow-addr-row">
+                      <div style="flex:1;">
+                        <div class="ow-coords-row">
+                          <div class="ow-coord-field">
+                            <label>Enlik (lat)</label>
+                            <input class="finput" id="owLat" type="number" step="0.000001" placeholder="40.409300">
+                          </div>
+                          <div class="ow-coord-field">
+                            <label>Uzunluq (lng)</label>
+                            <input class="finput" id="owLng" type="number" step="0.000001" placeholder="49.867100">
+                          </div>
+                        </div>
+                      </div>
+                      <button class="ow-loc-btn" id="owLocBtn" type="button">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z"/></svg>
+                        Xəritədə seç
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-foot">
+                <button class="fbtn fbtn-outline" id="owModalCancel" type="button">Ləğv et</button>
+                <button class="fbtn fbtn-primary" id="owModalEdit" type="button" style="display:none;">Redaktə et</button>
+                <button class="fbtn fbtn-primary" id="owModalSave" type="button">Saxla</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-ov" id="owMapModal">
+            <div class="modal-box" style="max-width:700px;height:80vh;max-height:600px;display:flex;flex-direction:column;padding:0;overflow:hidden;">
+              <div class="modal-head" style="flex-shrink:0;">
+                <div class="modal-title-block">
+                  <div class="mh-title">Xəritədə yer seçin</div>
+                  <div class="mh-sub">Mülkiyyətin yerini göstərmək üçün xəritəyə klikləyin</div>
+                </div>
+                <button class="modal-close-btn" id="owMapClose" type="button" aria-label="Bağla">
+                  <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+              <div class="ow-map-tip">Xəritəyə klikləyin — koordinatlar avtomatik doldurulacaq</div>
+              <div id="owMapContainer" style="flex:1;min-height:0;"></div>
+              <div style="padding:10px 16px;display:flex;justify-content:flex-end;border-top:1px solid #e2e8f0;background:#fff;flex-shrink:0;">
+                <button class="fbtn fbtn-primary" id="owMapConfirm" type="button">Seç</button>
+              </div>
+            </div>
+          </div>`);
+
+        /* ── Events ── */
+        document.getElementById('owModalSave').addEventListener('click', owSave);
+        document.getElementById('owModalCancel').addEventListener('click', owCloseModal);
+        document.getElementById('owModalClose').addEventListener('click', owCloseModal);
+        document.getElementById('owModalEdit').addEventListener('click', () => owOpenModal(owEditId, false));
+        document.getElementById('owModal').addEventListener('click', e => { if (e.target === document.getElementById('owModal')) owCloseModal(); });
+
+        document.getElementById('owPhoneAdd').addEventListener('click', () => owAddPhoneRow('', false));
+
+        document.querySelectorAll('.ow-type-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            if (btn.disabled) return;
+            document.querySelectorAll('.ow-type-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+          });
+        });
+
+        document.getElementById('owLocBtn').addEventListener('click', () => owOpenMap(false));
+        document.getElementById('owMapClose').addEventListener('click', owCloseMap);
+        document.getElementById('owMapConfirm').addEventListener('click', owCloseMap);
+        document.getElementById('owMapModal').addEventListener('click', e => { if (e.target === document.getElementById('owMapModal')) owCloseMap(); });
+
+        document.getElementById('btnOwnerNew').addEventListener('click', () => owOpenModal(null, false));
+
+        renderOwnersTable();
 
       })();
 
