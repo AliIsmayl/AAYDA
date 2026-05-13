@@ -903,6 +903,35 @@
       background: #1d55d4;
     }
 
+    .btn-export {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      height: 36px;
+      padding: 0 13px;
+      font-size: 12.5px;
+      font-family: inherit;
+      font-weight: 500;
+      border-radius: 8px;
+      border: 1px solid #16a34a;
+      background: #f0fdf4;
+      color: #16a34a;
+      cursor: pointer;
+      transition: background .15s, border-color .15s, color .15s;
+      white-space: nowrap;
+    }
+    .btn-export:hover { background: #dcfce7; border-color: #15803d; color: #15803d; }
+    .btn-export svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
     .btn-new svg {
       width: 13px;
       height: 13px;
@@ -5113,82 +5142,6 @@
         width: 100%;
       }
     }
-    /* ══ PASPORT SƏNƏDLƏRİ ══ */
-    #pasportView { flex-direction: column; }
-    .ps-filter-bar { display:flex; gap:8px; padding:9px 14px; border-bottom:1px solid #d8e4f0; background:#f8fafc; flex-shrink:0; flex-wrap:wrap; align-items:center; }
-    .ps-search { flex:1; min-width:200px; max-width:300px; height:34px; border:1px solid #d8e4f0; border-radius:8px; padding:0 10px 0 32px; font-size:12px; font-family:inherit; color:#1a2b3c; outline:none; background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E") no-repeat 9px center; transition:border-color .13s; }
-    .ps-search:focus { border-color:#3b82f6; }
-    .ps-fsel { height:34px; border:1px solid #d8e4f0; border-radius:8px; padding:0 28px 0 10px; font-size:12px; font-family:inherit; color:#1a2b3c; outline:none; background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat calc(100% - 8px) center; appearance:none; cursor:pointer; transition:border-color .13s; }
-    .ps-fsel:focus { border-color:#3b82f6; }
-    .ps-actions { margin-left:auto; display:flex; gap:8px; flex-shrink:0; }
-    /* status pills */
-    .pst { display:inline-flex; align-items:center; gap:4px; padding:2px 9px; border-radius:20px; font-size:11px; font-weight:600; white-space:nowrap; }
-    .pst::before { content:''; width:5px; height:5px; border-radius:50%; display:inline-block; flex-shrink:0; }
-    .pst-qaralama { background:#fef3c7; color:#92400e; } .pst-qaralama::before { background:#d97706; }
-    .pst-gonderilib { background:#dbeafe; color:#1d4ed8; } .pst-gonderilib::before { background:#3b82f6; }
-    .pst-tesdiqlenmib { background:#d1fae5; color:#065f46; } .pst-tesdiqlenmib::before { background:#10b981; }
-    .pst-aktiv { background:#d1fae5; color:#065f46; } .pst-aktiv::before { background:#10b981; }
-    .pst-arxiv { background:#f1f5f9; color:#64748b; } .pst-arxiv::before { background:#94a3b8; }
-    .pst-etibarsiz { background:#fee2e2; color:#991b1b; } .pst-etibarsiz::before { background:#ef4444; }
-    /* action btns in table */
-    .ps-btn { display:inline-flex; align-items:center; gap:3px; padding:3px 9px; border:1px solid #d8e4f0; border-radius:6px; background:#fff; font-size:11px; font-family:inherit; cursor:pointer; color:#1a2b3c; transition:.12s; white-space:nowrap; }
-    .ps-btn svg { width:11px; height:11px; stroke:currentColor; fill:none; stroke-width:2; flex-shrink:0; }
-    .ps-btn:hover { border-color:#93c5fd; background:#f0f7ff; color:#2563eb; }
-    .ps-btn.danger:hover { border-color:#fca5a5; background:#fff5f5; color:#dc2626; }
-    /* pasport modal */
-    #pasportModal .modal-box { max-width:860px; height:90vh; max-height:90vh; }
-    .pmo-head-meta { display:flex; align-items:center; gap:10px; }
-    .pmo-badge { display:flex; align-items:center; gap:4px; padding:3px 10px; border-radius:20px; background:#eff6ff; color:#2563eb; font-size:11px; font-weight:600; }
-    .pm-tabs { display:flex; gap:0; border-bottom:1px solid #d8e4f0; background:#f8fafc; padding:0 18px; flex-shrink:0; }
-    .pm-tab { padding:10px 16px; font-size:12px; font-weight:500; color:#6b7a8d; cursor:pointer; border:none; background:transparent; font-family:inherit; border-bottom:2.5px solid transparent; margin-bottom:-1px; transition:color .13s; }
-    .pm-tab:hover { color:#2563eb; }
-    .pm-tab.active { color:#2563eb; border-bottom-color:#2563eb; font-weight:600; }
-    .pm-pane { display:none; flex-direction:column; gap:14px; padding:18px; overflow-y:auto; flex:1; }
-    .pm-pane.active { display:flex; }
-    .pm-section { display:flex; flex-direction:column; gap:10px; }
-    .pm-section-title { font-size:10.5px; font-weight:700; color:#94a3b8; text-transform:uppercase; letter-spacing:.07em; border-bottom:1px solid #eef2f8; padding-bottom:5px; }
-    .pm-row { display:grid; gap:10px; }
-    .pm-row.c2 { grid-template-columns:1fr 1fr; }
-    .pm-row.c3 { grid-template-columns:1fr 1fr 1fr; }
-    .pm-row.c4 { grid-template-columns:1fr 1fr 1fr 1fr; }
-    .pm-field { display:flex; flex-direction:column; gap:4px; }
-    .pm-lbl { font-size:11px; font-weight:600; color:#64748b; }
-    .pm-inp { width:100%; height:34px; border:1px solid #d8e4f0; border-radius:7px; padding:0 10px; font-size:12.5px; font-family:inherit; color:#1a2b3c; outline:none; background:#fff; box-sizing:border-box; transition:border-color .13s; }
-    .pm-inp:focus { border-color:#3b82f6; }
-    .pm-inp[readonly] { background:#f8fafc; color:#64748b; cursor:default; }
-    .pm-sel { width:100%; height:34px; border:1px solid #d8e4f0; border-radius:7px; padding:0 28px 0 10px; font-size:12.5px; font-family:inherit; color:#1a2b3c; outline:none; background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat calc(100% - 8px) center; appearance:none; cursor:pointer; box-sizing:border-box; transition:border-color .13s; }
-    .pm-sel:focus { border-color:#3b82f6; }
-    .pm-ta { width:100%; min-height:68px; border:1px solid #d8e4f0; border-radius:7px; padding:8px 10px; font-size:12.5px; font-family:inherit; color:#1a2b3c; outline:none; background:#fff; resize:vertical; box-sizing:border-box; transition:border-color .13s; }
-    .pm-ta:focus { border-color:#3b82f6; }
-    .pm-toggle-row { display:flex; align-items:center; justify-content:space-between; padding:6px 10px; background:#f8fafc; border:1px solid #d8e4f0; border-radius:7px; }
-    .pm-toggle-lbl { font-size:12.5px; color:#1a2b3c; }
-    .pm-toggle { position:relative; width:38px; height:20px; flex-shrink:0; }
-    .pm-toggle input { opacity:0; width:0; height:0; position:absolute; }
-    .pm-toggle-slider { position:absolute; inset:0; background:#d8e4f0; border-radius:20px; cursor:pointer; transition:.2s; }
-    .pm-toggle-slider::after { content:''; position:absolute; left:2px; top:2px; width:16px; height:16px; background:#fff; border-radius:50%; transition:.2s; }
-    .pm-toggle input:checked + .pm-toggle-slider { background:#2563eb; }
-    .pm-toggle input:checked + .pm-toggle-slider::after { transform:translateX(18px); }
-    /* doc table */
-    .pmdoc-table { width:100%; border-collapse:collapse; font-size:12px; }
-    .pmdoc-table th { padding:7px 10px; background:#f0f6ff; color:#64748b; font-weight:600; text-align:left; border-bottom:1px solid #d8e4f0; font-size:11px; text-transform:uppercase; letter-spacing:.04em; }
-    .pmdoc-table td { padding:8px 10px; border-bottom:1px solid #eef2f8; color:#1a2b3c; vertical-align:middle; }
-    .pmdoc-table tr:last-child td { border-bottom:none; }
-    .pmdoc-table tr:hover td { background:#f8fbff; }
-    .pmdoc-act { display:flex; gap:4px; }
-    .pm-doc-toolbar { display:flex; justify-content:flex-end; margin-bottom:10px; }
-    .pm-empty { text-align:center; color:#94a3b8; font-size:12px; padding:28px 0; display:flex; flex-direction:column; align-items:center; gap:8px; }
-    .pm-empty svg { width:36px; height:36px; opacity:.25; }
-    /* status bar in modal footer */
-    .pm-status-bar { display:flex; align-items:center; gap:6px; flex:1; }
-    .pm-status-step { display:flex; align-items:center; gap:5px; font-size:11px; color:#94a3b8; }
-    .pm-status-step.done { color:#10b981; }
-    .pm-status-step.active { color:#2563eb; font-weight:600; }
-    .pm-status-step-dot { width:8px; height:8px; border-radius:50%; background:#d8e4f0; flex-shrink:0; }
-    .pm-status-step.done .pm-status-step-dot { background:#10b981; }
-    .pm-status-step.active .pm-status-step-dot { background:#2563eb; }
-    .pm-status-arrow { font-size:10px; color:#d8e4f0; }
-    /* doc modal */
-    #psDocModal .modal-box { max-width:580px; }
   </style>
   <style>
     /* ═══ DASHBOARD VIEW ═══ */
@@ -5371,14 +5324,6 @@
           <line x1="9" y1="12" x2="15" y2="12"/>
         </svg>
         <span class="ni-label">Soraqçalar</span>
-      </a>
-      <a class="nav-item" href="#">
-        <svg viewBox="0 0 24 24">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-          <polyline points="14 2 14 8 20 8"/>
-          <path d="M9 15l2 2 4-5"/>
-        </svg>
-        <span class="ni-label">Pasport sənədləri</span>
       </a>
     </div>
     </div><!-- /sb-nav-scroll -->
@@ -5601,7 +5546,11 @@
             </svg>
             Filteri sıfırla
           </button>
-          <button class="btn-new">
+          <button class="btn-export" id="btnExportRoads" type="button">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Excel
+          </button>
+          <button class="btn-new" id="btnNewRoad">
             <svg viewBox="0 0 24 24">
               <line x1="12" y1="5" x2="12" y2="19" />
               <line x1="5" y1="12" x2="19" y2="12" />
@@ -7952,6 +7901,27 @@
       { degree: 'IV', commissionedDate: '2013-09-11', lanes: '1 gəliş / 1 gediş', intersection: 'T tipli, eyni səviyyəli', landAreaHa: '11.4', condition: 'Qənaətbəxş', surface: 'Torpaq' },
     ];
 
+    function exportTableToCsv(tableEl, filename) {
+      if (!tableEl) return;
+      const rows = [...tableEl.querySelectorAll('tr')];
+      const csv = rows.map(row => {
+        const cells = [...row.querySelectorAll('th,td')];
+        return cells.slice(0, -1).map(cell => {
+          const text = (cell.innerText || cell.textContent || '').replace(/\r?\n/g,' ').replace(/"/g,'""').trim();
+          return '"' + text + '"';
+        }).join(',');
+      }).join('\r\n');
+      const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename + '.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
     function safeCell(value) {
       return String(value ?? '').replace(/[&<>"']/g, ch => ({
         '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
@@ -8987,7 +8957,6 @@
       e.stopPropagation();
       resetRegistryFilters();
     });
-
     /* ══ SORT ══ */
     document.querySelectorAll('#mainTable .sort-opt').forEach(opt => {
       opt.addEventListener('click', e => {
@@ -9248,7 +9217,9 @@
     });
 
     /* "Yeni Yol" button */
-    document.querySelector('.btn-new').addEventListener('click', () => openForm('create'));
+    document.getElementById('btnNewRoad').addEventListener('click', () => openForm('create'));
+    document.getElementById('btnExportRoads').addEventListener('click', () =>
+      exportTableToCsv(document.getElementById('mainTable'), 'Yollar'));
 
     /* Action menu in roads table */
     document.getElementById('tableBody').addEventListener('click', e => {
@@ -10128,6 +10099,10 @@
           </svg>
           Filteri sıfırla
         </button>
+        <button class="btn-export" id="btnExportRegistry" type="button">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Excel
+        </button>
       </div>
     </div>
     <div class="registry-stats">
@@ -10154,6 +10129,8 @@
       </table>
     </div>
   </div>`);
+    document.getElementById('btnExportRegistry').addEventListener('click', () =>
+      exportTableToCsv(document.getElementById('registryTable'), 'Vahid-Reyestr'));
 
       roadsView.insertAdjacentHTML('afterend', `
   <div class="table-card view-card is-hidden" id="segmentsView">
@@ -10171,6 +10148,10 @@
             <path d="M9 6V4h6v2" />
           </svg>
           Filteri sıfırla
+        </button>
+        <button class="btn-export" id="btnExportSegments" type="button">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Excel
         </button>
         <button class="btn-new" id="btnNewSegment" type="button">
           <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -10216,6 +10197,10 @@
           </svg>
           Filteri sıfırla
         </button>
+        <button class="btn-export" id="btnExportAssets" type="button">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Excel
+        </button>
         <button class="btn-new" id="btnNewAsset" type="button">
           <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Yeni Aktiv
@@ -10260,6 +10245,10 @@
             <path d="M9 6V4h6v2" />
           </svg>
           Filteri sıfırla
+        </button>
+        <button class="btn-export" id="btnExportDocuments" type="button">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Excel
         </button>
         <button class="btn-new" id="btnNewDocument" type="button">
           <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -10322,8 +10311,7 @@
         <button class="sq-tab active" data-sq-tab="assets" type="button">Aktivlər</button>
         <button class="sq-tab" data-sq-tab="passports" type="button">Pasportlar</button>
         <button class="sq-tab" data-sq-tab="documents" type="button">Sənədlər</button>
-        <button class="sq-tab" data-sq-tab="owners" type="button">Mülkiyyətçi</button>
-        <button class="sq-tab" data-sq-tab="managing" type="button">İdarəedici qurumlar</button>
+        <button class="sq-tab" data-sq-tab="entities" type="button">Qurumlar</button>
       </div>
     </div>
     <div class="sq-tab-pane active" id="sqPane-assets">
@@ -10360,6 +10348,10 @@
           <button class="sq-reset-btn" id="sdSearchReset" type="button" style="display:none;">
             <svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg> Sıfırla
           </button>
+          <button class="btn-export" id="btnExportSdAssets" type="button" style="height:36px;">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Excel
+          </button>
           <button class="btn-new" id="btnSdNew" type="button" style="height:36px;padding:0 14px;font-size:12.5px;">
             <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             <span id="btnSdNewLabel">Yeni qrup</span>
@@ -10380,6 +10372,10 @@
           </button>
         </div>
         <div class="sq-sdb-actions">
+          <button class="btn-export" id="btnExportPassports" type="button" style="height:36px;">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Excel
+          </button>
           <button class="btn-new" id="btnPassportStatusNew" type="button" style="height:36px;padding:0 14px;font-size:12.5px;">
             <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             Yeni status
@@ -10400,6 +10396,10 @@
           </button>
         </div>
         <div class="sq-sdb-actions">
+          <button class="btn-export" id="btnExportDocumentTypes" type="button" style="height:36px;">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Excel
+          </button>
           <button class="btn-new" id="btnDocumentTypeNew" type="button" style="height:36px;padding:0 14px;font-size:12.5px;">
             <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             Yeni sənəd növü
@@ -10408,261 +10408,32 @@
       </div>
       <div id="sqDocumentTypeArea" style="display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;"></div>
     </div>
-    <div class="sq-tab-pane" id="sqPane-owners">
-      <div class="sq-subdict-bar">
-        <div class="sq-sdb-left">
-          <button class="sq-subdict-btn active" type="button" style="pointer-events:none;cursor:default;">
-            <span class="sq-sdb-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-            <span class="sq-sdb-body">
-              <span class="sq-sdb-label">Mülkiyyətçilər</span>
-              <span class="sq-sdb-count" id="ownerCount">0 qeyd</span>
-            </span>
-          </button>
-        </div>
-        <div class="sq-sdb-actions">
-          <button class="btn-new" id="btnOwnerNew" type="button" style="height:36px;padding:0 14px;font-size:12.5px;">
-            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Yeni mülkiyyətçi
-          </button>
-        </div>
-      </div>
-      <div id="sqOwnerArea" style="display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;"></div>
-    </div>
-    <div class="sq-tab-pane" id="sqPane-managing">
+    <div class="sq-tab-pane" id="sqPane-entities">
       <div class="sq-subdict-bar">
         <div class="sq-sdb-left">
           <button class="sq-subdict-btn active" type="button" style="pointer-events:none;cursor:default;">
             <span class="sq-sdb-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></span>
             <span class="sq-sdb-body">
-              <span class="sq-sdb-label">İdarəedici qurumlar</span>
-              <span class="sq-sdb-count" id="managingCount">0 qeyd</span>
+              <span class="sq-sdb-label">Qurumlar</span>
+              <span class="sq-sdb-count" id="entitiesCount">0 qeyd</span>
             </span>
           </button>
         </div>
         <div class="sq-sdb-actions">
-          <button class="btn-new" id="btnManagingNew" type="button" style="height:36px;padding:0 14px;font-size:12.5px;">
+          <button class="btn-export" id="btnExportEntities" type="button" style="height:36px;">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Excel
+          </button>
+          <button class="btn-new" id="btnEntitiesNew" type="button" style="height:36px;padding:0 14px;font-size:12.5px;">
             <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Yeni qurum
+            Yeni qeyd
           </button>
         </div>
       </div>
-      <div id="sqManagingArea" style="display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;"></div>
+      <div id="sqEntitiesArea" style="display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;"></div>
     </div>
   </div>`);
 
-      document.getElementById('soraqcalarView').insertAdjacentHTML('afterend', `
-  <div class="table-card view-card is-hidden" id="pasportView">
-    <div class="tc-head">
-      <div class="tc-title">
-        <h2>Pasport sənədləri</h2>
-        <span class="tc-badge">Ümumi <span id="psTotalBadge">0</span> pasport reyestrdədir</span>
-      </div>
-      <div class="tc-actions">
-        <button class="btn-filter-reset" id="psFilterReset" type="button">
-          <svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg>
-          Filteri sıfırla
-        </button>
-        <button class="btn-new" id="btnNewPasport" type="button">
-          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Yeni pasport
-        </button>
-      </div>
-    </div>
-    <div class="ps-filter-bar">
-      <input class="ps-search" id="psSearch" type="text" placeholder="Aktiv adı və ya reyestr kodu ilə axtar...">
-      <select class="ps-fsel" id="psFilterGroup">
-        <option value="">Pasport qrupu</option>
-        <option>Körpü tipli qurğular</option>
-        <option>Tunel və keçid qurğuları</option>
-        <option>Geotexniki və mühafizə qurğuları</option>
-        <option>Kommunikasiya keçidləri</option>
-        <option>Torpaq və mühafizə zonaları</option>
-        <option>Suötürmə və drenaj qurğuları</option>
-      </select>
-      <select class="ps-fsel" id="psFilterStatus">
-        <option value="">Status</option>
-        <option>Qaralama</option>
-        <option>Təsdiqə göndərilib</option>
-        <option>Təsdiqlənib</option>
-        <option>Aktiv</option>
-        <option>Arxivləşdirilib</option>
-        <option>Etibarsız</option>
-      </select>
-      <select class="ps-fsel" id="psFilterType">
-        <option value="">Aktiv növü</option>
-        <option>Körpü</option><option>Estakada</option><option>Viyaduk</option>
-        <option>Tunel</option><option>Yeraltı piyada keçidi</option><option>Yerüstü piyada keçidi</option>
-        <option>İstinad divarı</option><option>Sürüşmə əleyhinə qurğu</option>
-        <option>Kabel keçidi</option><option>Boru keçidi</option>
-        <option>Suötürücü boru</option><option>Nasos stansiyası</option>
-        <option>Təhkim zolağı</option><option>Mühafizə zolağı</option>
-      </select>
-    </div>
-    <div class="table-wrap">
-      <table id="pasportTable" style="min-width:1100px;">
-        <thead>
-          <tr>
-            <th class="th-nof" style="width:36px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">#</span></div></th>
-            <th><div class="th-top"><span class="th-label">Reyestr kodu</span></div></th>
-            <th><div class="th-top"><span class="th-label">Aktiv adı</span></div></th>
-            <th><div class="th-top"><span class="th-label">Aktiv növü</span></div></th>
-            <th><div class="th-top"><span class="th-label">Pasport qrupu</span></div></th>
-            <th><div class="th-top"><span class="th-label">Status</span></div></th>
-            <th><div class="th-top"><span class="th-label">Versiya</span></div></th>
-            <th><div class="th-top"><span class="th-label">Son yenilənmə</span></div></th>
-            <th><div class="th-top"><span class="th-label">Təsdiq edən</span></div></th>
-            <th class="th-nof" style="width:180px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">Əməliyyatlar</span></div></th>
-          </tr>
-        </thead>
-        <tbody id="pasportTableBody"></tbody>
-      </table>
-    </div>
-    <div class="tc-foot">
-      <div class="pp-group"><span>Sətir:</span>
-        <select class="pp-select" id="psPerPage">
-          <option value="10" selected>10</option><option value="20">20</option><option value="50">50</option>
-        </select>
-      </div>
-      <div id="psPagInfo" class="pag-info">–</div>
-      <div class="pag-btns" id="psPagBtns"></div>
-    </div>
-  </div>
-
-  <!-- ══ PASPORT MODAL ══ -->
-  <div class="modal-ov" id="pasportModal">
-    <div class="modal-box" role="dialog" aria-modal="true">
-      <div class="modal-head">
-        <div class="modal-title-block">
-          <div class="mh-title" id="pmTitle">Pasport</div>
-          <div class="mh-sub" id="pmSub"></div>
-        </div>
-        <div class="pmo-head-meta" id="pmHeadMeta"></div>
-        <button class="modal-close-btn" id="pmClose" type="button">
-          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>
-      <div class="pm-tabs" id="pmTabs">
-        <button class="pm-tab active" data-pm-tab="general" type="button">Ümumi qeydiyyat</button>
-        <button class="pm-tab" data-pm-tab="specific" id="pmSpecificTabBtn" type="button">Qurğu məlumatları</button>
-        <button class="pm-tab" data-pm-tab="docs" type="button">Sənədlər</button>
-      </div>
-      <div class="pm-pane active" id="pmPane-general">
-        <div class="pm-section">
-          <div class="pm-section-title">Pasport identifikasiyası</div>
-          <div class="pm-row c3">
-            <div class="pm-field"><label class="pm-lbl">Pasport ID</label><input class="pm-inp" id="pm_id" readonly></div>
-            <div class="pm-field"><label class="pm-lbl">Reyestr kodu</label><input class="pm-inp" id="pm_regcode"></div>
-            <div class="pm-field"><label class="pm-lbl">Versiya nömrəsi</label><input class="pm-inp" id="pm_version" readonly></div>
-          </div>
-        </div>
-        <div class="pm-section">
-          <div class="pm-section-title">Aktiv bağlantısı</div>
-          <div class="pm-row c2">
-            <div class="pm-field"><label class="pm-lbl">Aktiv adı</label><input class="pm-inp" id="pm_assetname" readonly></div>
-            <div class="pm-field"><label class="pm-lbl">Aktiv növü</label><input class="pm-inp" id="pm_assettype" readonly></div>
-          </div>
-        </div>
-        <div class="pm-section">
-          <div class="pm-section-title">Status</div>
-          <div class="pm-row c2">
-            <div class="pm-field"><label class="pm-lbl">Pasport statusu</label>
-              <select class="pm-sel" id="pm_status">
-                <option>Qaralama</option><option>Təsdiqə göndərilib</option>
-                <option>Təsdiqlənib</option><option>Aktiv</option>
-                <option>Arxivləşdirilib</option><option>Etibarsız</option>
-              </select>
-            </div>
-            <div class="pm-field"><label class="pm-lbl">Qeydiyyatın əsas sənədi</label><input class="pm-inp" id="pm_regsrc" placeholder="Sərəncam / Qərar nömrəsi..."></div>
-          </div>
-        </div>
-        <div class="pm-section">
-          <div class="pm-section-title">Tarixlər</div>
-          <div class="pm-row c4">
-            <div class="pm-field"><label class="pm-lbl">İlkin tərtib tarixi</label><input class="pm-inp" id="pm_createdate" type="date" readonly></div>
-            <div class="pm-field"><label class="pm-lbl">Son yenilənmə tarixi</label><input class="pm-inp" id="pm_updatedate" type="date" readonly></div>
-            <div class="pm-field"><label class="pm-lbl">Təsdiq tarixi</label><input class="pm-inp" id="pm_approvedate" type="date"></div>
-            <div class="pm-field"><label class="pm-lbl">Etibarlılıq başlanğıcı</label><input class="pm-inp" id="pm_validfrom" type="date"></div>
-          </div>
-          <div class="pm-row c4">
-            <div class="pm-field"><label class="pm-lbl">Etibarlılıq sonu</label><input class="pm-inp" id="pm_validto" type="date"></div>
-            <div class="pm-field" style="grid-column:span 3;"><label class="pm-lbl">Təsdiq edən qurum / şəxs</label><input class="pm-inp" id="pm_approver"></div>
-          </div>
-        </div>
-        <div class="pm-section">
-          <div class="pm-section-title">Əlavə qeyd</div>
-          <div class="pm-field"><label class="pm-lbl">Qeyd</label><textarea class="pm-ta" id="pm_note" style="min-height:60px;"></textarea></div>
-        </div>
-      </div>
-
-      <div class="pm-pane" id="pmPane-specific">
-        <div id="pmSpecificForm"><div class="pm-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12h6M12 9v6"/></svg>Aktiv qrupu müəyyən edilməmişdir.</div></div>
-      </div>
-
-      <div class="pm-pane" id="pmPane-docs">
-        <div class="pm-doc-toolbar">
-          <button class="btn-new" id="pmAddDocBtn" type="button" style="height:32px;padding:0 14px;font-size:12px;">
-            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Sənəd əlavə et
-          </button>
-        </div>
-        <div id="pmDocArea"></div>
-      </div>
-
-      <div class="modal-foot" style="align-items:center;">
-        <div class="pm-status-bar" id="pmStatusBar"></div>
-        <div style="display:flex;gap:8px;flex-shrink:0;">
-          <button class="fbtn fbtn-ghost" id="pmCancelBtn" type="button">Bağla</button>
-          <button class="fbtn fbtn-outline" id="pmSendApprove" type="button">Təsdiqə göndər</button>
-          <button class="fbtn fbtn-primary" id="pmSaveBtn" type="button">Yadda saxla</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ SƏNƏD MODAL ══ -->
-  <div class="modal-ov" id="psDocModal">
-    <div class="modal-box" style="max-width:580px;">
-      <div class="modal-head">
-        <div class="modal-title-block"><div class="mh-title" id="psDocTitle">Sənəd əlavə et</div></div>
-        <button class="modal-close-btn" id="psDocClose" type="button">
-          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>
-      <div class="modal-body" style="padding:18px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;">
-        <input type="hidden" id="psd_editId">
-        <div class="pm-row c2">
-          <div class="pm-field"><label class="pm-lbl">Sənədin adı <span class="req">*</span></label><input class="pm-inp" id="psd_name"></div>
-          <div class="pm-field"><label class="pm-lbl">Sənəd növü</label>
-            <select class="pm-sel" id="psd_type"><option>Texniki sənəd</option><option>Layihə</option><option>Müqavilə</option><option>Hesabat</option><option>Rəsm / Çertyoj</option><option>Şəkil</option><option>Şəhadətnamə</option><option>Hüquqi sənəd</option><option>Digər</option></select>
-          </div>
-        </div>
-        <div class="pm-row c3">
-          <div class="pm-field"><label class="pm-lbl">Fayl tipi</label><input class="pm-inp" id="psd_filetype" placeholder="PDF, DOCX, DWG..."></div>
-          <div class="pm-field"><label class="pm-lbl">Fayl ölçüsü</label><input class="pm-inp" id="psd_filesize" placeholder="2.4 MB"></div>
-          <div class="pm-field"><label class="pm-lbl">Versiya nömrəsi</label><input class="pm-inp" id="psd_version" placeholder="v1"></div>
-        </div>
-        <div class="pm-row c3">
-          <div class="pm-field"><label class="pm-lbl">Sənəd statusu</label>
-            <select class="pm-sel" id="psd_status"><option>Aktiv</option><option>Arxiv</option><option>Etibarsız</option></select>
-          </div>
-          <div class="pm-field"><label class="pm-lbl">Yüklənmə tarixi</label><input class="pm-inp" id="psd_uploaded" type="date"></div>
-          <div class="pm-field"><label class="pm-lbl">Etibarlılıq tarixi</label><input class="pm-inp" id="psd_validto" type="date"></div>
-        </div>
-        <div class="pm-row c2">
-          <div class="pm-field"><label class="pm-lbl">Yükləyən istifadəçi</label><input class="pm-inp" id="psd_uploader"></div>
-          <div class="pm-field"><label class="pm-lbl">Əlaqəli sənəd ID</label><input class="pm-inp" id="psd_relid" placeholder="SD-..."></div>
-        </div>
-        <div class="pm-field"><label class="pm-lbl">Faylın saxlanma ünvanı</label><input class="pm-inp" id="psd_path" placeholder="/docs/pasport/..."></div>
-        <div class="pm-field"><label class="pm-lbl">Təsvir</label><textarea class="pm-ta" id="psd_desc" style="min-height:56px;"></textarea></div>
-      </div>
-      <div class="modal-foot">
-        <div style="display:flex;gap:8px;margin-left:auto;">
-          <button class="fbtn fbtn-ghost" id="psDocCancel" type="button">Ləğv et</button>
-          <button class="fbtn fbtn-primary" id="psDocSave" type="button">Yadda saxla</button>
-        </div>
-      </div>
-    </div>
-  </div>`);
 
       document.querySelector('#sp1 .fgrid').insertAdjacentHTML('afterbegin', `
     <div class="frow full" id="sgRoadSelectRow">
@@ -14039,9 +13810,13 @@
       document.getElementById('assetSaveNew').addEventListener('click', () => doSaveAsset(true));
 
       document.getElementById('btnNewSegment').addEventListener('click', () => openSegModal(-1, 'global'));
+      document.getElementById('btnExportSegments').addEventListener('click', () =>
+        exportTableToCsv(document.getElementById('segmentsTable'), 'Seqmentlər'));
       document.getElementById('btnNewAsset').addEventListener('click', () => {
         openGlobalAssetModal(-1);
       });
+      document.getElementById('btnExportAssets').addEventListener('click', () =>
+        exportTableToCsv(document.getElementById('assetsTable'), 'Aktivlər'));
       document.getElementById('segmentsTableBody').addEventListener('click', e => {
         const edit = e.target.closest('[data-seg-edit]');
         const del = e.target.closest('[data-seg-del]');
@@ -14123,6 +13898,8 @@
       });
 
       document.getElementById('btnNewDocument')?.addEventListener('click', () => openDocumentModal());
+      document.getElementById('btnExportDocuments')?.addEventListener('click', () =>
+        exportTableToCsv(document.getElementById('documentsTable'), 'Sənədlər'));
       document.getElementById('documentsTableBody')?.addEventListener('click', e => {
         const action = e.target.closest('[data-document-action]');
         if (!action) return;
@@ -15889,6 +15666,13 @@
           sdOpenModal('documentTypes', null, false);
         });
 
+        document.getElementById('btnExportSdAssets')?.addEventListener('click', () =>
+          exportTableToCsv(document.querySelector('#sqSubDictArea table'), 'Aktivlər-Soraqca'));
+        document.getElementById('btnExportPassports')?.addEventListener('click', () =>
+          exportTableToCsv(document.querySelector('#sqPassportStatusArea table'), 'Pasport-Statuslar'));
+        document.getElementById('btnExportDocumentTypes')?.addEventListener('click', () =>
+          exportTableToCsv(document.querySelector('#sqDocumentTypeArea table'), 'Sənəd-Növləri'));
+
         /* ─── SORAQÇA DETAIL MODAL ─── */
         document.body.insertAdjacentHTML('beforeend', `
           <div class="modal-ov" id="sqNameDetailModal">
@@ -15994,8 +15778,7 @@
           if (k === 'assets') renderSubDictTable(activeSD);
           if (k === 'passports') renderSimpleDictTable('passportStatus', 'sqPassportStatusArea');
           if (k === 'documents') renderSimpleDictTable('documentTypes', 'sqDocumentTypeArea');
-          if (k === 'owners') renderOwnersTable();
-          if (k === 'managing') { if (typeof renderManagingTable === 'function') renderManagingTable(); }
+          if (k === 'entities') { if (typeof renderEntitiesTable === 'function') renderEntitiesTable(); }
         });
 
         renderSubDictTable('groups');
@@ -16003,75 +15786,85 @@
       })();
 
       /* ══════════════════════════════════════════
-         MÜLKİYYƏTÇİLƏR
+         QURUMLAR SORAQÇASI
       ══════════════════════════════════════════ */
       (function() {
-        let sqOwners = [];
-        let owEditId = null;
-        let owMap = null, owMarker = null;
+        let sqEntities = [];
+        let entEditId = null;
+        let entMap = null, entMarker = null;
 
-        function owNid() {
-          return sqOwners.length ? Math.max(...sqOwners.map(o => o.id)) + 1 : 1;
+        function entNid() {
+          return sqEntities.length ? Math.max(...sqEntities.map(o => o.id)) + 1 : 1;
         }
 
-        function owEsc(s) {
+        function entEsc(s) {
           return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
         }
 
-        /* ── Table ── */
-        window.renderOwnersTable = function() {
-          const area = document.getElementById('sqOwnerArea');
-          if (!area) return;
-          const cnt = document.getElementById('ownerCount');
-          if (cnt) cnt.textContent = sqOwners.length + ' qeyd';
+        function roleBadgesHtml(roles) {
+          return (roles || []).map(r => {
+            if (r === 'mulkiyyetci') return '<span style="font-size:10.5px;font-weight:600;color:#2057d4;background:#eff6ff;border:1px solid #bfdbfe;border-radius:4px;padding:1px 6px;margin-right:2px;">Mülkiyyətçi</span>';
+            if (r === 'idareedici') return '<span style="font-size:10.5px;font-weight:600;color:#0f766e;background:#ccfbf1;border:1px solid #99f6e4;border-radius:4px;padding:1px 6px;margin-right:2px;">İdarəedici</span>';
+            return '';
+          }).join('');
+        }
 
-          if (!sqOwners.length) {
-            area.innerHTML = `<div style="text-align:center;padding:48px 24px;color:#94a3b8;font-size:13px;">Heç bir mülkiyyətçi qeydə alınmayıb</div>`;
+        /* ── Table ── */
+        window.renderEntitiesTable = function() {
+          const area = document.getElementById('sqEntitiesArea');
+          if (!area) return;
+          const cnt = document.getElementById('entitiesCount');
+          if (cnt) cnt.textContent = sqEntities.length + ' qeyd';
+
+          if (!sqEntities.length) {
+            area.innerHTML = '<div style="text-align:center;padding:48px 24px;color:#94a3b8;font-size:13px;">Heç bir qurum qeydə alınmayıb</div>';
             return;
           }
 
-          const rows = sqOwners.map((o, i) => {
-            const typeBadge = o.type === 'fardi'
-              ? `<span class="ow-type-badge ow-type-fardi">Fərdi şəxs</span>`
-              : `<span class="ow-type-badge ow-type-qurum">Hüquqi şəxs</span>`;
-            const phones = (o.phones || []).map(p => owEsc(p)).join(', ') || '—';
-            return `<tr>
-              <td style="text-align:center;color:#94a3b8;font-size:11px;">${i+1}</td>
-              <td style="cursor:pointer;" onclick="owView(${o.id})">
-                <span style="font-weight:600;color:#1a2b3c;">${owEsc(o.name || '—')}</span>
-                ${o.shortName ? `<span style="margin-left:6px;font-size:10.5px;font-weight:650;color:#2057d4;background:#eff6ff;border:1px solid #bfdbfe;border-radius:4px;padding:1px 6px;">${owEsc(o.shortName)}</span>` : ''}
-              </td>
-              <td>${typeBadge}</td>
-              <td style="font-size:12px;color:#64748b;">${owEsc(o.email || '—')}</td>
-              <td style="font-size:12px;color:#64748b;">${phones}</td>
-              <td style="font-size:12px;color:#64748b;max-width:220px;white-space:normal;">${owEsc(o.address || '—')}</td>
-              <td style="font-size:12px;color:#64748b;">${o.lat ? owEsc(Number(o.lat).toFixed(5) + ', ' + Number(o.lng).toFixed(5)) : '—'}</td>
-              <td><div class="row-acts"><div class="action-menu-wrap">
-                <button class="action-menu-btn" data-action-menu type="button">⋮</button>
-                <div class="action-menu">
-                  <button class="action-menu-item" type="button" onclick="owView(${o.id})">Bax</button>
-                  <button class="action-menu-item" type="button" onclick="owEdit(${o.id})">Redaktə et</button>
-                  <button class="action-menu-item danger" type="button" onclick="owDelete(${o.id})">Sil</button>
-                </div>
-              </div></div></td>
-            </tr>`;
+          const rows = sqEntities.map((o, i) => {
+            const typeBadge = o.type === 'fiziki'
+              ? '<span class="ow-type-badge ow-type-fardi">Fiziki şəxs</span>'
+              : '<span class="ow-type-badge ow-type-qurum">Hüquqi şəxs</span>';
+            const phones = (o.phones || []).map(p => entEsc(p)).join(', ') || '—';
+            const coordText = o.lat ? entEsc(Number(o.lat).toFixed(5) + ', ' + Number(o.lng).toFixed(5)) : '—';
+            return '<tr>' +
+              '<td style="text-align:center;color:#94a3b8;font-size:11px;">' + (i+1) + '</td>' +
+              '<td style="cursor:pointer;" onclick="entView(' + o.id + ')">' +
+                '<span style="font-weight:600;color:#1a2b3c;">' + entEsc(o.name || '—') + '</span>' +
+                (o.shortName ? '<span style="margin-left:6px;font-size:10.5px;font-weight:650;color:#2057d4;background:#eff6ff;border:1px solid #bfdbfe;border-radius:4px;padding:1px 6px;">' + entEsc(o.shortName) + '</span>' : '') +
+              '</td>' +
+              '<td>' + typeBadge + '</td>' +
+              '<td>' + roleBadgesHtml(o.roles) + '</td>' +
+              '<td style="font-size:12px;color:#64748b;">' + entEsc(o.email || '—') + '</td>' +
+              '<td style="font-size:12px;color:#64748b;">' + phones + '</td>' +
+              '<td style="font-size:12px;color:#64748b;max-width:220px;white-space:normal;">' + entEsc(o.address || '—') + '</td>' +
+              '<td style="font-size:12px;color:#64748b;">' + coordText + '</td>' +
+              '<td><div class="row-acts"><div class="action-menu-wrap">' +
+                '<button class="action-menu-btn" data-action-menu type="button">⋮</button>' +
+                '<div class="action-menu">' +
+                  '<button class="action-menu-item" type="button" onclick="entView(' + o.id + ')">Bax</button>' +
+                  '<button class="action-menu-item" type="button" onclick="entEdit(' + o.id + ')">Redaktə et</button>' +
+                  '<button class="action-menu-item danger" type="button" onclick="entDelete(' + o.id + ')">Sil</button>' +
+                '</div></div></div></td>' +
+            '</tr>';
           }).join('');
 
-          area.innerHTML = `<div class="table-wrap" style="flex:1;">
-            <table style="min-width:960px;">
-              <thead><tr>
-                <th class="th-nof" style="width:44px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">#</span></div></th>
-                <th><div class="th-top"><span class="th-label">Adı</span></div></th>
-                <th><div class="th-top"><span class="th-label">Növü</span></div></th>
-                <th><div class="th-top"><span class="th-label">Email</span></div></th>
-                <th><div class="th-top"><span class="th-label">Nömrə(lər)</span></div></th>
-                <th><div class="th-top"><span class="th-label">Ünvan</span></div></th>
-                <th><div class="th-top"><span class="th-label">Koordinat</span></div></th>
-                <th class="th-nof" style="width:120px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">Əməliyyatlar</span></div></th>
-              </tr></thead>
-              <tbody>${rows}</tbody>
-            </table>
-          </div>`;
+          area.innerHTML = '<div class="table-wrap" style="flex:1;">' +
+            '<table style="min-width:1000px;">' +
+              '<thead><tr>' +
+                '<th class="th-nof" style="width:44px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">#</span></div></th>' +
+                '<th><div class="th-top"><span class="th-label">Adı</span></div></th>' +
+                '<th><div class="th-top"><span class="th-label">Növü</span></div></th>' +
+                '<th><div class="th-top"><span class="th-label">Rol</span></div></th>' +
+                '<th><div class="th-top"><span class="th-label">Email</span></div></th>' +
+                '<th><div class="th-top"><span class="th-label">Telefon</span></div></th>' +
+                '<th><div class="th-top"><span class="th-label">Ünvan</span></div></th>' +
+                '<th><div class="th-top"><span class="th-label">Koordinat</span></div></th>' +
+                '<th class="th-nof" style="width:120px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">Əməliyyatlar</span></div></th>' +
+              '</tr></thead>' +
+              '<tbody>' + rows + '</tbody>' +
+            '</table>' +
+          '</div>';
 
           area.querySelectorAll('[data-action-menu]').forEach(btn => {
             btn.addEventListener('click', e => {
@@ -16084,15 +15877,15 @@
         };
 
         /* ── Phone rows ── */
-        function owRenderPhones(phones, readOnly) {
-          const list = document.getElementById('owPhoneList');
+        function entRenderPhones(phones, readOnly) {
+          const list = document.getElementById('entPhoneList');
           if (!list) return;
           list.innerHTML = '';
           const vals = (phones && phones.length) ? phones : (readOnly ? [] : ['']);
-          vals.forEach(v => owAddPhoneRow(v, readOnly));
+          vals.forEach(v => entAddPhoneRow(v, readOnly));
         }
-        function owAddPhoneRow(val, readOnly) {
-          const list = document.getElementById('owPhoneList');
+        function entAddPhoneRow(val, readOnly) {
+          const list = document.getElementById('entPhoneList');
           if (!list) return;
           const row = document.createElement('div');
           row.className = 'ow-phone-row';
@@ -16115,12 +15908,18 @@
           list.appendChild(row);
         }
 
-        /* ── Map picker ── */
-        let owPendingLat = null, owPendingLng = null;
+        /* ── Roles row visibility ── */
+        function entUpdateRolesRow(type) {
+          const row = document.getElementById('entRolesRow');
+          if (row) row.style.display = (type === 'huquqi') ? '' : 'none';
+        }
 
-        function owUpdateCoordChip(lat, lng) {
-          const chip = document.getElementById('owCoordChip');
-          const txt  = document.getElementById('owCoordText');
+        /* ── Map picker ── */
+        let entPendingLat = null, entPendingLng = null;
+
+        function entUpdateCoordChip(lat, lng) {
+          const chip = document.getElementById('entCoordChip');
+          const txt  = document.getElementById('entCoordText');
           if (lat && lng && chip && txt) {
             txt.textContent = Number(lat).toFixed(5) + ', ' + Number(lng).toFixed(5);
             chip.style.display = 'inline-flex';
@@ -16129,155 +15928,156 @@
           }
         }
 
-        function owOpenMap() {
-          owPendingLat = parseFloat(document.getElementById('owLat').value) || null;
-          owPendingLng = parseFloat(document.getElementById('owLng').value) || null;
-          const lat = owPendingLat || 40.4093;
-          const lng = owPendingLng || 49.8671;
-          document.getElementById('owMapCoordPreview').textContent = '';
-          document.getElementById('owMapModal').classList.add('open');
-          if (!owMap) {
-            owMap = L.map('owMapContainer').setView([lat, lng], 12);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-              attribution: '© OpenStreetMap'
-            }).addTo(owMap);
-            owMap.on('click', function(e) {
-              owPendingLat = e.latlng.lat;
-              owPendingLng = e.latlng.lng;
-              document.getElementById('owMapCoordPreview').textContent =
-                '📍 ' + owPendingLat.toFixed(5) + ', ' + owPendingLng.toFixed(5);
-              if (owMarker) owMarker.setLatLng(e.latlng);
-              else owMarker = L.marker(e.latlng).addTo(owMap);
+        function entOpenMap() {
+          entPendingLat = parseFloat(document.getElementById('entLat').value) || null;
+          entPendingLng = parseFloat(document.getElementById('entLng').value) || null;
+          const lat = entPendingLat || 40.4093;
+          const lng = entPendingLng || 49.8671;
+          document.getElementById('entMapCoordPreview').textContent = '';
+          document.getElementById('entMapModal').classList.add('open');
+          if (!entMap) {
+            entMap = L.map('entMapContainer').setView([lat, lng], 12);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(entMap);
+            entMap.on('click', function(e) {
+              entPendingLat = e.latlng.lat;
+              entPendingLng = e.latlng.lng;
+              document.getElementById('entMapCoordPreview').textContent =
+                '📍 ' + entPendingLat.toFixed(5) + ', ' + entPendingLng.toFixed(5);
+              if (entMarker) entMarker.setLatLng(e.latlng);
+              else entMarker = L.marker(e.latlng).addTo(entMap);
             });
           } else {
-            owMap.setView([lat, lng], 12);
+            entMap.setView([lat, lng], 12);
           }
-          if (owPendingLat && owPendingLng) {
-            const pos = [owPendingLat, owPendingLng];
-            if (owMarker) owMarker.setLatLng(pos);
-            else owMarker = L.marker(pos).addTo(owMap);
-            document.getElementById('owMapCoordPreview').textContent =
-              '📍 ' + owPendingLat.toFixed(5) + ', ' + owPendingLng.toFixed(5);
+          if (entPendingLat && entPendingLng) {
+            const pos = [entPendingLat, entPendingLng];
+            if (entMarker) entMarker.setLatLng(pos);
+            else entMarker = L.marker(pos).addTo(entMap);
+            document.getElementById('entMapCoordPreview').textContent =
+              '📍 ' + entPendingLat.toFixed(5) + ', ' + entPendingLng.toFixed(5);
           }
-          setTimeout(() => owMap.invalidateSize(), 120);
+          setTimeout(() => entMap.invalidateSize(), 120);
         }
-        function owCloseMap() {
-          owPendingLat = null;
-          owPendingLng = null;
-          document.getElementById('owMapModal').classList.remove('open');
+        function entCloseMap() {
+          entPendingLat = null;
+          entPendingLng = null;
+          document.getElementById('entMapModal').classList.remove('open');
         }
-        function owConfirmMap() {
-          if (owPendingLat && owPendingLng) {
-            document.getElementById('owLat').value = owPendingLat;
-            document.getElementById('owLng').value = owPendingLng;
-            owUpdateCoordChip(owPendingLat, owPendingLng);
+        function entConfirmMap() {
+          if (entPendingLat && entPendingLng) {
+            document.getElementById('entLat').value = entPendingLat;
+            document.getElementById('entLng').value = entPendingLng;
+            entUpdateCoordChip(entPendingLat, entPendingLng);
           }
-          document.getElementById('owMapModal').classList.remove('open');
+          document.getElementById('entMapModal').classList.remove('open');
         }
 
         /* ── Modal open/close ── */
-        function owOpenModal(id, viewMode) {
-          owEditId = id || null;
+        function entOpenModal(id, viewMode) {
+          entEditId = id || null;
           const isNew = !id;
-          const o = id ? sqOwners.find(x => x.id === id) : null;
+          const o = id ? sqEntities.find(x => x.id === id) : null;
 
-          document.getElementById('owModalTitle').textContent = isNew
-            ? 'Yeni mülkiyyətçi'
+          document.getElementById('entModalTitle').textContent = isNew
+            ? 'Yeni qurum'
             : (viewMode ? 'Bax — ' : 'Redaktə — ') + (o?.name || '');
-          document.getElementById('owModalSave').style.display = viewMode ? 'none' : '';
-          document.getElementById('owModalEdit').style.display = viewMode ? '' : 'none';
+          document.getElementById('entModalSave').style.display = viewMode ? 'none' : '';
+          document.getElementById('entModalEdit').style.display = viewMode ? '' : 'none';
 
-          const type = o?.type || 'qurum';
-          document.querySelectorAll('.ow-type-card').forEach(b => {
-            b.classList.toggle('active', b.dataset.owType === type);
+          const type = o?.type || 'huquqi';
+          document.querySelectorAll('.ent-type-card').forEach(b => {
+            b.classList.toggle('active', b.dataset.entType === type);
             b.disabled = viewMode;
           });
+          entUpdateRolesRow(type);
 
-          document.getElementById('owName').value      = o?.name      || '';
-          document.getElementById('owShortName').value = o?.shortName || '';
-          document.getElementById('owEmail').value   = o?.email   || '';
-          document.getElementById('owAddress').value = o?.address || '';
-          document.getElementById('owLat').value     = o?.lat     || '';
-          document.getElementById('owLng').value     = o?.lng     || '';
-          owUpdateCoordChip(o?.lat, o?.lng);
+          document.getElementById('entName').value      = o?.name      || '';
+          document.getElementById('entShortName').value = o?.shortName || '';
+          document.getElementById('entVoen').value      = o?.voen      || '';
+          document.getElementById('entEmail').value     = o?.email     || '';
+          document.getElementById('entAddress').value   = o?.address   || '';
+          document.getElementById('entLat').value       = o?.lat       || '';
+          document.getElementById('entLng').value       = o?.lng       || '';
+          entUpdateCoordChip(o?.lat, o?.lng);
 
-          /* set address tab: if has coords → map tab, else text tab */
-          const useMap = !!(o?.lat && o?.lng);
-          document.querySelectorAll('.ow-addr-tab').forEach(t => t.classList.toggle('active', t.dataset.addrTab === (useMap ? 'map' : 'text')));
-          document.getElementById('owAddrTextPane').classList.toggle('active', !useMap);
-          document.getElementById('owAddrMapPane').classList.toggle('active', useMap);
-          document.querySelectorAll('.ow-addr-tab').forEach(t => t.disabled = viewMode);
+          const roles = o?.roles || [];
+          const cbMulk  = document.getElementById('entRoleMulkiyyetci');
+          const cbIdare = document.getElementById('entRoleIdareedici');
+          if (cbMulk)  { cbMulk.checked  = roles.includes('mulkiyyetci'); cbMulk.disabled  = viewMode; }
+          if (cbIdare) { cbIdare.checked = roles.includes('idareedici');  cbIdare.disabled = viewMode; }
 
-          ['owName','owShortName','owEmail','owAddress'].forEach(fid => {
+          ['entName','entShortName','entVoen','entEmail','entAddress'].forEach(fid => {
             const el = document.getElementById(fid);
             if (el) el.readOnly = viewMode;
           });
 
-          owRenderPhones(o?.phones || [], viewMode);
-
-          document.getElementById('owPhoneAdd').style.display = viewMode ? 'none' : '';
-          const locBtn = document.getElementById('owLocBtn');
+          entRenderPhones(o?.phones || [], viewMode);
+          document.getElementById('entPhoneAdd').style.display = viewMode ? 'none' : '';
+          const locBtn = document.getElementById('entLocBtn');
           if (locBtn) locBtn.style.display = viewMode ? 'none' : '';
 
-          document.getElementById('owModal').classList.add('open');
+          document.getElementById('entModal').classList.add('open');
         }
-        function owCloseModal() {
-          document.getElementById('owModal').classList.remove('open');
+        function entCloseModal() {
+          document.getElementById('entModal').classList.remove('open');
         }
 
         /* ── CRUD ── */
-        function owSave() {
-          const name    = document.getElementById('owName').value.trim();
-          const address = document.getElementById('owAddress').value.trim();
-          const lat     = document.getElementById('owLat').value.trim();
-          const lng     = document.getElementById('owLng').value.trim();
+        function entSave() {
+          const name    = document.getElementById('entName').value.trim();
+          const address = document.getElementById('entAddress').value.trim();
+          const lat     = document.getElementById('entLat').value.trim();
+          const lng     = document.getElementById('entLng').value.trim();
           if (!name) { alert('Ad boş ola bilməz.'); return; }
-          const activeAddrTab = document.querySelector('.ow-addr-tab.active')?.dataset.addrTab || 'text';
-          if (activeAddrTab === 'text' && !address) {
-            alert('Yazılı ünvan daxil edin və ya Xəritə tabına keçib yer seçin.'); return;
-          }
-          if (activeAddrTab === 'map' && !lat) {
-            alert('Xəritədə yer seçin və ya Yazılı tabına keçib ünvan daxil edin.'); return;
-          }
-          const type      = document.querySelector('.ow-type-card.active')?.dataset.owType || 'qurum';
-          const shortName = document.getElementById('owShortName').value.trim();
-          const email     = document.getElementById('owEmail').value.trim();
-          const phones    = [...document.querySelectorAll('.ow-phone-input')].map(i => i.value.trim()).filter(Boolean);
-          const data      = { type, name, shortName, email, address, lat, lng, phones };
-          if (owEditId) {
-            const r = sqOwners.find(x => x.id === owEditId);
+          if (!address && !lat) { alert('Yazılı ünvan və ya koordinat daxil edin.'); return; }
+          const type      = document.querySelector('.ent-type-card.active')?.dataset.entType || 'huquqi';
+          const shortName = document.getElementById('entShortName').value.trim();
+          const voen      = document.getElementById('entVoen').value.trim();
+          const email     = document.getElementById('entEmail').value.trim();
+          const phones    = [...document.querySelectorAll('#entPhoneList .ow-phone-input')].map(i => i.value.trim()).filter(Boolean);
+          const roles     = type === 'huquqi'
+            ? [
+                ...(document.getElementById('entRoleMulkiyyetci')?.checked ? ['mulkiyyetci'] : []),
+                ...(document.getElementById('entRoleIdareedici')?.checked  ? ['idareedici']  : []),
+              ]
+            : [];
+          const data = { type, name, shortName, voen, email, address, lat, lng, phones, roles };
+          if (entEditId) {
+            const r = sqEntities.find(x => x.id === entEditId);
             if (r) Object.assign(r, data);
           } else {
-            sqOwners.push({ id: owNid(), ...data });
+            sqEntities.push({ id: entNid(), ...data });
           }
-          owCloseModal();
-          renderOwnersTable();
+          entCloseModal();
+          renderEntitiesTable();
         }
 
-        window.owView   = (id) => owOpenModal(id, true);
-        window.owEdit   = (id) => owOpenModal(id, false);
-        window.owDelete = (id) => {
-          const o = sqOwners.find(x => x.id === id);
+        window.entView   = (id) => entOpenModal(id, true);
+        window.entEdit   = (id) => entOpenModal(id, false);
+        window.entDelete = (id) => {
+          const o = sqEntities.find(x => x.id === id);
           if (!o) return;
-          if (!confirm('"' + o.name + '" mülkiyyətçisini silmək istədiyinizə əminsiniz?')) return;
-          sqOwners = sqOwners.filter(x => x.id !== id);
-          renderOwnersTable();
+          if (!confirm('"' + o.name + '" qurumu silmək istədiyinizə əminsiniz?')) return;
+          sqEntities = sqEntities.filter(x => x.id !== id);
+          renderEntitiesTable();
         };
+
         window.addOwnerSoraqcaFromRoad = function(entry) {
           if (!entry?.owner) return;
-          const existing = sqOwners.find(x => x.name.toLowerCase() === entry.owner.toLowerCase());
+          const existing = sqEntities.find(x => x.name.toLowerCase() === entry.owner.toLowerCase());
           if (existing) {
             Object.assign(existing, {
-              type: entry.ownerKind === 'Fiziki şəxs' ? 'fardi' : 'qurum',
+              type: entry.ownerKind === 'Fiziki şəxs' ? 'fiziki' : 'huquqi',
               shortName: entry.shortName || existing.shortName || '',
               email: entry.email || existing.email || '',
               address: entry.address || existing.address || '',
               phones: entry.phones || existing.phones || [],
             });
+            if (!existing.roles.includes('mulkiyyetci')) existing.roles.push('mulkiyyetci');
           } else {
-            sqOwners.push({
-              id: owNid(),
-              type: entry.ownerKind === 'Fiziki şəxs' ? 'fardi' : 'qurum',
+            sqEntities.push({
+              id: entNid(),
+              type: entry.ownerKind === 'Fiziki şəxs' ? 'fiziki' : 'huquqi',
               name: entry.owner,
               shortName: entry.shortName || '',
               email: entry.email || '',
@@ -16285,71 +16085,114 @@
               lat: entry.lat || '',
               lng: entry.lng || '',
               phones: entry.phones || [],
+              roles: ['mulkiyyetci'],
             });
           }
-          renderOwnersTable();
+          renderEntitiesTable();
+        };
+
+        window.addManagingSoraqcaFromRoad = function(entry) {
+          if (!entry?.name) return;
+          const existing = sqEntities.find(x => x.name.toLowerCase() === entry.name.toLowerCase());
+          if (existing) {
+            Object.assign(existing, {
+              shortName: entry.shortName || existing.shortName || '',
+              email: entry.email || existing.email || '',
+              address: entry.address || existing.address || '',
+              phones: entry.phones || existing.phones || [],
+            });
+            if (!existing.roles.includes('idareedici')) existing.roles.push('idareedici');
+          } else {
+            sqEntities.push({
+              id: entNid(),
+              type: 'huquqi',
+              name: entry.name,
+              shortName: entry.shortName || '',
+              email: entry.email || '',
+              address: entry.address || '',
+              lat: entry.lat || '',
+              lng: entry.lng || '',
+              phones: entry.phones || [],
+              roles: ['idareedici'],
+            });
+          }
+          renderEntitiesTable();
         };
 
         /* ── Inject modal HTML ── */
         document.body.insertAdjacentHTML('beforeend', `
-          <div class="modal-ov" id="owModal">
+          <div class="modal-ov" id="entModal">
             <div class="modal-box" style="max-width:540px;">
               <div class="modal-head">
                 <div class="modal-title-block">
-                  <div class="mh-title" id="owModalTitle">Yeni mülkiyyətçi</div>
-                  <div class="mh-sub" id="owModalSub">Mülkiyyətçi məlumatlarını daxil edin</div>
+                  <div class="mh-title" id="entModalTitle">Yeni qurum</div>
+                  <div class="mh-sub">Qurum məlumatlarını daxil edin</div>
                 </div>
-                <button class="modal-close-btn" id="owModalClose" type="button" aria-label="Bağla">
+                <button class="modal-close-btn" id="entModalClose" type="button" aria-label="Bağla">
                   <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 </button>
               </div>
               <div class="modal-body" style="padding:20px;">
                 <div style="display:flex;flex-direction:column;gap:14px;">
 
-                  <!-- Type cards -->
                   <div class="frow full">
                     <label style="margin-bottom:8px;display:block;">Növü</label>
                     <div class="ow-type-cards">
-                      <button class="ow-type-card active" data-ow-type="qurum" type="button">
+                      <button class="ent-type-card ow-type-card active" data-ent-type="huquqi" type="button">
                         <div class="ow-tc-icon">
                           <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
                         </div>
                         <span class="ow-tc-label">Hüquqi şəxs</span>
                       </button>
-                      <button class="ow-type-card" data-ow-type="fardi" type="button">
+                      <button class="ent-type-card ow-type-card" data-ent-type="fiziki" type="button">
                         <div class="ow-tc-icon">
                           <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                         </div>
-                        <span class="ow-tc-label">Fərdi şəxs</span>
+                        <span class="ow-tc-label">Fiziki şəxs</span>
                       </button>
                     </div>
                   </div>
 
-                  <!-- Name -->
-                  <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;">
+                  <div class="frow full" id="entRolesRow">
+                    <label style="margin-bottom:8px;display:block;">Rolu</label>
+                    <div style="display:flex;gap:16px;">
+                      <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;">
+                        <input type="checkbox" id="entRoleMulkiyyetci" style="width:15px;height:15px;accent-color:#2057d4;">
+                        Mülkiyyətçi
+                      </label>
+                      <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;">
+                        <input type="checkbox" id="entRoleIdareedici" style="width:15px;height:15px;accent-color:#2057d4;">
+                        İdarəedici
+                      </label>
+                    </div>
+                  </div>
+
+                  <div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:end;">
                     <div class="frow full">
                       <label>Tam adı <span class="req">*</span></label>
-                      <input class="finput" id="owName" type="text" placeholder="Ad, soyad / hüquqi şəxsin adı" style="margin-top:6px;">
+                      <input class="finput" id="entName" type="text" placeholder="Ad, soyad / hüquqi şəxsin adı" style="margin-top:6px;">
                     </div>
                     <div class="frow">
                       <label>Qısa adı</label>
-                      <input class="finput" id="owShortName" type="text" placeholder="Abbreviatura" style="margin-top:6px;width:120px;">
+                      <input class="finput" id="entShortName" type="text" placeholder="Abbreviatura" style="margin-top:6px;width:110px;">
+                    </div>
+                    <div class="frow">
+                      <label>VÖEN</label>
+                      <input class="finput" id="entVoen" type="text" placeholder="XXXXXXXXXX" style="margin-top:6px;width:110px;">
                     </div>
                   </div>
 
                   <div class="ow-section-div">Əlaqə</div>
 
-                  <!-- Email -->
                   <div class="frow full">
                     <label>Email</label>
-                    <input class="finput" id="owEmail" type="email" placeholder="email@..." style="margin-top:6px;">
+                    <input class="finput" id="entEmail" type="email" placeholder="email@..." style="margin-top:6px;">
                   </div>
 
-                  <!-- Phone -->
                   <div class="frow full">
                     <label>Telefon nömrəsi</label>
-                    <div id="owPhoneList" class="ow-phone-list" style="margin-top:6px;"></div>
-                    <button class="ow-phone-add" id="owPhoneAdd" type="button">
+                    <div id="entPhoneList" class="ow-phone-list" style="margin-top:6px;"></div>
+                    <button class="ow-phone-add" id="entPhoneAdd" type="button">
                       <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.5;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                       Nömrə əlavə et
                     </button>
@@ -16357,397 +16200,144 @@
 
                   <div class="ow-section-div">Ünvan</div>
 
-                  <!-- Address seg toggle -->
-                  <div class="frow full">
-                    <div class="ow-addr-seg" id="owAddrSeg">
-                      <button class="ow-addr-tab active" data-addr-tab="text" type="button">
-                        <svg viewBox="0 0 24 24"><line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/></svg>
-                        Yazılı
-                      </button>
-                      <button class="ow-addr-tab" data-addr-tab="map" type="button">
-                        <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z"/></svg>
-                        Xəritə
-                      </button>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start;">
+                    <div class="frow full">
+                      <label>Yazılı ünvan</label>
+                      <input class="finput" id="entAddress" type="text" placeholder="Küçə, şəhər, rayon..." style="margin-top:6px;">
                     </div>
-
-                    <!-- Text pane -->
-                    <div class="ow-addr-pane active" id="owAddrTextPane">
-                      <input class="finput" id="owAddress" type="text" placeholder="Küçə, şəhər, rayon...">
-                    </div>
-
-                    <!-- Map pane -->
-                    <div class="ow-addr-pane" id="owAddrMapPane">
-                      <div class="ow-map-row">
-                        <button class="ow-loc-btn" id="owLocBtn" type="button">
+                    <div class="frow full">
+                      <label>Koordinat</label>
+                      <div class="ow-map-row" style="margin-top:6px;">
+                        <button class="ow-loc-btn" id="entLocBtn" type="button">
                           <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z"/></svg>
                           Xəritədə seç
                         </button>
-                        <div class="ow-coord-chip" id="owCoordChip" style="display:none;">
+                        <div class="ow-coord-chip" id="entCoordChip" style="display:none;">
                           <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z"/></svg>
-                          <span id="owCoordText"></span>
-                          <button class="ow-coord-clear" id="owCoordClear" type="button" title="Sil">×</button>
+                          <span id="entCoordText"></span>
+                          <button class="ow-coord-clear" id="entCoordClear" type="button" title="Sil">×</button>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <!-- Hidden lat/lng -->
-                  <input type="hidden" id="owLat">
-                  <input type="hidden" id="owLng">
+                  <input type="hidden" id="entLat">
+                  <input type="hidden" id="entLng">
 
                 </div>
               </div>
               <div class="modal-foot">
-                <button class="fbtn fbtn-ghost" id="owModalCancel" type="button">Ləğv et</button>
-                <button class="fbtn fbtn-primary" id="owModalEdit" type="button" style="display:none;">Redaktə et</button>
-                <button class="fbtn fbtn-primary" id="owModalSave" type="button">Saxla</button>
+                <button class="fbtn fbtn-ghost" id="entModalCancel" type="button">Ləğv et</button>
+                <button class="fbtn fbtn-primary" id="entModalEdit" type="button" style="display:none;">Redaktə et</button>
+                <button class="fbtn fbtn-primary" id="entModalSave" type="button">Saxla</button>
               </div>
             </div>
           </div>
 
-          <div class="modal-ov" id="owMapModal">
+          <div class="modal-ov" id="entMapModal">
             <div class="modal-box" style="max-width:720px;height:82vh;max-height:620px;display:flex;flex-direction:column;padding:0;overflow:hidden;">
               <div class="modal-head" style="flex-shrink:0;">
                 <div class="modal-title-block">
                   <div class="mh-title">Xəritədə yer seçin</div>
-                  <div class="mh-sub">Mülkiyyətin yerini göstərmək üçün xəritəyə klikləyin</div>
+                  <div class="mh-sub">Qurumun yerini göstərmək üçün xəritəyə klikləyin</div>
                 </div>
-                <button class="modal-close-btn" id="owMapClose" type="button" aria-label="Bağla">
+                <button class="modal-close-btn" id="entMapClose" type="button" aria-label="Bağla">
                   <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 </button>
               </div>
               <div class="ow-map-tip">📍 Xəritəyə klikləyin — yer avtomatik seçilir</div>
-              <div id="owMapContainer" style="flex:1;min-height:0;"></div>
+              <div id="entMapContainer" style="flex:1;min-height:0;"></div>
               <div style="padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #e2e8f0;background:#fff;flex-shrink:0;gap:10px;">
-                <span id="owMapCoordPreview" style="font-size:12px;color:#64748b;font-weight:500;"></span>
+                <span id="entMapCoordPreview" style="font-size:12px;color:#64748b;font-weight:500;"></span>
                 <div style="display:flex;gap:8px;">
-                  <button class="fbtn fbtn-ghost" id="owMapCancel" type="button">Ləğv et</button>
-                  <button class="fbtn fbtn-primary" id="owMapConfirm" type="button">Seç</button>
+                  <button class="fbtn fbtn-ghost" id="entMapCancel" type="button">Ləğv et</button>
+                  <button class="fbtn fbtn-primary" id="entMapConfirm" type="button">Seç</button>
                 </div>
               </div>
             </div>
           </div>`);
 
         /* ── Events ── */
-        document.getElementById('owModalSave').addEventListener('click', owSave);
-        document.getElementById('owModalCancel').addEventListener('click', owCloseModal);
-        document.getElementById('owModalClose').addEventListener('click', owCloseModal);
-        document.getElementById('owModalEdit').addEventListener('click', () => owOpenModal(owEditId, false));
-        document.getElementById('owModal').addEventListener('click', e => { if (e.target === document.getElementById('owModal')) owCloseModal(); });
+        document.getElementById('entModalSave').addEventListener('click', entSave);
+        document.getElementById('entModalCancel').addEventListener('click', entCloseModal);
+        document.getElementById('entModalClose').addEventListener('click', entCloseModal);
+        document.getElementById('entModalEdit').addEventListener('click', () => entOpenModal(entEditId, false));
+        document.getElementById('entModal').addEventListener('click', e => { if (e.target === document.getElementById('entModal')) entCloseModal(); });
 
-        document.getElementById('owPhoneAdd').addEventListener('click', () => owAddPhoneRow('', false));
+        document.getElementById('entPhoneAdd').addEventListener('click', () => entAddPhoneRow('', false));
 
-        document.querySelectorAll('.ow-type-card').forEach(btn => {
+        document.querySelectorAll('.ent-type-card').forEach(btn => {
           btn.addEventListener('click', () => {
             if (btn.disabled) return;
-            document.querySelectorAll('.ow-type-card').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.ent-type-card').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+            entUpdateRolesRow(btn.dataset.entType);
           });
         });
 
-        document.getElementById('owAddrSeg').addEventListener('click', e => {
-          const tab = e.target.closest('.ow-addr-tab');
-          if (!tab || tab.classList.contains('active')) return;
-          document.querySelectorAll('.ow-addr-tab').forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
-          const k = tab.dataset.addrTab;
-          document.getElementById('owAddrTextPane').classList.toggle('active', k === 'text');
-          document.getElementById('owAddrMapPane').classList.toggle('active', k === 'map');
+        document.getElementById('entLocBtn').addEventListener('click', () => entOpenMap());
+        document.getElementById('entMapClose').addEventListener('click', entCloseMap);
+        document.getElementById('entMapCancel').addEventListener('click', entCloseMap);
+        document.getElementById('entMapConfirm').addEventListener('click', entConfirmMap);
+        document.getElementById('entMapModal').addEventListener('click', e => { if (e.target === document.getElementById('entMapModal')) entCloseMap(); });
+
+        document.getElementById('entCoordClear').addEventListener('click', () => {
+          document.getElementById('entLat').value = '';
+          document.getElementById('entLng').value = '';
+          document.getElementById('entCoordChip').style.display = 'none';
+          if (entMarker) { entMarker.remove(); entMarker = null; }
         });
 
-        document.getElementById('owLocBtn').addEventListener('click', () => owOpenMap());
-        document.getElementById('owMapClose').addEventListener('click', owCloseMap);
-        document.getElementById('owMapCancel').addEventListener('click', owCloseMap);
-        document.getElementById('owMapConfirm').addEventListener('click', owConfirmMap);
-        document.getElementById('owMapModal').addEventListener('click', e => { if (e.target === document.getElementById('owMapModal')) owCloseMap(); });
+        document.getElementById('btnEntitiesNew').addEventListener('click', () => entOpenModal(null, false));
+        document.getElementById('btnExportEntities').addEventListener('click', () =>
+          exportTableToCsv(document.querySelector('#sqEntitiesArea table'), 'Qurumlar'));
 
-        document.getElementById('owCoordClear').addEventListener('click', () => {
-          document.getElementById('owLat').value = '';
-          document.getElementById('owLng').value = '';
-          document.getElementById('owCoordChip').style.display = 'none';
-          if (owMarker) { owMarker.remove(); owMarker = null; }
-        });
-
-        document.getElementById('btnOwnerNew').addEventListener('click', () => owOpenModal(null, false));
-
-        renderOwnersTable();
-
-        /* ══════════════════════════════════════════
-           İDARƏEDİCİ QURUMLAR SORAQÇASI
-        ══════════════════════════════════════════ */
-        let sqManaging = [];
-        let mqEditId = null;
-
-        function mqNid() {
-          return sqManaging.length ? Math.max(...sqManaging.map(o => o.id)) + 1 : 1;
-        }
-
-        function mqEsc(s) {
-          return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-        }
-
-        window.renderManagingTable = function() {
-          const area = document.getElementById('sqManagingArea');
-          if (!area) return;
-          const cnt = document.getElementById('managingCount');
-          if (cnt) cnt.textContent = sqManaging.length + ' qeyd';
-
-          if (!sqManaging.length) {
-            area.innerHTML = `<div style="text-align:center;padding:48px 24px;color:#94a3b8;font-size:13px;">Heç bir idarəedici qurum qeydə alınmayıb</div>`;
-            return;
-          }
-
-          const rows = sqManaging.map((o, i) => {
-            const phones = (o.phones || []).map(p => mqEsc(p)).join(', ') || '—';
-            return `<tr>
-              <td style="text-align:center;color:#94a3b8;font-size:11px;">${i+1}</td>
-              <td style="cursor:pointer;" onclick="mqView(${o.id})">
-                <span style="font-weight:600;color:#1a2b3c;">${mqEsc(o.name || '—')}</span>
-                ${o.shortName ? `<span style="margin-left:6px;font-size:10.5px;font-weight:650;color:#0f766e;background:#ccfbf1;border:1px solid #99f6e4;border-radius:4px;padding:1px 6px;">${mqEsc(o.shortName)}</span>` : ''}
-              </td>
-              <td><span class="ow-type-badge ow-type-qurum">Qurum</span></td>
-              <td style="font-size:12px;color:#64748b;">${mqEsc(o.email || '—')}</td>
-              <td style="font-size:12px;color:#64748b;">${phones}</td>
-              <td style="font-size:12px;color:#64748b;max-width:220px;white-space:normal;">${mqEsc(o.address || '—')}</td>
-              <td><div class="row-acts"><div class="action-menu-wrap">
-                <button class="action-menu-btn" data-action-menu type="button">⋮</button>
-                <div class="action-menu">
-                  <button class="action-menu-item" type="button" onclick="mqView(${o.id})">Bax</button>
-                  <button class="action-menu-item" type="button" onclick="mqEdit(${o.id})">Redaktə et</button>
-                  <button class="action-menu-item danger" type="button" onclick="mqDelete(${o.id})">Sil</button>
-                </div>
-              </div></div></td>
-            </tr>`;
-          }).join('');
-
-          area.innerHTML = `<div class="table-wrap" style="flex:1;">
-            <table style="min-width:860px;">
-              <thead><tr>
-                <th class="th-nof" style="width:44px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">#</span></div></th>
-                <th><div class="th-top"><span class="th-label">Adı</span></div></th>
-                <th><div class="th-top"><span class="th-label">Növü</span></div></th>
-                <th><div class="th-top"><span class="th-label">Email</span></div></th>
-                <th><div class="th-top"><span class="th-label">Nömrə(lər)</span></div></th>
-                <th><div class="th-top"><span class="th-label">Ünvan</span></div></th>
-                <th class="th-nof" style="width:120px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">Əməliyyatlar</span></div></th>
-              </tr></thead>
-              <tbody>${rows}</tbody>
-            </table>
-          </div>`;
-
-          area.querySelectorAll('[data-action-menu]').forEach(btn => {
-            btn.addEventListener('click', e => {
-              e.stopPropagation();
-              const menu = btn.nextElementSibling;
-              document.querySelectorAll('.action-menu.open').forEach(m => { if (m !== menu) m.classList.remove('open'); });
-              menu.classList.toggle('open');
-            });
-          });
-        };
-
-        /* ── Modal ── */
-        function mqOpenModal(id, viewMode) {
-          mqEditId = id || null;
-          const isNew = !id;
-          const o = id ? sqManaging.find(x => x.id === id) : null;
-
-          document.getElementById('mqModalTitle').textContent = isNew
-            ? 'Yeni idarəedici qurum'
-            : (viewMode ? 'Bax — ' : 'Redaktə — ') + (o?.name || '');
-          document.getElementById('mqModalSave').style.display = viewMode ? 'none' : '';
-          document.getElementById('mqModalEdit').style.display = viewMode ? '' : 'none';
-
-          document.getElementById('mqName').value      = o?.name      || '';
-          document.getElementById('mqShortName').value = o?.shortName || '';
-          document.getElementById('mqEmail').value     = o?.email     || '';
-          document.getElementById('mqAddress').value   = o?.address   || '';
-
-          ['mqName','mqShortName','mqEmail','mqAddress'].forEach(fid => {
-            const el = document.getElementById(fid);
-            if (el) el.readOnly = viewMode;
-          });
-
-          const list = document.getElementById('mqPhoneList');
-          if (list) {
-            list.innerHTML = '';
-            const vals = (o?.phones && o.phones.length) ? o.phones : (viewMode ? [] : ['']);
-            vals.forEach(v => {
-              const row = document.createElement('div');
-              row.className = 'ow-phone-row';
-              const inp = document.createElement('input');
-              inp.className = 'finput ow-phone-input';
-              inp.type = 'tel';
-              inp.placeholder = '+994 XX XXX XX XX';
-              inp.value = v || '';
-              inp.readOnly = !!viewMode;
-              row.appendChild(inp);
-              if (!viewMode) {
-                const rm = document.createElement('button');
-                rm.className = 'ow-phone-remove';
-                rm.type = 'button';
-                rm.title = 'Sil';
-                rm.textContent = '×';
-                rm.addEventListener('click', () => row.remove());
-                row.appendChild(rm);
-              }
-              list.appendChild(row);
+        /* pre-seed from roadOwnershipDirectory */
+        roadOwnershipDirectory.forEach(entry => {
+          if (!sqEntities.find(x => x.name === entry.owner)) {
+            sqEntities.push({
+              id: entNid(),
+              type: entry.ownerKind === 'Fiziki şəxs' ? 'fiziki' : 'huquqi',
+              name: entry.owner,
+              shortName: entry.shortName || '',
+              voen: entry.voen || '',
+              email: entry.email || '',
+              address: entry.address || '',
+              lat: entry.lat || '',
+              lng: entry.lng || '',
+              phones: entry.phones || [],
+              roles: ['mulkiyyetci'],
             });
           }
-
-          document.getElementById('mqPhoneAdd').style.display = viewMode ? 'none' : '';
-          document.getElementById('mqModal').classList.add('open');
-        }
-
-        function mqCloseModal() {
-          document.getElementById('mqModal').classList.remove('open');
-        }
-
-        function mqSave() {
-          const name    = document.getElementById('mqName').value.trim();
-          const address = document.getElementById('mqAddress').value.trim();
-          if (!name) { alert('Qurum adı boş ola bilməz.'); return; }
-          if (!address) { alert('Ünvan daxil edin.'); return; }
-          const shortName = document.getElementById('mqShortName').value.trim();
-          const email     = document.getElementById('mqEmail').value.trim();
-          const phones    = [...document.querySelectorAll('#mqPhoneList .ow-phone-input')].map(i => i.value.trim()).filter(Boolean);
-          const data      = { name, shortName, email, address, phones };
-          if (mqEditId) {
-            const r = sqManaging.find(x => x.id === mqEditId);
-            if (r) Object.assign(r, data);
-          } else {
-            sqManaging.push({ id: mqNid(), ...data });
-          }
-          mqCloseModal();
-          renderManagingTable();
-          /* sync with directory */
-          const entry = sqManaging.find(x => x.name === name || (mqEditId && x.id === mqEditId));
-          if (entry) {
-            const existing = roadManagingDirectory.find(d => d.name === entry.name || d.label === entry.name);
-            if (existing) {
-              Object.assign(existing, { name: entry.name, label: entry.shortName || entry.name, shortName: entry.shortName, email: entry.email, address: entry.address, phones: entry.phones });
-            } else {
-              const id = `mng-sq-${Date.now()}`;
-              roadManagingDirectory.push({ id, label: entry.shortName || entry.name, name: entry.name, shortName: entry.shortName, email: entry.email, address: entry.address, phones: entry.phones, lat: '', lng: '' });
-            }
-            if (typeof window.populateRoadManagingSelects === 'function') window.populateRoadManagingSelects();
-          }
-        }
-
-        window.mqView   = (id) => mqOpenModal(id, true);
-        window.mqEdit   = (id) => mqOpenModal(id, false);
-        window.mqDelete = (id) => {
-          const o = sqManaging.find(x => x.id === id);
-          if (!o) return;
-          if (!confirm('"' + o.name + '" qurumunu silmək istədiyinizə əminsiniz?')) return;
-          sqManaging = sqManaging.filter(x => x.id !== id);
-          renderManagingTable();
-        };
-
-        window.addManagingSoraqcaFromRoad = function(entry) {
-          if (!entry?.name) return;
-          const existing = sqManaging.find(x => x.name.toLowerCase() === entry.name.toLowerCase());
-          if (existing) {
-            Object.assign(existing, { shortName: entry.shortName || existing.shortName || '', email: entry.email || existing.email || '', address: entry.address || existing.address || '', phones: entry.phones || existing.phones || [] });
-          } else {
-            sqManaging.push({ id: mqNid(), name: entry.name, shortName: entry.shortName || '', email: entry.email || '', address: entry.address || '', phones: entry.phones || [] });
-          }
-          renderManagingTable();
-        };
-
-        /* ── Inject managing modal HTML ── */
-        document.body.insertAdjacentHTML('beforeend', `
-          <div class="modal-ov" id="mqModal">
-            <div class="modal-box" style="max-width:540px;">
-              <div class="modal-head">
-                <div class="modal-title-block">
-                  <div class="mh-title" id="mqModalTitle">Yeni idarəedici qurum</div>
-                  <div class="mh-sub">Yalnız qurum tipi — fiziki şəxs seçilmir</div>
-                </div>
-                <button class="modal-close-btn" id="mqModalClose" type="button" aria-label="Bağla">
-                  <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                </button>
-              </div>
-              <div class="modal-body" style="padding:20px;">
-                <div style="display:flex;flex-direction:column;gap:14px;">
-                  <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;">
-                    <div class="frow full">
-                      <label>Tam adı <span class="req">*</span></label>
-                      <input class="finput" id="mqName" type="text" placeholder="Qurumun rəsmi adı" style="margin-top:6px;">
-                    </div>
-                    <div class="frow">
-                      <label>Qısa adı</label>
-                      <input class="finput" id="mqShortName" type="text" placeholder="Abbreviatura" style="margin-top:6px;width:120px;">
-                    </div>
-                  </div>
-                  <div class="ow-section-div">Əlaqə</div>
-                  <div class="frow full">
-                    <label>Email</label>
-                    <input class="finput" id="mqEmail" type="email" placeholder="email@..." style="margin-top:6px;">
-                  </div>
-                  <div class="frow full">
-                    <label>Telefon nömrəsi</label>
-                    <div id="mqPhoneList" class="ow-phone-list" style="margin-top:6px;"></div>
-                    <button class="ow-phone-add" id="mqPhoneAdd" type="button">
-                      <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.5;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                      Nömrə əlavə et
-                    </button>
-                  </div>
-                  <div class="ow-section-div">Ünvan</div>
-                  <div class="frow full">
-                    <input class="finput" id="mqAddress" type="text" placeholder="Küçə, şəhər, rayon..." style="margin-top:6px;">
-                  </div>
-                </div>
-              </div>
-              <div class="modal-foot">
-                <button class="fbtn fbtn-ghost" id="mqModalCancel" type="button">Ləğv et</button>
-                <button class="fbtn fbtn-primary" id="mqModalEdit" type="button" style="display:none;">Redaktə et</button>
-                <button class="fbtn fbtn-primary" id="mqModalSave" type="button">Saxla</button>
-              </div>
-            </div>
-          </div>`);
-
-        document.getElementById('mqModalSave').addEventListener('click', mqSave);
-        document.getElementById('mqModalCancel').addEventListener('click', mqCloseModal);
-        document.getElementById('mqModalClose').addEventListener('click', mqCloseModal);
-        document.getElementById('mqModalEdit').addEventListener('click', () => mqOpenModal(mqEditId, false));
-        document.getElementById('mqModal').addEventListener('click', e => { if (e.target === document.getElementById('mqModal')) mqCloseModal(); });
-        document.getElementById('mqPhoneAdd').addEventListener('click', () => {
-          const list = document.getElementById('mqPhoneList');
-          if (!list) return;
-          const row = document.createElement('div');
-          row.className = 'ow-phone-row';
-          const inp = document.createElement('input');
-          inp.className = 'finput ow-phone-input';
-          inp.type = 'tel';
-          inp.placeholder = '+994 XX XXX XX XX';
-          row.appendChild(inp);
-          const rm = document.createElement('button');
-          rm.className = 'ow-phone-remove';
-          rm.type = 'button';
-          rm.title = 'Sil';
-          rm.textContent = '×';
-          rm.addEventListener('click', () => row.remove());
-          row.appendChild(rm);
-          list.appendChild(row);
         });
-        document.getElementById('btnManagingNew').addEventListener('click', () => mqOpenModal(null, false));
-
-        renderManagingTable();
 
         /* pre-seed from roadManagingDirectory */
         roadManagingDirectory.forEach(entry => {
-          if (!sqManaging.find(x => x.name === entry.name)) {
-            sqManaging.push({ id: mqNid(), name: entry.name, shortName: entry.shortName || '', email: entry.email || '', address: entry.address || '', phones: entry.phones || [] });
+          const existing = sqEntities.find(x => x.name === entry.name);
+          if (existing) {
+            if (!existing.roles.includes('idareedici')) existing.roles.push('idareedici');
+          } else {
+            sqEntities.push({
+              id: entNid(),
+              type: 'huquqi',
+              name: entry.name,
+              shortName: entry.shortName || '',
+              voen: entry.voen || '',
+              email: entry.email || '',
+              address: entry.address || '',
+              lat: entry.lat || '',
+              lng: entry.lng || '',
+              phones: entry.phones || [],
+              roles: ['idareedici'],
+            });
           }
         });
-        renderManagingTable();
+
+        renderEntitiesTable();
 
       })();
 
-      /* ══════════════════════════════════════════
-         PASPORT SƏNƏDLƏRİ
-      ══════════════════════════════════════════ */
-      (function() {
+      if (false) (function() { // PASPORT REMOVED
 
         /* ─── Dummy data ─── */
         const psData = [
