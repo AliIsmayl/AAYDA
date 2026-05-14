@@ -887,11 +887,12 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
+      height: 36px;
       background: #2563eb;
       color: #fff;
       border: none;
       border-radius: 7px;
-      padding: 5px 11px;
+      padding: 0 11px;
       font-size: 11px;
       font-weight: 600;
       cursor: pointer;
@@ -931,6 +932,44 @@
       stroke-linejoin: round;
       flex-shrink: 0;
     }
+
+    .word-upload-label {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 14px; border-radius: 8px; cursor: pointer;
+      border: 1.5px dashed #93c5fd; background: #eff6ff; color: #2563eb;
+      font-size: 12.5px; font-weight: 500; font-family: inherit;
+      transition: background .14s, border-color .14s;
+    }
+    .word-upload-label:hover { background: #dbeafe; border-color: #3b82f6; }
+    .word-upload-label svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .word-file-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 12px; border-radius: 8px; background: #eff6ff;
+      border: 1px solid #bfdbfe; font-size: 12.5px; color: #1e40af;
+    }
+    .word-file-chip svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; color: #2563eb; }
+    .word-file-name { font-weight: 500; max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .word-file-acts { display: flex; gap: 4px; margin-left: 4px; }
+    .word-act-btn {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 9px; border-radius: 6px; border: 1px solid #bfdbfe;
+      background: #fff; color: #2563eb; font-size: 11.5px; font-weight: 500;
+      cursor: pointer; font-family: inherit; transition: background .12s;
+    }
+    .word-act-btn:hover { background: #dbeafe; }
+    .word-act-btn.danger { color: #dc2626; border-color: #fca5a5; }
+    .word-act-btn.danger:hover { background: #fee2e2; }
+    .word-act-btn svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .td-word-acts { display: flex; gap: 5px; align-items: center; }
+    .td-word-btn {
+      display: inline-flex; align-items: center; gap: 3px;
+      padding: 3px 8px; border-radius: 6px; border: 1px solid #bfdbfe;
+      background: #eff6ff; color: #2563eb; font-size: 11px; font-weight: 500;
+      cursor: pointer; font-family: inherit; transition: background .12s;
+      white-space: nowrap;
+    }
+    .td-word-btn:hover { background: #dbeafe; }
+    .td-word-btn svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
 
     .btn-new svg {
       width: 13px;
@@ -1056,7 +1095,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 8px 8px;
+      padding: 6px 7px;
       gap: 3px;
     }
 
@@ -1068,6 +1107,8 @@
       overflow: hidden;
       text-overflow: ellipsis;
       flex: 1;
+      text-align: center;
+      min-width: 0;
     }
 
     #mainTable thead {
@@ -1095,26 +1136,24 @@
     }
 
     .th-ctrls {
-      display: flex;
-      gap: 1px;
-      flex-shrink: 0;
+      display: contents;
     }
 
     .sort-btn {
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       border: none;
       background: transparent;
       cursor: pointer;
-      border-radius: 5px;
+      border-radius: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 700;
       color: rgba(255,255,255,.55);
       line-height: 1;
-      padding: 0 0 2px;
+      padding: 0;
       transition: background .12s, color .12s;
     }
 
@@ -1128,12 +1167,12 @@
     }
 
     .filt-btn {
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       border: none;
       background: transparent;
       cursor: pointer;
-      border-radius: 5px;
+      border-radius: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -3664,7 +3703,8 @@
 
     .btn-new {
       gap: 5px;
-      padding: 6px 13px;
+      height: 36px;
+      padding: 0 13px;
       font-size: 12px;
       border-radius: 8px;
     }
@@ -3726,11 +3766,6 @@
       color: #fff !important;
     }
 
-    .th-top {
-      padding: 11px 10px;
-      gap: 6px;
-    }
-
     .th-label {
       font-size: 13px;
       font-weight: 700;
@@ -3738,18 +3773,18 @@
 
     .sort-btn,
     .filt-btn {
-      width: 26px;
-      height: 26px;
-      border-radius: 7px;
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
     }
 
     .sort-btn {
-      font-size: 18px;
+      font-size: 15px;
     }
 
     .filt-btn svg {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
     }
 
     .th-bot {
@@ -6367,7 +6402,7 @@
             </div>
             <div class="frow">
               <label>İstismara verildiyi tarix</label>
-              <input class="finput" id="f_tarix" type="date">
+              <input class="finput" id="f_tarix" type="text" placeholder="GG.AA.İİİİ" maxlength="10" data-mask="date" autocomplete="off">
             </div>
           </div>
         </div>
@@ -7336,7 +7371,7 @@
             </div>
             <div class="frow">
               <label>İstismara verildiyi tarix</label>
-              <input class="finput" id="rm_tarix" type="date">
+              <input class="finput" id="rm_tarix" type="text" placeholder="GG.AA.İİİİ" maxlength="10" data-mask="date" autocomplete="off">
             </div>
           </div>
         </div>
@@ -7882,7 +7917,7 @@
       { label: 'Mülkiyyət', ci: ROAD_COL.ownership, type: 'select', options: ['Dövlət', 'Bələdiyyə', 'Özəl', 'Hüquqi şəxs', 'Fiziki şəxs'], tooltip: 'Yolun mülkiyyət forması' },
       { label: 'İstifadə', ci: ROAD_COL.usage, tooltip: 'Yolun istifadə növü' },
       { label: 'Kəsişmə', ci: ROAD_COL.intersection, tooltip: 'Kəsişmənin növü və səviyyəsi' },
-      { label: 'İstismara verildiyi tarix', ci: ROAD_COL.commissionedDate, tooltip: 'Yolun istifadəyə verildiyi tarix' },
+      { label: 'İst. tarixi', title: 'İstismara verildiyi tarix', ci: ROAD_COL.commissionedDate, tooltip: 'Yolun istifadəyə verildiyi tarix' },
       { label: 'Torpaq, ha', title: 'Tutduğu torpaq sahəsi (ha)', ci: ROAD_COL.landAreaHa, filterKind: 'range', tooltip: 'Yolun tutduğu torpaq sahəsi, hektar' },
     ];
 
@@ -7944,21 +7979,54 @@
       const text = String(value || '').trim();
       if (!text || text === '-') return '-';
       const isoMatch = text.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-      if (!isoMatch) return text;
-      const monthIdx = Number(isoMatch[2]) - 1;
-      const day = String(Number(isoMatch[3]));
-      return `${day} ${roadMonthNames[monthIdx] || isoMatch[2]} ${isoMatch[1]}`;
+      if (isoMatch) {
+        const monthIdx = Number(isoMatch[2]) - 1;
+        const day = String(Number(isoMatch[3]));
+        return `${day} ${roadMonthNames[monthIdx] || isoMatch[2]} ${isoMatch[1]}`;
+      }
+      const maskMatch = text.match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+      if (maskMatch) {
+        const monthIdx = Number(maskMatch[2]) - 1;
+        const day = String(Number(maskMatch[1]));
+        return `${day} ${roadMonthNames[monthIdx] || maskMatch[2]} ${maskMatch[3]}`;
+      }
+      return text;
     }
 
     function roadDateInputValue(value) {
       const text = String(value || '').trim().toLowerCase();
       if (!text || text === '-') return '';
-      if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+      if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
+        const [y, m, d] = text.split('-');
+        return `${d}.${m}.${y}`;
+      }
       const match = text.match(/^(\d{1,2})\s+([a-zəğıöşüç]+)(?:\s+(\d{4}))?$/i);
       if (!match) return '';
       const monthIdx = roadMonthNames.indexOf(match[2]);
       if (monthIdx < 0 || !match[3]) return '';
-      return `${match[3]}-${String(monthIdx + 1).padStart(2, '0')}-${String(Number(match[1])).padStart(2, '0')}`;
+      return `${String(Number(match[1])).padStart(2,'0')}.${String(monthIdx+1).padStart(2,'0')}.${match[3]}`;
+    }
+
+    function applyDateMask(input) {
+      input.addEventListener('keydown', function(e) {
+        const allowed = ['Backspace','Delete','Tab','Escape','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'];
+        if (allowed.includes(e.key)) return;
+        if (!/^\d$/.test(e.key)) { e.preventDefault(); return; }
+      });
+      input.addEventListener('input', function() {
+        const prev = this.value;
+        const digits = prev.replace(/\D/g, '').slice(0, 8);
+        let out = '';
+        if (digits.length <= 2) {
+          out = digits;
+        } else if (digits.length <= 4) {
+          out = digits.slice(0, 2) + '.' + digits.slice(2);
+        } else {
+          out = digits.slice(0, 2) + '.' + digits.slice(2, 4) + '.' + digits.slice(4);
+        }
+        this.value = out;
+        this.setSelectionRange(out.length, out.length);
+      });
     }
 
     function normalizeRoadLanes(value) {
@@ -8356,13 +8424,11 @@
       return `
         <th data-ci="${col.ci}"${thTitle}${thStyle}>
           <div class="th-top">
+            <button class="sort-btn" type="button" title="Sırala">⋮</button>
             <span class="th-label"${labelTooltip}>${safeCell(col.label)}</span>
-            <div class="th-ctrls">
-              <button class="sort-btn" type="button" title="Sırala">⋮</button>
-              <button class="filt-btn" type="button" title="Axtar"><svg viewBox="0 0 24 24">
-                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-              </svg></button>
-            </div>
+            <button class="filt-btn" type="button" title="Axtar"><svg viewBox="0 0 24 24">
+              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+            </svg></button>
             <div class="sort-menu">
               <div class="sort-opt" data-dir="asc">Artan sırala</div>
               <div class="sort-opt" data-dir="desc">Azalan sırala</div>
@@ -9134,7 +9200,7 @@
       const el = document.getElementById(id);
       if (!el) return;
       const text = String(value ?? '').trim();
-      if (el.type === 'date') {
+      if (el.dataset.mask === 'date') {
         el.value = roadDateInputValue(text);
         return;
       }
@@ -9220,6 +9286,8 @@
     document.getElementById('btnNewRoad').addEventListener('click', () => openForm('create'));
     document.getElementById('btnExportRoads').addEventListener('click', () =>
       exportTableToCsv(document.getElementById('mainTable'), 'Yollar'));
+    applyDateMask(document.getElementById('f_tarix'));
+    applyDateMask(document.getElementById('rm_tarix'));
 
     /* Action menu in roads table */
     document.getElementById('tableBody').addEventListener('click', e => {
@@ -12593,11 +12661,9 @@
           th.dataset.ci = String(idx);
           th.innerHTML = `
             <div class="th-top">
+              <button class="sort-btn" type="button">⋮</button>
               <span class="th-label">${label}</span>
-              <div class="th-ctrls">
-                <button class="sort-btn" type="button">⋮</button>
-                <button class="filt-btn" type="button"><svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></svg></button>
-              </div>
+              <button class="filt-btn" type="button"><svg viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></svg></button>
               <div class="sort-menu">
                 <div class="sort-opt" data-dir="asc">Artan sırala</div>
                 <div class="sort-opt" data-dir="desc">Azalan sırala</div>
@@ -14952,9 +15018,9 @@
           const pages = Math.max(1, Math.ceil(total / SD_PER));
           if (sdPages[key] > pages) sdPages[key] = pages;
           const slice = filtered.slice((page-1)*SD_PER, page*SD_PER);
-          const colCount = isNames ? 7 : 5;
+          const colCount = isNames ? 8 : 5;
 
-          const statusCI  = isNames ? 6 : 3;
+          const statusCI  = isNames ? 7 : 3;
           const filterByCi = isNames
             ? {'1':'name','3':'group','4':'type','5':'gis',[String(statusCI)]:'status'}
             : {'1':'name',[String(statusCI)]:'status'};
@@ -14967,10 +15033,8 @@
           const relFilterTh = (ci, label, filterKey, selected, optionsHtml) => `
               <th data-ci="${ci}">
                 <div class="th-top">
-                  <span class="th-label">${label}</span>
-                  <div class="th-ctrls">
-                    <button class="filt-btn${selected?' on':''}" type="button">${filtSvg}</button>
-                  </div>
+                  <span class="th-label" style="text-align:center;">${label}</span>
+                  <button class="filt-btn${selected?' on':''}" type="button">${filtSvg}</button>
                 </div>
                 <div class="th-bot" style="display:${sdOpenBot[key] === filterKey ? 'block' : 'none'};">
                   <div class="th-filter-row">
@@ -14990,11 +15054,9 @@
             <th class="th-nof" style="width:44px;" data-ci="0"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">#</span></div></th>
             <th data-ci="1">
               <div class="th-top">
+                <button class="sort-btn${sdSortDir[key]?' on':''}" type="button">⋮</button>
                 <span class="th-label">Adı</span>
-                <div class="th-ctrls">
-                  <button class="sort-btn${sdSortDir[key]?' on':''}" type="button">⋮</button>
-                  <button class="filt-btn${sdSearch[key]?' on':''}" type="button">${filtSvg}</button>
-                </div>
+                <button class="filt-btn${sdSearch[key]?' on':''}" type="button">${filtSvg}</button>
                 <div class="sort-menu">
                   <div class="sort-opt" data-dir="asc">Artan sırala</div>
                   <div class="sort-opt" data-dir="desc">Azalan sırala</div>
@@ -15010,12 +15072,11 @@
             </th>
             <th data-ci="2"><div class="th-top"><span class="th-label">Təsviri</span></div></th>
             ${relThs}
+            ${isNames ? `<th data-ci="6" style="width:140px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">Şablon</span></div></th>` : ''}
             <th data-ci="${statusCI}">
               <div class="th-top">
-                <span class="th-label">Status</span>
-                <div class="th-ctrls">
-                  <button class="filt-btn${sdStatusF[key]?' on':''}" type="button">${filtSvg}</button>
-                </div>
+                <span class="th-label" style="text-align:center;">Status</span>
+                <button class="filt-btn${sdStatusF[key]?' on':''}" type="button">${filtSvg}</button>
               </div>
               <div class="th-bot" style="display:${statusBot};">
                 <div class="th-filter-row">
@@ -15047,11 +15108,22 @@
               const nameTd = isNames
                 ? `<td class="sq-name-cell" tabindex="0" role="button" onclick="sqNameDetail(${r.id})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();sqNameDetail(${r.id});}">${esc(r.name)}</td>`
                 : `<td style="font-weight:500;color:#1a2b3c;">${esc(r.name)}</td>`;
+              const wordActsTd = (isNames && sdRowField(r,'typeId') === 12 && r.wordFile)
+                ? `<td><div class="td-word-acts">
+                    <button class="td-word-btn" type="button" onclick="sdWordView('${key}',${r.id})">
+                      <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Bax
+                    </button>
+                    <button class="td-word-btn" type="button" onclick="sdWordDownload('${key}',${r.id})">
+                      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Endir
+                    </button>
+                  </div></td>`
+                : (isNames ? `<td style="color:#94a3b8;font-size:11px;text-align:center;">—</td>` : '');
               return `<tr>
                 <td style="text-align:center;color:#94a3b8;font-size:11px;">${(page-1)*SD_PER+i+1}</td>
                 ${nameTd}
                 <td style="font-size:12px;color:#64748b;max-width:240px;">${esc(r.description||'—')}</td>
                 ${relCols}
+                ${wordActsTd}
                 <td>${stBadge}</td>
                 <td><div class="row-acts"><div class="action-menu-wrap">
                   <button class="action-menu-btn" data-action-menu type="button" aria-label="Əməliyyatlar">⋮</button>
@@ -15334,6 +15406,31 @@
                       </div>
                     </div>
                   </div>
+                  <div class="frow full" id="sqModalWordSection" style="display:none;">
+                    <label style="margin-bottom:6px;display:block;">Pasport şablonu <span style="font-size:11px;color:#64748b;font-weight:400;">(Word faylı)</span></label>
+                    <div id="sqModalWordEmpty">
+                      <label class="word-upload-label" for="sqModalWordInput">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="12" x2="12" y2="18"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                        Word fayl seçin (.doc, .docx)
+                      </label>
+                      <input type="file" id="sqModalWordInput" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none;">
+                    </div>
+                    <div id="sqModalWordFile" style="display:none;">
+                      <div class="word-file-chip">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        <span class="word-file-name" id="sqModalWordFileName"></span>
+                        <div class="word-file-acts">
+                          <button class="word-act-btn" id="sqModalWordView" type="button">
+                            <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Bax
+                          </button>
+                          <button class="word-act-btn" id="sqModalWordDownload" type="button">
+                            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Endir
+                          </button>
+                          <button class="word-act-btn danger" id="sqModalWordRemove" type="button">× Sil</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div class="frow">
                     <label>Status</label>
                     <select class="fselect" id="sq_modal_status">
@@ -15359,6 +15456,132 @@
           sdOpenModal(document.getElementById('sqModal').dataset.sdKey, sdEditId, false);
         });
         document.getElementById('sqModal').addEventListener('click', e => { if (e.target === document.getElementById('sqModal')) sdCloseModal(); });
+
+        /* ─── WORD FILE LOGIC ─── */
+        const PASPORTLASDIRILMIS_TYPE_ID = 12;
+        let _sqWordPending = null; // { name, dataUrl } or null while editing
+
+        function sqWordShowSection(show) {
+          const sec = document.getElementById('sqModalWordSection');
+          if (sec) sec.style.display = show ? '' : 'none';
+          if (!show) { _sqWordPending = null; sqWordRenderChip(null); }
+        }
+
+        function sqWordRenderChip(file) {
+          const empty = document.getElementById('sqModalWordEmpty');
+          const chip  = document.getElementById('sqModalWordFile');
+          const fname = document.getElementById('sqModalWordFileName');
+          if (!empty || !chip) return;
+          if (file) {
+            fname.textContent = file.name;
+            empty.style.display = 'none';
+            chip.style.display  = '';
+          } else {
+            empty.style.display = '';
+            chip.style.display  = 'none';
+          }
+        }
+
+        document.getElementById('sq_modal_type').addEventListener('change', function() {
+          const key = document.getElementById('sqModal').dataset.sdKey;
+          if (key !== 'names') return;
+          sqWordShowSection(+this.value === PASPORTLASDIRILMIS_TYPE_ID);
+        });
+
+        document.getElementById('sqModalWordInput').addEventListener('change', function() {
+          const file = this.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            _sqWordPending = { name: file.name, dataUrl: e.target.result };
+            sqWordRenderChip(_sqWordPending);
+          };
+          reader.readAsDataURL(file);
+          this.value = '';
+        });
+
+        document.getElementById('sqModalWordView').addEventListener('click', function() {
+          if (!_sqWordPending) return;
+          const a = document.createElement('a');
+          a.href = _sqWordPending.dataUrl;
+          a.target = '_blank';
+          document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        });
+
+        document.getElementById('sqModalWordDownload').addEventListener('click', function() {
+          if (!_sqWordPending) return;
+          const a = document.createElement('a');
+          a.href = _sqWordPending.dataUrl;
+          a.download = _sqWordPending.name;
+          document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        });
+
+        document.getElementById('sqModalWordRemove').addEventListener('click', function() {
+          _sqWordPending = null;
+          sqWordRenderChip(null);
+        });
+
+        /* patch sdOpenModal to handle word file */
+        const _origSdOpenModal = sdOpenModal;
+        sdOpenModal = function(key, id, viewMode) {
+          _origSdOpenModal(key, id, viewMode);
+          const typeVal = +document.getElementById('sq_modal_type').value;
+          const isPasport = key === 'names' && typeVal === PASPORTLASDIRILMIS_TYPE_ID;
+          sqWordShowSection(isPasport);
+          if (isPasport && id) {
+            const r = sdStore(key).find(x => x.id === id);
+            _sqWordPending = r?.wordFile || null;
+            sqWordRenderChip(_sqWordPending);
+          } else {
+            _sqWordPending = null;
+            sqWordRenderChip(null);
+          }
+          const wordEls = ['sqModalWordInput','sqModalWordView','sqModalWordDownload','sqModalWordRemove','sqModalWordEmpty'];
+          wordEls.forEach(eid => { const el = document.getElementById(eid); if (el) { if (eid === 'sqModalWordInput') el.disabled = !!viewMode; else if (eid !== 'sqModalWordEmpty') el.style.display = (viewMode && eid === 'sqModalWordView') ? '' : (viewMode && (eid === 'sqModalWordDownload')) ? '' : (viewMode && eid === 'sqModalWordRemove') ? 'none' : el.style.display; } });
+          if (viewMode) { const lbl = document.querySelector('label[for="sqModalWordInput"]'); if(lbl) lbl.style.display='none'; }
+          else { const lbl = document.querySelector('label[for="sqModalWordInput"]'); if(lbl) lbl.style.display=''; }
+        };
+        window.sdView = (key, id) => sdOpenModal(key, id, true);
+        window.sdEdit = (key, id) => sdOpenModal(key, id, false);
+
+        /* patch sdSave to persist word file */
+        const _origSdSave = sdSave;
+        sdSave = function() {
+          const key     = document.getElementById('sqModal').dataset.sdKey;
+          const tId     = +document.getElementById('sq_modal_type').value;
+          const isPasport = key === 'names' && tId === PASPORTLASDIRILMIS_TYPE_ID;
+          const nameVal = document.getElementById('sq_modal_name').value.trim();
+          const editId  = sdEditId;
+          _origSdSave();
+          /* only proceed if modal was actually closed (= save succeeded) */
+          if (isPasport && _sqWordPending !== undefined
+              && !document.getElementById('sqModal').classList.contains('open')) {
+            const store = sdStore(key);
+            const r = editId
+              ? store.find(x => x.id === editId)
+              : store.find(x => x.name === nameVal);
+            if (r) {
+              r.wordFile = _sqWordPending;
+              renderDictionaryKey(key); /* re-render so table shows the buttons */
+            }
+          }
+        };
+
+        /* global actions for table buttons */
+        window.sdWordView = function(key, id) {
+          const r = sdStore(key).find(x => x.id === id);
+          if (!r?.wordFile) return;
+          const a = document.createElement('a');
+          a.href = r.wordFile.dataUrl; a.target = '_blank';
+          document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        };
+        window.sdWordDownload = function(key, id) {
+          const r = sdStore(key).find(x => x.id === id);
+          if (!r?.wordFile) return;
+          const a = document.createElement('a');
+          a.href = r.wordFile.dataUrl; a.download = r.wordFile.name;
+          document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        };
 
         /* ─── INJECT NEW-ACTIVE MODAL ─── */
         document.body.insertAdjacentHTML('beforeend', `
