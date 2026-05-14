@@ -6410,22 +6410,14 @@
         <!-- ── Step 2: Mülkiyyət ── -->
         <div class="step-pane" id="pane2">
           <div class="fgrid">
-            <div class="frow">
-              <label>Mülkiyyət soraqçası <span class="req">*</span></label>
+            <div class="frow full">
+              <label>Mülkiyyətçi qurum <span class="req">*</span></label>
               <div class="relation-row">
                 <select class="fselect" id="f_mulk_nov">
                   <option value="">Seçin...</option>
                 </select>
-                <button class="fbtn fbtn-outline" id="fCreateOwnershipToggle" type="button">Mülkiyyət yarat</button>
+                <button class="fbtn fbtn-outline" id="fCreateQurumToggle" type="button">Qurum yarat</button>
               </div>
-            </div>
-            <div class="frow">
-              <label>Mülkiyyətçi <span class="req">*</span></label>
-              <input class="finput" id="f_mulk" placeholder="Nümunə: Azərbaycan Respublikası" readonly>
-            </div>
-            <div class="frow full">
-              <label>İdarə edən qurum <span class="req">*</span></label>
-              <input class="finput" id="f_idarə" placeholder="Nümunə: AAYDA" readonly>
             </div>
             <div class="ownership-info-card" id="fOwnershipInfo"></div>
             <div class="frow">
@@ -6450,21 +6442,11 @@
           </div>
           <!-- İdarəedici qurum -->
           <div class="fgrid" style="margin-top:14px;padding-top:14px;border-top:1px solid #e2e8f0;">
-            <div class="frow full" style="margin-bottom:4px;">
-              <span style="font-size:10.5px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;">İdarəedici Qurum</span>
-            </div>
             <div class="frow full">
-              <label>Soraqçadan seçin</label>
-              <div class="relation-row">
-                <select class="fselect" id="f_mng_nov">
-                  <option value="">Seçin...</option>
-                </select>
-                <button class="fbtn fbtn-outline" id="fCreateManagingToggle" type="button">Qurum yarat</button>
-              </div>
-            </div>
-            <div class="frow full">
-              <label>Tam adı</label>
-              <input class="finput" id="f_mng_name" placeholder="İdarəedici qurumun adı" readonly>
+              <label>İdarəedici qurum</label>
+              <select class="fselect" id="f_mng_nov">
+                <option value="">Seçin...</option>
+              </select>
             </div>
             <div class="ownership-info-card" id="fManagingInfo"></div>
           </div>
@@ -7378,22 +7360,14 @@
         <!-- Step 2: Mülkiyyət -->
         <div class="mpane" id="rmp2">
           <div class="fgrid">
-            <div class="frow">
-              <label>Mülkiyyət soraqçası <span class="req">*</span></label>
+            <div class="frow full">
+              <label>Mülkiyyətçi qurum <span class="req">*</span></label>
               <div class="relation-row">
                 <select class="fselect" id="rm_mulk_nov">
                   <option value="">Seçin...</option>
                 </select>
-                <button class="fbtn fbtn-outline" id="rmCreateOwnershipToggle" type="button">Mülkiyyət yarat</button>
+                <button class="fbtn fbtn-outline" id="rmCreateQurumToggle" type="button">Qurum yarat</button>
               </div>
-            </div>
-            <div class="frow">
-              <label>Mülkiyyətçi <span class="req">*</span></label>
-              <input class="finput" id="rm_mulk" placeholder="Azərbaycan Respublikası" readonly>
-            </div>
-            <div class="frow full">
-              <label>İdarə edən qurum <span class="req">*</span></label>
-              <input class="finput" id="rm_idare" placeholder="AAYDA" readonly>
             </div>
             <div class="ownership-info-card" id="rmOwnershipInfo"></div>
             <div class="frow">
@@ -7419,21 +7393,11 @@
           </div>
           <!-- İdarəedici qurum -->
           <div class="fgrid" style="margin-top:14px;padding-top:14px;border-top:1px solid #e2e8f0;">
-            <div class="frow full" style="margin-bottom:4px;">
-              <span style="font-size:10.5px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;">İdarəedici Qurum</span>
-            </div>
             <div class="frow full">
-              <label>Soraqçadan seçin</label>
-              <div class="relation-row">
-                <select class="fselect" id="rm_mng_nov">
-                  <option value="">Seçin...</option>
-                </select>
-                <button class="fbtn fbtn-outline" id="rmCreateManagingToggle" type="button">Qurum yarat</button>
-              </div>
-            </div>
-            <div class="frow full">
-              <label>Tam adı</label>
-              <input class="finput" id="rm_mng_name" placeholder="İdarəedici qurumun adı" readonly>
+              <label>İdarəedici qurum</label>
+              <select class="fselect" id="rm_mng_nov">
+                <option value="">Seçin...</option>
+              </select>
             </div>
             <div class="ownership-info-card" id="rmManagingInfo"></div>
           </div>
@@ -8120,8 +8084,8 @@
 
     function roadManagingFields(prefix) {
       return prefix === 'rm'
-        ? { select: 'rm_mng_nov', name: 'rm_mng_name', info: 'rmManagingInfo' }
-        : { select: 'f_mng_nov', name: 'f_mng_name', info: 'fManagingInfo' };
+        ? { select: 'rm_mng_nov', info: 'rmManagingInfo' }
+        : { select: 'f_mng_nov', info: 'fManagingInfo' };
     }
 
     function managingInfoItem(label, value) {
@@ -8131,31 +8095,46 @@
     function updateRoadManagingInfo(prefix) {
       const fields = roadManagingFields(prefix);
       const selectedId = document.getElementById(fields.select)?.value || '';
-      const entry = roadManagingById(selectedId);
       const info = document.getElementById(fields.info);
-      const nameEl = document.getElementById(fields.name);
 
-      if (nameEl) nameEl.value = entry?.name || '';
+      const entities = typeof window.getSqEntities === 'function' ? window.getSqEntities() : [];
+      const numId = parseInt(selectedId);
+      const entity = !isNaN(numId) ? entities.find(e => e.id === numId) : null;
+      const entry = entity || roadManagingById(selectedId);
 
       if (!info) return;
-      if (!entry) {
+      if (!entity && !entry) {
         info.classList.remove('visible');
         info.innerHTML = '';
         return;
       }
       info.classList.add('visible');
-      info.innerHTML = `
-        <div class="ownership-info-head">
-          <div class="ownership-info-title">${safeCell(entry.label)}</div>
-          <div class="ownership-info-badge">Soraqça</div>
-        </div>
-        <div class="ownership-info-grid">
-          ${managingInfoItem('Tam adı', entry.name)}
-          ${managingInfoItem('Qısa adı', entry.shortName)}
-          ${managingInfoItem('Email', entry.email)}
-          ${managingInfoItem('Nömrə(lər)', (entry.phones || []).join(', '))}
-          ${managingInfoItem('Ünvan', entry.address)}
-        </div>`;
+      if (entity) {
+        info.innerHTML = `
+          <div class="ownership-info-head">
+            <div class="ownership-info-title">${safeCell(entity.name)}</div>
+            <div class="ownership-info-badge">Soraqça</div>
+          </div>
+          <div class="ownership-info-grid">
+            ${managingInfoItem('Qısa adı', entity.shortName)}
+            ${managingInfoItem('Email', entity.email)}
+            ${managingInfoItem('Nömrə(lər)', (entity.phones || []).join(', '))}
+            ${managingInfoItem('Ünvan', entity.address)}
+          </div>`;
+      } else {
+        info.innerHTML = `
+          <div class="ownership-info-head">
+            <div class="ownership-info-title">${safeCell(entry.label)}</div>
+            <div class="ownership-info-badge">Soraqça</div>
+          </div>
+          <div class="ownership-info-grid">
+            ${managingInfoItem('Tam adı', entry.name)}
+            ${managingInfoItem('Qısa adı', entry.shortName)}
+            ${managingInfoItem('Email', entry.email)}
+            ${managingInfoItem('Nömrə(lər)', (entry.phones || []).join(', '))}
+            ${managingInfoItem('Ünvan', entry.address)}
+          </div>`;
+      }
     }
 
     function populateRoadManagingSelects() {
@@ -8164,10 +8143,18 @@
         const select = document.getElementById(fields.select);
         if (!select) return;
         const current = select.value;
-        select.innerHTML = '<option value="">Seçin...</option>' + roadManagingDirectory.map(item =>
-          `<option value="${safeCell(item.id)}">${safeCell(item.label)} — ${safeCell(item.name)}</option>`
-        ).join('');
-        if (current && roadManagingById(current)) select.value = current;
+        const entities = typeof window.getSqEntities === 'function' ? window.getSqEntities() : [];
+        const mngList = entities.filter(e => (e.roles || []).includes('idareedici'));
+        if (mngList.length) {
+          select.innerHTML = '<option value="">Seçin...</option>' + mngList.map(item =>
+            `<option value="${item.id}">${safeCell(item.name)}${item.shortName ? ' (' + safeCell(item.shortName) + ')' : ''}</option>`
+          ).join('');
+        } else {
+          select.innerHTML = '<option value="">Seçin...</option>' + roadManagingDirectory.map(item =>
+            `<option value="${safeCell(item.id)}">${safeCell(item.label)} — ${safeCell(item.name)}</option>`
+          ).join('');
+        }
+        if (current) select.value = current;
         updateRoadManagingInfo(prefix);
       });
     }
@@ -8176,14 +8163,41 @@
       const fields = roadManagingFields(prefix);
       const select = document.getElementById(fields.select);
       if (!select) return;
-      const entry = roadManagingByText(value);
-      select.value = entry?.id || '';
+      const text = String(value || '').trim().toLowerCase();
+      const entities = typeof window.getSqEntities === 'function' ? window.getSqEntities() : [];
+      const entity = entities.find(e =>
+        (e.roles || []).includes('idareedici') && (
+          e.name.toLowerCase() === text ||
+          (e.shortName || '').toLowerCase() === text
+        )
+      );
+      if (entity) {
+        select.value = entity.id;
+      } else {
+        const entry = roadManagingByText(value);
+        select.value = entry?.id || '';
+      }
       updateRoadManagingInfo(prefix);
     }
 
     function selectedRoadManaging(prefix) {
       const fields = roadManagingFields(prefix);
-      return roadManagingById(document.getElementById(fields.select)?.value || '');
+      const selectedId = document.getElementById(fields.select)?.value || '';
+      const entities = typeof window.getSqEntities === 'function' ? window.getSqEntities() : [];
+      const numId = parseInt(selectedId);
+      if (!isNaN(numId)) {
+        const entity = entities.find(e => e.id === numId);
+        if (entity) return {
+          id: String(entity.id),
+          label: entity.shortName || entity.name,
+          name: entity.name,
+          shortName: entity.shortName || '',
+          email: entity.email || '',
+          address: entity.address || '',
+          phones: entity.phones || [],
+        };
+      }
+      return roadManagingById(selectedId);
     }
     window.selectedRoadManaging = selectedRoadManaging;
     window.setRoadManagingSelection = setRoadManagingSelection;
@@ -8269,8 +8283,8 @@
 
     function roadOwnershipFields(prefix) {
       return prefix === 'rm'
-        ? { select: 'rm_mulk_nov', owner: 'rm_mulk', manager: 'rm_idare', info: 'rmOwnershipInfo' }
-        : { select: 'f_mulk_nov', owner: 'f_mulk', manager: 'f_idarə', info: 'fOwnershipInfo' };
+        ? { select: 'rm_mulk_nov', info: 'rmOwnershipInfo' }
+        : { select: 'f_mulk_nov', info: 'fOwnershipInfo' };
     }
 
     function ownershipInfoItem(label, value) {
@@ -8280,34 +8294,49 @@
     function updateRoadOwnershipInfo(prefix) {
       const fields = roadOwnershipFields(prefix);
       const selectedId = document.getElementById(fields.select)?.value || '';
-      const entry = roadOwnershipById(selectedId);
       const info = document.getElementById(fields.info);
-      const owner = document.getElementById(fields.owner);
-      const manager = document.getElementById(fields.manager);
 
-      if (owner) owner.value = entry?.owner || '';
-      if (manager) manager.value = entry?.manager || '';
+      const entities = typeof window.getSqEntities === 'function' ? window.getSqEntities() : [];
+      const numId = parseInt(selectedId);
+      const entity = !isNaN(numId) ? entities.find(e => e.id === numId) : null;
+      const entry = entity || roadOwnershipById(selectedId);
 
       if (!info) return;
-      if (!entry) {
+      if (!entity && !entry) {
         info.classList.remove('visible');
         info.innerHTML = '';
         return;
       }
       info.classList.add('visible');
-      info.innerHTML = `
-        <div class="ownership-info-head">
-          <div class="ownership-info-title">${safeCell(entry.label)}</div>
-          <div class="ownership-info-badge">Soraqça</div>
-        </div>
-        <div class="ownership-info-grid">
-          ${ownershipInfoItem('Adı', entry.owner)}
-          ${ownershipInfoItem('Qısa ad', entry.shortName)}
-          ${ownershipInfoItem('Email', entry.email)}
-          ${ownershipInfoItem('Nömrə(lər)', (entry.phones || []).join(', '))}
-          ${ownershipInfoItem('Ünvan', entry.address)}
-          ${ownershipInfoItem('Hüquqi / fiziki şəxs', entry.ownerKind)}
-        </div>`;
+      if (entity) {
+        info.innerHTML = `
+          <div class="ownership-info-head">
+            <div class="ownership-info-title">${safeCell(entity.name)}</div>
+            <div class="ownership-info-badge">Soraqça</div>
+          </div>
+          <div class="ownership-info-grid">
+            ${ownershipInfoItem('Qısa adı', entity.shortName)}
+            ${ownershipInfoItem('VÖEN', entity.voen)}
+            ${ownershipInfoItem('Email', entity.email)}
+            ${ownershipInfoItem('Nömrə(lər)', (entity.phones || []).join(', '))}
+            ${ownershipInfoItem('Ünvan', entity.address)}
+            ${ownershipInfoItem('Növü', entity.type === 'fiziki' ? 'Fiziki şəxs' : 'Hüquqi şəxs')}
+          </div>`;
+      } else {
+        info.innerHTML = `
+          <div class="ownership-info-head">
+            <div class="ownership-info-title">${safeCell(entry.label)}</div>
+            <div class="ownership-info-badge">Soraqça</div>
+          </div>
+          <div class="ownership-info-grid">
+            ${ownershipInfoItem('Adı', entry.owner)}
+            ${ownershipInfoItem('Qısa ad', entry.shortName)}
+            ${ownershipInfoItem('Email', entry.email)}
+            ${ownershipInfoItem('Nömrə(lər)', (entry.phones || []).join(', '))}
+            ${ownershipInfoItem('Ünvan', entry.address)}
+            ${ownershipInfoItem('Hüquqi / fiziki şəxs', entry.ownerKind)}
+          </div>`;
+      }
     }
 
     function populateRoadOwnershipSelects() {
@@ -8316,10 +8345,18 @@
         const select = document.getElementById(fields.select);
         if (!select) return;
         const current = select.value;
-        select.innerHTML = '<option value="">Seçin...</option>' + roadOwnershipDirectory.map(item =>
-          `<option value="${safeCell(item.id)}">${safeCell(item.label)} - ${safeCell(item.owner)}</option>`
-        ).join('');
-        if (current && roadOwnershipById(current)) select.value = current;
+        const entities = typeof window.getSqEntities === 'function' ? window.getSqEntities() : [];
+        const mulkList = entities.filter(e => (e.roles || []).includes('mulkiyyetci'));
+        if (mulkList.length) {
+          select.innerHTML = '<option value="">Seçin...</option>' + mulkList.map(item =>
+            `<option value="${item.id}">${safeCell(item.name)}${item.shortName ? ' (' + safeCell(item.shortName) + ')' : ''}</option>`
+          ).join('');
+        } else {
+          select.innerHTML = '<option value="">Seçin...</option>' + roadOwnershipDirectory.map(item =>
+            `<option value="${safeCell(item.id)}">${safeCell(item.label)} - ${safeCell(item.owner)}</option>`
+          ).join('');
+        }
+        if (current) select.value = current;
         updateRoadOwnershipInfo(prefix);
       });
     }
@@ -8328,14 +8365,44 @@
       const fields = roadOwnershipFields(prefix);
       const select = document.getElementById(fields.select);
       if (!select) return;
-      const entry = roadOwnershipByText(value);
-      select.value = entry?.id || '';
+      const text = String(value || '').trim().toLowerCase();
+      const entities = typeof window.getSqEntities === 'function' ? window.getSqEntities() : [];
+      const entity = entities.find(e =>
+        (e.roles || []).includes('mulkiyyetci') && (
+          e.name.toLowerCase() === text ||
+          (e.shortName || '').toLowerCase() === text
+        )
+      );
+      if (entity) {
+        select.value = entity.id;
+      } else {
+        const entry = roadOwnershipByText(value);
+        select.value = entry?.id || '';
+      }
       updateRoadOwnershipInfo(prefix);
     }
 
     function selectedRoadOwnership(prefix) {
       const fields = roadOwnershipFields(prefix);
-      return roadOwnershipById(document.getElementById(fields.select)?.value || '');
+      const selectedId = document.getElementById(fields.select)?.value || '';
+      const entities = typeof window.getSqEntities === 'function' ? window.getSqEntities() : [];
+      const numId = parseInt(selectedId);
+      if (!isNaN(numId)) {
+        const entity = entities.find(e => e.id === numId);
+        if (entity) return {
+          id: String(entity.id),
+          typeLabel: entity.type === 'fiziki' ? 'Fiziki şəxs' : 'Hüquqi şəxs',
+          ownerKind: entity.type === 'fiziki' ? 'Fiziki şəxs' : 'Hüquqi şəxs',
+          owner: entity.name,
+          shortName: entity.shortName || '',
+          manager: entity.name,
+          address: entity.address || '',
+          phones: entity.phones || [],
+          email: entity.email || '',
+          label: entity.shortName || entity.name,
+        };
+      }
+      return roadOwnershipById(selectedId);
     }
 
     let roadOwnershipCreateCaller = 'f';
@@ -8497,24 +8564,14 @@
     populateRoadManagingSelects();
     document.getElementById('f_mulk_nov')?.addEventListener('change', () => updateRoadOwnershipInfo('f'));
     document.getElementById('rm_mulk_nov')?.addEventListener('change', () => updateRoadOwnershipInfo('rm'));
-    document.getElementById('fCreateOwnershipToggle')?.addEventListener('click', () => openRoadOwnershipCreateModal('f'));
-    document.getElementById('rmCreateOwnershipToggle')?.addEventListener('click', () => openRoadOwnershipCreateModal('rm'));
-    document.getElementById('ownershipCreateSave')?.addEventListener('click', () => createRoadOwnership());
-    document.getElementById('ownershipCreateCancel')?.addEventListener('click', closeRoadOwnershipCreateModal);
-    document.getElementById('ownershipCreateClose')?.addEventListener('click', closeRoadOwnershipCreateModal);
-    document.getElementById('roadOwnershipCreateModal')?.addEventListener('click', e => {
-      if (e.target === document.getElementById('roadOwnershipCreateModal')) closeRoadOwnershipCreateModal();
+    document.getElementById('fCreateQurumToggle')?.addEventListener('click', () => {
+      if (typeof window.entOpenModalForRoad === 'function') window.entOpenModalForRoad();
+    });
+    document.getElementById('rmCreateQurumToggle')?.addEventListener('click', () => {
+      if (typeof window.entOpenModalForRoad === 'function') window.entOpenModalForRoad();
     });
     document.getElementById('f_mng_nov')?.addEventListener('change', () => updateRoadManagingInfo('f'));
     document.getElementById('rm_mng_nov')?.addEventListener('change', () => updateRoadManagingInfo('rm'));
-    document.getElementById('fCreateManagingToggle')?.addEventListener('click', () => openRoadManagingCreateModal('f'));
-    document.getElementById('rmCreateManagingToggle')?.addEventListener('click', () => openRoadManagingCreateModal('rm'));
-    document.getElementById('managingCreateSave')?.addEventListener('click', () => createRoadManaging());
-    document.getElementById('managingCreateCancel')?.addEventListener('click', closeRoadManagingCreateModal);
-    document.getElementById('managingCreateClose')?.addEventListener('click', closeRoadManagingCreateModal);
-    document.getElementById('roadManagingCreateModal')?.addEventListener('click', e => {
-      if (e.target === document.getElementById('roadManagingCreateModal')) closeRoadManagingCreateModal();
-    });
 
     const floatingActionMenu = document.createElement('div');
     floatingActionMenu.className = 'action-menu action-menu-floating';
@@ -9187,13 +9244,12 @@
       document.getElementById('f_kod').value = 'YOL-2026-' + String(Date.now()).slice(-5);
       ['f_ad', 'f_indeks', 'f_qeyd_nom', 'f_uzunluq', 'f_tarix',
         'f_zolaq', 'f_kesisme', 'f_torpaq_sahesi',
-        'f_mulk_nov', 'f_mulk', 'f_idarə', 'f_huq_status', 'f_ist_status',
+        'f_mulk_nov', 'f_mng_nov', 'f_huq_status', 'f_ist_status',
         'f_ehem', 'f_funk', 'f_derece', 'f_veziyyet', 'f_ortuk', 'f_inzibati', 'f_marsrut', 'f_qeyd',
         'f_bas_lat', 'f_bas_lon', 'f_son_lat', 'f_son_lon', 'f_sened'
       ].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
       updateRoadOwnershipInfo('f');
-      clearRoadOwnershipCreate();
-      closeRoadOwnershipCreateModal();
+      updateRoadManagingInfo('f');
     }
 
     function setFormValue(id, value) {
@@ -13378,7 +13434,7 @@
           usage: document.getElementById('f_inzibati').value || 'reyestr',
           importance: document.getElementById('f_ehem').value || 'Respublika',
           category: document.getElementById('f_funk').value || 'Magistral',
-          managing: (() => { const e = window.selectedRoadManaging?.('f'); return e?.shortName || e?.label || document.getElementById('f_mng_name')?.value || '-'; })(),
+          managing: (() => { const e = window.selectedRoadManaging?.('f'); return e?.shortName || e?.label || e?.name || '-'; })(),
           managingId: document.getElementById('f_mng_nov')?.value || '',
           row: fp.editRow || null,
         };
@@ -14406,15 +14462,14 @@
         rcmStep = 1;
         ['rm_ad', 'rm_indeks', 'rm_qeyd_nom', 'rm_uzunluq', 'rm_tarix',
           'rm_zolaq', 'rm_kesisme', 'rm_torpaq_sahesi',
-          'rm_mulk', 'rm_idare', 'rm_inzibati', 'rm_marsrut', 'rm_qeyd_text',
+          'rm_inzibati', 'rm_marsrut', 'rm_qeyd_text',
           'rm_bas_lat', 'rm_bas_lon', 'rm_son_lat', 'rm_son_lon', 'rm_sened'
         ].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-        ['rm_mulk_nov', 'rm_huq_status', 'rm_ist_status', 'rm_ehem', 'rm_funk', 'rm_derece', 'rm_veziyyet', 'rm_ortuk'].forEach(id => {
+        ['rm_mulk_nov', 'rm_mng_nov', 'rm_huq_status', 'rm_ist_status', 'rm_ehem', 'rm_funk', 'rm_derece', 'rm_veziyyet', 'rm_ortuk'].forEach(id => {
           const el = document.getElementById(id); if (el) el.value = '';
         });
         updateRoadOwnershipInfo('rm');
-        clearRoadOwnershipCreate();
-        closeRoadOwnershipCreateModal();
+        updateRoadManagingInfo('rm');
         document.getElementById('rm_kod').value = nextCode('YOL', roadsData, roadsData.length);
         goRcmStep(1);
         document.getElementById('roadCreateModal').classList.add('open');
@@ -16013,6 +16068,7 @@
       ══════════════════════════════════════════ */
       (function() {
         let sqEntities = [];
+        window.getSqEntities = () => sqEntities;
         let entEditId = null;
         let entMap = null, entMarker = null;
 
@@ -16273,10 +16329,13 @@
           }
           entCloseModal();
           renderEntitiesTable();
+          if (typeof populateRoadOwnershipSelects === 'function') populateRoadOwnershipSelects();
+          if (typeof populateRoadManagingSelects === 'function') populateRoadManagingSelects();
         }
 
         window.entView   = (id) => entOpenModal(id, true);
         window.entEdit   = (id) => entOpenModal(id, false);
+        window.entOpenModalForRoad = () => entOpenModal(null, false);
         window.entDelete = (id) => {
           const o = sqEntities.find(x => x.id === id);
           if (!o) return;
@@ -16557,6 +16616,8 @@
         });
 
         renderEntitiesTable();
+        populateRoadOwnershipSelects();
+        populateRoadManagingSelects();
 
       })();
 
