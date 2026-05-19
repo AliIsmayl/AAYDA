@@ -6515,34 +6515,30 @@
 
           <div class="form-section">
             <div class="fsec-title">Sistem Kodlaması</div>
-            <div class="fgrid">
+            <div class="fgrid" style="grid-template-columns: repeat(4,1fr);">
               <div class="frow">
                 <label>Sistem identifikatoru <span class="fauto-tag">AUTO</span></label>
                 <input class="finput f-auto" id="f_sys_id" readonly placeholder="SYS-ROAD-0001">
-                <span class="fhint">Sistem tərəfindən avtomatik yaradılır</span>
               </div>
               <div class="frow">
                 <label>Daxili reyestr kodu <span class="fauto-tag">AUTO</span></label>
                 <input class="finput f-auto" id="f_kod" readonly value="YOL-2026-00013">
-                <span class="fhint">Sistemin daxili unikal kodu</span>
               </div>
               <div class="frow">
                 <label>Yolun reyestr kodu</label>
                 <input class="finput" id="f_reg_code" placeholder="Nümunə: YR-2026-0015">
-                <span class="fhint">Dövlət reyestrindəki rəsmi kod</span>
               </div>
               <div class="frow">
                 <label>Yolun qeydiyyat nömrəsi</label>
                 <input class="finput" id="f_qeyd_nom" placeholder="Nümunə: QN-45821">
-                <span class="fhint">Qeydiyyat şəhadətnaməsinin nömrəsi</span>
               </div>
             </div>
           </div>
 
           <div class="form-section">
             <div class="fsec-title">Yol Haqqında Əsas Məlumat</div>
-            <div class="fgrid">
-              <div class="frow full">
+            <div class="fgrid" style="grid-template-columns: 2fr 1fr 1fr;">
+              <div class="frow">
                 <label>Avtomobil yolunun adı <span class="req">*</span></label>
                 <input class="finput" id="f_ad" placeholder="Nümunə: Bakı – Quba avtomobil yolu">
                 <span class="ferr" id="err_ad">Yol adı məcburidir</span>
@@ -6550,7 +6546,6 @@
               <div class="frow">
                 <label>Yol indeksi <span class="req">*</span></label>
                 <input class="finput" id="f_indeks" placeholder="Nümunə: M1">
-                <span class="fhint">Xəritə və hesabatlarda istifadə olunur</span>
                 <span class="ferr" id="err_indeks">Yol indeksi məcburidir</span>
               </div>
               <div class="frow">
@@ -6587,7 +6582,7 @@
 
           <div class="form-section">
             <div class="fsec-title">Mülkiyyət Məlumatları</div>
-            <div class="fgrid">
+            <div class="fgrid" style="grid-template-columns: 1fr 1fr 2fr 2fr;">
               <div class="frow">
                 <label>Mülkiyyət növü <span class="req">*</span></label>
                 <select class="fselect" id="f_mulk_tip">
@@ -6611,13 +6606,12 @@
                 </select>
                 <span class="ferr" id="err_ist_status">İstifadə statusu məcburidir</span>
               </div>
-              <div class="frow full">
+              <div class="frow">
                 <label>Mülkiyyətçi <span class="req">*</span></label>
                 <input class="finput" id="f_mulk_text" placeholder="Nümunə: Azərbaycan Avtomobil Yolları Dövlət Agentliyi">
-                <span class="fhint">Mülkiyyətçinin tam rəsmi adı</span>
                 <span class="ferr" id="err_mulk_text">Mülkiyyətçi adı məcburidir</span>
               </div>
-              <div class="frow full">
+              <div class="frow">
                 <label>Mülkiyyətçi qurum (soraqçadan)</label>
                 <div class="relation-row">
                   <select class="fselect" id="f_mulk_nov">
@@ -6625,14 +6619,13 @@
                   </select>
                   <button class="fbtn fbtn-outline" id="fCreateQurumToggle" type="button">Qurum yarat</button>
                 </div>
-                <span class="fhint">Soraqçada qeydiyyatlı qurum varsa, buradan seçin</span>
               </div>
-              <div class="ownership-info-card" id="fOwnershipInfo"></div>
+              <div class="ownership-info-card" id="fOwnershipInfo" style="grid-column: 1/-1;"></div>
             </div>
           </div>
 
           <div class="form-section">
-            <div class="fsec-title">Hüquqi Status</div>
+            <div class="fsec-title">Hüquqi Status və İdarəetmə</div>
             <div class="fgrid">
               <div class="frow">
                 <label>Hüquqi status <span class="req">*</span></label>
@@ -6645,20 +6638,13 @@
                 </select>
                 <span class="ferr" id="err_huq_status">Hüquqi status məcburidir</span>
               </div>
-            </div>
-          </div>
-
-          <div class="form-section">
-            <div class="fsec-title">İdarəetmə</div>
-            <div class="fgrid">
-              <div class="frow full">
+              <div class="frow">
                 <label>İdarə edən qurum</label>
                 <select class="fselect" id="f_mng_nov">
                   <option value="">Seçin...</option>
                 </select>
-                <span class="fhint">Nümunə: 6 saylı Magistral Yolların İstismarı MMC</span>
               </div>
-              <div class="ownership-info-card" id="fManagingInfo"></div>
+              <div class="ownership-info-card" id="fManagingInfo" style="grid-column: 1/-1;"></div>
             </div>
           </div>
 
@@ -6669,7 +6655,7 @@
 
           <div class="form-section">
             <div class="fsec-title">Yol Növü və Əhəmiyyəti</div>
-            <div class="fgrid">
+            <div class="fgrid" style="grid-template-columns: repeat(4,1fr);">
               <div class="frow">
                 <label>Əhəmiyyətinə görə növü <span class="req">*</span></label>
                 <select class="fselect" id="f_ehem">
@@ -6716,11 +6702,7 @@
 
           <div class="form-section">
             <div class="fsec-title">Texniki Göstəricilər</div>
-            <div class="fgrid">
-              <div class="frow">
-                <label>Hərəkət zolağı</label>
-                <input class="finput" id="f_zolaq" placeholder="Nümunə: 2 gəliş / 2 gediş">
-              </div>
+            <div class="fgrid" style="grid-template-columns: repeat(4,1fr);">
               <div class="frow">
                 <label>Vəziyyəti</label>
                 <select class="fselect" id="f_veziyyet">
@@ -6760,24 +6742,22 @@
 
           <div class="form-section">
             <div class="fsec-title">Coğrafi Məlumatlar</div>
-            <div class="fgrid">
-              <div class="frow full">
+            <div class="fgrid" style="grid-template-columns: 1fr 1fr 1fr 2fr;">
+              <div class="frow">
                 <label>İnzibati aidiyyət</label>
-                <input class="finput" id="f_inzibati" placeholder="Nümunə: Bakı, Sumqayıt, Siyəzən, Quba">
-                <span class="fhint">Vergüllə ayrılmış rayon/şəhər adları daxil edin</span>
+                <input class="finput" id="f_inzibati" placeholder="Nümunə: Bakı, Sumqayıt, Quba">
               </div>
-              <div class="frow full">
+              <div class="frow">
                 <label>Başlanğıc nöqtəsi</label>
-                <input class="finput" id="f_start_point" placeholder="Nümunə: Bakı şəhəri, Binəqədi rayonu">
+                <input class="finput" id="f_start_point" placeholder="Nümunə: Bakı, Binəqədi">
               </div>
-              <div class="frow full">
+              <div class="frow">
                 <label>Son nöqtəsi</label>
                 <input class="finput" id="f_end_point" placeholder="Nümunə: Quba rayonu">
               </div>
-              <div class="frow full">
+              <div class="frow">
                 <label>Marşrut təsviri</label>
-                <textarea class="ftextarea" id="f_marsrut"
-                  placeholder="Nümunə: Yol Bakı şəhərindən başlayaraq Sumqayıt və Siyəzən istiqamətində davam edir."></textarea>
+                <input class="finput" id="f_marsrut" placeholder="Nümunə: Bakı – Sumqayıt – Siyəzən – Quba">
               </div>
             </div>
           </div>
@@ -6800,22 +6780,22 @@
 
           <div class="form-section">
             <div class="fsec-title">Koordinatlar (WGS84)</div>
-            <div class="fgrid">
+            <div class="fgrid" style="grid-template-columns: repeat(4,1fr);">
               <div class="frow">
-                <label>Başlanğıc koordinatları</label>
-                <div class="coord-row">
-                  <input class="finput" id="f_bas_lat" placeholder="Lat: 40.4093">
-                  <input class="finput" id="f_bas_lon" placeholder="Lon: 49.8671">
-                </div>
-                <span class="fhint">Xəritəyə klik edərək avtomatik doldurun</span>
+                <label>Başlanğıc — Lat</label>
+                <input class="finput" id="f_bas_lat" placeholder="40.4093">
               </div>
               <div class="frow">
-                <label>Son koordinatları</label>
-                <div class="coord-row">
-                  <input class="finput" id="f_son_lat" placeholder="Lat: 41.0831">
-                  <input class="finput" id="f_son_lon" placeholder="Lon: 45.3534">
-                </div>
-                <span class="fhint">Xəritəyə klik edərək avtomatik doldurun</span>
+                <label>Başlanğıc — Lon</label>
+                <input class="finput" id="f_bas_lon" placeholder="49.8671">
+              </div>
+              <div class="frow">
+                <label>Son — Lat</label>
+                <input class="finput" id="f_son_lat" placeholder="41.0831">
+              </div>
+              <div class="frow">
+                <label>Son — Lon</label>
+                <input class="finput" id="f_son_lon" placeholder="45.3534">
               </div>
             </div>
           </div>
@@ -6829,7 +6809,6 @@
                   <input class="finput" id="f_tahkim" type="number" step="0.1" min="0" placeholder="25">
                   <span class="input-unit-sfx">m</span>
                 </div>
-                <span class="fhint">Yolun hüquqi cəhətdən qorunan eni</span>
               </div>
               <div class="frow">
                 <label>Mühafizə zolağı</label>
@@ -6837,26 +6816,24 @@
                   <input class="finput" id="f_muhafize" type="number" step="0.1" min="0" placeholder="60">
                   <span class="input-unit-sfx">m</span>
                 </div>
-                <span class="fhint">Yolun mühafizə zonasının eni</span>
               </div>
             </div>
           </div>
 
           <div class="form-section">
             <div class="fsec-title">İnteraktiv Xəritə (GIS)</div>
-            <div id="formMapContainer" style="height:270px;border-radius:10px;border:1px solid #d1d9e6;overflow:hidden;"></div>
-            <span class="fhint" style="display:block;margin-top:7px;">1-ci klik: Başlanğıc nöqtəsi · 2-ci klik: Son nöqtəsi · 3-cü klik: Sıfırla</span>
+            <div id="formMapContainer" style="height:200px;border-radius:10px;border:1px solid #d1d9e6;overflow:hidden;"></div>
+            <span class="fhint" style="display:block;margin-top:6px;">1-ci klik: Başlanğıc · 2-ci klik: Son nöqtə · 3-cü klik: Sıfırla</span>
           </div>
 
           <div class="form-section">
             <div class="fsec-title">Qeydiyyat Sənədi</div>
             <div class="fgrid">
-              <div class="frow full">
+              <div class="frow">
                 <label>Sənədin adı / nömrəsi</label>
                 <input class="finput" id="f_sened" placeholder="Nümunə: Nazirlər Kabinetinin qərarı №145">
-                <span class="fhint">Qeydiyyatın əsas hüquqi sənədi</span>
               </div>
-              <div class="frow full">
+              <div class="frow">
                 <label>Fayl yüklə</label>
                 <div class="file-upload-row">
                   <input type="file" id="f_sened_file" accept=".pdf,.doc,.docx,.jpg,.png" class="file-input-hidden">
@@ -6870,7 +6847,6 @@
                   <span id="f_sened_file_name">Fayl seçilməyib</span>
                   <button type="button" class="file-preview-clear" id="f_sened_clear" title="Faylı sil">×</button>
                 </div>
-                <span class="fhint">Dəstəklənən formatlar: PDF, DOC, DOCX, JPG, PNG</span>
               </div>
             </div>
           </div>
@@ -7618,31 +7594,32 @@
       <div class="modal-body">
         <!-- Step 1: Əsas məlumatlar -->
         <div class="mpane mp-active" id="rmp1">
-          <div class="fgrid">
-            <div class="frow full">
+          <div class="fgrid" style="grid-template-columns: repeat(3,1fr);">
+            <div class="frow">
               <label>Reyestr kodu <span class="fauto-tag">AUTO</span></label>
               <input class="finput f-auto" id="rm_kod" readonly>
-            </div>
-            <div class="frow full">
-              <label>Yolun adı <span class="req">*</span></label>
-              <input class="finput" id="rm_ad" placeholder="Nümunə: Bakı-Qazax avtomobil yolu">
-            </div>
-            <div class="frow">
-              <label>Yol indeksi <span class="req">*</span></label>
-              <input class="finput" id="rm_indeks" placeholder="M1, R-15, E60">
-              <span class="fhint">Xəritə və hesabatlarda istifadə olunur</span>
             </div>
             <div class="frow">
               <label>Qeydiyyat nömrəsi</label>
               <input class="finput" id="rm_qeyd_nom" placeholder="DR-2024-0892">
             </div>
             <div class="frow">
-              <label>Uzunluq (km) <span class="req">*</span></label>
-              <input class="finput" id="rm_uzunluq" type="number" step="0.1" placeholder="320.5">
-            </div>
-            <div class="frow">
               <label>İstismara verildiyi tarix</label>
               <input class="finput" id="rm_tarix" type="text" placeholder="GG.AA.İİİİ" maxlength="10" data-mask="date" autocomplete="off">
+            </div>
+          </div>
+          <div class="fgrid" style="grid-template-columns: 2fr 1fr 1fr; margin-top:12px;">
+            <div class="frow">
+              <label>Yolun adı <span class="req">*</span></label>
+              <input class="finput" id="rm_ad" placeholder="Nümunə: Bakı-Qazax avtomobil yolu">
+            </div>
+            <div class="frow">
+              <label>Yol indeksi <span class="req">*</span></label>
+              <input class="finput" id="rm_indeks" placeholder="M1, R-15, E60">
+            </div>
+            <div class="frow">
+              <label>Uzunluq (km) <span class="req">*</span></label>
+              <input class="finput" id="rm_uzunluq" type="number" step="0.1" placeholder="320.5">
             </div>
           </div>
         </div>
@@ -9648,7 +9625,7 @@
     function clearForm() {
       document.getElementById('f_kod').value = 'YOL-2026-' + String(Date.now()).slice(-5);
       ['f_ad', 'f_indeks', 'f_qeyd_nom', 'f_reg_code', 'f_sys_id', 'f_uzunluq', 'f_tarix', 'f_last_updated',
-        'f_zolaq', 'f_kesisme', 'f_torpaq_sahesi',
+        'f_kesisme', 'f_torpaq_sahesi',
         'f_mulk_tip', 'f_mulk_nov', 'f_mulk_text', 'f_mng_nov', 'f_huq_status', 'f_ist_status',
         'f_ehem', 'f_func_purpose', 'f_funk', 'f_derece', 'f_veziyyet', 'f_ortuk',
         'f_inzibati', 'f_start_point', 'f_end_point', 'f_marsrut', 'f_qeyd',
@@ -9690,7 +9667,6 @@
       setFormValue('f_derece', cells[ROAD_COL.degree]?.textContent.trim());
       setFormValue('f_uzunluq', cells[ROAD_COL.length]?.textContent.trim());
       setFormValue('f_tarix', cells[ROAD_COL.commissionedDate]?.textContent.trim());
-      setFormValue('f_zolaq', cells[ROAD_COL.lanes]?.textContent.trim());
       setFormValue('f_kesisme', cells[ROAD_COL.intersection]?.textContent.trim());
       setFormValue('f_torpaq_sahesi', cells[ROAD_COL.landAreaHa]?.textContent.trim());
       setFormValue('f_veziyyet', cells[ROAD_COL.condition]?.textContent.trim());
@@ -14053,7 +14029,7 @@
           degree: document.getElementById('f_derece').value || '-',
           length: document.getElementById('f_uzunluq').value.trim(),
           commissionedDate: formatRoadDateText(document.getElementById('f_tarix').value || '-'),
-          lanes: normalizeRoadLanes(document.getElementById('f_zolaq').value),
+          lanes: '',
           intersection: document.getElementById('f_kesisme').value.trim() || '-',
           landAreaHa: document.getElementById('f_torpaq_sahesi').value.trim() || '-',
           condition: document.getElementById('f_veziyyet').value || '-',
