@@ -4415,8 +4415,8 @@
       min-height: 34px;
     }
 
-    #mainTable th:nth-child(2),
-    #mainTable td:nth-child(2) {
+    #mainTable th:nth-child(4),
+    #mainTable td:nth-child(4) {
       min-width: 160px;
       width: 18%;
       text-align: left;
@@ -5177,6 +5177,108 @@
         width: 100%;
       }
     }
+
+    /* ── Column toggle ── */
+    .col-toggle-wrap { position: relative; }
+    .btn-cell-preview {
+      display: inline-flex; align-items: center; gap: 5px;
+      height: 26px; padding: 0 10px; border-radius: 7px;
+      border: 1px solid #d1d9e6; background: #f8fafc;
+      color: #2563eb; font-size: 11px; font-weight: 600;
+      font-family: inherit; cursor: pointer; white-space: nowrap;
+      transition: .12s;
+    }
+    .btn-cell-preview:hover { background: #eff6ff; border-color: #93c5fd; }
+    .btn-cell-preview svg { flex-shrink: 0; }
+    .btn-col-toggle {
+      display: flex; align-items: center; gap: 6px;
+      height: 34px; padding: 0 12px;
+      border: 1px solid #d8e4f0; border-radius: 9px;
+      background: #fff; color: #64748b; font-size: 12px; font-weight: 500;
+      font-family: inherit; cursor: pointer; transition: .13s;
+    }
+    .btn-col-toggle:hover { background: #eff6ff; border-color: #93c5fd; color: #2563eb; }
+    .col-toggle-panel {
+      position: absolute; top: calc(100% + 6px); right: 0;
+      background: #fff; border: 1px solid #d8e4f0; border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.10); z-index: 600;
+      min-width: 220px; max-height: 360px; overflow: hidden;
+      display: none; flex-direction: column;
+    }
+    .col-toggle-panel.open { display: flex; }
+    .col-toggle-head {
+      padding: 10px 14px 8px; font-size: 11px; font-weight: 700;
+      color: #94a3b8; letter-spacing: .06em; text-transform: uppercase;
+      border-bottom: 1px solid #f1f5f9; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .col-toggle-actions { display: flex; gap: 6px; }
+    .col-toggle-act-btn {
+      font-size: 11px; font-weight: 600; font-family: inherit;
+      padding: 2px 8px; border-radius: 5px; border: 1px solid #d8e4f0;
+      background: #f8fafc; color: #2563eb; cursor: pointer; transition: .12s;
+      text-transform: none; letter-spacing: 0;
+    }
+    .col-toggle-act-btn:hover { background: #eff6ff; border-color: #93c5fd; }
+    .col-toggle-list { overflow-y: auto; padding: 6px 0; }
+    .col-toggle-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 7px 14px; cursor: pointer; transition: background .12s;
+    }
+    .col-toggle-item:hover { background: #f8fafc; }
+    .col-toggle-item input[type="checkbox"] { accent-color: #2563eb; width: 14px; height: 14px; flex-shrink: 0; }
+    .col-toggle-item label { font-size: 12.5px; color: #1e293b; cursor: pointer; flex: 1; }
+    .col-hidden { display: none !important; }
+
+    /* ── File upload ── */
+    .file-input-hidden { display: none; }
+    .file-upload-row { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+
+    /* ── Input with unit suffix ── */
+    .input-unit-group { display: flex; align-items: stretch; }
+    .input-unit-group .finput { flex: 1; border-radius: 8px 0 0 8px !important; border-right: none; }
+    .input-unit-sfx {
+      display: flex; align-items: center; padding: 0 12px;
+      background: #f1f5f9; border: 1px solid #cdd8e8;
+      border-radius: 0 8px 8px 0; font-size: 11px; font-weight: 700;
+      color: #64748b; white-space: nowrap; flex-shrink: 0;
+    }
+
+    /* ── Inline validation ── */
+    .finput.f-err, .fselect.f-err, .ftextarea.f-err {
+      border-color: #ef4444 !important; background: #fff8f8;
+    }
+    .ferr {
+      font-size: 10px; color: #ef4444; display: none; margin-top: 1px;
+    }
+    .ferr.vis { display: block; }
+
+    /* ── Form section grouping ── */
+    .form-section { margin-bottom: 22px; }
+    .form-section:last-child { margin-bottom: 0; }
+
+    /* ── File preview ── */
+    .file-preview-name {
+      display: flex; align-items: center; gap: 8px; margin-top: 7px;
+      padding: 7px 12px; background: #f0f7ff; border: 1px solid #bfdbfe;
+      border-radius: 8px; font-size: 12px; color: #1d4ed8;
+    }
+    .file-preview-name svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
+    .file-preview-clear {
+      margin-left: auto; background: none; border: none; cursor: pointer;
+      color: #94a3b8; font-size: 16px; line-height: 1; padding: 0 2px;
+      font-family: inherit; transition: color .13s;
+    }
+    .file-preview-clear:hover { color: #ef4444; }
+
+    .file-upload-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border: 1px solid #2563eb; border-radius: 8px;
+      background: #eff6ff; color: #2563eb; font-size: 12px; font-weight: 600;
+      font-family: inherit; cursor: pointer; transition: .13s; white-space: nowrap;
+    }
+    .file-upload-btn:hover { background: #dbeafe; }
+    .file-name-display { font-size: 12px; color: #64748b; }
   </style>
   <style>
     /* ═══ DASHBOARD VIEW ═══ */
@@ -5585,6 +5687,21 @@
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Excel
           </button>
+          <div class="col-toggle-wrap">
+            <button class="btn-col-toggle" id="btnColToggle" type="button">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              Sütunlar
+            </button>
+            <div class="col-toggle-panel" id="colTogglePanel">
+              <div class="col-toggle-head">
+                <span>Sütunları idarə et</span>
+                <div class="col-toggle-actions">
+                  <button class="col-toggle-act-btn" id="btnColShowAll" type="button">Hamısı</button>
+                </div>
+              </div>
+              <div class="col-toggle-list" id="colToggleList"></div>
+            </div>
+          </div>
           <button class="btn-new" id="btnNewRoad">
             <svg viewBox="0 0 24 24">
               <line x1="12" y1="5" x2="12" y2="19" />
@@ -6267,6 +6384,23 @@
       </div>
     </div>
 
+    <!-- GIS / Marsrut text preview modal -->
+    <div class="modal-ov" id="textPreviewModal" aria-hidden="true">
+      <div class="modal-box" role="dialog" aria-modal="true" style="max-width:520px;">
+        <div class="modal-head">
+          <div class="modal-title-block">
+            <div class="mh-title" id="textPreviewTitle">Məlumat</div>
+          </div>
+          <button class="modal-close-btn" id="textPreviewClose" type="button" aria-label="Bağla">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="modal-body" style="padding:20px 24px;">
+          <pre id="textPreviewContent" style="font-family:inherit;font-size:13px;color:#1e293b;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px 16px;white-space:pre-wrap;word-break:break-all;margin:0;max-height:300px;overflow-y:auto;"></pre>
+        </div>
+      </div>
+    </div>
+
     <div class="modal-ov" id="segmentInfoModal" aria-hidden="true">
       <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="segmentInfoTitle">
         <div class="modal-head">
@@ -6378,212 +6512,369 @@
 
         <!-- ── Step 1: Əsas məlumatlar ── -->
         <div class="step-pane sp-active" id="pane1">
-          <div class="fgrid">
-            <div class="frow full">
-              <label>Reyestr kodu <span class="fauto-tag">AUTO</span></label>
-              <input class="finput f-auto" id="f_kod" readonly value="YOL-2026-00013">
-            </div>
-            <div class="frow full">
-              <label>Yolun adı <span class="req">*</span></label>
-              <input class="finput" id="f_ad" placeholder="Nümunə: Bakı-Qazax avtomobil yolu">
-            </div>
-            <div class="frow">
-              <label>Yol indeksi <span class="req">*</span></label>
-              <input class="finput" id="f_indeks" placeholder="Nümunə: M1, R-15, E60">
-              <span class="fhint">Xəritə və hesabatlarda istifadə olunur</span>
-            </div>
-            <div class="frow">
-              <label>Qeydiyyat nömrəsi</label>
-              <input class="finput" id="f_qeyd_nom" placeholder="Nümunə: DR-2024-0892">
-            </div>
-            <div class="frow">
-              <label>Uzunluq (km) <span class="req">*</span></label>
-              <input class="finput" id="f_uzunluq" type="number" step="0.1" placeholder="Nümunə: 320.5">
-            </div>
-            <div class="frow">
-              <label>İstismara verildiyi tarix</label>
-              <input class="finput" id="f_tarix" type="text" placeholder="GG.AA.İİİİ" maxlength="10" data-mask="date" autocomplete="off">
+
+          <div class="form-section">
+            <div class="fsec-title">Sistem Kodlaması</div>
+            <div class="fgrid">
+              <div class="frow">
+                <label>Sistem identifikatoru <span class="fauto-tag">AUTO</span></label>
+                <input class="finput f-auto" id="f_sys_id" readonly placeholder="SYS-ROAD-0001">
+                <span class="fhint">Sistem tərəfindən avtomatik yaradılır</span>
+              </div>
+              <div class="frow">
+                <label>Daxili reyestr kodu <span class="fauto-tag">AUTO</span></label>
+                <input class="finput f-auto" id="f_kod" readonly value="YOL-2026-00013">
+                <span class="fhint">Sistemin daxili unikal kodu</span>
+              </div>
+              <div class="frow">
+                <label>Yolun reyestr kodu</label>
+                <input class="finput" id="f_reg_code" placeholder="Nümunə: YR-2026-0015">
+                <span class="fhint">Dövlət reyestrindəki rəsmi kod</span>
+              </div>
+              <div class="frow">
+                <label>Yolun qeydiyyat nömrəsi</label>
+                <input class="finput" id="f_qeyd_nom" placeholder="Nümunə: QN-45821">
+                <span class="fhint">Qeydiyyat şəhadətnaməsinin nömrəsi</span>
+              </div>
             </div>
           </div>
+
+          <div class="form-section">
+            <div class="fsec-title">Yol Haqqında Əsas Məlumat</div>
+            <div class="fgrid">
+              <div class="frow full">
+                <label>Avtomobil yolunun adı <span class="req">*</span></label>
+                <input class="finput" id="f_ad" placeholder="Nümunə: Bakı – Quba avtomobil yolu">
+                <span class="ferr" id="err_ad">Yol adı məcburidir</span>
+              </div>
+              <div class="frow">
+                <label>Yol indeksi <span class="req">*</span></label>
+                <input class="finput" id="f_indeks" placeholder="Nümunə: M1">
+                <span class="fhint">Xəritə və hesabatlarda istifadə olunur</span>
+                <span class="ferr" id="err_indeks">Yol indeksi məcburidir</span>
+              </div>
+              <div class="frow">
+                <label>Yolun uzunluğu <span class="req">*</span></label>
+                <div class="input-unit-group">
+                  <input class="finput" id="f_uzunluq" type="number" step="0.1" min="0" placeholder="145">
+                  <span class="input-unit-sfx">km</span>
+                </div>
+                <span class="ferr" id="err_uzunluq">Uzunluq məcburidir</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="fsec-title">Tarix Məlumatları</div>
+            <div class="fgrid">
+              <div class="frow">
+                <label>İstismara verilmə tarixi</label>
+                <input class="finput" id="f_tarix" type="text" placeholder="15.09.2018" maxlength="10" data-mask="date" autocomplete="off">
+                <span class="fhint">Format: GG.AA.İİİİ</span>
+              </div>
+              <div class="frow">
+                <label>Son yenilənmə tarixi</label>
+                <input class="finput" id="f_last_updated" type="text" placeholder="12.05.2026" maxlength="10" data-mask="date" autocomplete="off">
+                <span class="fhint">Format: GG.AA.İİİİ</span>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         <!-- ── Step 2: Mülkiyyət ── -->
         <div class="step-pane" id="pane2">
-          <div class="fgrid">
-            <div class="frow full">
-              <label>Mülkiyyətçi qurum <span class="req">*</span></label>
-              <div class="relation-row">
-                <select class="fselect" id="f_mulk_nov">
+
+          <div class="form-section">
+            <div class="fsec-title">Mülkiyyət Məlumatları</div>
+            <div class="fgrid">
+              <div class="frow">
+                <label>Mülkiyyət növü <span class="req">*</span></label>
+                <select class="fselect" id="f_mulk_tip">
                   <option value="">Seçin...</option>
+                  <option>Dövlət</option>
+                  <option>Bələdiyyə</option>
+                  <option>Özəl</option>
+                  <option>Birgə</option>
+                  <option>Digər</option>
                 </select>
-                <button class="fbtn fbtn-outline" id="fCreateQurumToggle" type="button">Qurum yarat</button>
+                <span class="ferr" id="err_mulk_tip">Mülkiyyət növü məcburidir</span>
+              </div>
+              <div class="frow">
+                <label>İstifadə statusu <span class="req">*</span></label>
+                <select class="fselect" id="f_ist_status">
+                  <option value="">Seçin...</option>
+                  <option>Aktiv</option>
+                  <option>Təmir gedir</option>
+                  <option>Bağlı</option>
+                  <option>Planlaşdırılır</option>
+                </select>
+                <span class="ferr" id="err_ist_status">İstifadə statusu məcburidir</span>
+              </div>
+              <div class="frow full">
+                <label>Mülkiyyətçi <span class="req">*</span></label>
+                <input class="finput" id="f_mulk_text" placeholder="Nümunə: Azərbaycan Avtomobil Yolları Dövlət Agentliyi">
+                <span class="fhint">Mülkiyyətçinin tam rəsmi adı</span>
+                <span class="ferr" id="err_mulk_text">Mülkiyyətçi adı məcburidir</span>
+              </div>
+              <div class="frow full">
+                <label>Mülkiyyətçi qurum (soraqçadan)</label>
+                <div class="relation-row">
+                  <select class="fselect" id="f_mulk_nov">
+                    <option value="">Seçin...</option>
+                  </select>
+                  <button class="fbtn fbtn-outline" id="fCreateQurumToggle" type="button">Qurum yarat</button>
+                </div>
+                <span class="fhint">Soraqçada qeydiyyatlı qurum varsa, buradan seçin</span>
+              </div>
+              <div class="ownership-info-card" id="fOwnershipInfo"></div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="fsec-title">Hüquqi Status</div>
+            <div class="fgrid">
+              <div class="frow">
+                <label>Hüquqi status <span class="req">*</span></label>
+                <select class="fselect" id="f_huq_status">
+                  <option value="">Seçin...</option>
+                  <option>Dövlət balansında</option>
+                  <option>İstismarda</option>
+                  <option>Tikintidə</option>
+                  <option>Layihələndirilir</option>
+                </select>
+                <span class="ferr" id="err_huq_status">Hüquqi status məcburidir</span>
               </div>
             </div>
-            <div class="ownership-info-card" id="fOwnershipInfo"></div>
-            <div class="frow">
-              <label>Hüquqi status <span class="req">*</span></label>
-              <select class="fselect" id="f_huq_status">
-                <option value="">Seçin...</option>
-                <option>Qaralama</option>
-                <option>Aktiv</option>
-                <option>Layihədə</option>
-                <option>Ləğv olunmuş</option>
-                <option>Arxivləşdirilmiş</option>
-              </select>
-            </div>
-            <div class="frow">
-              <label>İstifadə statusu <span class="req">*</span></label>
-              <select class="fselect" id="f_ist_status">
-                <option value="">Seçin...</option>
-                <option>aktiv</option>
-                <option>deaktiv</option>
-              </select>
+          </div>
+
+          <div class="form-section">
+            <div class="fsec-title">İdarəetmə</div>
+            <div class="fgrid">
+              <div class="frow full">
+                <label>İdarə edən qurum</label>
+                <select class="fselect" id="f_mng_nov">
+                  <option value="">Seçin...</option>
+                </select>
+                <span class="fhint">Nümunə: 6 saylı Magistral Yolların İstismarı MMC</span>
+              </div>
+              <div class="ownership-info-card" id="fManagingInfo"></div>
             </div>
           </div>
-          <!-- İdarəedici qurum -->
-          <div class="fgrid" style="margin-top:14px;padding-top:14px;border-top:1px solid #e2e8f0;">
-            <div class="frow full">
-              <label>İdarəedici qurum</label>
-              <select class="fselect" id="f_mng_nov">
-                <option value="">Seçin...</option>
-              </select>
-            </div>
-            <div class="ownership-info-card" id="fManagingInfo"></div>
-          </div>
+
         </div>
 
         <!-- ── Step 3: Təsnifat ── -->
         <div class="step-pane" id="pane3">
-          <div class="fgrid">
-            <div class="frow">
-              <label>Əhəmiyyətinə görə növü <span class="req">*</span></label>
-              <select class="fselect" id="f_ehem">
-                <option value="">Seçin...</option>
-                <option>Beynəlxalq</option>
-                <option>Respublika</option>
-                <option>Yerli</option>
-              </select>
-            </div>
-            <div class="frow">
-              <label>Funksional təyinat <span class="req">*</span></label>
-              <select class="fselect" id="f_funk">
-                <option value="">Seçin...</option>
-                <option>Magistral</option>
-                <option>Rayon</option>
-                <option>Kənd</option>
-              </select>
-            </div>
-            <div class="frow">
-              <label>Dərəcə</label>
-              <select class="fselect" id="f_derece">
-                <option value="">Seçin...</option>
-                <option>I</option>
-                <option>II</option>
-                <option>III</option>
-                <option>IV</option>
-              </select>
-            </div>
-            <div class="frow">
-              <label>Hərəkət zolağı</label>
-              <input class="finput" id="f_zolaq" placeholder="Nümunə: 2 gəliş / 2 gediş">
-            </div>
-            <div class="frow">
-              <label>Kəsişmə</label>
-              <input class="finput" id="f_kesisme" placeholder="Nümunə: T tipli, eyni səviyyəli">
-            </div>
-            <div class="frow">
-              <label>Tutduğu torpaq sahəsi (ha)</label>
-              <input class="finput" id="f_torpaq_sahesi" type="number" step="0.01" placeholder="Nümunə: 12.5">
-            </div>
-            <div class="frow">
-              <label>Vəziyyəti</label>
-              <select class="fselect" id="f_veziyyet">
-                <option value="">Seçin...</option>
-                <option>Yaxşı</option>
-                <option>Orta</option>
-                <option>Kafi</option>
-                <option>Qənaətbəxş</option>
-                <option>Qənaətsiz</option>
-              </select>
-            </div>
-            <div class="frow">
-              <label>Yol örtüyü</label>
-              <select class="fselect" id="f_ortuk">
-                <option value="">Seçin...</option>
-                <option>Asfalt</option>
-                <option>Sement-beton</option>
-                <option>Çınqıl</option>
-                <option>Torpaq</option>
-              </select>
-            </div>
-            <div class="frow">
-              <label>İnzibati aidiyyət</label>
-              <input class="finput" id="f_inzibati" placeholder="Nümunə: Bakı, Gəncə, Samux">
-            </div>
-            <div class="frow full">
-              <label>Marşrut təsviri</label>
-              <textarea class="ftextarea" id="f_marsrut"
-                placeholder="Nümunə: Bakı şəhərindən başlayaraq Sumqayıt, Şamaxı üzərindən Qazax şəhərinə qədər"></textarea>
-            </div>
-            <div class="frow full">
-              <label>Qeyd</label>
-              <textarea class="ftextarea" id="f_qeyd"
-                placeholder="Yol haqqında əlavə qeydlər, xüsusi şərtlər..."></textarea>
+
+          <div class="form-section">
+            <div class="fsec-title">Yol Növü və Əhəmiyyəti</div>
+            <div class="fgrid">
+              <div class="frow">
+                <label>Əhəmiyyətinə görə növü <span class="req">*</span></label>
+                <select class="fselect" id="f_ehem">
+                  <option value="">Seçin...</option>
+                  <option>Beynəlxalq</option>
+                  <option>Respublika</option>
+                  <option>Yerli</option>
+                </select>
+                <span class="ferr" id="err_ehem">Bu sahə məcburidir</span>
+              </div>
+              <div class="frow">
+                <label>Funksional təyinatı <span class="req">*</span></label>
+                <select class="fselect" id="f_func_purpose">
+                  <option value="">Seçin...</option>
+                  <option>Sərnişin</option>
+                  <option>Yük</option>
+                  <option>Qarışıq</option>
+                  <option>Xidmət yolu</option>
+                </select>
+                <span class="ferr" id="err_func_purpose">Bu sahə məcburidir</span>
+              </div>
+              <div class="frow">
+                <label>Yol şəbəkəsindəki rolu</label>
+                <select class="fselect" id="f_funk">
+                  <option value="">Seçin...</option>
+                  <option>Magistral</option>
+                  <option>Əsas yol</option>
+                  <option>Köməkçi yol</option>
+                  <option>Birləşdirici yol</option>
+                </select>
+              </div>
+              <div class="frow">
+                <label>Dərəcə</label>
+                <select class="fselect" id="f_derece">
+                  <option value="">Seçin...</option>
+                  <option>I</option>
+                  <option>II</option>
+                  <option>III</option>
+                  <option>IV</option>
+                </select>
+              </div>
             </div>
           </div>
+
+          <div class="form-section">
+            <div class="fsec-title">Texniki Göstəricilər</div>
+            <div class="fgrid">
+              <div class="frow">
+                <label>Hərəkət zolağı</label>
+                <input class="finput" id="f_zolaq" placeholder="Nümunə: 2 gəliş / 2 gediş">
+              </div>
+              <div class="frow">
+                <label>Vəziyyəti</label>
+                <select class="fselect" id="f_veziyyet">
+                  <option value="">Seçin...</option>
+                  <option>Yaxşı</option>
+                  <option>Orta</option>
+                  <option>Kafi</option>
+                  <option>Qənaətbəxş</option>
+                  <option>Qənaətsiz</option>
+                </select>
+              </div>
+              <div class="frow">
+                <label>Yol örtüyü</label>
+                <select class="fselect" id="f_ortuk">
+                  <option value="">Seçin...</option>
+                  <option>Asfalt</option>
+                  <option>Sement-beton</option>
+                  <option>Çınqıl</option>
+                  <option>Torpaq</option>
+                  <option>Beton</option>
+                  <option>Daş döşəmə</option>
+                </select>
+              </div>
+              <div class="frow">
+                <label>Tutduğu torpaq sahəsi</label>
+                <div class="input-unit-group">
+                  <input class="finput" id="f_torpaq_sahesi" type="number" step="0.01" min="0" placeholder="38.2">
+                  <span class="input-unit-sfx">ha</span>
+                </div>
+              </div>
+              <div class="frow">
+                <label>Kəsişmə</label>
+                <input class="finput" id="f_kesisme" placeholder="Nümunə: Fərqli səviyyəli">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="fsec-title">Coğrafi Məlumatlar</div>
+            <div class="fgrid">
+              <div class="frow full">
+                <label>İnzibati aidiyyət</label>
+                <input class="finput" id="f_inzibati" placeholder="Nümunə: Bakı, Sumqayıt, Siyəzən, Quba">
+                <span class="fhint">Vergüllə ayrılmış rayon/şəhər adları daxil edin</span>
+              </div>
+              <div class="frow full">
+                <label>Başlanğıc nöqtəsi</label>
+                <input class="finput" id="f_start_point" placeholder="Nümunə: Bakı şəhəri, Binəqədi rayonu">
+              </div>
+              <div class="frow full">
+                <label>Son nöqtəsi</label>
+                <input class="finput" id="f_end_point" placeholder="Nümunə: Quba rayonu">
+              </div>
+              <div class="frow full">
+                <label>Marşrut təsviri</label>
+                <textarea class="ftextarea" id="f_marsrut"
+                  placeholder="Nümunə: Yol Bakı şəhərindən başlayaraq Sumqayıt və Siyəzən istiqamətində davam edir."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="fsec-title">Qeydlər</div>
+            <div class="fgrid">
+              <div class="frow full">
+                <label>Qeyd</label>
+                <textarea class="ftextarea" id="f_qeyd"
+                  placeholder="Nümunə: Yol üzrə cari təmir işləri davam edir."></textarea>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        <!-- ── Step 4: GİS / Məkan ── -->
+        <!-- ── Step 4: GİS / Məkan / Sənəd ── -->
         <div class="step-pane" id="pane4">
-          <div class="fgrid">
-            <div class="frow">
-              <label>Başlanğıc nöqtə <span class="req">*</span></label>
-              <div class="coord-row">
-                <input class="finput" id="f_bas_lat" placeholder="Lat: 40.4093">
-                <input class="finput" id="f_bas_lon" placeholder="Lon: 49.8671">
+
+          <div class="form-section">
+            <div class="fsec-title">Koordinatlar (WGS84)</div>
+            <div class="fgrid">
+              <div class="frow">
+                <label>Başlanğıc koordinatları</label>
+                <div class="coord-row">
+                  <input class="finput" id="f_bas_lat" placeholder="Lat: 40.4093">
+                  <input class="finput" id="f_bas_lon" placeholder="Lon: 49.8671">
+                </div>
+                <span class="fhint">Xəritəyə klik edərək avtomatik doldurun</span>
               </div>
-              <span class="fhint">WGS84 formatı</span>
-            </div>
-            <div class="frow">
-              <label>Son nöqtə <span class="req">*</span></label>
-              <div class="coord-row">
-                <input class="finput" id="f_son_lat" placeholder="Lat: 41.0831">
-                <input class="finput" id="f_son_lon" placeholder="Lon: 45.3534">
+              <div class="frow">
+                <label>Son koordinatları</label>
+                <div class="coord-row">
+                  <input class="finput" id="f_son_lat" placeholder="Lat: 41.0831">
+                  <input class="finput" id="f_son_lon" placeholder="Lon: 45.3534">
+                </div>
+                <span class="fhint">Xəritəyə klik edərək avtomatik doldurun</span>
               </div>
-              <span class="fhint">WGS84 formatı</span>
-            </div>
-            <div class="frow full">
-              <label>Mərkəz xətti (centerline) <span class="req">*</span></label>
-              <div class="gis-box">
-                <svg viewBox="0 0 24 24">
-                  <path d="M3 12h18M3 6l9-3 9 3M3 18l9 3 9-3" />
-                </svg>
-                Xəritədən çəkmək üçün klik edin (GİS xətt — Polyline)
-              </div>
-            </div>
-            <div class="frow">
-              <label>Təhkim zolağı</label>
-              <div class="gis-box" style="padding:10px;">
-                <svg viewBox="0 0 24 24">
-                  <rect x="3" y="3" width="18" height="18" rx="2" />
-                </svg>
-                Polygon — ixtiyari
-              </div>
-            </div>
-            <div class="frow">
-              <label>Mühafizə zolağı</label>
-              <div class="gis-box" style="padding:10px;">
-                <svg viewBox="0 0 24 24">
-                  <rect x="3" y="3" width="18" height="18" rx="2" />
-                </svg>
-                Polygon — ixtiyari
-              </div>
-            </div>
-            <div class="frow full">
-              <label>Qeydiyyat əsas sənədi</label>
-              <input class="finput" id="f_sened" placeholder="Nümunə: Nazirlər Kabineti Qərarı №245, 12.03.2019">
             </div>
           </div>
+
+          <div class="form-section">
+            <div class="fsec-title">Mühafizə Zolaqları</div>
+            <div class="fgrid">
+              <div class="frow">
+                <label>Təhkim zolağı</label>
+                <div class="input-unit-group">
+                  <input class="finput" id="f_tahkim" type="number" step="0.1" min="0" placeholder="25">
+                  <span class="input-unit-sfx">m</span>
+                </div>
+                <span class="fhint">Yolun hüquqi cəhətdən qorunan eni</span>
+              </div>
+              <div class="frow">
+                <label>Mühafizə zolağı</label>
+                <div class="input-unit-group">
+                  <input class="finput" id="f_muhafize" type="number" step="0.1" min="0" placeholder="60">
+                  <span class="input-unit-sfx">m</span>
+                </div>
+                <span class="fhint">Yolun mühafizə zonasının eni</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="fsec-title">İnteraktiv Xəritə (GIS)</div>
+            <div id="formMapContainer" style="height:270px;border-radius:10px;border:1px solid #d1d9e6;overflow:hidden;"></div>
+            <span class="fhint" style="display:block;margin-top:7px;">1-ci klik: Başlanğıc nöqtəsi · 2-ci klik: Son nöqtəsi · 3-cü klik: Sıfırla</span>
+          </div>
+
+          <div class="form-section">
+            <div class="fsec-title">Qeydiyyat Sənədi</div>
+            <div class="fgrid">
+              <div class="frow full">
+                <label>Sənədin adı / nömrəsi</label>
+                <input class="finput" id="f_sened" placeholder="Nümunə: Nazirlər Kabinetinin qərarı №145">
+                <span class="fhint">Qeydiyyatın əsas hüquqi sənədi</span>
+              </div>
+              <div class="frow full">
+                <label>Fayl yüklə</label>
+                <div class="file-upload-row">
+                  <input type="file" id="f_sened_file" accept=".pdf,.doc,.docx,.jpg,.png" class="file-input-hidden">
+                  <label for="f_sened_file" class="file-upload-btn">
+                    <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    Fayl seç (PDF, DOC, JPG)
+                  </label>
+                </div>
+                <div id="f_sened_preview" class="file-preview-name" style="display:none;">
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  <span id="f_sened_file_name">Fayl seçilməyib</span>
+                  <button type="button" class="file-preview-clear" id="f_sened_clear" title="Faylı sil">×</button>
+                </div>
+                <span class="fhint">Dəstəklənən formatlar: PDF, DOC, DOCX, JPG, PNG</span>
+              </div>
+            </div>
+          </div>
+
           <div class="inline-list-panel">
             <div class="inline-list-head">
               <div class="inline-list-title">Seqmentlər siyahısı</div>
@@ -6592,14 +6883,12 @@
             <div class="inline-list-body">
               <div id="segList" class="seg-list"></div>
               <div id="segEmpty" class="seg-empty">
-                <svg viewBox="0 0 24 24">
-                  <path d="M3 3h18v18H3z" rx="2" />
-                  <path d="M3 9h18M9 21V9" />
-                </svg>
+                <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
                 Hələ heç bir seqment yaradılmayıb.<br>Yolu yadda saxladıqdan sonra "Seqment yarat" düyməsindən istifadə edin.
               </div>
             </div>
           </div>
+
         </div>
 
         <!-- ── Step 5: Seqmentlər ── -->
@@ -7845,59 +8134,61 @@
 
     const ROAD_COL = Object.freeze({
       number: 0,
-      name: 1,
-      code: 2,
-      index: 3,
-      status: 4,
-      condition: 5,
-      category: 6,
-      importance: 7,
-      degree: 8,
-      length: 9,
-      lanes: 10,
-      surface: 11,
-      managing: 12,
-      ownership: 13,
-      usage: 14,
-      intersection: 15,
-      commissionedDate: 16,
-      landAreaHa: 17,
-      actions: 18,
+      sysId: 1, regCode: 2, name: 3, index: 4, regNo: 5,
+      ownership: 6, ownerText: 7, managing: 8, length: 9,
+      startPoint: 10, endPoint: 11, gis: 12,
+      usage: 13, marsrut: 14,
+      tahkimZolagi: 15, muhafizeZolagi: 16,
+      commissionedDate: 17, importance: 18, status: 19,
+      funcPurpose: 20, category: 21, legalStatus: 22,
+      regDoc: 23, lastUpdated: 24, note: 25,
+      // always-hidden internal fields:
+      code: 26, condition: 27, degree: 28, lanes: 29, surface: 30,
+      intersection: 31, landAreaHa: 32,
+      actions: 33,
     });
 
     const roadTableColumns = [
-      { label: 'Yol adı', ci: ROAD_COL.name, tooltip: 'Yolun tam rəsmi adı' },
-      { label: 'Reyestr kodu', ci: ROAD_COL.code, tooltip: 'Dövlət reyestrindəki unikal identifikasiya kodu' },
-      { label: 'İndeks', ci: ROAD_COL.index, type: 'select', options: ['M0', 'M2', 'M4', 'M6', 'M8', 'A 21', 'A 22', 'A 43', 'B-48'], tooltip: 'Yolun marşrut indeksi (M, A, B)' },
-      { label: 'Status', ci: ROAD_COL.status, type: 'select', options: ['aktiv', 'deaktiv'], tooltip: 'Yolun cari istismar statusu' },
-      { label: 'Vəziyyəti', ci: ROAD_COL.condition, type: 'select', options: ['Yaxşı', 'Orta', 'Kafi', 'Qənaətbəxş', 'Qənaətsiz'], tooltip: 'Yol örtüyünün texniki vəziyyəti' },
-      { label: 'Kateqoriyası', ci: ROAD_COL.category, type: 'select', options: ['Magistral', 'Rayon', 'Kənd'], tooltip: 'Yolun funksional kateqoriyası' },
-      { label: 'Əhəmiyyəti', ci: ROAD_COL.importance, type: 'select', options: ['Respublika', 'Yerli'], tooltip: 'Yolun inzibati əhəmiyyəti' },
-      { label: 'Dərəcə', ci: ROAD_COL.degree, type: 'select', options: ['I', 'II', 'III', 'IV'], tooltip: 'Yolun texniki dərəcəsi (I–IV)' },
-      { label: 'Uzunluğu (km)', ci: ROAD_COL.length, filterKind: 'range', tooltip: 'Yolun ümumi uzunluğu, km' },
-      { label: 'Hərəkət zolağı', ci: ROAD_COL.lanes, tooltip: 'Hərəkət istiqamətləri üzrə zolaqların sayı' },
-      { label: 'Yol örtüyü', ci: ROAD_COL.surface, type: 'select', options: ['Asfalt', 'Sement-beton', 'Çınqıl', 'Torpaq'], tooltip: 'Yol örtüyünün materialı' },
-      { label: 'İdarəedici qurum', ci: ROAD_COL.managing, tooltip: 'Yolu idarə edən qurum' },
-      { label: 'Mülkiyyət', ci: ROAD_COL.ownership, type: 'select', options: ['Dövlət', 'Bələdiyyə', 'Özəl', 'Hüquqi şəxs', 'Fiziki şəxs'], tooltip: 'Yolun mülkiyyət forması' },
-      { label: 'İstifadə', ci: ROAD_COL.usage, tooltip: 'Yolun istifadə növü' },
-      { label: 'Kəsişmə', ci: ROAD_COL.intersection, tooltip: 'Kəsişmənin növü və səviyyəsi' },
-      { label: 'İst. tarixi', title: 'İstismara verildiyi tarix', ci: ROAD_COL.commissionedDate, tooltip: 'Yolun istifadəyə verildiyi tarix' },
-      { label: 'Torpaq, ha', title: 'Tutduğu torpaq sahəsi (ha)', ci: ROAD_COL.landAreaHa, filterKind: 'range', tooltip: 'Yolun tutduğu torpaq sahəsi, hektar' },
+      { label: 'Sistem ID', ci: ROAD_COL.sysId, tooltip: 'Sistem identifikatoru' },
+      { label: 'Reyestr kodu', ci: ROAD_COL.regCode, tooltip: 'Yolun reyestr kodu' },
+      { label: 'Yol adı', ci: ROAD_COL.name, width: '180px', tooltip: 'Avtomobil yolunun adı' },
+      { label: 'İndeks', ci: ROAD_COL.index, type: 'select', options: ['M1','M2','M3','M4','M5','M6','M7','M8','A 21','A 22','A 43','B-48'], tooltip: 'Yol indeksi' },
+      { label: 'Qeydiyyat №', ci: ROAD_COL.regNo, tooltip: 'Yolun qeydiyyat nömrəsi' },
+      { label: 'Mülkiyyət növü', ci: ROAD_COL.ownership, type: 'select', options: ['Dövlət','Bələdiyyə','Özəl','Birgə','Digər'], tooltip: 'Mülkiyyət növü' },
+      { label: 'Mülkiyyətçi', ci: ROAD_COL.ownerText, tooltip: 'Mülkiyyətçinin tam adı' },
+      { label: 'İdarəedici qurum', ci: ROAD_COL.managing, tooltip: 'İdarə edən qurum' },
+      { label: 'Uzunluğu (km)', ci: ROAD_COL.length, filterKind: 'range', tooltip: 'Yolun uzunluğu' },
+      { label: 'Başlanğıc nöqtəsi', ci: ROAD_COL.startPoint, tooltip: 'Yolun başlanğıc nöqtəsi' },
+      { label: 'Son nöqtəsi', ci: ROAD_COL.endPoint, tooltip: 'Yolun son nöqtəsi' },
+      { label: 'Yolun xəritəsi', ci: ROAD_COL.gis, tooltip: 'Yolun GIS xəritəsi (POLYLINE)' },
+      { label: 'İnzibati aidiyyət', ci: ROAD_COL.usage, tooltip: 'İnzibati aidiyyət' },
+      { label: 'Marşrut təsviri', ci: ROAD_COL.marsrut, tooltip: 'Marşrut təsviri' },
+      { label: 'Təhkim zolağı', ci: ROAD_COL.tahkimZolagi, tooltip: 'Təhkim zolağının eni' },
+      { label: 'Mühafizə zolağı', ci: ROAD_COL.muhafizeZolagi, tooltip: 'Mühafizə zolağının eni' },
+      { label: 'İst. tarixi', title: 'İstismara verildiyi tarix', ci: ROAD_COL.commissionedDate, tooltip: 'İstismara verilmə tarixi' },
+      { label: 'Əhəmiyyəti', ci: ROAD_COL.importance, type: 'select', options: ['Beynəlxalq','Respublika','Yerli'], tooltip: 'Əhəmiyyətinə görə növü' },
+      { label: 'İstifadə statusu', ci: ROAD_COL.status, type: 'select', options: ['Aktiv','Təmir gedir','Bağlı','Planlaşdırılır','aktiv','deaktiv'], tooltip: 'İstifadə statusu' },
+      { label: 'Funk. təyinatı', ci: ROAD_COL.funcPurpose, type: 'select', options: ['Sərnişin','Yük','Qarışıq','Xidmət yolu'], tooltip: 'Funksional təyinatı' },
+      { label: 'Şəbəkə rolu', ci: ROAD_COL.category, type: 'select', options: ['Magistral','Əsas yol','Köməkçi yol','Birləşdirici yol','Rayon','Kənd'], tooltip: 'Yol şəbəkəsindəki rolu' },
+      { label: 'Hüquqi status', ci: ROAD_COL.legalStatus, type: 'select', options: ['Dövlət balansında','İstismarda','Tikintidə','Layihələndirilir'], tooltip: 'Hüquqi status' },
+      { label: 'Qeydiyyat sənədi', ci: ROAD_COL.regDoc, tooltip: 'Qeydiyyatın əsas sənədi' },
+      { label: 'Son yenilənmə', ci: ROAD_COL.lastUpdated, tooltip: 'Son yenilənmə tarixi' },
+      { label: 'Qeyd', ci: ROAD_COL.note, tooltip: 'Əlavə qeydlər' },
     ];
 
     const initialRoadTechnicalData = [
-      { degree: 'I', commissionedDate: '2018-05-12', lanes: '2 gəliş / 2 gediş', intersection: 'Fərqli səviyyəli', landAreaHa: '38.2', condition: 'Yaxşı', surface: 'Asfalt' },
-      { degree: 'II', commissionedDate: '2016-09-20', lanes: '2 gəliş / 2 gediş', intersection: 'T tipli, eyni səviyyəli', landAreaHa: '31.5', condition: 'Orta', surface: 'Asfalt' },
-      { degree: 'II', commissionedDate: '2017-04-10', lanes: '1 gəliş / 1 gediş', intersection: '+ tipli, eyni səviyyəli', landAreaHa: '24.8', condition: 'Kafi', surface: 'Asfalt' },
-      { degree: 'III', commissionedDate: '2015-11-03', lanes: '1 gəliş / 1 gediş', intersection: 'T tipli, eyni səviyyəli', landAreaHa: '44.0', condition: 'Orta', surface: 'Çınqıl' },
-      { degree: 'I', commissionedDate: '2020-08-28', lanes: '2 gəliş / 2 gediş', intersection: 'Fərqli səviyyəli', landAreaHa: '52.7', condition: 'Yaxşı', surface: 'Asfalt' },
-      { degree: 'II', commissionedDate: '2019-06-14', lanes: '2 gəliş / 1 gediş', intersection: '+ tipli, eyni səviyyəli', landAreaHa: '47.3', condition: 'Orta', surface: 'Asfalt' },
-      { degree: 'III', commissionedDate: '2021-03-19', lanes: '1 gəliş / 1 gediş', intersection: 'T tipli, eyni səviyyəli', landAreaHa: '29.6', condition: 'Kafi', surface: 'Torpaq' },
-      { degree: 'II', commissionedDate: '2018-12-07', lanes: '2 gəliş / 2 gediş', intersection: 'Fərqli səviyyəli', landAreaHa: '36.4', condition: 'Yaxşı', surface: 'Asfalt' },
-      { degree: 'IV', commissionedDate: '2014-10-25', lanes: '1 gediş', intersection: 'T tipli, eyni səviyyəli', landAreaHa: '12.1', condition: 'Kafi', surface: 'Torpaq' },
-      { degree: 'I', commissionedDate: '2022-02-16', lanes: '2 gəliş / 2 gediş', intersection: 'Fərqli səviyyəli', landAreaHa: '41.9', condition: 'Yaxşı', surface: 'Sement-beton' },
-      { degree: 'III', commissionedDate: '2016-05-30', lanes: '1 gəliş / 1 gediş', intersection: '+ tipli, eyni səviyyəli', landAreaHa: '18.7', condition: 'Orta', surface: 'Asfalt' },
-      { degree: 'IV', commissionedDate: '2013-09-11', lanes: '1 gəliş / 1 gediş', intersection: 'T tipli, eyni səviyyəli', landAreaHa: '11.4', condition: 'Qənaətbəxş', surface: 'Torpaq' },
+      { degree: 'I', commissionedDate: '2018-05-12', lanes: '2 gəliş / 2 gediş', intersection: 'Fərqli səviyyəli', landAreaHa: '38.2', condition: 'Yaxşı', surface: 'Asfalt', sysId: 'SYS-ROAD-0001', regCode: 'YR-2026-001', regNo: 'QN-45821', ownerText: 'Azərbaycan Avtomobil Yolları Dövlət Agentliyi', startPoint: '40.4093, 49.8671', endPoint: '41.3660, 48.5126', inzibati: 'Bakı, Siyəzən, Quba', marsrut: 'Bakı şəhəri – Sumqayıt şəhəri – Siyəzən rayonu – Quba rayonu', tahkimZolagi: '25 m', muhafizeZolagi: '60 m', funcPurpose: 'Qarışıq', legalStatus: 'İstismarda', regDoc: 'Nazirlər Kabinetinin qərarı №145', lastUpdated: '12.05.2026', note: '' },
+      { degree: 'II', commissionedDate: '2016-09-20', lanes: '2 gəliş / 2 gediş', intersection: 'T tipli, eyni səviyyəli', landAreaHa: '31.5', condition: 'Orta', surface: 'Asfalt', sysId: 'SYS-ROAD-0002', regCode: 'YR-2026-002', regNo: 'QN-31205', ownerText: 'Azərbaycan Avtomobil Yolları Dövlət Agentliyi', startPoint: '38.7529, 48.8530', endPoint: '38.4564, 48.8725', inzibati: 'Lənkəran, Astara', marsrut: 'Lənkəran şəhəri – Lerik rayonu – Astara rayonu', tahkimZolagi: '20 m', muhafizeZolagi: '50 m', funcPurpose: 'Qarışıq', legalStatus: 'İstismarda', regDoc: 'NK qərarı №98', lastUpdated: '10.04.2026', note: '' },
+      { degree: 'II', commissionedDate: '2017-04-10', lanes: '1 gəliş / 1 gediş', intersection: '+ tipli, eyni səviyyəli', landAreaHa: '24.8', condition: 'Kafi', surface: 'Asfalt', sysId: 'SYS-ROAD-0003', regCode: 'YR-2026-003', regNo: 'QN-28760', ownerText: 'Azərbaycan Avtomobil Yolları Dövlət Agentliyi', startPoint: '38.4564, 48.8725', endPoint: '38.7788, 48.4151', inzibati: 'Astara, Lerik', marsrut: 'Astara şəhəri – Lerik rayonu mərkəzi', tahkimZolagi: '18 m', muhafizeZolagi: '45 m', funcPurpose: 'Yük', legalStatus: 'İstismarda', regDoc: 'NK qərarı №112', lastUpdated: '05.03.2026', note: '' },
+      { degree: 'III', commissionedDate: '2015-11-03', lanes: '1 gəliş / 1 gediş', intersection: 'T tipli, eyni səviyyəli', landAreaHa: '44.0', condition: 'Orta', surface: 'Çınqıl', sysId: 'SYS-ROAD-0004', regCode: 'YR-2026-004', regNo: 'QN-12304', ownerText: 'Naxçıvan MR İcra Hakimiyyəti', startPoint: '39.2090, 45.4122', endPoint: '39.5530, 44.9874', inzibati: 'Naxçıvan, Şərur', marsrut: 'Naxçıvan şəhəri – Şərur rayonu mərkəzi', tahkimZolagi: '15 m', muhafizeZolagi: '40 m', funcPurpose: 'Qarışıq', legalStatus: 'İstismarda', regDoc: 'NK qərarı №67', lastUpdated: '01.02.2026', note: '' },
+      { degree: 'I', commissionedDate: '2020-08-28', lanes: '2 gəliş / 2 gediş', intersection: 'Fərqli səviyyəli', landAreaHa: '52.7', condition: 'Yaxşı', surface: 'Asfalt', sysId: 'SYS-ROAD-0005', regCode: 'YR-2026-005', regNo: 'QN-55010', ownerText: 'Azərbaycan Avtomobil Yolları Dövlət Agentliyi', startPoint: '40.4093, 49.8671', endPoint: '40.5773, 49.6322', inzibati: 'Bakı, Sumqayıt', marsrut: 'Bakı şəhəri (Sabunçu) – Sumqayıt şəhəri', tahkimZolagi: '30 m', muhafizeZolagi: '70 m', funcPurpose: 'Sərnişin', legalStatus: 'İstismarda', regDoc: 'NK qərarı №200', lastUpdated: '15.04.2026', note: '' },
+      { degree: 'II', commissionedDate: '2019-06-14', lanes: '2 gəliş / 1 gediş', intersection: '+ tipli, eyni səviyyəli', landAreaHa: '47.3', condition: 'Orta', surface: 'Asfalt', sysId: 'SYS-ROAD-0006', regCode: 'YR-2026-006', regNo: 'QN-40321', ownerText: 'Gəncə şəhər İcra Hakimiyyəti', startPoint: '40.6824, 46.3606', endPoint: '40.5744, 46.7875', inzibati: 'Gəncə, Goranboy', marsrut: 'Gəncə şəhəri – Goranboy rayonu mərkəzi', tahkimZolagi: '22 m', muhafizeZolagi: '55 m', funcPurpose: 'Qarışıq', legalStatus: 'İstismarda', regDoc: 'NK qərarı №175', lastUpdated: '08.03.2026', note: '' },
+      { degree: 'III', commissionedDate: '2021-03-19', lanes: '1 gəliş / 1 gediş', intersection: 'T tipli, eyni səviyyəli', landAreaHa: '29.6', condition: 'Kafi', surface: 'Torpaq', sysId: 'SYS-ROAD-0007', regCode: 'YR-2026-007', regNo: 'QN-19870', ownerText: 'Quba Rayon İcra Hakimiyyəti', startPoint: '41.3660, 48.5126', endPoint: '41.5023, 48.3812', inzibati: 'Quba', marsrut: 'Quba rayonu mərkəzi – Qonaqkənd kəndi', tahkimZolagi: '12 m', muhafizeZolagi: '30 m', funcPurpose: 'Xidmət yolu', legalStatus: 'İstismarda', regDoc: 'NK qərarı №89', lastUpdated: '20.01.2026', note: 'Təmir planlaşdırılır' },
+      { degree: 'II', commissionedDate: '2018-12-07', lanes: '2 gəliş / 2 gediş', intersection: 'Fərqli səviyyəli', landAreaHa: '36.4', condition: 'Yaxşı', surface: 'Asfalt', sysId: 'SYS-ROAD-0008', regCode: 'YR-2026-008', regNo: 'QN-50012', ownerText: 'Azərbaycan Avtomobil Yolları Dövlət Agentliyi', startPoint: '40.4093, 49.8671', endPoint: '40.6824, 46.3606', inzibati: 'Bakı, Gəncə, Yevlax', marsrut: 'Bakı şəhəri – Gəncə şəhəri (Yevlax üzərindən)', tahkimZolagi: '28 m', muhafizeZolagi: '65 m', funcPurpose: 'Qarışıq', legalStatus: 'İstismarda', regDoc: 'NK qərarı №160', lastUpdated: '22.04.2026', note: '' },
+      { degree: 'IV', commissionedDate: '2014-10-25', lanes: '1 gediş', intersection: 'T tipli, eyni səviyyəli', landAreaHa: '12.1', condition: 'Kafi', surface: 'Torpaq', sysId: 'SYS-ROAD-0009', regCode: 'YR-2026-009', regNo: 'QN-08901', ownerText: 'Ağcabədi Rayon İcra Hakimiyyəti', startPoint: '40.0531, 47.4509', endPoint: '39.7757, 47.6153', inzibati: 'Ağcabədi, Beyləqan', marsrut: 'Ağcabədi rayonu – Beyləqan rayonu mərkəzi', tahkimZolagi: '10 m', muhafizeZolagi: '25 m', funcPurpose: 'Yük', legalStatus: 'Dövlət balansında', regDoc: 'NK qərarı №45', lastUpdated: '11.02.2026', note: '' },
+      { degree: 'I', commissionedDate: '2022-02-16', lanes: '2 gəliş / 2 gediş', intersection: 'Fərqli səviyyəli', landAreaHa: '41.9', condition: 'Yaxşı', surface: 'Sement-beton', sysId: 'SYS-ROAD-0010', regCode: 'YR-2026-010', regNo: 'QN-61105', ownerText: 'Azərbaycan Avtomobil Yolları Dövlət Agentliyi', startPoint: '40.4093, 49.8671', endPoint: '40.3699, 49.7052', inzibati: 'Bakı, Abşeron', marsrut: 'Bakı şəhəri – Abşeron rayonu', tahkimZolagi: '32 m', muhafizeZolagi: '75 m', funcPurpose: 'Sərnişin', legalStatus: 'İstismarda', regDoc: 'NK qərarı №220', lastUpdated: '30.04.2026', note: '' },
+      { degree: 'III', commissionedDate: '2016-05-30', lanes: '1 gəliş / 1 gediş', intersection: '+ tipli, eyni səviyyəli', landAreaHa: '18.7', condition: 'Orta', surface: 'Asfalt', sysId: 'SYS-ROAD-0011', regCode: 'YR-2026-011', regNo: 'QN-24530', ownerText: 'Şirvan şəhər İcra Hakimiyyəti', startPoint: '39.9361, 48.9199', endPoint: '40.0023, 48.4690', inzibati: 'Şirvan, Sabirabad', marsrut: 'Şirvan şəhəri – Sabirabad rayonu mərkəzi', tahkimZolagi: '16 m', muhafizeZolagi: '38 m', funcPurpose: 'Qarışıq', legalStatus: 'İstismarda', regDoc: 'NK qərarı №130', lastUpdated: '17.03.2026', note: '' },
+      { degree: 'IV', commissionedDate: '2013-09-11', lanes: '1 gəliş / 1 gediş', intersection: 'T tipli, eyni səviyyəli', landAreaHa: '11.4', condition: 'Qənaətbəxş', surface: 'Torpaq', sysId: 'SYS-ROAD-0012', regCode: 'YR-2026-012', regNo: 'QN-07640', ownerText: 'Saatlı Rayon İcra Hakimiyyəti', startPoint: '39.9094, 48.3797', endPoint: '40.0023, 48.4690', inzibati: 'Saatlı, Sabirabad', marsrut: 'Saatlı rayonu – Sabirabad rayonu mərkəzi', tahkimZolagi: '10 m', muhafizeZolagi: '25 m', funcPurpose: 'Xidmət yolu', legalStatus: 'Dövlət balansında', regDoc: 'NK qərarı №38', lastUpdated: '05.01.2026', note: '' },
     ];
 
     function exportTableToCsv(tableEl, filename) {
@@ -8489,7 +8780,7 @@
       const thStyle = col.width ? ` style="width:${col.width};max-width:${col.width};overflow:hidden;"` : '';
       const labelTooltip = col.tooltip ? ` data-tooltip="${safeCell(col.tooltip)}"` : '';
       return `
-        <th data-ci="${col.ci}"${thTitle}${thStyle}>
+        <th data-ci="${col.ci}" data-col="${col.ci}"${thStyle}${thTitle}>
           <div class="th-top">
             <button class="sort-btn" type="button" title="Sırala">⋮</button>
             <span class="th-label"${labelTooltip}>${safeCell(col.label)}</span>
@@ -8537,29 +8828,143 @@
         };
         row.innerHTML = `
           <td class="td-num">${safeCell(old.number)}</td>
+          <td>${safeCell(t.sysId || 'SYS-ROAD-' + String(i + 1).padStart(4, '0'))}</td>
+          <td><button class="link-btn road-code-link btn-regcode-detail" data-road-code="${safeCell(old.code)}" type="button">${safeCell(t.regCode || 'YR-2026-' + String(i + 1).padStart(3, '0'))}</button></td>
           <td class="td-name">${safeCell(old.name)}</td>
-          <td class="td-code">${safeCell(old.code)}</td>
           <td>${roadCellBadge(old.index, 'b-gray')}</td>
-          <td><span class="badge ${String(old.status || 'aktiv').toLowerCase() !== 'aktiv' ? 'b-amber' : 'b-green'} status-toggle">${safeCell(old.status || 'aktiv')}</span></td>
-          <td>${roadConditionBadge(t.condition || '-')}</td>
-          <td>${safeCell(old.category || '-')}</td>
-          <td>${roadCellBadge(old.importance || '-', old.importance === 'Yerli' ? 'b-gray' : 'b-blue')}</td>
-          <td>${safeCell(t.degree || 'III')}</td>
-          <td>${safeCell(old.length || '-')}</td>
-          <td>${safeCell(normalizeRoadLanes(t.lanes || '-'))}</td>
-          <td>${roadCellBadge(t.surface || '-', 'b-gray')}</td>
+          <td>${safeCell(t.regNo || '-')}</td>
+          <td>${roadCellBadge((() => { const v = old.ownership || 'Dövlət'; return v.charAt(0).toUpperCase() + v.slice(1); })(), 'b-blue')}</td>
+          <td>${safeCell(t.ownerText || '-')}</td>
           <td>${roadCellBadge('AAYDA', 'b-teal')}</td>
-          <td>${roadCellBadge((() => { const ow = roadOwnershipByText(old.ownership); return ow?.shortName || old.ownership || 'AR'; })(), 'b-blue')}</td>
-          <td>${roadCellBadge(old.usage || '-', 'b-teal')}</td>
-          <td>${safeCell(t.intersection || '-')}</td>
+          <td>${safeCell(old.length || '-')}</td>
+          <td>${safeCell(t.startPoint || '-')}</td>
+          <td>${safeCell(t.endPoint || '-')}</td>
+          <td>${(() => { const sp = t.startPoint||''; const ep = t.endPoint||''; if (!sp) return '-'; const wkt = sp && ep ? `POLYLINE ((${sp.split(',').map(s=>s.trim()).reverse().join(' ')}, ${ep.split(',').map(s=>s.trim()).reverse().join(' ')}))` : `POLYLINE ((${sp.split(',').map(s=>s.trim()).reverse().join(' ')}))`; return `<button class="btn-cell-preview" data-cell-gis="${safeCell(wkt)}" type="button"><svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>Xəritə</button>`; })()}</td>
+          <td>${safeCell(t.inzibati || '-')}</td>
+          <td>${(() => { const mr = t.marsrut||''; if (!mr) return '-'; return `<button class="btn-cell-preview" data-cell-marsrut="${safeCell(mr)}" type="button"><svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" fill="none" stroke-width="2"><path d="M3 12h18M3 6l9-4 9 4M4 20h16"/></svg>Marşrut</button>`; })()}</td>
+          <td>${safeCell(t.tahkimZolagi || '-')}</td>
+          <td>${safeCell(t.muhafizeZolagi || '-')}</td>
           <td>${safeCell(formatRoadDateText(t.commissionedDate || '-'))}</td>
-          <td>${safeCell(t.landAreaHa || '-')}</td>
+          <td>${roadCellBadge(old.importance || '-', old.importance === 'Yerli' ? 'b-gray' : 'b-blue')}</td>
+          <td><span class="badge ${String(old.status || 'aktiv').toLowerCase() !== 'aktiv' ? 'b-amber' : 'b-green'} status-toggle">${safeCell(old.status || 'aktiv')}</span></td>
+          <td>${roadCellBadge(t.funcPurpose || '-', 'b-teal')}</td>
+          <td>${safeCell(old.category || '-')}</td>
+          <td>${roadCellBadge(t.legalStatus || '-', 'b-gray')}</td>
+          <td>${safeCell(t.regDoc || '-')}</td>
+          <td>${safeCell(t.lastUpdated || '-')}</td>
+          <td>${safeCell(t.note || '-')}</td>
+          <td class="td-code" style="display:none;">${safeCell(old.code)}</td>
+          <td style="display:none;">${roadConditionBadge(t.condition || '-')}</td>
+          <td style="display:none;">${safeCell(t.degree || 'III')}</td>
+          <td style="display:none;">${safeCell(normalizeRoadLanes(t.lanes || '-'))}</td>
+          <td style="display:none;">${roadCellBadge(t.surface || '-', 'b-gray')}</td>
+          <td style="display:none;">${safeCell(t.intersection || '-')}</td>
+          <td style="display:none;">${safeCell(t.landAreaHa || '-')}</td>
           <td>${roadActionMenuHtml(0, 0)}</td>`;
+        roadTableColumns.forEach(col => {
+          const cell = row.cells[col.ci];
+          if (cell) cell.dataset.col = col.ci;
+        });
       });
     }
 
     rebuildRoadTableHeader();
     normalizeInitialRoadRows();
+
+    /* ── Column visibility toggle ── */
+    const ROAD_DEFAULT_HIDDEN = new Set([10, 11, 12, 14, 15, 16, 22, 23, 24, 25]);
+
+    function applyColVisibility() {
+      const table = document.getElementById('mainTable');
+      if (!table) return;
+      roadTableColumns.forEach(col => {
+        const isHidden = ROAD_DEFAULT_HIDDEN.has(col.ci);
+        table.querySelectorAll(`[data-col="${col.ci}"]`).forEach(el => {
+          el.classList.toggle('col-hidden', isHidden);
+        });
+        const th = table.querySelector(`th[data-ci="${col.ci}"]`);
+        if (th) th.classList.toggle('col-hidden', isHidden);
+      });
+    }
+
+    function buildColToggleList() {
+      const list = document.getElementById('colToggleList');
+      if (!list) return;
+      list.innerHTML = roadTableColumns.map(col => {
+        const checked = !ROAD_DEFAULT_HIDDEN.has(col.ci) ? 'checked' : '';
+        return `<div class="col-toggle-item">
+          <input type="checkbox" id="ctcol_${col.ci}" data-col-ci="${col.ci}" ${checked}>
+          <label for="ctcol_${col.ci}">${safeCell(col.label)}</label>
+        </div>`;
+      }).join('');
+      list.addEventListener('change', e => {
+        const cb = e.target.closest('[data-col-ci]');
+        if (!cb) return;
+        const ci = parseInt(cb.dataset.colCi);
+        if (cb.checked) ROAD_DEFAULT_HIDDEN.delete(ci);
+        else ROAD_DEFAULT_HIDDEN.add(ci);
+        applyColVisibility();
+      });
+    }
+
+    const btnColToggle = document.getElementById('btnColToggle');
+    const colTogglePanel = document.getElementById('colTogglePanel');
+    if (btnColToggle && colTogglePanel) {
+      btnColToggle.addEventListener('click', e => {
+        e.stopPropagation();
+        colTogglePanel.classList.toggle('open');
+      });
+      document.addEventListener('click', e => {
+        if (!colTogglePanel.contains(e.target) && e.target !== btnColToggle) {
+          colTogglePanel.classList.remove('open');
+        }
+      });
+    }
+    buildColToggleList();
+
+    document.getElementById('btnColShowAll')?.addEventListener('click', e => {
+      e.stopPropagation();
+      roadTableColumns.forEach(col => ROAD_DEFAULT_HIDDEN.delete(col.ci));
+      document.querySelectorAll('#colToggleList input[type="checkbox"]').forEach(cb => cb.checked = true);
+      applyColVisibility();
+    });
+    /* ── apply data-col to TD cells (for visibility toggle) ── */
+    function addDataColToRows() {
+      document.querySelectorAll('#tableBody tr').forEach(row => {
+        roadTableColumns.forEach(col => {
+          const cell = row.cells[col.ci];
+          if (cell) cell.dataset.col = col.ci;
+        });
+      });
+    }
+
+    addDataColToRows();
+    applyColVisibility();
+
+    /* ── File upload display ── */
+    document.getElementById('f_sened_file')?.addEventListener('change', function() {
+      const previewEl = document.getElementById('f_sened_preview');
+      const nameEl = document.getElementById('f_sened_file_name');
+      if (this.files[0]) {
+        if (nameEl) nameEl.textContent = this.files[0].name;
+        if (previewEl) previewEl.style.display = 'flex';
+        const senedInput = document.getElementById('f_sened');
+        if (senedInput && !senedInput.value.trim()) senedInput.value = this.files[0].name;
+      } else {
+        if (previewEl) previewEl.style.display = 'none';
+      }
+    });
+    document.getElementById('f_sened_clear')?.addEventListener('click', function() {
+      const fileInput = document.getElementById('f_sened_file');
+      const previewEl = document.getElementById('f_sened_preview');
+      if (fileInput) fileInput.value = '';
+      if (previewEl) previewEl.style.display = 'none';
+    });
+
+    /* ── Date mask for new date fields ── */
+    const lastUpdatedInput = document.getElementById('f_last_updated');
+    if (lastUpdatedInput) applyDateMask(lastUpdatedInput);
+
     populateRoadOwnershipSelects();
     populateRoadManagingSelects();
     document.getElementById('f_mulk_nov')?.addEventListener('change', () => updateRoadOwnershipInfo('f'));
@@ -9242,14 +9647,21 @@
 
     function clearForm() {
       document.getElementById('f_kod').value = 'YOL-2026-' + String(Date.now()).slice(-5);
-      ['f_ad', 'f_indeks', 'f_qeyd_nom', 'f_uzunluq', 'f_tarix',
+      ['f_ad', 'f_indeks', 'f_qeyd_nom', 'f_reg_code', 'f_sys_id', 'f_uzunluq', 'f_tarix', 'f_last_updated',
         'f_zolaq', 'f_kesisme', 'f_torpaq_sahesi',
-        'f_mulk_nov', 'f_mng_nov', 'f_huq_status', 'f_ist_status',
-        'f_ehem', 'f_funk', 'f_derece', 'f_veziyyet', 'f_ortuk', 'f_inzibati', 'f_marsrut', 'f_qeyd',
-        'f_bas_lat', 'f_bas_lon', 'f_son_lat', 'f_son_lon', 'f_sened'
+        'f_mulk_tip', 'f_mulk_nov', 'f_mulk_text', 'f_mng_nov', 'f_huq_status', 'f_ist_status',
+        'f_ehem', 'f_func_purpose', 'f_funk', 'f_derece', 'f_veziyyet', 'f_ortuk',
+        'f_inzibati', 'f_start_point', 'f_end_point', 'f_marsrut', 'f_qeyd',
+        'f_bas_lat', 'f_bas_lon', 'f_son_lat', 'f_son_lon',
+        'f_tahkim', 'f_muhafize', 'f_sened'
       ].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
       updateRoadOwnershipInfo('f');
       updateRoadManagingInfo('f');
+      const fileInput = document.getElementById('f_sened_file');
+      if (fileInput) fileInput.value = '';
+      const previewEl = document.getElementById('f_sened_preview');
+      if (previewEl) previewEl.style.display = 'none';
+      if (typeof clearRoadFormErrors === 'function') clearRoadFormErrors();
     }
 
     function setFormValue(id, value) {
@@ -9289,6 +9701,25 @@
       setFormValue('f_ehem', cells[ROAD_COL.importance]?.textContent.trim());
       setFormValue('f_funk', cells[ROAD_COL.category]?.textContent.trim());
       if (typeof setRoadManagingSelection === 'function') setRoadManagingSelection('f', cells[ROAD_COL.managing]?.textContent.trim());
+      setFormValue('f_mulk_tip', cells[ROAD_COL.ownership]?.textContent.trim());
+      setFormValue('f_sys_id', cells[ROAD_COL.sysId]?.textContent.trim());
+      setFormValue('f_reg_code', cells[ROAD_COL.regCode]?.textContent.trim());
+      setFormValue('f_qeyd_nom', cells[ROAD_COL.regNo]?.textContent.trim());
+      setFormValue('f_mulk_text', cells[ROAD_COL.ownerText]?.textContent.trim());
+      const _spParts = (cells[ROAD_COL.startPoint]?.textContent.trim() || '').split(',');
+      setFormValue('f_bas_lat', (_spParts[0] || '').trim());
+      setFormValue('f_bas_lon', (_spParts[1] || '').trim());
+      const _epParts = (cells[ROAD_COL.endPoint]?.textContent.trim() || '').split(',');
+      setFormValue('f_son_lat', (_epParts[0] || '').trim());
+      setFormValue('f_son_lon', (_epParts[1] || '').trim());
+      setFormValue('f_tahkim', cells[ROAD_COL.tahkimZolagi]?.textContent.trim());
+      setFormValue('f_muhafize', cells[ROAD_COL.muhafizeZolagi]?.textContent.trim());
+      setFormValue('f_func_purpose', cells[ROAD_COL.funcPurpose]?.textContent.trim());
+      setFormValue('f_huq_status', cells[ROAD_COL.legalStatus]?.textContent.trim());
+      setFormValue('f_sened', cells[ROAD_COL.regDoc]?.textContent.trim());
+      setFormValue('f_last_updated', roadDateInputValue(cells[ROAD_COL.lastUpdated]?.textContent.trim()));
+      setFormValue('f_qeyd', cells[ROAD_COL.note]?.textContent.trim());
+      setFormValue('f_marsrut', cells[ROAD_COL.marsrut]?.textContent.trim());
     }
 
     /* step navigation */
@@ -9317,10 +9748,111 @@
         const hasData = document.getElementById('f_ad')?.value.trim() && document.getElementById('f_indeks')?.value.trim();
         addSegmentBtn.disabled = !fp.savedRoadCode && !hasData;
       }
+      if (n === TOTAL_STEPS) initFormMap();
     }
 
+    let formRoadMap = null;
+    function initFormMap() {
+      if (formRoadMap) { formRoadMap.invalidateSize(); return; }
+      const container = document.getElementById('formMapContainer');
+      if (!container || typeof L === 'undefined') return;
+      formRoadMap = L.map('formMapContainer', { center: [40.4093, 49.8671], zoom: 7 });
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap',
+        maxZoom: 18
+      }).addTo(formRoadMap);
+      const markers = [];
+      formRoadMap.on('click', function(e) {
+        const lat = e.latlng.lat.toFixed(6);
+        const lng = e.latlng.lng.toFixed(6);
+        if (markers.length === 0) {
+          document.getElementById('f_bas_lat').value = lat;
+          document.getElementById('f_bas_lon').value = lng;
+          markers.push(L.marker(e.latlng).addTo(formRoadMap).bindPopup('Başlanğıc nöqtəsi').openPopup());
+        } else if (markers.length === 1) {
+          document.getElementById('f_son_lat').value = lat;
+          document.getElementById('f_son_lon').value = lng;
+          markers.push(L.marker(e.latlng).addTo(formRoadMap).bindPopup('Son nöqtəsi').openPopup());
+          L.polyline(markers.map(m => m.getLatLng()), {color: '#2563eb', weight: 3}).addTo(formRoadMap);
+        } else {
+          markers.forEach(m => formRoadMap.removeLayer(m));
+          markers.length = 0;
+          formRoadMap.eachLayer(l => { if (l instanceof L.Polyline && !(l instanceof L.TileLayer)) formRoadMap.removeLayer(l); });
+          document.getElementById('f_bas_lat').value = lat;
+          document.getElementById('f_bas_lon').value = lng;
+          markers.push(L.marker(e.latlng).addTo(formRoadMap).bindPopup('Başlanğıc nöqtəsi').openPopup());
+        }
+      });
+    }
+
+    /* ── Step validation ── */
+    const ROAD_STEP_RULES = {
+      1: [
+        { id: 'f_ad', errId: 'err_ad' },
+        { id: 'f_indeks', errId: 'err_indeks' },
+        { id: 'f_uzunluq', errId: 'err_uzunluq' },
+      ],
+      2: [
+        { id: 'f_mulk_tip', errId: 'err_mulk_tip' },
+        { id: 'f_mulk_text', errId: 'err_mulk_text' },
+        { id: 'f_ist_status', errId: 'err_ist_status' },
+        { id: 'f_huq_status', errId: 'err_huq_status' },
+      ],
+      3: [
+        { id: 'f_ehem', errId: 'err_ehem' },
+        { id: 'f_func_purpose', errId: 'err_func_purpose' },
+      ],
+    };
+
+    function clearRoadFormErrors() {
+      document.querySelectorAll('#formPanel .finput.f-err, #formPanel .fselect.f-err').forEach(el => el.classList.remove('f-err'));
+      document.querySelectorAll('#formPanel .ferr.vis').forEach(el => el.classList.remove('vis'));
+    }
+
+    function validateRoadStep(step) {
+      clearRoadFormErrors();
+      const rules = ROAD_STEP_RULES[step] || [];
+      let valid = true;
+      rules.forEach(({ id, errId }) => {
+        const el = document.getElementById(id);
+        const errEl = document.getElementById(errId);
+        if (!el) return;
+        if (!el.value.trim()) {
+          el.classList.add('f-err');
+          if (errEl) errEl.classList.add('vis');
+          valid = false;
+        }
+      });
+      if (!valid) {
+        const firstErr = document.querySelector('#formPanel .finput.f-err, #formPanel .fselect.f-err');
+        if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return valid;
+    }
+
+    /* clear errors on input */
+    Object.values(ROAD_STEP_RULES).flat().forEach(({ id, errId }) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const errEl = document.getElementById(errId);
+      el.addEventListener('input', function() {
+        if (this.value.trim()) {
+          this.classList.remove('f-err');
+          if (errEl) errEl.classList.remove('vis');
+        }
+      });
+      el.addEventListener('change', function() {
+        if (this.value.trim()) {
+          this.classList.remove('f-err');
+          if (errEl) errEl.classList.remove('vis');
+        }
+      });
+    });
+
     document.getElementById('fpNext').addEventListener('click', () => {
-      if (fp.step < TOTAL_STEPS) goStep(fp.step + 1);
+      if (fp.step >= TOTAL_STEPS) return;
+      if (!validateRoadStep(fp.step)) return;
+      goStep(fp.step + 1);
     });
     document.getElementById('fpPrev').addEventListener('click', () => {
       if (fp.step > 1) goStep(fp.step - 1);
@@ -9345,12 +9877,37 @@
     applyDateMask(document.getElementById('f_tarix'));
     applyDateMask(document.getElementById('rm_tarix'));
 
+    /* Text preview modal (GIS / Marsrut) */
+    function openTextPreview(title, content) {
+      document.getElementById('textPreviewTitle').textContent = title;
+      document.getElementById('textPreviewContent').textContent = content || '-';
+      const m = document.getElementById('textPreviewModal');
+      m.classList.add('open'); m.setAttribute('aria-hidden', 'false');
+    }
+    document.getElementById('textPreviewClose')?.addEventListener('click', () => {
+      const m = document.getElementById('textPreviewModal');
+      m.classList.remove('open'); m.setAttribute('aria-hidden', 'true');
+    });
+    document.getElementById('textPreviewModal')?.addEventListener('click', e => {
+      if (e.target === e.currentTarget) { e.currentTarget.classList.remove('open'); e.currentTarget.setAttribute('aria-hidden', 'true'); }
+    });
+
+    /* Cell preview buttons in table */
+    document.getElementById('tableBody').addEventListener('click', e => {
+      const rcBtn = e.target.closest('.btn-regcode-detail');
+      if (rcBtn) { if (typeof openRoadInfoModal === 'function') openRoadInfoModal(rcBtn.dataset.roadCode); return; }
+      const gisBtn = e.target.closest('[data-cell-gis]');
+      if (gisBtn) { openTextPreview('Yolun xəritəsi (GIS)', gisBtn.dataset.cellGis); return; }
+      const mrBtn = e.target.closest('[data-cell-marsrut]');
+      if (mrBtn) { openTextPreview('Marşrut təsviri', mrBtn.dataset.cellMarsrut); return; }
+    }, true);
+
     /* Action menu in roads table */
     document.getElementById('tableBody').addEventListener('click', e => {
       const action = e.target.closest('[data-road-action]');
       if (!action) return;
       const row = action.closest('tr');
-      const code = row?.cells?.[1]?.textContent.trim() || '';
+      const code = row?.cells?.[ROAD_COL.code]?.textContent.trim() || '';
       const type = action.dataset.roadAction;
 
       if (type === 'edit') {
@@ -10782,6 +11339,21 @@
             importance: row.cells[ROAD_COL.importance]?.textContent.trim() || '',
             category: row.cells[ROAD_COL.category]?.textContent.trim() || '',
             managing: row.cells[ROAD_COL.managing]?.textContent.trim() || '',
+            sysId: row.cells[ROAD_COL.sysId]?.textContent.trim() || '',
+            regCode: row.cells[ROAD_COL.regCode]?.textContent.trim() || '',
+            regNo: row.cells[ROAD_COL.regNo]?.textContent.trim() || '',
+            ownerText: row.cells[ROAD_COL.ownerText]?.textContent.trim() || '',
+            startPoint: row.cells[ROAD_COL.startPoint]?.textContent.trim() || '',
+            endPoint: row.cells[ROAD_COL.endPoint]?.textContent.trim() || '',
+            tahkimZolagi: row.cells[ROAD_COL.tahkimZolagi]?.textContent.trim() || '',
+            muhafizeZolagi: row.cells[ROAD_COL.muhafizeZolagi]?.textContent.trim() || '',
+            funcPurpose: row.cells[ROAD_COL.funcPurpose]?.textContent.trim() || '',
+            legalStatus: row.cells[ROAD_COL.legalStatus]?.textContent.trim() || '',
+            regDoc: row.cells[ROAD_COL.regDoc]?.textContent.trim() || '',
+            lastUpdated: row.cells[ROAD_COL.lastUpdated]?.textContent.trim() || '',
+            note: row.cells[ROAD_COL.note]?.textContent.trim() || '',
+            gis: row.cells[ROAD_COL.gis]?.textContent.trim() || '',
+            marsrut: row.cells[ROAD_COL.marsrut]?.textContent.trim() || '',
             row,
           });
         });
@@ -10955,29 +11527,52 @@
           </div>
           ${roadInfoSection('Əsas məlumatlar', `
             <div class="road-info-grid">
-              ${roadInfoItem('Reyestr kodu', road.code)}
+              ${roadInfoItem('Sistem ID', road.sysId)}
+              ${roadInfoItem('Daxili reyestr kodu', road.code)}
+              ${roadInfoItem('Reyestr kodu (YR)', road.regCode)}
+              ${roadInfoItem('Qeydiyyat nömrəsi', road.regNo)}
               ${roadInfoItem('Yol adı', road.name)}
               ${roadInfoItem('İndeks', road.index)}
-              ${roadInfoItem('Dərəcə', road.degree)}
-              ${roadInfoItem('Uzunluğu', road.length ? `${road.length} km` : '-')}
+              ${roadInfoItem('Uzunluğu', road.length ? road.length + ' km' : '-')}
               ${roadInfoItem('İstismara verildiyi tarix', road.commissionedDate)}
-              ${roadInfoItem('Hərəkət zolağı', road.lanes)}
-              ${roadInfoItem('Kəsişmə', road.intersection)}
-              ${roadInfoItem('Tutduğu torpaq sahəsi', road.landAreaHa ? `${road.landAreaHa} ha` : '-')}
-              ${roadInfoItem('Vəziyyəti', road.condition)}
-              ${roadInfoItem('Yol örtüyü', road.surface)}
-              ${roadInfoItem('Mülkiyyət', road.ownership)}
-              ${roadInfoItem('Mülkiyyətçi', road.ownerName)}
-              ${roadInfoItem('Qısa ad', road.ownerShortName)}
-              ${roadInfoItem('Email', road.ownerEmail)}
-              ${roadInfoItem('Nömrə(lər)', road.ownerPhone)}
-              ${roadInfoItem('Ünvan', road.ownerAddress)}
-              ${roadInfoItem('Status', road.status)}
-              ${roadInfoItem('İstifadə', road.usage)}
-              ${roadInfoItem('Əhəmiyyəti', road.importance)}
-              ${roadInfoItem('Kateqoriyası', road.category)}
+              ${roadInfoItem('Son yenilənmə', road.lastUpdated)}
             </div>
           `)}
+          ${roadInfoSection('Mülkiyyət', `
+            <div class="road-info-grid">
+              ${roadInfoItem('Mülkiyyət növü', road.ownership)}
+              ${roadInfoItem('Mülkiyyətçi', road.ownerText || road.ownerName)}
+              ${roadInfoItem('İdarəedici qurum', road.managing)}
+              ${roadInfoItem('Hüquqi status', road.legalStatus)}
+              ${roadInfoItem('İstifadə statusu', road.status)}
+            </div>
+          `)}
+          ${roadInfoSection('Təsnifat', `
+            <div class="road-info-grid">
+              ${roadInfoItem('Əhəmiyyəti', road.importance)}
+              ${roadInfoItem('Funksional təyinatı', road.funcPurpose)}
+              ${roadInfoItem('Şəbəkə rolu', road.category)}
+              ${roadInfoItem('Dərəcə', road.degree)}
+              ${roadInfoItem('Vəziyyəti', road.condition)}
+              ${roadInfoItem('Yol örtüyü', road.surface)}
+            </div>
+          `)}
+          ${roadInfoSection('Coğrafi məlumat', `
+            <div class="road-info-grid">
+              ${roadInfoItem('Başlanğıc nöqtəsi', road.startPoint)}
+              ${roadInfoItem('Son nöqtəsi', road.endPoint)}
+              ${roadInfoItem('GIS koordinatı', road.gis)}
+              ${roadInfoItem('İnzibati aidiyyət', road.usage)}
+              ${roadInfoItem('Təhkim zolağı', road.tahkimZolagi)}
+              ${roadInfoItem('Mühafizə zolağı', road.muhafizeZolagi)}
+              ${roadInfoItem('Hərəkət zolağı', road.lanes)}
+              ${roadInfoItem('Kəsişmə', road.intersection)}
+              ${roadInfoItem('Torpaq sahəsi', road.landAreaHa ? road.landAreaHa + ' ha' : '-')}
+            </div>
+            ${road.marsrut ? '<div style="margin-top:8px;font-size:13px;color:#475569;"><strong>Marşrut:</strong> ' + esc(road.marsrut || '') + '</div>' : ''}
+          `)}
+          ${road.regDoc ? roadInfoSection('Sənəd', `<div class="road-info-grid">${roadInfoItem('Qeydiyyat sənədi', road.regDoc)}</div>`) : ''}
+          ${road.note ? roadInfoSection('Qeyd', `<p style="font-size:13px;color:#475569;margin:0;">${esc(road.note)}</p>`) : ''}
           ${roadInfoSection('Seqmentlər', `<div class="road-info-list">${segmentText}</div>`)}
           ${roadInfoSection('Seqment-aktiv bağlılığı', `<div class="road-info-list">${segmentAssetText}${unlinkedAssetText}</div>`)}
           ${roadInfoSection('Aktivlər', `<div class="road-info-list">${assetText}</div>`)}`;
@@ -11320,27 +11915,47 @@
         const row = document.createElement('tr');
         row.innerHTML = `
       <td class="td-num">${allRows.length + 1}</td>
+      <td>${esc(road.sysId || '-')}</td>
+      <td><button class="link-btn road-code-link btn-regcode-detail" data-road-code="${esc(road.code)}" type="button">${esc(road.regCode || '-')}</button></td>
       <td class="td-name">${esc(road.name)}</td>
-      <td class="td-code">${roadCodeButtonHtml(road.code)}</td>
       <td>${badge(road.index || '-', 'b-gray')}</td>
-      <td>${statusBadge(road.status || 'aktiv')}</td>
-      <td>${conditionBadge(road.condition || '-')}</td>
-      <td>${esc(road.category || '-')}</td>
-      <td>${badge(road.importance || '-', road.importance === 'Yerli' ? 'b-gray' : 'b-blue')}</td>
-      <td>${esc(road.degree || '-')}</td>
-      <td>${esc(road.length || '-')}</td>
-      <td>${esc(normalizeRoadLanes(road.lanes || '-'))}</td>
-      <td>${badge(road.surface || '-', 'b-gray')}</td>
+      <td>${esc(road.regNo || '-')}</td>
+      <td>${badge(road.ownership || 'Dövlət', 'b-blue')}</td>
+      <td>${esc(road.ownerText || '-')}</td>
       <td>${badge(road.managing || '-', 'b-teal')}</td>
-      <td>${badge(road.ownerShortName || road.ownerName || road.ownership || 'AR', 'b-blue')}</td>
+      <td>${esc(road.length || '-')}</td>
+      <td>${esc(road.startPoint || '-')}</td>
+      <td>${esc(road.endPoint || '-')}</td>
+      <td>${road.gis ? `<button class="btn-cell-preview" data-cell-gis="${esc(road.gis)}" type="button"><svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>Xəritə</button>` : '-'}</td>
       <td>${badge(road.usage || '-', 'b-teal')}</td>
-      <td>${esc(road.intersection || '-')}</td>
+      <td>${road.marsrut ? `<button class="btn-cell-preview" data-cell-marsrut="${esc(road.marsrut)}" type="button"><svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" fill="none" stroke-width="2"><path d="M3 12h18M3 6l9-4 9 4M4 20h16"/></svg>Marşrut</button>` : '-'}</td>
+      <td>${esc(road.tahkimZolagi || '-')}</td>
+      <td>${esc(road.muhafizeZolagi || '-')}</td>
       <td>${esc(formatRoadDateText(road.commissionedDate || '-'))}</td>
-      <td>${esc(road.landAreaHa || '-')}</td>
+      <td>${badge(road.importance || '-', road.importance === 'Yerli' ? 'b-gray' : 'b-blue')}</td>
+      <td>${statusBadge(road.status || 'aktiv')}</td>
+      <td>${badge(road.funcPurpose || '-', 'b-teal')}</td>
+      <td>${esc(road.category || '-')}</td>
+      <td>${badge(road.legalStatus || '-', 'b-gray')}</td>
+      <td>${esc(road.regDoc || '-')}</td>
+      <td>${esc(road.lastUpdated || '-')}</td>
+      <td>${esc(road.note || '-')}</td>
+      <td class="td-code" style="display:none;">${roadCodeButtonHtml(road.code)}</td>
+      <td style="display:none;">${conditionBadge(road.condition || '-')}</td>
+      <td style="display:none;">${esc(road.degree || '-')}</td>
+      <td style="display:none;">${esc(normalizeRoadLanes(road.lanes || '-'))}</td>
+      <td style="display:none;">${badge(road.surface || '-', 'b-gray')}</td>
+      <td style="display:none;">${esc(road.intersection || '-')}</td>
+      <td style="display:none;">${esc(road.landAreaHa || '-')}</td>
       <td>${roadActionMenuHtml(0, documentCountForRoad(road.code))}</td>`;
         document.getElementById('tableBody').appendChild(row);
         allRows.push(row);
         road.row = row;
+        roadTableColumns.forEach(col => {
+          const cell = row.cells[col.ci];
+          if (cell) cell.dataset.col = col.ci;
+        });
+        applyColVisibility();
       }
 
       function updateRoadRow(road) {
@@ -11356,12 +11971,27 @@
         road.row.cells[ROAD_COL.landAreaHa].textContent = road.landAreaHa || '-';
         road.row.cells[ROAD_COL.condition].innerHTML = conditionBadge(road.condition || '-');
         road.row.cells[ROAD_COL.surface].innerHTML = badge(road.surface || '-', 'b-gray');
-        road.row.cells[ROAD_COL.ownership].innerHTML = badge(road.ownerShortName || road.ownerName || road.ownership || 'AR', 'b-blue');
+        road.row.cells[ROAD_COL.ownership].innerHTML = badge(road.ownership || 'Dövlət', 'b-blue');
         road.row.cells[ROAD_COL.status].innerHTML = statusBadge(road.status || 'aktiv');
         road.row.cells[ROAD_COL.usage].innerHTML = badge(road.usage || '-', 'b-teal');
         road.row.cells[ROAD_COL.importance].innerHTML = badge(road.importance || '-', road.importance === 'Yerli' ? 'b-gray' : 'b-blue');
         road.row.cells[ROAD_COL.category].textContent = road.category || '-';
         road.row.cells[ROAD_COL.managing].innerHTML = badge(road.managing || '-', 'b-teal');
+        if (road.row.cells[ROAD_COL.sysId]) road.row.cells[ROAD_COL.sysId].textContent = road.sysId || '-';
+        if (road.row.cells[ROAD_COL.regCode]) road.row.cells[ROAD_COL.regCode].textContent = road.regCode || '-';
+        if (road.row.cells[ROAD_COL.regNo]) road.row.cells[ROAD_COL.regNo].textContent = road.regNo || '-';
+        if (road.row.cells[ROAD_COL.ownerText]) road.row.cells[ROAD_COL.ownerText].textContent = road.ownerText || '-';
+        if (road.row.cells[ROAD_COL.startPoint]) road.row.cells[ROAD_COL.startPoint].textContent = road.startPoint || '-';
+        if (road.row.cells[ROAD_COL.endPoint]) road.row.cells[ROAD_COL.endPoint].textContent = road.endPoint || '-';
+        if (road.row.cells[ROAD_COL.tahkimZolagi]) road.row.cells[ROAD_COL.tahkimZolagi].textContent = road.tahkimZolagi || '-';
+        if (road.row.cells[ROAD_COL.muhafizeZolagi]) road.row.cells[ROAD_COL.muhafizeZolagi].textContent = road.muhafizeZolagi || '-';
+        if (road.row.cells[ROAD_COL.funcPurpose]) road.row.cells[ROAD_COL.funcPurpose].innerHTML = badge(road.funcPurpose || '-', 'b-teal');
+        if (road.row.cells[ROAD_COL.legalStatus]) road.row.cells[ROAD_COL.legalStatus].innerHTML = badge(road.legalStatus || '-', 'b-gray');
+        if (road.row.cells[ROAD_COL.regDoc]) road.row.cells[ROAD_COL.regDoc].textContent = road.regDoc || '-';
+        if (road.row.cells[ROAD_COL.lastUpdated]) road.row.cells[ROAD_COL.lastUpdated].textContent = road.lastUpdated || '-';
+        if (road.row.cells[ROAD_COL.note]) road.row.cells[ROAD_COL.note].textContent = road.note || '-';
+        if (road.row.cells[ROAD_COL.gis]) road.row.cells[ROAD_COL.gis].innerHTML = road.gis ? `<button class="btn-cell-preview" data-cell-gis="${esc(road.gis)}" type="button"><svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>Xəritə</button>` : '-';
+        if (road.row.cells[ROAD_COL.marsrut]) road.row.cells[ROAD_COL.marsrut].innerHTML = road.marsrut ? `<button class="btn-cell-preview" data-cell-marsrut="${esc(road.marsrut)}" type="button"><svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" fill="none" stroke-width="2"><path d="M3 12h18M3 6l9-4 9 4M4 20h16"/></svg>Marşrut</button>` : '-';
       }
 
       function addRoadRecord(road) {
@@ -13398,6 +14028,12 @@
           card.style.display = '';
         });
         originalOpenForm(mode, rowEl);
+        if (mode === 'create') {
+          const sysIdEl = document.getElementById('f_sys_id');
+          if (sysIdEl && !sysIdEl.value) {
+            sysIdEl.value = 'SYS-ROAD-' + String(roadsData.length + 1).padStart(4, '0');
+          }
+        }
       };
 
       closeForm = function () {
@@ -13422,7 +14058,7 @@
           landAreaHa: document.getElementById('f_torpaq_sahesi').value.trim() || '-',
           condition: document.getElementById('f_veziyyet').value || '-',
           surface: document.getElementById('f_ortuk').value || '-',
-          ownership: ownershipEntry?.typeLabel || 'Dövlət',
+          ownership: document.getElementById('f_mulk_tip')?.value || ownershipEntry?.typeLabel || 'Dövlət',
           ownershipId: ownershipEntry?.id || '',
           ownerName: ownershipEntry?.owner || '',
           ownerShortName: ownershipEntry?.shortName || '',
@@ -13431,11 +14067,42 @@
           ownerPhone: (ownershipEntry?.phones || []).join(', '),
           ownerEmail: ownershipEntry?.email || '',
           status: document.getElementById('f_ist_status').value || 'aktiv',
-          usage: document.getElementById('f_inzibati').value || 'reyestr',
+          usage: document.getElementById('f_inzibati').value || '',
           importance: document.getElementById('f_ehem').value || 'Respublika',
           category: document.getElementById('f_funk').value || 'Magistral',
           managing: (() => { const e = window.selectedRoadManaging?.('f'); return e?.shortName || e?.label || e?.name || '-'; })(),
           managingId: document.getElementById('f_mng_nov')?.value || '',
+          sysId: (document.getElementById('f_sys_id')?.value || '').trim() || ('SYS-ROAD-' + String(roadsData.length + 1).padStart(4, '0')),
+          regCode: document.getElementById('f_reg_code')?.value.trim() || '',
+          regNo: document.getElementById('f_qeyd_nom')?.value.trim() || '',
+          ownerText: document.getElementById('f_mulk_text')?.value.trim() || '',
+          startPoint: (() => {
+            const lat = (document.getElementById('f_bas_lat')?.value || '').trim();
+            const lon = (document.getElementById('f_bas_lon')?.value || '').trim();
+            return (lat && lon) ? `${lat}, ${lon}` : '';
+          })(),
+          endPoint: (() => {
+            const lat = (document.getElementById('f_son_lat')?.value || '').trim();
+            const lon = (document.getElementById('f_son_lon')?.value || '').trim();
+            return (lat && lon) ? `${lat}, ${lon}` : '';
+          })(),
+          tahkimZolagi: document.getElementById('f_tahkim')?.value.trim() || '',
+          muhafizeZolagi: document.getElementById('f_muhafize')?.value.trim() || '',
+          funcPurpose: document.getElementById('f_func_purpose')?.value || '',
+          legalStatus: document.getElementById('f_huq_status')?.value || '',
+          regDoc: document.getElementById('f_sened')?.value.trim() || '',
+          lastUpdated: formatRoadDateText(document.getElementById('f_last_updated')?.value || new Date().toLocaleDateString('az-AZ').replace(/\./g, '.')),
+          note: document.getElementById('f_qeyd')?.value.trim() || '',
+          marsrut: (document.getElementById('f_marsrut')?.value || '').trim(),
+          gis: (() => {
+            const lat = (document.getElementById('f_bas_lat')?.value || '').trim();
+            const lon = (document.getElementById('f_bas_lon')?.value || '').trim();
+            const lat2 = (document.getElementById('f_son_lat')?.value || '').trim();
+            const lon2 = (document.getElementById('f_son_lon')?.value || '').trim();
+            if (lat && lon && lat2 && lon2) return `POLYLINE ((${lon} ${lat}, ${lon2} ${lat2}))`;
+            if (lat && lon) return `POLYLINE ((${lon} ${lat}))`;
+            return '';
+          })(),
           row: fp.editRow || null,
         };
       }
@@ -14805,31 +15472,32 @@
           {id:1105, name:'Aşınma',             description:'Səthin aşınması və sürtünməsi',                   status:'active'},
           {id:1106, name:'Deformasiya yoxdur', description:'Heç bir deformasiya əlaməti müşahidə edilmir',    status:'active'},
         ];
+        const _mw = (name) => ({ name, dataUrl: 'data:application/octet-stream;base64,UEsDBBQAAAAIAAAAIVBhc3BvcnQgxZ9hYmxvbnUgKG1vY2sgbcmZluG8luG8luKBguKBguKBgikA' });
         let sqNames = [
           {id:30,name:'Üst örtük',          description:'Yol səthinin yuxarı layı',                       groupId:1,typeId:10,gisId:21,status:'active'},
           {id:31,name:'Yol yatağı',         description:'Yolun alt konstruksiya qatı',                    groupId:1,typeId:10,gisId:21,status:'active'},
-          {id:32,name:'Dayaq divarı',       description:'Torpaq kütlələrini tutan konstruksiya',           groupId:1,typeId:12,gisId:21,status:'active'},
-          {id:33,name:'Körpü',              description:'Maneələr üzərindən keçidi təmin edən qurğu',     groupId:2,typeId:12,gisId:22,status:'active'},
-          {id:34,name:'Tunel',              description:'Dağ və ya torpaq altından keçid qurğusu',        groupId:2,typeId:12,gisId:21,status:'active'},
-          {id:35,name:'Estakada',           description:'Hündürlükdə yerləşən yol konstruksiyası',        groupId:2,typeId:12,gisId:21,status:'active'},
+          {id:32,name:'Dayaq divarı',       description:'Torpaq kütlələrini tutan konstruksiya',           groupId:1,typeId:12,gisId:21,status:'active',wordFile:_mw('Dayaq_divari_sablon.docx')},
+          {id:33,name:'Körpü',              description:'Maneələr üzərindən keçidi təmin edən qurğu',     groupId:2,typeId:12,gisId:22,status:'active',wordFile:_mw('Korpu_sablon.docx')},
+          {id:34,name:'Tunel',              description:'Dağ və ya torpaq altından keçid qurğusu',        groupId:2,typeId:12,gisId:21,status:'active',wordFile:_mw('Tunel_sablon.docx')},
+          {id:35,name:'Estakada',           description:'Hündürlükdə yerləşən yol konstruksiyası',        groupId:2,typeId:12,gisId:21,status:'active',wordFile:_mw('Estakada_sablon.docx')},
           {id:36,name:'Keçid',              description:'Piyada və ya nəqliyyat keçid nöqtəsi',           groupId:2,typeId:11,gisId:20,status:'active'},
           {id:37,name:'Boru keçid',         description:'Su axını üçün boru keçid elementi',              groupId:3,typeId:11,gisId:20,status:'active'},
           {id:38,name:'Kanal',              description:'Su aparma kanalı',                               groupId:3,typeId:10,gisId:21,status:'active'},
           {id:39,name:'Drenaj sistemi',     description:'Yeraltı su drenajı sistemi',                     groupId:3,typeId:11,gisId:21,status:'active'},
           {id:40,name:'Hasarlar',           description:'Yol kənarında quraşdırılmış mühafizə hasarı',    groupId:4,typeId:11,gisId:21,status:'active'},
           {id:41,name:'Maneə',              description:'Hərəkəti məhdudlaşdıran maneə',                  groupId:4,typeId:11,gisId:20,status:'active'},
-          {id:42,name:'Səs ekranı',         description:'Səs-küy azaltma üçün ekran konstruksiyası',      groupId:4,typeId:12,gisId:21,status:'active'},
+          {id:42,name:'Səs ekranı',         description:'Səs-küy azaltma üçün ekran konstruksiyası',      groupId:4,typeId:12,gisId:21,status:'active',wordFile:_mw('Ses_ekrani_sablon.docx')},
           {id:43,name:'Nişan',              description:'Yol hərəkət nişanı',                             groupId:5,typeId:11,gisId:20,status:'active'},
           {id:44,name:'İşarə xətti',        description:'Yol üzərindəki üfüqi işarə',                    groupId:5,typeId:10,gisId:21,status:'active'},
-          {id:45,name:'İşıqfor',            description:'Hərəkəti tənzimləyən işıqfor qurğusu',          groupId:5,typeId:12,gisId:20,status:'active'},
+          {id:45,name:'İşıqfor',            description:'Hərəkəti tənzimləyən işıqfor qurğusu',          groupId:5,typeId:12,gisId:20,status:'active',wordFile:_mw('Isiqfor_sablon.docx')},
           {id:46,name:'Dayanacaq',          description:'Nəqliyyat dayanacağı zonası',                    groupId:6,typeId:11,gisId:22,status:'active'},
           {id:47,name:'İstirahət zonası',   description:'Sürücülər üçün istirahət sahəsi',               groupId:6,typeId:11,gisId:22,status:'active'},
           {id:48,name:'Yanacaq stansiyası', description:'Yanacaq doldurma stansiyası',                   groupId:6,typeId:11,gisId:20,status:'active'},
           {id:49,name:'Kamera',             description:'Video müşahidə kamerası',                        groupId:7,typeId:11,gisId:20,status:'active'},
           {id:50,name:'Hava sensoru',       description:'Meteoroloji ölçü sensoru',                       groupId:7,typeId:11,gisId:20,status:'active'},
           {id:51,name:'Sayğac',             description:'Nəqliyyat axını sayğacı',                        groupId:7,typeId:11,gisId:20,status:'active'},
-          {id:52,name:'Elektrik keçidi',    description:'Yol altından keçən elektrik xətti',              groupId:8,typeId:12,gisId:20,status:'active'},
-          {id:53,name:'Boru xətti',         description:'Yol altından keçən boru xətti',                  groupId:8,typeId:12,gisId:21,status:'active'},
+          {id:52,name:'Elektrik keçidi',    description:'Yol altından keçən elektrik xətti',              groupId:8,typeId:12,gisId:20,status:'active',wordFile:_mw('Elektrik_kecidi_sablon.docx')},
+          {id:53,name:'Boru xətti',         description:'Yol altından keçən boru xətti',                  groupId:8,typeId:12,gisId:21,status:'active',wordFile:_mw('Boru_xetti_sablon.docx')},
           {id:54,name:'Təhkim zolağı',      description:'Yol hüdudlarını müəyyən edən zolaq',             groupId:9,typeId:10,gisId:22,status:'active'},
           {id:55,name:'Mühafizə zolağı',    description:'Yol mühafizə zonası',                            groupId:9,typeId:10,gisId:22,status:'active'},
         ];
@@ -15073,14 +15741,14 @@
           const pages = Math.max(1, Math.ceil(total / SD_PER));
           if (sdPages[key] > pages) sdPages[key] = pages;
           const slice = filtered.slice((page-1)*SD_PER, page*SD_PER);
-          const colCount = isNames ? 8 : 5;
+          const colCount = isNames ? 6 : 5;
 
-          const statusCI  = isNames ? 7 : 3;
+          const statusCI  = isNames ? 5 : 3;
           const filterByCi = isNames
-            ? {'1':'name','3':'group','4':'type','5':'gis',[String(statusCI)]:'status'}
+            ? {'1':'name',[String(statusCI)]:'status'}
             : {'1':'name',[String(statusCI)]:'status'};
           const ciByFilter = isNames
-            ? {name:'1', group:'3', type:'4', gis:'5', status:String(statusCI)}
+            ? {name:'1', status:String(statusCI)}
             : {name:'1', status:String(statusCI)};
           const nameBot   = sdOpenBot[key] === 'name'   ? 'block' : 'none';
           const statusBot = sdOpenBot[key] === 'status' ? 'block' : 'none';
@@ -15101,9 +15769,8 @@
                 </div>
               </th>`;
           const relThs = isNames ? `
-              ${relFilterTh(3, 'Qrup', 'group', sdGroupF[key], sdRelOptions(sqGroups, 'groupId', sdGroupF[key]))}
-              ${relFilterTh(4, 'Növ', 'type', sdTypeF[key], sdRelOptions(sqTypes, 'typeId', sdTypeF[key]))}
-              ${relFilterTh(5, 'GİS tipi', 'gis', sdGisF[key], sdRelOptions(sqGis, 'gisId', sdGisF[key]))}
+              <th data-ci="3" style="min-width:140px;"><div class="th-top"><span class="th-label">Soraqça kateqoriyası</span></div></th>
+              <th data-ci="4" style="min-width:140px;"><div class="th-top"><span class="th-label">Dəyər</span></div></th>
             ` : '';
           const ths = `
             <th class="th-nof" style="width:44px;" data-ci="0"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">#</span></div></th>
@@ -15127,7 +15794,6 @@
             </th>
             <th data-ci="2"><div class="th-top"><span class="th-label">Təsviri</span></div></th>
             ${relThs}
-            ${isNames ? `<th data-ci="6" style="width:140px;"><div class="th-top"><span class="th-label" style="text-align:center;display:block;">Şablon</span></div></th>` : ''}
             <th data-ci="${statusCI}">
               <div class="th-top">
                 <span class="th-label" style="text-align:center;">Status</span>
@@ -15153,38 +15819,52 @@
               const stBadge = r.status === 'active' ? badge('Aktiv','b-green') : badge('Passiv','b-gray');
               let relCols = '';
               if (isNames) {
-                const grp = sqGroups.find(x => x.id === sdRowField(r, 'groupId'));
-                const typ = sqTypes.find(x => x.id === sdRowField(r, 'typeId'));
-                const gis = sqGis.find(x => x.id === sdRowField(r, 'gisId'));
-                relCols = `<td style="font-size:12px;">${esc(grp?grp.name:'—')}</td>
-                           <td style="font-size:12px;">${esc(typ?typ.name:'—')}</td>
-                           <td style="font-size:12px;">${esc(gis?gis.name:'—')}</td>`;
+                const _allAttrMap = [
+                  { label:'Qrup',                   store:sqGroups,        field:'groupId' },
+                  { label:'Növ',                    store:sqTypes,         field:'typeId' },
+                  { label:'GİS tipi',               store:sqGis,           field:'gisId' },
+                  { label:'Aktivin tipi',           store:sqActTypes,      field:'actTypesId',    alt:'actTypeId' },
+                  { label:'Qurğunun tipi',          store:sqStructTypes,   field:'structTypesId', alt:'structTypeId' },
+                  { label:'Tikinti üsulu',          store:sqConstrMethod,  field:'constrMethodId' },
+                  { label:'Material',               store:sqMaterial,      field:'materialId' },
+                  { label:'Daşıyıcı konstruksiya',  store:sqLoadStruct,    field:'loadStructId' },
+                  { label:'Ventilyasiya',           store:sqVentilation,   field:'ventilationId' },
+                  { label:'Su maneəsi',             store:sqWaterBarrier,  field:'waterBarrierId' },
+                  { label:'Alt keçid tipi',         store:sqUnderpassType, field:'underpassTypeId' },
+                  { label:'İstismar vəziyyəti',     store:sqCondition,     field:'conditionId' },
+                  { label:'Monitorinq',             store:sqMonitoring,    field:'monitoringId' },
+                  { label:'Deformasiya',            store:sqDeformation,   field:'deformationId' },
+                ];
+                const _attrs = _allAttrMap.map(a => {
+                  const id = r[a.field] ?? (a.alt ? r[a.alt] : undefined);
+                  if (!id) return null;
+                  const item = a.store.find(x => x.id === id);
+                  return item ? { label: a.label, value: item.name } : null;
+                }).filter(Boolean);
+                const _cellStyle = 'font-size:11px;vertical-align:top;padding-top:8px;line-height:1.7;';
+                relCols = `
+                  <td style="${_cellStyle}color:#64748b;">
+                    ${_attrs.length ? _attrs.map(a => `<div>${esc(a.label)}</div>`).join('') : '<span style="color:#cbd5e1;">—</span>'}
+                  </td>
+                  <td style="${_cellStyle}color:#1a2b3c;">
+                    ${_attrs.map(a => `<div>${esc(a.value)}</div>`).join('')}
+                  </td>`;
               }
               const nameTd = isNames
                 ? `<td class="sq-name-cell" tabindex="0" role="button" onclick="sqNameDetail(${r.id})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();sqNameDetail(${r.id});}">${esc(r.name)}</td>`
                 : `<td style="font-weight:500;color:#1a2b3c;">${esc(r.name)}</td>`;
-              const wordActsTd = (isNames && sdRowField(r,'typeId') === 12 && r.wordFile)
-                ? `<td><div class="td-word-acts">
-                    <button class="td-word-btn" type="button" onclick="sdWordView('${key}',${r.id})">
-                      <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Bax
-                    </button>
-                    <button class="td-word-btn" type="button" onclick="sdWordDownload('${key}',${r.id})">
-                      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Endir
-                    </button>
-                  </div></td>`
-                : (isNames ? `<td style="color:#94a3b8;font-size:11px;text-align:center;">—</td>` : '');
               return `<tr>
                 <td style="text-align:center;color:#94a3b8;font-size:11px;">${(page-1)*SD_PER+i+1}</td>
                 ${nameTd}
                 <td style="font-size:12px;color:#64748b;max-width:240px;">${esc(r.description||'—')}</td>
                 ${relCols}
-                ${wordActsTd}
                 <td>${stBadge}</td>
                 <td><div class="row-acts"><div class="action-menu-wrap">
                   <button class="action-menu-btn" data-action-menu type="button" aria-label="Əməliyyatlar">⋮</button>
                   <div class="action-menu">
                     <button class="action-menu-item" type="button" onclick="sdView('${key}',${r.id})">Bax</button>
                     <button class="action-menu-item" type="button" onclick="sdEdit('${key}',${r.id})">Redaktə et</button>
+                    ${isNames && sdRowField(r,'typeId') === 12 && r.wordFile ? `<button class="action-menu-item" type="button" onclick="sdWordDownload('${key}',${r.id})">Şablonu yüklə</button>` : ''}
                     <button class="action-menu-item danger" type="button" onclick="sdDelete('${key}',${r.id})">Sil</button>
                   </div>
                 </div></div></td>
@@ -15201,10 +15881,10 @@
 
           const area = document.getElementById('sqSubDictArea');
           if (!area) return;
-          const hasFilter = !!(sdSearch[key] || sdStatusF[key] || sdGroupF[key] || sdTypeF[key] || sdGisF[key] || sdSortDir[key]);
+          const hasFilter = !!(sdSearch[key] || sdStatusF[key] || sdSortDir[key]);
           area.innerHTML = `
             <div class="table-wrap" style="flex:1;">
-              <table id="sdTable" style="min-width:${isNames?'880':'580'}px;">
+              <table id="sdTable" style="min-width:${isNames?'820':'580'}px;">
                 <thead><tr>${ths}</tr></thead>
                 <tbody>${rows}</tbody>
               </table>
@@ -15217,7 +15897,7 @@
           if (resetBtn) {
             resetBtn.style.display = hasFilter ? 'flex' : 'none';
             resetBtn.onclick = () => {
-              sdSearch[key] = ''; sdStatusF[key] = ''; sdGroupF[key] = ''; sdTypeF[key] = ''; sdGisF[key] = ''; sdSortDir[key] = ''; sdOpenBot[key] = null; sdPages[key] = 1; renderSubDictTable(key);
+              sdSearch[key] = ''; sdStatusF[key] = ''; sdSortDir[key] = ''; sdOpenBot[key] = null; sdPages[key] = 1; renderSubDictTable(key);
             };
           }
 
@@ -15284,22 +15964,6 @@
               });
             }
 
-            if (isNames) {
-              [
-                {ci:'3', state:sdGroupF, open:'group'},
-                {ci:'4', state:sdTypeF, open:'type'},
-                {ci:'5', state:sdGisF, open:'gis'},
-              ].forEach(f => {
-                const relSelect = sdTable.querySelector(`th[data-ci="${f.ci}"] .th-input`);
-                if (!relSelect) return;
-                relSelect.addEventListener('change', function() {
-                  f.state[key] = this.value;
-                  sdOpenBot[key] = f.open;
-                  sdPages[key] = 1;
-                  renderSubDictTable(key);
-                });
-              });
-            }
 
             const statusSelect = sdTable.querySelector(`th[data-ci="${statusCI}"] .th-input`);
             if (statusSelect) {
@@ -15462,7 +16126,7 @@
                     </div>
                   </div>
                   <div class="frow full" id="sqModalWordSection" style="display:none;">
-                    <label style="margin-bottom:6px;display:block;">Pasport şablonu <span style="font-size:11px;color:#64748b;font-weight:400;">(Word faylı)</span></label>
+                    <label style="margin-bottom:6px;display:block;">Pasport şablonu <span class="req">*</span></label>
                     <div id="sqModalWordEmpty">
                       <label class="word-upload-label" for="sqModalWordInput">
                         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="12" x2="12" y2="18"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
@@ -15605,6 +16269,7 @@
           const key     = document.getElementById('sqModal').dataset.sdKey;
           const tId     = +document.getElementById('sq_modal_type').value;
           const isPasport = key === 'names' && tId === PASPORTLASDIRILMIS_TYPE_ID;
+          if (isPasport && !_sqWordPending) { alert('Pasportlaşdırılan növ üçün Word şablon faylı mütləq yüklənməlidir'); return; }
           const nameVal = document.getElementById('sq_modal_name').value.trim();
           const editId  = sdEditId;
           _origSdSave();
@@ -15694,6 +16359,31 @@
                 <div class="sna-selected-list" id="snaSelectedList">
                   <div class="sna-selected-empty">Hələ heç bir xüsusiyyət seçilməyib</div>
                 </div>
+                <div id="snaWordSection" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid #e2e8f0;">
+                  <label style="font-size:13px;font-weight:500;margin-bottom:8px;display:block;">Pasport şablonu <span class="req">*</span></label>
+                  <div id="snaWordEmpty">
+                    <label class="word-upload-label" for="snaWordInput">
+                      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="12" x2="12" y2="18"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                      Word fayl seçin (.doc, .docx)
+                    </label>
+                    <input type="file" id="snaWordInput" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none;">
+                  </div>
+                  <div id="snaWordFile" style="display:none;">
+                    <div class="word-file-chip">
+                      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                      <span class="word-file-name" id="snaWordFileName"></span>
+                      <div class="word-file-acts">
+                        <button class="word-act-btn" id="snaWordView" type="button">
+                          <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Bax
+                        </button>
+                        <button class="word-act-btn" id="snaWordDownload" type="button">
+                          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Endir
+                        </button>
+                        <button class="word-act-btn danger" id="snaWordRemove" type="button">× Sil</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="modal-foot">
                 <button class="fbtn fbtn-ghost" id="snaModalCancel" type="button">Ləğv et</button>
@@ -15725,6 +16415,33 @@
         var snaCurCatKey = null;    // currently picked category
         var snaCurItemId = null;
         var snaCurItemName = null;
+        var _snaWordPending = null;
+
+        function snaWordShowSection(show) {
+          var el = document.getElementById('snaWordSection');
+          if (el) el.style.display = show ? '' : 'none';
+        }
+        function snaWordRenderChip(file) {
+          var empty = document.getElementById('snaWordEmpty');
+          var chip  = document.getElementById('snaWordFile');
+          var fname = document.getElementById('snaWordFileName');
+          if (!empty || !chip) return;
+          if (file) {
+            empty.style.display = 'none';
+            chip.style.display  = '';
+            if (fname) fname.textContent = file.name;
+          } else {
+            empty.style.display = '';
+            chip.style.display  = 'none';
+            if (fname) fname.textContent = '';
+          }
+        }
+        function snaCheckWordSection() {
+          var typesSel = snaSelected['types'];
+          var show = !!(typesSel && typesSel.itemId === 12);
+          snaWordShowSection(show);
+          if (!show) { _snaWordPending = null; snaWordRenderChip(null); }
+        }
 
         function snaCloseDrop(id) {
           var d = document.getElementById(id);
@@ -15819,6 +16536,9 @@
           document.getElementById('snaPickValOpts').innerHTML = '';
           snaRenderCatOpts();
           snaRenderSelected();
+          _snaWordPending = null;
+          snaWordShowSection(false);
+          snaWordRenderChip(null);
           document.getElementById('sqNewActiveModal').classList.add('open');
           document.getElementById('sna_name').focus();
         }
@@ -15833,8 +16553,11 @@
           if (sqNames.find(function(n){ return n.name.toLowerCase() === name.toLowerCase(); })) {
             alert('Bu adda soraqça artıq mövcuddur'); return;
           }
+          var isPasport = snaSelected['types'] && snaSelected['types'].itemId === 12;
+          if (isPasport && !_snaWordPending) { alert('Pasportlaşdırılan növ üçün Word şablon faylı mütləq yüklənməlidir'); return; }
           var attrs = {};
           Object.keys(snaSelected).forEach(function(k){ attrs[snaAttrKey(k)] = snaSelected[k].itemId; });
+          if (_snaWordPending) attrs.wordFile = _snaWordPending;
           var newId = Math.max.apply(null, [0].concat(sqNames.map(function(n){ return n.id; }))) + 1;
           sqNames.push(Object.assign({ id:newId, name:name, description:desc, status:'active' }, attrs));
           closeNewActiveModal();
@@ -15904,6 +16627,7 @@
           snaSelected[snaCurCatKey] = { itemId: snaCurItemId, itemName: snaCurItemName };
           snaRenderCatOpts();
           snaRenderSelected();
+          snaCheckWordSection();
         });
 
         // Remove chip
@@ -15918,6 +16642,7 @@
           }
           snaRenderCatOpts();
           snaRenderSelected();
+          snaCheckWordSection();
         });
 
         // Close on outside click
@@ -15929,6 +16654,34 @@
         document.getElementById('snaModalClose').addEventListener('click', closeNewActiveModal);
         document.getElementById('snaModalCancel').addEventListener('click', closeNewActiveModal);
         document.getElementById('snaModalSave').addEventListener('click', saveNewActive);
+
+        document.getElementById('snaWordInput').addEventListener('change', function() {
+          var file = this.files[0];
+          if (!file) return;
+          var reader = new FileReader();
+          reader.onload = function(ev) {
+            _snaWordPending = { name: file.name, dataUrl: ev.target.result };
+            snaWordRenderChip(_snaWordPending);
+          };
+          reader.readAsDataURL(file);
+          this.value = '';
+        });
+        document.getElementById('snaWordView').addEventListener('click', function() {
+          if (!_snaWordPending) return;
+          var a = document.createElement('a');
+          a.href = _snaWordPending.dataUrl; a.target = '_blank';
+          document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        });
+        document.getElementById('snaWordDownload').addEventListener('click', function() {
+          if (!_snaWordPending) return;
+          var a = document.createElement('a');
+          a.href = _snaWordPending.dataUrl; a.download = _snaWordPending.name;
+          document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        });
+        document.getElementById('snaWordRemove').addEventListener('click', function() {
+          _snaWordPending = null;
+          snaWordRenderChip(null);
+        });
         document.getElementById('sqNewActiveModal').addEventListener('click', e => {
           if (e.target === document.getElementById('sqNewActiveModal')) closeNewActiveModal();
         });
@@ -15993,6 +16746,23 @@
             ? '<span class="badge b-green" style="font-size:11px;">Aktiv</span>'
             : '<span class="badge b-gray"  style="font-size:11px;">Passiv</span>';
 
+          const wordSection = r.wordFile ? `
+            <div class="sqnd-section" style="margin-top:14px;padding-top:14px;border-top:1px solid #e2e8f0;">
+              <div style="font-size:12px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Pasport şablonu</div>
+              <div class="word-file-chip">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span class="word-file-name">${esc(r.wordFile.name)}</span>
+                <div class="word-file-acts">
+                  <button class="word-act-btn" type="button" onclick="(function(){var a=document.createElement('a');a.href='${r.wordFile.dataUrl}';a.target='_blank';document.body.appendChild(a);a.click();document.body.removeChild(a);})()">
+                    <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Bax
+                  </button>
+                  <button class="word-act-btn" type="button" onclick="(function(){var a=document.createElement('a');a.href='${r.wordFile.dataUrl}';a.download='${esc(r.wordFile.name)}';document.body.appendChild(a);a.click();document.body.removeChild(a);})()">
+                    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Endir
+                  </button>
+                </div>
+              </div>
+            </div>` : '';
+
           document.getElementById('sqndBody').innerHTML = `
             <div class="sqnd-section">
               <div class="sqnd-chips-grid">
@@ -16013,7 +16783,8 @@
                 ${chip('Monitorinq',             lk(sqMonitoring,   r.monitoringId))}
                 ${chip('Deformasiya əlamətləri', lk(sqDeformation,  r.deformationId))}
               </div>
-            </div>`;
+            </div>
+            ${wordSection}`;
 
           document.getElementById('sqNameDetailModal').classList.add('open');
         }
