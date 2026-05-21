@@ -3669,6 +3669,8 @@
       font: 12px/1.45 Consolas, "Courier New", monospace;
       white-space: pre-wrap;
       word-break: break-all;
+      max-height: 96px;
+      overflow: auto;
     }
 
     @media (max-width: 700px) {
@@ -3684,6 +3686,28 @@
       .road-map-preview-meta {
         grid-template-columns: 1fr;
       }
+    }
+
+    .road-map-point-label {
+      width: 11px !important;
+      height: 11px !important;
+      margin-left: -5.5px !important;
+      margin-top: -5.5px !important;
+      border: 2px solid #1d4ed8;
+      border-radius: 999px;
+      background: #bfdbfe;
+      box-shadow: 0 1px 5px rgba(15, 23, 42, .22);
+      pointer-events: auto;
+    }
+
+    .road-map-point-label.is-start {
+      border-color: #15803d;
+      background: #dcfce7;
+    }
+
+    .road-map-point-label.is-end {
+      border-color: #b91c1c;
+      background: #fee2e2;
     }
 
     .road-info-action-btn {
@@ -6650,7 +6674,7 @@
         <div class="modal-head">
           <div class="modal-title-block">
             <div class="mh-title" id="roadMapPreviewTitle">Yolun xəritəsi</div>
-            <div class="mh-sub" id="roadMapPreviewSub">Başlanğıc və son nöqtəyə əsasən xəritə görünüşü</div>
+            <div class="mh-sub" id="roadMapPreviewSub">OSM LINESTRING / GeoJSON datasına əsasən xəritə görünüşü</div>
           </div>
           <button class="modal-close-btn" id="roadMapPreviewClose" type="button" aria-label="Bağla">
             <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -6666,6 +6690,22 @@
             <div class="road-map-preview-item">
               <span>Son nöqtəsi</span>
               <strong id="roadMapPreviewEnd">-</strong>
+            </div>
+            <div class="road-map-preview-item">
+              <span>Data formatı</span>
+              <strong id="roadMapPreviewFormat">-</strong>
+            </div>
+            <div class="road-map-preview-item">
+              <span>Xətt nöqtələri</span>
+              <strong id="roadMapPreviewPointCount">-</strong>
+            </div>
+            <div class="road-map-preview-item">
+              <span>Xətt hissələri</span>
+              <strong id="roadMapPreviewSegmentCount">-</strong>
+            </div>
+            <div class="road-map-preview-item">
+              <span>Yol şəbəkəsi</span>
+              <strong id="roadMapPreviewRouting">-</strong>
             </div>
           </div>
           <pre class="road-map-preview-wkt" id="roadMapPreviewWkt">-</pre>
@@ -8429,7 +8469,7 @@
       { label: 'Uzunluğu (km)', ci: ROAD_COL.length, filterKind: 'range', tooltip: 'Yolun uzunluğu' },
       { label: 'Başlanğıc nöqtəsi', ci: ROAD_COL.startPoint, tooltip: 'Yolun başlanğıc nöqtəsi' },
       { label: 'Son nöqtəsi', ci: ROAD_COL.endPoint, tooltip: 'Yolun son nöqtəsi' },
-      { label: 'Yolun xəritəsi', ci: ROAD_COL.gis, tooltip: 'Yolun GIS xəritəsi (POLYLINE)' },
+      { label: 'Yolun xəritəsi', ci: ROAD_COL.gis, tooltip: 'Yolun GIS xəritəsi (LINESTRING / GeoJSON)' },
       { label: 'İnzibati aidiyyət', ci: ROAD_COL.usage, tooltip: 'İnzibati aidiyyət' },
       { label: 'Marşrut təsviri', ci: ROAD_COL.marsrut, tooltip: 'Marşrut təsviri' },
       { label: 'Təhkim zolağı', ci: ROAD_COL.tahkimZolagi, tooltip: 'Təhkim zolağının eni' },
@@ -9118,7 +9158,7 @@
           <td>${safeCell(old.length || '-')}</td>
           <td>${safeCell(t.startPoint || '-')}</td>
           <td>${safeCell(t.endPoint || '-')}</td>
-          <td>${(() => { const sp = t.startPoint||''; const ep = t.endPoint||''; if (!sp) return '-'; const wkt = sp && ep ? `POLYLINE ((${sp.split(',').map(s=>s.trim()).reverse().join(' ')}, ${ep.split(',').map(s=>s.trim()).reverse().join(' ')}))` : `POLYLINE ((${sp.split(',').map(s=>s.trim()).reverse().join(' ')}))`; return `<button class="btn-cell-preview" data-cell-gis="${safeCell(wkt)}" type="button"><svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>Xəritə</button>`; })()}</td>
+          <td>${(() => { const sp = t.startPoint||''; const ep = t.endPoint||''; if (!sp) return '-'; const wkt = sp && ep ? `LINESTRING (${sp.split(',').map(s=>s.trim()).reverse().join(' ')}, ${ep.split(',').map(s=>s.trim()).reverse().join(' ')})` : `LINESTRING (${sp.split(',').map(s=>s.trim()).reverse().join(' ')})`; return `<button class="btn-cell-preview" data-cell-gis="${safeCell(wkt)}" type="button"><svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>Xəritə</button>`; })()}</td>
           <td>${safeCell(t.inzibati || '-')}</td>
           <td>${(() => { const mr = t.marsrut||''; if (!mr) return '-'; return `<button class="btn-cell-preview" data-cell-marsrut="${safeCell(mr)}" type="button"><svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" fill="none" stroke-width="2"><path d="M3 12h18M3 6l9-4 9 4M4 20h16"/></svg>Marşrut</button>`; })()}</td>
           <td>${safeCell(t.tahkimZolagi || '-')}</td>
@@ -10395,6 +10435,8 @@
 
     let roadMapPreviewMap = null;
     let roadMapPreviewLayers = [];
+    let roadMapPreviewRequestId = 0;
+    const roadMapRouteCache = new Map();
 
     function parseCoordPair(value) {
       const nums = String(value || '').match(/-?\d+(?:\.\d+)?/g);
@@ -10413,25 +10455,192 @@
       return `${Number(pair[0]).toFixed(6)}, ${Number(pair[1]).toFixed(6)}`;
     }
 
-    function parseRoadWktCoords(wkt) {
-      const text = String(wkt || '');
-      const match = text.match(/\(\(([^)]+)\)\)/) || text.match(/\(([^()]+)\)/);
-      if (!match) return [];
-      return match[1].split(',').map(part => {
+    function roadCoordFromValue(value, order = 'lngLat') {
+      if (Array.isArray(value)) {
+        const a = Number(value[0]);
+        const b = Number(value[1]);
+        const preferred = order === 'latLng' ? [a, b] : [b, a];
+        const fallback = order === 'latLng' ? [b, a] : [a, b];
+        if (isValidLatLng(preferred[0], preferred[1])) return preferred;
+        if (isValidLatLng(fallback[0], fallback[1])) return fallback;
+      } else if (value && typeof value === 'object') {
+        const lat = Number(value.lat ?? value.latitude ?? value.y);
+        const lng = Number(value.lon ?? value.lng ?? value.longitude ?? value.x);
+        if (isValidLatLng(lat, lng)) return [lat, lng];
+      }
+      return null;
+    }
+
+    function parseWktCoordList(text) {
+      return String(text || '').replace(/[()]/g, '').split(',').map(part => {
         const nums = part.match(/-?\d+(?:\.\d+)?/g);
         if (!nums || nums.length < 2) return null;
-        const first = parseFloat(nums[0]);
-        const second = parseFloat(nums[1]);
-        if (isValidLatLng(second, first)) return [second, first];
-        if (isValidLatLng(first, second)) return [first, second];
-        return null;
+        return roadCoordFromValue([nums[0], nums[1]], 'lngLat');
       }).filter(Boolean);
+    }
+
+    function geoJsonLineCoords(value) {
+      if (!value) return [];
+      if (Array.isArray(value.geometry)) {
+        return value.geometry.map(coord => roadCoordFromValue(coord, 'latLng')).filter(Boolean);
+      }
+      const source = value.type === 'Feature' ? value.geometry : value;
+      if (!source) return [];
+      if (!source.type && Array.isArray(source.coordinates)) {
+        return source.coordinates.map(coord => roadCoordFromValue(coord, 'lngLat')).filter(Boolean);
+      }
+      if (source.type === 'FeatureCollection') {
+        return (source.features || []).flatMap(feature => geoJsonLineCoords(feature));
+      }
+      if (source.type === 'GeometryCollection') {
+        return (source.geometries || []).flatMap(geometry => geoJsonLineCoords(geometry));
+      }
+      if (source.type === 'LineString') {
+        return (source.coordinates || []).map(coord => roadCoordFromValue(coord, 'lngLat')).filter(Boolean);
+      }
+      if (source.type === 'MultiLineString') {
+        return (source.coordinates || []).flatMap(line => line.map(coord => roadCoordFromValue(coord, 'lngLat')).filter(Boolean));
+      }
+      if (source.type === 'Point') {
+        const point = roadCoordFromValue(source.coordinates, 'lngLat');
+        return point ? [point] : [];
+      }
+      if (source.type === 'Polygon') {
+        return ((source.coordinates || [])[0] || []).map(coord => roadCoordFromValue(coord, 'lngLat')).filter(Boolean);
+      }
+      if (Array.isArray(value)) {
+        return value.map(coord => roadCoordFromValue(coord, 'lngLat')).filter(Boolean);
+      }
+      return [];
+    }
+
+    function roadGeometryFormat(value) {
+      if (!value) return '';
+      if (Array.isArray(value.geometry)) return 'OSM geometry LineString';
+      if (value.type === 'Feature') return roadGeometryFormat(value.geometry);
+      if (value.type === 'FeatureCollection') return 'GeoJSON FeatureCollection';
+      if (value.type) return `GeoJSON ${value.type}`;
+      if (Array.isArray(value)) return 'GeoJSON koordinat massivi';
+      return '';
+    }
+
+    function parseRoadGeometry(raw) {
+      const text = String(raw || '').trim();
+      if (!text || text === '-') return { coords: [], format: '' };
+
+      if (text.startsWith('{') || text.startsWith('[')) {
+        try {
+          const json = JSON.parse(text);
+          const coords = geoJsonLineCoords(json);
+          if (coords.length) return { coords, format: roadGeometryFormat(json) || 'GeoJSON LineString' };
+        } catch (_) {}
+      }
+
+      const cleaned = text.replace(/^SRID=\d+;/i, '').trim();
+      const upper = cleaned.toUpperCase();
+      if (upper.startsWith('MULTILINESTRING')) {
+        const parts = cleaned.match(/\([^()]*\)/g) || [];
+        const segments = parts.map(parseWktCoordList).filter(segment => segment.length);
+        return { coords: segments.flat(), segments, format: 'OSM MULTILINESTRING' };
+      }
+      if (upper.startsWith('LINESTRING')) {
+        const body = cleaned.slice(cleaned.indexOf('(') + 1, cleaned.lastIndexOf(')'));
+        const coords = parseWktCoordList(body);
+        return { coords, segments: coords.length ? [coords] : [], format: 'OSM LINESTRING' };
+      }
+      if (upper.startsWith('POLYLINE')) {
+        const body = cleaned.slice(cleaned.indexOf('(') + 1, cleaned.lastIndexOf(')'));
+        const coords = parseWktCoordList(body);
+        return { coords, segments: coords.length ? [coords] : [], format: 'POLYLINE' };
+      }
+
+      const match = cleaned.match(/\(\(([\s\S]+)\)\)/) || cleaned.match(/\(([\s\S]+)\)/);
+      if (match) {
+        const coords = parseWktCoordList(match[1]);
+        return { coords, segments: coords.length ? [coords] : [], format: 'WKT koordinat' };
+      }
+      const fallback = parseWktCoordList(cleaned);
+      return { coords: fallback, segments: fallback.length ? [fallback] : [], format: fallback.length ? 'Koordinat siyahısı' : '' };
     }
 
     function roadWktFromCoords(coords) {
       const valid = (coords || []).filter(Boolean);
       if (!valid.length) return '';
-      return `POLYLINE ((${valid.map(([lat, lng]) => `${lng} ${lat}`).join(', ')}))`;
+      return `LINESTRING (${valid.map(([lat, lng]) => `${lng} ${lat}`).join(', ')})`;
+    }
+
+    function roadSegmentsFromCoords(coords) {
+      const valid = (coords || []).filter(Boolean);
+      return valid.length ? [valid] : [];
+    }
+
+    function roadMapSegmentCount(segments) {
+      return (segments || []).reduce((sum, segment) => sum + Math.max(0, (segment || []).length - 1), 0);
+    }
+
+    function osrmCoordParam(coords) {
+      return (coords || []).filter(Boolean).map(([lat, lng]) => `${Number(lng).toFixed(6)},${Number(lat).toFixed(6)}`).join(';');
+    }
+
+    function osrmLineToLatLng(coords) {
+      return (coords || []).map(coord => roadCoordFromValue(coord, 'lngLat')).filter(Boolean);
+    }
+
+    async function fetchOsrmRoadGeometry(kind, coords) {
+      const coordText = osrmCoordParam(coords);
+      if (!coordText) return null;
+      const base = `https://router.project-osrm.org/${kind}/v1/driving/${coordText}`;
+      const query = kind === 'match'
+        ? `overview=full&geometries=geojson&radiuses=${coords.map(() => '80').join(';')}`
+        : 'overview=full&geometries=geojson&continue_straight=false';
+      const response = await fetch(`${base}?${query}`);
+      if (!response.ok) throw new Error(`${kind} ${response.status}`);
+      const json = await response.json();
+      const geometries = kind === 'match'
+        ? (json.matchings || []).map(match => match.geometry).filter(Boolean)
+        : [json.routes?.[0]?.geometry].filter(Boolean);
+      const routeCoords = geometries.flatMap(geometry => osrmLineToLatLng(geometry?.coordinates || []));
+      return routeCoords.length > 1 ? routeCoords : null;
+    }
+
+    function roadMapChunkCoords(coords, size = 80) {
+      const chunks = [];
+      for (let i = 0; i < coords.length; i += size - 1) {
+        const chunk = coords.slice(i, i + size);
+        if (chunk.length > 1) chunks.push(chunk);
+      }
+      return chunks;
+    }
+
+    async function loadRoadNetworkRoute(coords) {
+      const input = (coords || []).filter(Boolean);
+      if (input.length < 2) return null;
+      const key = osrmCoordParam(input);
+      if (roadMapRouteCache.has(key)) return roadMapRouteCache.get(key);
+      const chunks = roadMapChunkCoords(input);
+      const routeSegments = [];
+      for (const chunk of chunks) {
+        let routeCoords = null;
+        try {
+          routeCoords = await fetchOsrmRoadGeometry('match', chunk);
+        } catch (_) {}
+        if (!routeCoords) {
+          try {
+            routeCoords = await fetchOsrmRoadGeometry('route', chunk);
+          } catch (_) {}
+        }
+        if (!routeCoords) return null;
+        routeSegments.push(routeCoords);
+      }
+      const route = {
+        coords: routeSegments.flat(),
+        segments: routeSegments,
+        format: 'OSRM/OSM avtomobil yolu',
+      };
+      route.pointCount = route.coords.length;
+      route.segmentCount = roadMapSegmentCount(route.segments);
+      roadMapRouteCache.set(key, route);
+      return route;
     }
 
     function roadMapDataFromRow(row, fallbackGis = '') {
@@ -10444,19 +10653,27 @@
       const endText = road?.endPoint || row?.cells?.[ROAD_COL.endPoint]?.textContent.trim() || '';
       let start = parseCoordPair(startText);
       let end = parseCoordPair(endText);
-      let line = start && end ? [start, end] : parseRoadWktCoords(wkt);
+      const geometry = parseRoadGeometry(wkt);
+      let line = geometry.coords;
+      let segments = geometry.segments || (line.length ? [line] : []);
+      if (!line.length && start && end) line = [start, end];
       if (!line.length && start) line = [start];
-      if (!start && line[0]) start = line[0];
-      if (!end && line.length > 1) end = line[line.length - 1];
+      if (!segments.length && line.length) segments = [line];
+      if (line[0]) start = line[0];
+      if (line.length > 1) end = line[line.length - 1];
       return {
         code,
         title: road?.name || row?.cells?.[ROAD_COL.name]?.textContent.trim() || 'Yol xəritəsi',
         sub: [road?.regCode || code, road?.index || row?.cells?.[ROAD_COL.index]?.textContent.trim()].filter(Boolean).join(' / '),
-        startText,
-        endText,
+        startText: line[0] ? formatCoordPair(line[0]) : startText,
+        endText: line.length > 1 ? formatCoordPair(line[line.length - 1]) : endText,
         start,
         end,
         line,
+        segments,
+        format: geometry.format || (line.length ? 'Koordinat' : ''),
+        pointCount: line.length,
+        segmentCount: roadMapSegmentCount(segments),
         wkt: wkt || roadWktFromCoords(line),
       };
     }
@@ -10469,49 +10686,139 @@
       roadMapPreviewLayers = [];
     }
 
-    function renderRoadMapPreview(data) {
+    function renderRoadMapPreview(data, routeData = null) {
       const mapEl = document.getElementById('roadMapPreviewMap');
       if (!mapEl) return;
       if (typeof L === 'undefined') {
         mapEl.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#64748b;font-size:13px;">Xəritə kitabxanası yüklənməyib.</div>';
         return;
       }
-      const coords = (data.line || []).filter(Boolean);
+      const sourceSegments = (data.segments || []).map(segment => (segment || []).filter(Boolean)).filter(segment => segment.length);
+      const sourceCoords = sourceSegments.length ? sourceSegments.flat() : (data.line || []).filter(Boolean);
+      const hasRouteData = routeData !== null && routeData !== undefined;
+      const routeSegments = (hasRouteData ? (routeData.segments || []) : sourceSegments).map(segment => (segment || []).filter(Boolean)).filter(segment => segment.length);
+      const routeCoords = routeSegments.length ? routeSegments.flat() : (hasRouteData ? (routeData.coords || []) : sourceCoords);
+      const boundsCoords = (routeCoords.length ? routeCoords : sourceCoords).concat(sourceCoords);
       if (!roadMapPreviewMap) {
         roadMapPreviewMap = L.map('roadMapPreviewMap', { center: [40.4093, 49.8671], zoom: 7 });
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap', maxZoom: 18 }).addTo(roadMapPreviewMap);
       }
       clearRoadMapPreviewLayers();
       roadMapPreviewMap.invalidateSize();
-      if (!coords.length) {
+      if (!boundsCoords.length) {
         roadMapPreviewMap.setView([40.4093, 49.8671], 7);
         return;
       }
-      if (coords.length > 1) {
-        roadMapPreviewLayers.push(L.polyline(coords, { color: '#2563eb', weight: 5, opacity: 0.85 }).addTo(roadMapPreviewMap));
+      const drawSegments = routeSegments.length ? routeSegments : (!hasRouteData && routeCoords.length ? [routeCoords] : []);
+      const pieceColors = ['#2563eb', '#0891b2', '#7c3aed', '#ea580c', '#16a34a'];
+      let pieceNumber = 0;
+      drawSegments.forEach(segment => {
+        for (let i = 0; i < segment.length - 1; i += 1) {
+          pieceNumber += 1;
+          const from = segment[i];
+          const to = segment[i + 1];
+          roadMapPreviewLayers.push(L.polyline([from, to], {
+            color: pieceColors[(pieceNumber - 1) % pieceColors.length],
+            weight: 6,
+            opacity: 0.96,
+            lineCap: 'round',
+            lineJoin: 'miter',
+            interactive: true
+          }).addTo(roadMapPreviewMap).bindTooltip(
+            `Yol hissəsi: ${formatCoordPair(from)} -> ${formatCoordPair(to)}`,
+            { sticky: true, opacity: 0.94 }
+          ).bindPopup(
+            `Yol hissəsi<br>${formatCoordPair(from)} -> ${formatCoordPair(to)}`,
+          ));
+        }
+      });
+      const markerSegments = sourceSegments.length ? sourceSegments : drawSegments;
+      const totalVertices = markerSegments.reduce((sum, segment) => sum + segment.length, 0);
+      let vertexNumber = 0;
+      markerSegments.forEach(segment => {
+        segment.forEach(point => {
+          vertexNumber += 1;
+          const pointClass = [
+            'road-map-point-label',
+            vertexNumber === 1 ? 'is-start' : '',
+            vertexNumber === totalVertices ? 'is-end' : ''
+          ].filter(Boolean).join(' ');
+          const pointName = vertexNumber === 1
+            ? 'Başlanğıc nöqtəsi'
+            : vertexNumber === totalVertices
+              ? 'Son nöqtəsi'
+              : 'Ara nöqtə';
+          const pointIcon = L.divIcon({
+            className: pointClass,
+            html: '',
+            iconSize: [11, 11],
+            iconAnchor: [5.5, 5.5]
+          });
+          roadMapPreviewLayers.push(L.marker(point, { icon: pointIcon, zIndexOffset: 500 }).addTo(roadMapPreviewMap).bindTooltip(`${pointName}: ${formatCoordPair(point)}`, {
+            direction: 'top',
+            sticky: true,
+            opacity: 0.92
+          }).bindPopup(`${pointName}<br>${formatCoordPair(point)}`));
+        });
+      });
+      if (data.start || sourceCoords[0]) {
+        roadMapPreviewLayers.push(L.circleMarker(data.start || sourceCoords[0], {
+          radius: 6,
+          color: '#15803d',
+          weight: 2,
+          fillColor: '#22c55e',
+          fillOpacity: 1
+        }).addTo(roadMapPreviewMap).bindPopup('Başlanğıc nöqtəsi'));
       }
-      if (data.start || coords[0]) {
-        roadMapPreviewLayers.push(L.marker(data.start || coords[0]).addTo(roadMapPreviewMap).bindPopup('Başlanğıc nöqtəsi'));
+      if (data.end || sourceCoords.length > 1) {
+        const endPoint = data.end || sourceCoords[sourceCoords.length - 1];
+        roadMapPreviewLayers.push(L.circleMarker(endPoint, {
+          radius: 6,
+          color: '#b91c1c',
+          weight: 2,
+          fillColor: '#ef4444',
+          fillOpacity: 1
+        }).addTo(roadMapPreviewMap).bindPopup('Son nöqtəsi'));
       }
-      if (data.end || coords.length > 1) {
-        const endPoint = data.end || coords[coords.length - 1];
-        roadMapPreviewLayers.push(L.marker(endPoint).addTo(roadMapPreviewMap).bindPopup('Son nöqtəsi'));
-      }
-      if (coords.length === 1) roadMapPreviewMap.setView(coords[0], 12);
-      else roadMapPreviewMap.fitBounds(L.latLngBounds(coords).pad(0.25), { maxZoom: 12 });
+      if (boundsCoords.length === 1) roadMapPreviewMap.setView(boundsCoords[0], 12);
+      else roadMapPreviewMap.fitBounds(L.latLngBounds(boundsCoords).pad(0.25), { maxZoom: 12 });
     }
 
     function openRoadMapPreview(data) {
       const modal = document.getElementById('roadMapPreviewModal');
       if (!modal) return;
+      const requestId = ++roadMapPreviewRequestId;
       document.getElementById('roadMapPreviewTitle').textContent = 'Yolun xəritəsi';
-      document.getElementById('roadMapPreviewSub').textContent = [data.sub, data.title].filter(Boolean).join(' - ') || 'Başlanğıc və son nöqtəyə əsasən xəritə görünüşü';
+      document.getElementById('roadMapPreviewSub').textContent = [data.sub, data.title].filter(Boolean).join(' - ') || 'OSM LINESTRING / GeoJSON datasına əsasən xəritə görünüşü';
       document.getElementById('roadMapPreviewStart').textContent = data.startText || formatCoordPair(data.start);
       document.getElementById('roadMapPreviewEnd').textContent = data.endText || formatCoordPair(data.end);
+      document.getElementById('roadMapPreviewFormat').textContent = data.format || '-';
+      document.getElementById('roadMapPreviewPointCount').textContent = data.pointCount ? `${data.pointCount} nöqtə` : '-';
+      document.getElementById('roadMapPreviewSegmentCount').textContent = data.segmentCount ? `${data.segmentCount} hissə` : '-';
+      document.getElementById('roadMapPreviewRouting').textContent = data.pointCount > 1 ? 'Yol ilə hesablanır...' : '-';
       document.getElementById('roadMapPreviewWkt').textContent = data.wkt || 'Koordinat məlumatı yoxdur';
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
-      setTimeout(() => renderRoadMapPreview(data), 80);
+      const shouldRoute = data.line?.length > 1;
+      setTimeout(() => renderRoadMapPreview(data, shouldRoute ? { segments: [], coords: [] } : null), 80);
+      if (shouldRoute) {
+        loadRoadNetworkRoute(data.line).then(route => {
+          if (requestId !== roadMapPreviewRequestId || !modal.classList.contains('open')) return;
+          if (!route) {
+            document.getElementById('roadMapPreviewRouting').textContent = 'Yol tapılmadı, LINESTRING göstərildi';
+            renderRoadMapPreview(data);
+            return;
+          }
+          document.getElementById('roadMapPreviewRouting').textContent = 'OSM yol şəbəkəsi';
+          document.getElementById('roadMapPreviewFormat').textContent = `${route.format} / ${data.format || 'LINESTRING'}`;
+          document.getElementById('roadMapPreviewSegmentCount').textContent = route.segmentCount ? `${route.segmentCount} yol hissəsi` : '-';
+          renderRoadMapPreview(data, route);
+        }).catch(() => {
+          if (requestId !== roadMapPreviewRequestId || !modal.classList.contains('open')) return;
+          document.getElementById('roadMapPreviewRouting').textContent = 'Yol tapılmadı, LINESTRING göstərildi';
+          renderRoadMapPreview(data);
+        });
+      }
     }
 
     function openRoadMapPreviewFromRow(row, fallbackGis = '') {
@@ -10522,6 +10829,7 @@
     function closeRoadMapPreview() {
       const modal = document.getElementById('roadMapPreviewModal');
       if (!modal) return;
+      roadMapPreviewRequestId += 1;
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden', 'true');
     }
@@ -14814,8 +15122,8 @@
             const bp = basCoord.split(',').map(s => parseFloat(s.trim()));
             const ep = sonCoord.split(',').map(s => parseFloat(s.trim()));
             if (bp.length === 2 && !isNaN(bp[0]) && ep.length === 2 && !isNaN(ep[0]))
-              return `POLYLINE ((${bp[1]} ${bp[0]}, ${ep[1]} ${ep[0]}))`;
-            if (bp.length === 2 && !isNaN(bp[0])) return `POLYLINE ((${bp[1]} ${bp[0]}))`;
+              return `LINESTRING (${bp[1]} ${bp[0]}, ${ep[1]} ${ep[0]})`;
+            if (bp.length === 2 && !isNaN(bp[0])) return `LINESTRING (${bp[1]} ${bp[0]})`;
             return '';
           })(),
           row: fp.editRow || null,
@@ -15974,7 +16282,7 @@
           startPoint: bas,
           endPoint: son,
           gis: (bp.length === 2 && !isNaN(bp[0]) && ep.length === 2 && !isNaN(ep[0]))
-            ? `POLYLINE ((${bp[1]} ${bp[0]}, ${ep[1]} ${ep[0]}))`
+            ? `LINESTRING (${bp[1]} ${bp[0]}, ${ep[1]} ${ep[0]})`
             : '',
           marsrut: marsrutParts.join(' → '),
           legalStatus: document.getElementById('rm_huq_status')?.value || '',
